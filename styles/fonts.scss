@@ -1,0 +1,88 @@
+// Google Fonts Import
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+// ===== INTER =====
+// Inter Regular - font-weight: 400 (обычный вес)
+@font-face {
+  font-family: 'Inter';
+  src: url('https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2')
+    format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+// ===== LATO =====
+// Lato Medium - font-weight: 500 (средний вес)
+@font-face {
+  font-family: 'Lato';
+  src: url('https://fonts.gstatic.com/s/lato/v24/S6u9w4BMUTPHh6UVSwaPGQ3q5d0N7w.woff2')
+    format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+// Lato SemiBold - font-weight: 600 (полужирный)
+@font-face {
+  font-family: 'Lato';
+  src: url('https://fonts.gstatic.com/s/lato/v24/S6u9w4BMUTPHh6UVSiaPGQ3q5d0N7w.woff2')
+    format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+// Lato Bold - font-weight: 700 (жирный)
+@font-face {
+  font-family: 'Lato';
+  src: url('https://fonts.gstatic.com/s/lato/v24/S6u9w4BMUTPHh6UVSzaPGQ3q5d0N7w.woff2')
+    format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+// Lato ExtraBold - font-weight: 800 (сверхжирный)
+@font-face {
+  font-family: 'Lato';
+  src: url('https://fonts.gstatic.com/s/lato/v24/S6u9w4BMUTPHh6UVTBaPGQ3q5d0N7w.woff2')
+    format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+// ===== OPEN SANS =====
+// Open Sans Regular - font-weight: 400 (обычный вес)
+@font-face {
+  font-family: 'Open Sans';
+  src: url('https://fonts.gstatic.com/s/opensans/v35/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0B4gaVIGwA.woff2')
+    format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+// Open Sans SemiBold - font-weight: 600 (полужирный)
+@font-face {
+  font-family: 'Open Sans';
+  src: url('https://fonts.gstatic.com/s/opensans/v35/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0B4taVIGwA.woff2')
+    format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+// ===== CSS ПЕРЕМЕННЫЕ ДЛЯ УДОБСТВА =====
+:root {
+  --font-inter-regular: 'Inter', sans-serif; /* 400 */
+  --font-lato-medium: 'Lato', sans-serif; /* 500 */
+  --font-lato-semibold: 'Lato', sans-serif; /* 600 */
+  --font-lato-bold: 'Lato', sans-serif; /* 700 */
+  --font-lato-extrabold: 'Lato', sans-serif; /* 800 */
+  --font-opensans-regular: 'Open Sans', sans-serif; /* 400 */
+  --font-opensans-semibold: 'Open Sans', sans-serif; /* 600 */
+}

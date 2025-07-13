@@ -1,0 +1,253 @@
+// Button specific variables
+:root {
+  // Button sizes
+  --btnHeightSmall: 40px;
+  --btnHeightMedium: 48px;
+  --btnHeightLarge: 56px;
+
+  --btnPaddingSmall: 12px 24px;
+  --btnPaddingMedium: 12px 24px;
+  --btnPaddingLarge: 16px 32px;
+
+  --btnFontSizeSmall: 14px;
+  --btnFontSizeMedium: 16px;
+  --btnFontSizeLarge: 18px;
+
+  // Button styling
+  --btnBorderRadius: 60px;
+  --btnBorderWidth: 1px;
+  --btnBorderWidthOutline: 2px;
+
+  // Button shadows
+  --btnShadowHover: 0 4px 12px rgba(46, 88, 124, 0.3);
+  --btnShadowHoverSecondary: 0 4px 12px rgba(46, 88, 124, 0.2);
+  --btnShadowHoverSuccess: 0 4px 12px rgba(107, 133, 61, 0.3);
+
+  // Button transitions
+  --btnTransition: all 0.3s ease;
+}
+
+// Базовый стиль кнопки
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--btnFontSizeMedium);
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+
+  border: none;
+  border-radius: var(--btnBorderRadius);
+  cursor: pointer;
+  transition: var(--btnTransition);
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+
+  // Размеры
+  &--small {
+    height: var(--btnHeightSmall);
+    padding: var(--btnPaddingSmall);
+    font-size: var(--btnFontSizeSmall);
+  }
+
+  &--medium {
+    height: var(--btnHeightMedium);
+    padding: var(--btnPaddingMedium);
+    font-size: var(--btnFontSizeMedium);
+  }
+
+  &--large {
+    height: var(--btnHeightLarge);
+    padding: var(--btnPaddingLarge);
+    font-size: var(--btnFontSizeLarge);
+  }
+
+  // Варианты стилей
+  &--primary {
+    background: var(--color-accent-blue);
+    color: var(--color-white);
+    border: var(--btnBorderWidth) solid var(--color-accent-blue);
+
+    &:hover {
+      background: var(--color-middle-blue);
+      border-color: var(--color-middle-blue);
+      transform: translateY(-2px);
+      box-shadow: var(--btnShadowHover);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  &--secondary {
+    background: var(--color-white);
+    color: var(--color-accent-blue);
+    border: var(--btnBorderWidth) solid var(--color-accent-blue);
+
+    &:hover {
+      background: var(--color-accent-blue);
+      color: var(--color-white);
+      transform: translateY(-2px);
+      box-shadow: var(--btnShadowHoverSecondary);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  &--outline {
+    background: transparent;
+    color: var(--color-accent-blue);
+    border: var(--btnBorderWidthOutline) solid var(--color-accent-blue);
+
+    &:hover {
+      background: var(--color-light-blue);
+      border-color: var(--color-middle-blue);
+    }
+  }
+
+  &--success {
+    background: var(--color-accent-green);
+    color: var(--color-white);
+    border: var(--btnBorderWidth) solid var(--color-accent-green);
+
+    &:hover {
+      background: var(--color-middle-green);
+      border-color: var(--color-middle-green);
+      transform: translateY(-2px);
+      box-shadow: var(--btnShadowHoverSuccess);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: var(--color-accent-blue);
+    border: var(--btnBorderWidth) solid transparent;
+
+    &:hover {
+      background: var(--color-light-blue);
+      border-color: var(--color-accent-blue);
+    }
+  }
+
+  &--light {
+    background: var(--color-light-gray);
+    color: var(--color-dark);
+    border: var(--btnBorderWidth) solid var(--color-gray);
+
+    &:hover {
+      background: var(--color-gray);
+      border-color: var(--color-dark-gray);
+    }
+  }
+
+  // Состояния
+  &--disabled,
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  &--loading {
+    cursor: wait;
+
+    .btn__text {
+      opacity: 0.7;
+    }
+  }
+
+  // Полная ширина
+  &--full-width {
+    width: 100%;
+  }
+
+  // Элементы кнопки
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &--left {
+      order: -1;
+    }
+
+    &--right {
+      order: 1;
+    }
+
+    svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+  }
+
+  &__text {
+    transition: var(--transition-normal);
+  }
+
+  &__loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    &::after {
+      content: '';
+      width: 16px;
+      height: 16px;
+      border: 2px solid transparent;
+      border-top: 2px solid currentColor;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+  }
+}
+
+// Анимация загрузки
+@keyframes spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+// Специальные стили для разных размеров экрана
+@media (max-width: 768px) {
+  .btn {
+    &--large {
+      height: var(--btnHeightMedium);
+      padding: var(--btnPaddingMedium);
+      font-size: var(--btnFontSizeMedium);
+    }
+
+    &--medium {
+      height: 44px;
+      padding: 10px 20px;
+      font-size: 15px;
+    }
+
+    &--small {
+      height: 36px;
+      padding: var(--spacing-sm) var(--spacing-md);
+      font-size: 13px;
+    }
+  }
+}

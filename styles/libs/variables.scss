@@ -1,0 +1,80 @@
+// ===== ШРИФТЫ =====
+:root {
+  --font-family: 'Lato', sans-serif;
+  --second-family: 'Open Sans', sans-serif;
+  --third-family: 'Inter', sans-serif;
+
+  --container-max-width: 1180px;
+
+  --container-padding-x: 40px;
+  --container-current-width: calc(var(--container-max-width) + var(--container-padding-x) * 2);
+
+  // Веса шрифтов
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  // ===== ЦВЕТА =====
+  // Основные цвета
+  --color-main: #242424;
+  --color-white: #fff;
+  --color-black: #000;
+
+  // Цветовая палитра проекта
+  --color-light: #fdfdfd;
+  --color-accent-blue: #2e587c;
+  --color-light-blue: #d5e8f8;
+
+  --color-middle-blue: #2e587c;
+
+  // ===== ОТСТУПЫ И РАЗМЕРЫ =====
+  // Базовые отступы
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 40px;
+  --spacing-3xl: 48px;
+  --spacing-4xl: 64px;
+
+  // Радиусы скругления
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+  --border-radius-2xl: 24px;
+  --border-radius-full: 9999px;
+
+  // ===== ТЕНИ =====
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+
+  // ===== ПЕРЕХОДЫ =====
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  // Специальные переходы
+  --hover-transition: all 0.3s ease;
+
+  // // ===== РАЗМЕРЫ ЭКРАНОВ =====
+  // --screen-sm: 640px;
+  // --screen-md: 768px;
+  // --screen-lg: 1024px;
+  // --screen-xl: 1280px;
+  // --screen-2xl: 1536px;
+
+  // ===== Z-INDEX =====
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+}
