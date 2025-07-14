@@ -1,15 +1,13 @@
 // ===== ШРИФТЫ =====
 :root {
-  --font-family: "Lato", sans-serif;
-  --second-family: "Open Sans", sans-serif;
-  --third-family: "Inter", sans-serif;
+  --font-family: 'Lato', sans-serif;
+  --second-family: 'Open Sans', sans-serif;
+  --third-family: 'Inter', sans-serif;
 
   --container-max-width: 1180px;
 
   --container-padding-x: 40px;
-  --container-current-width: calc(
-    var(--container-max-width) + var(--container-padding-x) * 2
-  );
+  --container-current-width: calc(var(--container-max-width) + var(--container-padding-x) * 2);
 
   --height-header: 54px;
 
@@ -25,6 +23,7 @@
   --color-main: #242424;
   --color-white: #fff;
   --color-black: #000;
+  --color-white-1: #f6f6f6;
 
   // Цветовая палитра проекта
   --color-light: #fdfdfd;

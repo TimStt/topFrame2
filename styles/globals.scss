@@ -1,9 +1,9 @@
-@import "./libs/normalize.scss";
-@import "./libs/fonts.scss";
-@import "./libs/variables.scss";
+@import './libs/normalize.scss';
+@import './libs/fonts.scss';
+@import './libs/variables.scss';
 
 body {
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   font-family: var(--font-family);
   font-weight: 500;
   font-size: 16px;
@@ -19,4 +19,28 @@ body {
 
 main {
   flex-grow: 1;
+}
+
+@media (max-width: 1200px) {
+  body {
+    --container-padding-x: 36px;
+  }
+}
+
+@media (max-width: 700px) {
+  body {
+    --container-padding-x: 32px;
+  }
+}
+
+@media (max-width: 550px) {
+  body {
+    --container-padding-x: 24px;
+  }
+}
+
+@media (max-width: 450px) {
+  body {
+    --container-padding-x: 16px;
+  }
 }

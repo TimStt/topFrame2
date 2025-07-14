@@ -1,6 +1,6 @@
 // Header Component Styles
 
-@use "../libs/mixins.scss" as *;
+@use '../libs/mixins.scss' as *;
 
 .header {
   &__inner {
@@ -45,18 +45,14 @@
       transition: color 0.3s ease;
       position: relative;
 
-      &:hover {
-        color: var(--color-accent-blue);
-      }
-
       &::after {
-        content: "";
+        content: '';
         position: absolute;
         bottom: -4px;
         left: 0;
         width: 0;
         height: 2px;
-        background: var(--color-accent-blue);
+        background: var(--color-light);
         transition: width 0.3s ease;
       }
 
@@ -111,20 +107,18 @@
   &_inner {
     @include flex-center-between();
 
-    padding-block: calc(var(--height-header) + var(--paddingTop))
-      var(--paddingBottom);
+    padding-block: calc(var(--height-header) + var(--paddingTop)) var(--paddingBottom);
   }
 
   &__title {
-    @include fluid-text(44, 32);
-    font-weight: 700;
+    @include font-setup(44, 53, 700, true);
     margin-bottom: 24px;
     color: var(--color-light);
   }
 
   &__subtitle {
-    font-weight: 400;
-    font-size: 16px;
+    @include font-setup(16, 20, 400);
+    font-family: var(--second-family);
     margin-bottom: 40px;
     color: var(--color-light);
   }
@@ -159,6 +153,70 @@
 
   &__features {
     width: 100%;
+    position: relative;
+  }
+
+  &__features-wrapper {
+    --sizeButton: 32px;
+    --topButton: 20px;
+    position: absolute;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-bottom: 20px;
+    top: calc((var(--sizeButton) + var(--topButton)) * -1);
+    right: 0;
+  }
+
+  &__nav-next,
+  &__nav-prev {
+    position: relative !important;
+    top: 0 !important;
+    right: 0 !important;
+    left: 0 !important;
+    margin: 0 !important;
+    border: 1px solid var(--color-white-1);
+    border-radius: 50%;
+    padding: 10px;
+    width: var(--sizeButton) !important;
+    height: var(--sizeButton) !important;
+    transition-duration: 0.3s;
+    display: inline-flex !important;
+    &:after {
+      display: none;
+    }
+    color: var(--color-white-1) !important;
+    svg {
+      min-width: 20px !important;
+      height: 20px !important;
+      vertical-align: middle;
+    }
+
+    &:hover {
+      background-color: var(--color-white-1);
+      color: var(--color-accent-blue) !important;
+    }
+
+    &.swiper-button-disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+
+      &:hover {
+        transform: none;
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.2);
+
+        svg {
+          fill: var(--color-light);
+        }
+      }
+    }
+  }
+
+  &__nav-prev {
+    svg {
+      transform: rotate(180deg);
+    }
   }
 
   &__swiper {
@@ -176,52 +234,63 @@
     padding: 24px;
     max-width: 280px;
     width: 100%;
+    position: relative; // Добавляем для позиционирования псевдоэлемента
 
     backdrop-filter: blur(8px);
     background: rgba(253, 253, 253, 0.16);
     max-height: 72px;
-    overflow: hidden;
+
+    // Псевдоэлемент для границы
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      transition: border-color 0.3s ease;
+      pointer-events: none;
+    }
 
     @media (hover: hover) {
       @if () {
         &:hover {
+          height: 100%;
           max-height: 200px;
-          border: 1px solid var(--color-light-blue);
-          overflow-y: auto;
+          // border: 1px solid var(--color-light-blue); // Убираем эту строку
 
-          .zero-hero__card-description {
-            opacity: 1;
-          }
-          .zero-hero__card-head {
-            margin-bottom: 20px;
-          }
-        }
-
-        &:has(input:checked) {
-          height: 138px;
-          border: 1px solid var(--color-light-blue);
-          overflow-y: auto;
-
-          .zero-hero__card-head {
-            margin-bottom: 20px;
+          // Активируем границу псевдоэлемента
+          &::before {
+            border-color: var(--color-light-blue);
           }
 
           .zero-hero__card-description {
             opacity: 1;
+            overflow-y: auto;
+          }
+          .zero-hero__card-head {
+            margin-bottom: 20px;
           }
         }
       } @else {
         &:has(input:checked) {
-          height: 138px;
-          border: 1px solid var(--color-light-blue);
-          overflow-y: auto;
+          height: 100%;
+          max-height: 200px;
+          // border: 1px solid var(--color-light-blue); // Убираем эту строку
 
-          .zero-hero__card-head {
-            margin-bottom: 20px;
+          // Активируем границу псевдоэлемента
+          &::before {
+            border-color: var(--color-light-blue);
           }
 
           .zero-hero__card-description {
             opacity: 1;
+            overflow-y: auto;
+          }
+          .zero-hero__card-head {
+            margin-bottom: 20px;
           }
         }
       }
@@ -308,8 +377,30 @@
       font-size: 15px;
     }
 
+    &__features-wrapper {
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+
+    &__nav-next,
+    &__nav-prev {
+      width: 36px;
+      height: 36px;
+
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
     &__feature-card {
       padding: 20px;
     }
+  }
+}
+
+@media (max-width: 500px) {
+  .zero-hero__feature-card {
+    max-width: 100%;
   }
 }

@@ -4,17 +4,17 @@
  * @dependencies: Next.js Image, Button component
  * @created: 2024-01-15
  */
+import React from 'react'
 
-import React from "react";
-import Image from "next/image";
+import Image from 'next/image'
 
 export const Header = () => {
   const navigationItems = [
-    { label: "Все профессии", href: "/freelance" },
-    { label: "Фриланс", href: "/freelance" },
-    { label: "Наши вакансии", href: "/vacancies" },
-    { label: "Наша компания", href: "/about" },
-  ];
+    { label: 'Все профессии', href: '/freelance' },
+    { label: 'Фриланс', href: '/freelance' },
+    { label: 'Наши вакансии', href: '/vacancies' },
+    { label: 'Наша компания', href: '/about' },
+  ]
 
   return (
     <header className="header">
@@ -46,5 +46,5 @@ export const Header = () => {
         </div>
       </div>
     </header>
-  );
-};
+  )
+}
