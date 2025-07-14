@@ -17,6 +17,7 @@ h6 {
   font-weight: 400;
   font-size: 16px;
   line-height: 125%;
+  margin: 0px;
   color: var(--color-black);
 }
 
@@ -63,10 +64,10 @@ h1 {
   margin-block-start: 0;
 }
 
-input[type='date']::-webkit-datetime-edit-day-field,
-input[type='date']::-webkit-datetime-edit-month-field,
-input[type='date']::-webkit-datetime-edit-year-field,
-input[type='date']::-webkit-datetime-edit-text {
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-year-field,
+input[type="date"]::-webkit-datetime-edit-text {
   color: var(--color-black);
   background-color: transparent;
 }

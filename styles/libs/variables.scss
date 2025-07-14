@@ -1,13 +1,17 @@
 // ===== ШРИФТЫ =====
 :root {
-  --font-family: 'Lato', sans-serif;
-  --second-family: 'Open Sans', sans-serif;
-  --third-family: 'Inter', sans-serif;
+  --font-family: "Lato", sans-serif;
+  --second-family: "Open Sans", sans-serif;
+  --third-family: "Inter", sans-serif;
 
   --container-max-width: 1180px;
 
   --container-padding-x: 40px;
-  --container-current-width: calc(var(--container-max-width) + var(--container-padding-x) * 2);
+  --container-current-width: calc(
+    var(--container-max-width) + var(--container-padding-x) * 2
+  );
+
+  --height-header: 54px;
 
   // Веса шрифтов
   --font-weight-regular: 400;
@@ -26,8 +30,6 @@
   --color-light: #fdfdfd;
   --color-accent-blue: #2e587c;
   --color-light-blue: #d5e8f8;
-
-  --color-middle-blue: #2e587c;
 
   // ===== ОТСТУПЫ И РАЗМЕРЫ =====
   // Базовые отступы

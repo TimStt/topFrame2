@@ -1,70 +1,315 @@
-// Zero Hero Component Styles
-.zero-hero {
-  width: 100%;
-  height: 100vh;
-  background: #007bff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+// Header Component Styles
 
-  // Responsive adjustments
-  @media (max-width: 768px) {
-    height: 80vh;
+@use "../libs/mixins.scss" as *;
+
+.header {
+  &__inner {
+    height: var(--height-header);
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    z-index: 10;
+    justify-content: space-between;
   }
 
-  @media (max-width: 480px) {
-    height: 70vh;
+  &__logo {
+    &-image {
+      height: auto;
+    }
   }
 
-  // Optional: Add subtle gradient overlay
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(0, 123, 255, 0.1) 0%, rgba(0, 123, 255, 0.05) 100%);
-    pointer-events: none;
-  }
-
-  // Content container (if needed in future)
-  &__content {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    color: white;
-
-    h1 {
-      font-family: 'Lato', sans-serif;
-      font-weight: 400;
-      font-size: 3rem;
+  &__nav {
+    &-list {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      list-style: none;
       margin: 0;
+      padding: 0;
 
       @media (max-width: 768px) {
-        font-size: 2.5rem;
-      }
-
-      @media (max-width: 480px) {
-        font-size: 2rem;
+        display: none;
       }
     }
 
-    p {
-      font-family: 'Open Sans', sans-serif;
+    &-item {
+      position: relative;
+    }
+
+    &-link {
+      font-family: var(--second-family);
       font-weight: 400;
-      font-size: 1.2rem;
-      margin: 1rem 0 0 0;
-      opacity: 0.9;
+      font-size: 12px;
+      color: var(--color-light);
+      transition: color 0.3s ease;
+      position: relative;
 
-      @media (max-width: 768px) {
-        font-size: 1.1rem;
+      &:hover {
+        color: var(--color-accent-blue);
       }
 
-      @media (max-width: 480px) {
-        font-size: 1rem;
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--color-accent-blue);
+        transition: width 0.3s ease;
       }
+
+      &:hover::after {
+        width: 100%;
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+  }
+
+  &__login-btn {
+    background: transparent;
+    border: 2px solid var(--color-accent-blue);
+    color: var(--color-accent-blue);
+
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--color-light);
+    width: 67px;
+    height: 22px;
+    background-color: transparent;
+    border: 1px solid var(--color-light);
+    border-radius: 40px;
+
+    transition: all 0.3s ease;
+
+    // &:hover {
+    //   background: var(--color-accent-blue);
+    //   color: var(--color-white);
+    //   transform: translateY(-2px);
+    //   box-shadow: 0 4px 12px rgba(46, 88, 124, 0.3);
+    // }
+  }
+}
+
+// Zero Hero Component Styles
+.zero-hero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-top: calc(var(--height-header) * -1);
+  --paddingTop: 17px;
+  --paddingBottom: 40px;
+
+  &_inner {
+    @include flex-center-between();
+
+    padding-block: calc(var(--height-header) + var(--paddingTop))
+      var(--paddingBottom);
+  }
+
+  &__title {
+    @include fluid-text(44, 32);
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--color-light);
+  }
+
+  &__subtitle {
+    font-weight: 400;
+    font-size: 16px;
+    margin-bottom: 40px;
+    color: var(--color-light);
+  }
+
+  &__cta-btn {
+    @include flex-center-between();
+
+    svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--color-accent-blue);
+    }
+  }
+
+  &__btn-arrow {
+    transition: transform 0.3s ease;
+  }
+
+  &__world-map {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__world-svg {
+    width: 100%;
+    max-width: 682px;
+    height: auto;
+
+    animation: float 6s ease-in-out infinite;
+  }
+
+  &__features {
+    width: 100%;
+  }
+
+  &__swiper {
+    padding: 20px 0;
+
+    .swiper-slide {
+      height: auto;
+    }
+  }
+
+  &__feature-card {
+    display: block;
+    transition-duration: 0.3s;
+    border-radius: 8px;
+    padding: 24px;
+    max-width: 280px;
+    width: 100%;
+
+    backdrop-filter: blur(8px);
+    background: rgba(253, 253, 253, 0.16);
+    max-height: 72px;
+    overflow: hidden;
+
+    @media (hover: hover) {
+      @if () {
+        &:hover {
+          max-height: 200px;
+          border: 1px solid var(--color-light-blue);
+          overflow-y: auto;
+
+          .zero-hero__card-description {
+            opacity: 1;
+          }
+          .zero-hero__card-head {
+            margin-bottom: 20px;
+          }
+        }
+
+        &:has(input:checked) {
+          height: 138px;
+          border: 1px solid var(--color-light-blue);
+          overflow-y: auto;
+
+          .zero-hero__card-head {
+            margin-bottom: 20px;
+          }
+
+          .zero-hero__card-description {
+            opacity: 1;
+          }
+        }
+      } @else {
+        &:has(input:checked) {
+          height: 138px;
+          border: 1px solid var(--color-light-blue);
+          overflow-y: auto;
+
+          .zero-hero__card-head {
+            margin-bottom: 20px;
+          }
+
+          .zero-hero__card-description {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__card-head {
+    transition-duration: 0.3s;
+    @include flex-center-between();
+  }
+
+  &__card-title {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--color-light);
+    text-align: left;
+  }
+
+  &__card-description {
+    transition-duration: 0.3s;
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 12px;
+    color: var(--color-light);
+    opacity: 0;
+  }
+}
+
+// Animations
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+// Responsive styles
+@media (max-width: 768px) {
+  .header {
+    padding: 15px 0;
+
+    &__container {
+      padding: 0 15px;
+    }
+
+    &__logo-image {
+      width: 100px;
+      height: auto;
+    }
+
+    &__login-btn {
+      padding: 10px 20px;
+      font-size: 13px;
+    }
+  }
+
+  .zero-hero {
+    &__container {
+      padding: 0 15px;
+    }
+
+    &__content {
+      margin-bottom: 40px;
+    }
+
+    &__title {
+      font-size: 2.5rem;
+    }
+
+    &__subtitle {
+      font-size: 16px;
+    }
+
+    &__cta-btn {
+      padding: 14px 28px;
+      font-size: 15px;
+    }
+
+    &__feature-card {
+      padding: 20px;
     }
   }
 }
