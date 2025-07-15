@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 /**
  * @file: Directions section
@@ -6,50 +6,78 @@
  * @dependencies: React
  * @created: 2024-01-15
  */
-import React from "react";
-import { directionsData, IDirection } from "./directions.data";
+import React, { useState } from 'react'
 
-export const DirectionsSection: React.FC = () => {
+import { useAnimateOnScroll } from '@/shared/hooks/use-animate-on-scroll'
+import { cls } from '@/shared/lib/cls'
+import { ArrowIconUI } from '@/shared/ui/arrow-icon-ui'
+import { ButtonUI } from '@/shared/ui/button-ui'
+import Image from 'next/image'
+
+import {
+  IDirectionButtons,
+  IDirectionCards,
+  directionsCardsData,
+  directionsData,
+} from './directions.data'
+
+export const Directions: React.FC = () => {
+  const [isSelected, setIsSelected] = useState<number | null>(null)
+
   return (
-    <section className="directions-section">
-      <div className="directions-section__container">
-        <div className="directions-section__header">
-          <h2 className="directions-section__title">Наши направления</h2>
-          <p className="directions-section__subtitle">
-            Широкий спектр профессиональных услуг для эффективного бизнеса
+    <section
+      className="directions "
+      style={{
+        backgroundImage: `url("/icons/bg-main.svg")`,
+      }}
+    >
+      <div className="directions__inner container">
+        <div className="directions__header">
+          <h2 className="directions__title title-section">Наши направления</h2>
+          <p className="directions__subtitle">
+            Широкий спектр профессиональных услуг <br /> для эффективного бизнеса
           </p>
         </div>
-
-        <div className="directions-section__grid">
-          {directionsData.map((direction) => (
-            <DirectionCard key={direction.id} direction={direction} />
-          ))}
-        </div>
-
-        <div className="directions-section__center">
-          <div className="directions-section__logo">
-            <h3 className="directions-section__logo-title">
-              HR пространство TopFrame
-            </h3>
+        <div className="directions__content">
+          <div className="directions__list">
+            {directionsData.map((direction) => (
+              <button
+                className={cls('directions__button', {
+                  active: isSelected === direction.id,
+                })}
+                onClick={() => setIsSelected(direction.id)}
+              >
+                <span className="directions__button-title">{direction.title}</span>
+                <ArrowIconUI />
+              </button>
+            ))}
+          </div>
+          <div className="directions__selected">
+            {isSelected && <DirectionCard {...directionsCardsData[isSelected]} />}
           </div>
         </div>
       </div>
     </section>
-  );
-};
-
-interface DirectionCardProps {
-  direction: IDirection;
+  )
 }
 
-const DirectionCard: React.FC<DirectionCardProps> = ({ direction }) => {
+export const DirectionCard: React.FC<IDirectionCards> = ({ id, title, description, image }) => {
+  const { ref, className } = useAnimateOnScroll()
   return (
-    <div className="direction-card">
-      <div className="direction-card__icon">{direction.icon}</div>
-      <h4 className="direction-card__title">{direction.title}</h4>
-      <p className="direction-card__description">{direction.description}</p>
-    </div>
-  );
-};
-
-export default DirectionsSection;
+    <article className={cls('directions__card fade-in', className)} key={id} ref={ref}>
+      <Image src={image} alt={title} width={480} height={240} />
+      <div className="directions__card-text-container">
+        <h4 className="directions__card-title">{title}</h4>
+        <p className="directions__card-description">{description}</p>
+        <div className="directions__card-buttons">
+          <ButtonUI variant="primary" size="medium" hasArrow>
+            Присоединиться к компании
+          </ButtonUI>
+          <ButtonUI variant="secondary" size="medium" hasArrow>
+            Подробнее
+          </ButtonUI>
+        </div>
+      </div>
+    </article>
+  )
+}

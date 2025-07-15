@@ -2,6 +2,8 @@ import React from 'react'
 
 import classNames from 'classnames'
 
+import { ArrowIconUI } from '../arrow-icon-ui'
+
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Вариант стиля кнопки */
   variant?: 'primary' | 'secondary' | 'outline' | 'success' | 'ghost' | 'light'
@@ -23,6 +25,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   type?: 'button' | 'submit' | 'reset'
   /** Обработчик клика */
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  hasArrow?: boolean
 }
 
 export const ButtonUI: React.FC<ButtonProps> = ({
@@ -37,6 +40,7 @@ export const ButtonUI: React.FC<ButtonProps> = ({
   disabled,
   type = 'button',
   onClick,
+  hasArrow = false,
   ...rest
 }) => {
   const buttonClasses = classNames(
@@ -67,11 +71,8 @@ export const ButtonUI: React.FC<ButtonProps> = ({
       onClick={handleClick}
       {...rest}
     >
-      {leftIcon && <span className="btn__icon btn__icon--left">{leftIcon}</span>}
-
       {children}
-
-      {rightIcon && <span className="btn__icon btn__icon--right">{rightIcon}</span>}
+      {hasArrow && <ArrowIconUI />}
 
       {loading && <span className="btn__loader" />}
     </button>

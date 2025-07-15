@@ -5,6 +5,11 @@
 $min-font-size-h1: 32;
 $min-font-size-h2: 24;
 
+.title-section {
+  @include font-setup(40, 48, 700, true, $min-font-size-h2);
+  margin-bottom: 24px;
+}
+
 .header {
   &__inner {
     height: var(--height-header);
@@ -697,6 +702,127 @@ $min-font-size-h2: 24;
       text-align: center;
       color: var(--color-main);
     }
+  }
+}
+
+.directions {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  max-height: 825px;
+
+  &__inner {
+    padding-top: 80px;
+  }
+
+  &__title {
+    color: var(--color-light);
+  }
+
+  &__subtitle {
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--color-light);
+  }
+
+  &__list {
+    overflow-x: auto;
+    /* Дорожка скроллбара (фон, по которому двигается ползунок) */
+    &::-webkit-scrollbar-track {
+      background: var(--color-light-blue);
+      /* Закругленные углы дорожки */
+    }
+    padding-right: 24px;
+    /* Ползунок скроллбара (та часть, которую можно перетаскивать) */
+    &::-webkit-scrollbar-thumb {
+      background: var(--color-light);
+    }
+  }
+
+  &__button {
+    border-radius: 8px;
+
+    max-width: 580px;
+    width: 100%;
+    height: 85px;
+    backdrop-filter: blur(8px);
+    background: rgba(253, 253, 253, 0.16);
+    display: flex;
+    align-items: center;
+    gap: 21px;
+    transition-duration: 0.3s;
+    border: 1px solid transparent;
+    color: var(--color-light);
+    padding-inline: 28px;
+    &.active,
+    &:hover {
+      border: 1px solid var(--color-light);
+      background-color: #f7ffcd;
+      color: var(--color-main);
+    }
+    &-title {
+      font-weight: 700;
+      font-size: 24px;
+      color: inherit;
+      text-align: left;
+    }
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__content {
+    @include flex-center-between();
+  }
+
+  &__card {
+    background-color: transparent;
+
+    img {
+      border-radius: 8px;
+      margin-bottom: 2px;
+      aspect-ratio: 480 / 240;
+      object-fit: cover;
+    }
+
+    &__text-container {
+      padding: 20px 20px 24px;
+      background-color: var(--color-light);
+      border-radius: 8px;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-title {
+      font-weight: 700;
+      font-size: 24px;
+      color: var(--color-main);
+      margin-bottom: 16px;
+    }
+
+    &-description {
+      min-height: 88px;
+      max-height: 88px;
+      overflow: hidden;
+      font-family: var(--second-family);
+      font-weight: 400;
+      font-size: 16px;
+      margin-bottom: 24px;
+      color: #727272;
+    }
+  }
+
+  &__header {
+    margin-bottom: 40px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 }
 
