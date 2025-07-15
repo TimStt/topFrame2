@@ -6,14 +6,15 @@
  */
 
 import { Header } from "@/widgets/mainblocks/header";
+import HREcosystemSection from "@/widgets/mainblocks/hr-ecosystem";
 import { ZeroHero } from "@/widgets/mainblocks/zero-hero";
 
 export default function Home() {
   return (
     <>
-      <Header />
       <main>
         <ZeroHero />
+        <HREcosystemSection />
       </main>
     </>
   );

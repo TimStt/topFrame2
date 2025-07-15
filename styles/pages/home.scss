@@ -1,6 +1,9 @@
 // Header Component Styles
 
-@use '../libs/mixins.scss' as *;
+@use "../libs/mixins.scss" as *;
+
+$min-font-size-h1: 32;
+$min-font-size-h2: 24;
 
 .header {
   &__inner {
@@ -46,7 +49,7 @@
       position: relative;
 
       &::after {
-        content: '';
+        content: "";
         position: absolute;
         bottom: -4px;
         left: 0;
@@ -92,32 +95,192 @@
   }
 }
 
+.footer {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  --paddingTop: 23px;
+  --paddingBottom: 20px;
+  padding-block: var(--paddingTop) var(--paddingBottom);
+
+  &__content {
+  }
+
+  &__top {
+    @include flex-center-between();
+    align-items: flex-start;
+    margin-bottom: 40px;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  &__logo {
+    display: inline-block;
+    margin-bottom: 12px;
+
+    img {
+      max-width: 102.5px;
+    }
+  }
+
+  &__description {
+    font-weight: 400;
+    font-size: 12px;
+    color: var(--color-light-blue);
+    margin-bottom: 24px;
+  }
+
+  &__nav {
+    &-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    &-item {
+      a {
+        font-family: var(--third-family);
+        font-weight: 400;
+        font-size: 12px;
+        color: var(--color-light);
+      }
+    }
+  }
+
+  &__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    gap: 10px;
+    font-weight: 500;
+    font-size: 12px;
+    gap: 4px;
+    color: var(--color-light);
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  &__bottom-content {
+    @include flex-center-between();
+    font-family: var(--second-family);
+    font-weight: 400;
+    flex-wrap: wrap;
+    font-size: 12px;
+    gap: 8px;
+    text-wrap: nowrap;
+    color: var(--color-light-blue-2);
+  }
+
+  &__contacts {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    color: var(--color-light);
+
+    font-weight: 500;
+    font-size: 12px;
+
+    --sizeEmail: 28px;
+    --sizeTriangle: 6px;
+    --sizeIcon: 16px;
+
+    &__email {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      position: relative;
+      width: var(--sizeEmail);
+      height: var(--sizeEmail);
+      border-radius: 50%;
+      backdrop-filter: blur(8px);
+      transition-duration: 0.3s;
+      margin-bottom: 16px;
+      background: rgba(253, 253, 253, 0.16);
+      svg {
+        vertical-align: middle;
+        width: var(--sizeIcon);
+        height: var(--sizeIcon);
+      }
+
+      &-text {
+        display: inline-block;
+        position: absolute;
+        text-wrap: nowrap;
+        opacity: 0;
+        right: 0;
+        background: rgba(253, 253, 253, 0.16);
+        top: calc((100% + var(--sizeTriangle)) * -1);
+        border-radius: 50px;
+        padding: 2px 8px;
+        backdrop-filter: blur(8px);
+        transition-duration: 0.3s;
+        box-shadow: 0 0 10px 0 rgba(253, 253, 253, 0.16);
+
+        &::before {
+          content: "";
+          position: absolute;
+          bottom: calc(var(--sizeTriangle) * -1);
+          right: calc(var(--sizeIcon) / 2);
+          width: 0;
+          height: 0;
+          border-left: 6px solid transparent;
+          border-right: 6px solid transparent;
+          border-top: 6px solid rgba(253, 253, 253, 0.16);
+        }
+      }
+
+      &:hover {
+        .footer__contacts__email-text {
+          opacity: 1;
+        }
+      }
+    }
+
+    &-phone {
+      text-wrap: nowrap;
+    }
+
+    .footer__contact-phone + .footer__contact-phone {
+      margin-top: 12px;
+    }
+  }
+}
+
 // Zero Hero Component Styles
 .zero-hero {
   position: relative;
-  min-height: 100vh;
+
   overflow: hidden;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   margin-top: calc(var(--height-header) * -1);
   --paddingTop: 17px;
-  --paddingBottom: 40px;
+  --paddingBottom: 108px;
 
   &_inner {
-    @include flex-center-between();
+    padding-block: calc(var(--height-header) + var(--paddingTop))
+      var(--paddingBottom);
+  }
 
-    padding-block: calc(var(--height-header) + var(--paddingTop)) var(--paddingBottom);
+  &__row {
+    @include flex-center-between();
+    margin-bottom: 40px;
   }
 
   &__title {
-    @include font-setup(44, 53, 700, true);
+    @include font-setup(44, 53, 700, true, $min-font-size-h1);
     margin-bottom: 24px;
     color: var(--color-light);
   }
 
   &__subtitle {
-    @include font-setup(16, 20, 400);
+    @include font-setup(16, 20, 400, true, 14);
     font-family: var(--second-family);
     margin-bottom: 40px;
     color: var(--color-light);
@@ -137,23 +300,19 @@
     transition: transform 0.3s ease;
   }
 
-  &__world-map {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  &__world-svg {
-    width: 100%;
+  &__world {
+    @include fluid-text(682, 50, width);
+    margin-right: 62px;
     max-width: 682px;
-    height: auto;
 
     animation: float 6s ease-in-out infinite;
   }
 
   &__features {
+    --maxHeight: 138px;
     width: 100%;
     position: relative;
+    min-height: var(--maxHeight);
   }
 
   &__features-wrapper {
@@ -221,16 +380,14 @@
 
   &__swiper {
     padding: 20px 0;
-
-    .swiper-slide {
-      height: auto;
-    }
   }
 
   &__feature-card {
     display: block;
     transition-duration: 0.3s;
     border-radius: 8px;
+    max-height: var(--maxHeight);
+
     padding: 24px;
     max-width: 280px;
     width: 100%;
@@ -238,67 +395,30 @@
 
     backdrop-filter: blur(8px);
     background: rgba(253, 253, 253, 0.16);
-    max-height: 72px;
 
+    border: 1px solid transparent;
     // Псевдоэлемент для границы
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border: 1px solid transparent;
-      border-radius: 8px;
-      transition: border-color 0.3s ease;
-      pointer-events: none;
-    }
-
-    @media (hover: hover) {
-      @if () {
-        &:hover {
-          height: 100%;
-          max-height: 200px;
-          // border: 1px solid var(--color-light-blue); // Убираем эту строку
-
-          // Активируем границу псевдоэлемента
-          &::before {
-            border-color: var(--color-light-blue);
-          }
-
-          .zero-hero__card-description {
-            opacity: 1;
-            overflow-y: auto;
-          }
-          .zero-hero__card-head {
-            margin-bottom: 20px;
-          }
-        }
-      } @else {
-        &:has(input:checked) {
-          height: 100%;
-          max-height: 200px;
-          // border: 1px solid var(--color-light-blue); // Убираем эту строку
-
-          // Активируем границу псевдоэлемента
-          &::before {
-            border-color: var(--color-light-blue);
-          }
-
-          .zero-hero__card-description {
-            opacity: 1;
-            overflow-y: auto;
-          }
-          .zero-hero__card-head {
-            margin-bottom: 20px;
-          }
-        }
-      }
-    }
 
     svg {
       width: 24px;
       height: 24px;
+    }
+
+    &:has(.zero-hero__feature-details[open]) {
+      height: 100%;
+      overflow-y: auto;
+      border-color: var(--color-light-blue);
+      // border: 1px solid var(--color-light-blue); // Убираем эту строку
+
+      // Активируем границу псевдоэлемента
+
+      .zero-hero__card-description {
+        opacity: 1;
+        overflow-y: auto;
+      }
+      .zero-hero__card-head {
+        margin-bottom: 20px;
+      }
     }
   }
 
@@ -324,6 +444,290 @@
   }
 }
 
+.hr-ecosystem {
+  --sizeCircle: 335px;
+
+  --sizeMiddleLine: 700px;
+  --sizeBigLine: 1040px;
+  overflow: hidden;
+  --bottomMargin: calc((var(--sizeCircle) / 3) * -1);
+  position: relative;
+  padding-top: 500px;
+  --topBigLine: 30%;
+  --topMiddleLine: 50%;
+
+  &:after,
+  &:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 100%;
+    /* aspect-ratio: 1 / 1; */
+
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    outline: 1px solid var(--color-light-blue);
+    z-index: -1;
+  }
+
+  &::after {
+    max-width: var(--sizeMiddleLine);
+    top: var(--topMiddleLine);
+    max-height: var(--sizeMiddleLine);
+  }
+
+  &::before {
+    max-width: var(--sizeBigLine);
+    top: var(--topBigLine);
+    max-height: var(--sizeBigLine);
+  }
+  &__wrapper {
+    position: relative;
+
+    // круги для элементов
+  }
+  &__circle {
+    --sizeBlur: 407px;
+    margin: auto auto var(--bottomMargin) auto;
+    position: relative;
+    max-width: var(--sizeCircle);
+    width: 100%;
+    max-height: var(--sizeCircle);
+    height: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      object-fit: contain;
+    }
+
+    &:after {
+      aspect-ratio: 1 / 1;
+      content: "";
+      border-radius: 50%;
+      background: var(--color-light-blue);
+      filter: blur(64px);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      overflow: hidden;
+      width: calc(100% + (var(--sizeBlur) - var(--sizeCircle)));
+      height: auto;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+    }
+  }
+  &__title {
+    @include font-setup(28, 34, 800, true, $min-font-size-h2);
+
+    color: var(--color-light);
+
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 41%;
+    translate: -50% -50%;
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  --firstElementBottom: calc(30% + 42px);
+
+  --widthElement: 140px;
+
+  --radiusBigLine: calc(var(--sizeBigLine) / 2);
+
+  --twoElementBottom: calc(var(--bottomMargin) * -1 + 286px);
+
+  &__elements {
+    position: absolute;
+    /* left: 50%; */
+    inset: 0;
+    width: 100%;
+    max-width: var(--sizeBigLine);
+    aspect-ratio: 1;
+    max-height: var(--sizeBigLine);
+    height: auto;
+    top: var(--topBigLine);
+    left: 50%;
+    transform: translate(-50%, 0%);
+    /* top: 50%; */
+    border-radius: 50%;
+    /* translate: -50% 0%; */
+    z-index: 3;
+    bottom: var(--bottomMargin);
+
+    &__wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__element {
+    position: absolute;
+    border: 1px solid #6b853d;
+    border-radius: 8px;
+    padding: 16px;
+    max-width: var(--widthElement);
+    width: 100%;
+    max-height: 114px;
+    height: 100%;
+    transition-duration: 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 12px;
+
+    // Распределяем 11 элементов равномерно по кругу (360° / 11 ≈ 32.73°)
+    &:nth-child(1) {
+      --angle: 0deg; // top
+      --translateY: calc(var(--radiusBigLine) + var(--widthElement) / 2);
+      top: 50%;
+      left: 50%;
+      transform-origin: center center;
+      transform: rotate(var(--angle)) translateY(calc(var(--translateY) * -1))
+        rotate(calc(-1 * var(--angle))) translateX(-50%);
+    }
+
+    &:nth-child(2) {
+      --angle: 32.73deg; // top-right
+      --translateY: calc(var(--radiusBigLine) + var(--widthElement) / 2);
+      top: 50%;
+      left: 50%;
+      transform-origin: center center;
+      transform: rotate(var(--angle)) translateY(calc(var(--translateY) * -1))
+        rotate(calc(-1 * var(--angle))) translateX(-50%);
+    }
+
+    &:nth-child(3) {
+      --angle: 65.46deg; // right
+      --translateY: calc(var(--radiusBigLine) + var(--widthElement) / 2);
+      top: 50%;
+      left: 50%;
+      transform-origin: center center;
+      transform: rotate(var(--angle)) translateY(calc(var(--translateY) * -1))
+        rotate(calc(-1 * var(--angle))) translateX(-50%);
+    }
+
+    &:nth-child(4) {
+      --angle: 98.19deg; // bottom-right
+      --translateY: calc(var(--radiusBigLine) + var(--widthElement) / 2);
+      top: 50%;
+      left: 50%;
+      transform-origin: center center;
+      transform: rotate(var(--angle)) translateY(calc(var(--translateY) * -1))
+        rotate(calc(-1 * var(--angle)));
+    }
+
+    &:nth-child(5) {
+      --angle: 130.92deg; // bottom
+      --translateY: calc(var(--radiusBigLine) + var(--widthElement) / 2);
+      top: 50%;
+      left: 50%;
+      transform-origin: center center;
+      transform: rotate(var(--angle)) translateY(calc(var(--translateY) * -1))
+        rotate(calc(-1 * var(--angle)));
+    }
+
+    &:nth-child(6) {
+      --angle: 163.65deg; // bottom-left
+      --translateY: calc(var(--radiusBigLine) + var(--widthElement) / 2);
+      top: 50%;
+      left: 50%;
+      transform-origin: center center;
+      transform: rotate(var(--angle)) translateY(calc(var(--translateY) * -1))
+        rotate(calc(-1 * var(--angle)));
+    }
+
+    &:nth-child(7) {
+      --angle: 196.38deg; // left
+      --translateY: calc(var(--radiusBigLine) + var(--widthElement) / 2);
+      top: 50%;
+      left: 50%;
+      transform-origin: center center;
+      transform: rotate(var(--angle)) translateY(calc(var(--translateY) * -1))
+        rotate(calc(-1 * var(--angle)));
+    }
+
+    &:nth-child(8) {
+      --angle: 0deg;
+      --translateY: calc(var(--radiusMiddleLine) + var(--widthElement) / 2);
+      top: 50%;
+      left: 50%;
+      transform-origin: center center;
+      transform: rotate(var(--angle)) translateY(calc(var(--translateY) * -1))
+        rotate(calc(-1 * var(--angle)));
+    }
+
+    &:nth-child(9) {
+      --angle: 32.73deg; // center-left
+      --translateY: calc(var(--radiusMiddleLine) + var(--widthElement) / 2);
+      top: 50%;
+      left: 50%;
+      transform-origin: center center;
+      transform: rotate(var(--angle)) translateY(calc(var(--translateY) * -1))
+        rotate(calc(-1 * var(--angle)));
+    }
+
+    &:nth-child(10) {
+      --angle: 65.46deg; // center-right
+      --translateY: calc(var(--radiusMiddleLine) + var(--widthElement) / 2);
+      top: 50%;
+      left: 50%;
+      transform-origin: center center;
+      transform: rotate(var(--angle)) translateY(calc(var(--translateY) * -1))
+        rotate(calc(-1 * var(--angle)));
+    }
+
+    &:nth-child(11) {
+      --angle: 98.19deg; // special position
+      --translateY: calc(var(--radiusMiddleLine) + var(--widthElement) / 2);
+      top: 50%;
+      left: 50%;
+      transform-origin: center center;
+      transform: rotate(var(--angle)) translateY(calc(var(--translateY) * -1))
+        rotate(calc(-1 * var(--angle)));
+    }
+
+    &:hover {
+      box-shadow: 0 0 20px 0 rgba(247, 255, 205, 0.95);
+      background: #f7ffcd;
+      .hr-ecosystem__element-icon {
+        background-color: #6b853d;
+      }
+
+      .hr-ecosystem__element-title {
+        color: #6b853d;
+      }
+    }
+
+    &-icon {
+      border-radius: 50%;
+      background-color: #9fb872;
+      width: 36px;
+      height: 36px;
+      transition-duration: 0.3s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      color: var(--color-light);
+    }
+
+    &-title {
+      transition-duration: 0.3s;
+      font-weight: 600;
+      font-size: 14px;
+
+      text-align: center;
+      color: var(--color-main);
+    }
+  }
+}
+
 // Animations
 @keyframes float {
   0%,
@@ -335,53 +739,54 @@
   }
 }
 
+@media (max-width: 1040px) {
+  .hr-ecosystem__wrapper::after {
+    top: -25%;
+  }
+
+  .hr-ecosystem__wrapper::before {
+    top: -60%;
+  }
+}
+
+@media (max-width: 950px) {
+  .footer__nav-list {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .hr-ecosystem__wrapper::after {
+    top: -25%;
+  }
+
+  .hr-ecosystem__wrapper::before {
+    top: -45%;
+  }
+}
+
 // Responsive styles
 @media (max-width: 768px) {
+  .zero-hero__row {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .zero-hero__world {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .header__nav {
+    display: none;
+  }
+
   .header {
-    padding: 15px 0;
-
-    &__container {
-      padding: 0 15px;
-    }
-
     &__logo-image {
       width: 100px;
       height: auto;
     }
-
-    &__login-btn {
-      padding: 10px 20px;
-      font-size: 13px;
-    }
   }
 
   .zero-hero {
-    &__container {
-      padding: 0 15px;
-    }
-
-    &__content {
-      margin-bottom: 40px;
-    }
-
-    &__title {
-      font-size: 2.5rem;
-    }
-
-    &__subtitle {
-      font-size: 16px;
-    }
-
-    &__cta-btn {
-      padding: 14px 28px;
-      font-size: 15px;
-    }
-
-    &__features-wrapper {
-      justify-content: center;
-      margin-bottom: 15px;
-    }
-
     &__nav-next,
     &__nav-prev {
       width: 36px;
@@ -402,5 +807,21 @@
 @media (max-width: 500px) {
   .zero-hero__feature-card {
     max-width: 100%;
+  }
+
+  .footer__contacts {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    &__email {
+      margin-bottom: 0;
+
+      &-text {
+        display: none;
+      }
+    }
   }
 }

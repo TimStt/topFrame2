@@ -1,9 +1,15 @@
-@import './libs/normalize.scss';
-@import './libs/fonts.scss';
-@import './libs/variables.scss';
+@import "./libs/normalize.scss";
+@import "./libs/fonts.scss";
+@import "./libs/variables.scss";
+
+html {
+  scroll-behavior: smooth;
+
+  scrollbar-gutter: stable;
+}
 
 body {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-family: var(--font-family);
   font-weight: 500;
   font-size: 16px;
@@ -19,6 +25,46 @@ body {
 
 main {
   flex-grow: 1;
+}
+
+/* ========== КАСТОМНЫЕ СТИЛИ СКРОЛЛБАРА ========== */
+
+/* Для Webkit браузеров (Chrome, Safari, Edge) */
+
+/* Основной контейнер скроллбара */
+::-webkit-scrollbar {
+  width: 8px; /* Ширина вертикального скроллбара */
+  height: 8px; /* Высота горизонтального скроллбара */
+}
+
+/* Дорожка скроллбара (фон, по которому двигается ползунок) */
+::-webkit-scrollbar-track {
+  background: var(--color-light-blue); /* Светло-серый полупрозрачный фон */
+  border-radius: 10px; /* Закругленные углы дорожки */
+}
+
+/* Ползунок скроллбара (та часть, которую можно перетаскивать) */
+::-webkit-scrollbar-thumb {
+  background: var(--color-light-blue-2); /* Темно-серый полупрозрачный цвет */
+  border-radius: 50%; /* Закругленные углы ползунка */
+  transition: background 0.3s ease; /* Плавный переход цвета за 0.3 секунды */
+}
+
+/* Ползунок при наведении курсора */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-light-blue); /* Более темный цвет при наведении */
+}
+
+/* Угол между вертикальным и горизонтальным скроллбарами */
+::-webkit-scrollbar-corner {
+  background: transparent; /* Прозрачный угол */
+}
+
+/* Для Firefox */
+* {
+  scrollbar-width: thin; /* Тонкий скроллбар */
+  scrollbar-color: var(--color-light-blue-2) transparent;
+  /* Первый цвет - ползунок, второй - дорожка */
 }
 
 @media (max-width: 1200px) {

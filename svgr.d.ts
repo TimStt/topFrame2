@@ -3,3 +3,9 @@ declare module "*.svg" {
   const ReactComponent: FC<SVGProps<SVGElement>>;
   export default ReactComponent;
 }
+
+// Дополнительная типизация для @svgr/webpack
+declare module "*.svg?url" {
+  const src: string;
+  export default src;
+}

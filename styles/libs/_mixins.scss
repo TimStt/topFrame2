@@ -5,9 +5,16 @@
   flex-direction: column;
 }
 
-@mixin font-setup($font-size, $line-height-px, $font-weight: 400, $isFluid: false) {
+@mixin font-setup(
+  $font-size,
+  $line-height-px,
+  $font-weight: 400,
+  $isFluid: false,
+  $min: 16,
+  $max: 44
+) {
   @if $isFluid {
-    @include fluid-text($font-size);
+    @include fluid-text($font-size, $min);
   } @else {
     font-size: #{$font-size}px;
   }
@@ -206,22 +213,22 @@
 }
 
 // Миксин для быстрого создания анимации в компонентах
-@mixin animate-on-scroll($animation: 'slide-up', $duration: 0.6s, $delay: 0s) {
+@mixin animate-on-scroll($animation: "slide-up", $duration: 0.6s, $delay: 0s) {
   opacity: 0;
   transition: all $duration ease;
   transition-delay: $delay;
 
-  @if $animation == 'slide-up' {
+  @if $animation == "slide-up" {
     transform: translateY(30px);
-  } @else if $animation == 'slide-down' {
+  } @else if $animation == "slide-down" {
     transform: translateY(-30px);
-  } @else if $animation == 'slide-left' {
+  } @else if $animation == "slide-left" {
     transform: translateX(-30px);
-  } @else if $animation == 'slide-right' {
+  } @else if $animation == "slide-right" {
     transform: translateX(30px);
-  } @else if $animation == 'scale' {
+  } @else if $animation == "scale" {
     transform: scale(0.9);
-  } @else if $animation == 'fade' {
+  } @else if $animation == "fade" {
     // только прозрачность
   }
 

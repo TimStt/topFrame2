@@ -4,22 +4,23 @@
  * @dependencies: Next.js Image, Button component
  * @created: 2024-01-15
  */
-import React from 'react'
+import React from "react";
 
-import Image from 'next/image'
+import Image from "next/image";
+import Link from "next/link";
 
 export const Header = () => {
   const navigationItems = [
-    { label: 'Все профессии', href: '/freelance' },
-    { label: 'Фриланс', href: '/freelance' },
-    { label: 'Наши вакансии', href: '/vacancies' },
-    { label: 'Наша компания', href: '/about' },
-  ]
+    { label: "Все профессии", href: "/freelance" },
+    { label: "Фриланс", href: "/freelance" },
+    { label: "Наши вакансии", href: "/vacancies" },
+    { label: "Наша компания", href: "/about" },
+  ];
 
   return (
     <header className="header">
       <div className="header__inner container">
-        <div className="header__logo">
+        <Link className="header__logo" href="/">
           <Image
             src="/icons/logo.svg"
             width={120}
@@ -27,7 +28,7 @@ export const Header = () => {
             alt="TopFrame"
             className="header__logo-image"
           />
-        </div>
+        </Link>
 
         <nav className="header__nav">
           <ul className="header__nav-list">
@@ -46,5 +47,5 @@ export const Header = () => {
         </div>
       </div>
     </header>
-  )
-}
+  );
+};
