@@ -1,6 +1,6 @@
 // Header Component Styles
 
-@use "../libs/mixins.scss" as *;
+@use '../libs/mixins.scss' as *;
 
 $min-font-size-h1: 32;
 $min-font-size-h2: 24;
@@ -49,7 +49,7 @@ $min-font-size-h2: 24;
       position: relative;
 
       &::after {
-        content: "";
+        content: '';
         position: absolute;
         bottom: -4px;
         left: 0;
@@ -222,7 +222,7 @@ $min-font-size-h2: 24;
         box-shadow: 0 0 10px 0 rgba(253, 253, 253, 0.16);
 
         &::before {
-          content: "";
+          content: '';
           position: absolute;
           bottom: calc(var(--sizeTriangle) * -1);
           right: calc(var(--sizeIcon) / 2);
@@ -264,8 +264,7 @@ $min-font-size-h2: 24;
   --paddingBottom: 108px;
 
   &_inner {
-    padding-block: calc(var(--height-header) + var(--paddingTop))
-      var(--paddingBottom);
+    padding-block: calc(var(--height-header) + var(--paddingTop)) var(--paddingBottom);
   }
 
   &__row {
@@ -389,7 +388,7 @@ $min-font-size-h2: 24;
     max-height: var(--maxHeight);
 
     padding: 24px;
-    max-width: 280px;
+    max-width: 278px;
     width: 100%;
     position: relative; // Добавляем для позиционирования псевдоэлемента
 
@@ -444,6 +443,17 @@ $min-font-size-h2: 24;
   }
 }
 
+@mixin place-on-circle($angle, $radius, $additionalAngle: 0deg) {
+  --angle: #{$angle};
+  --translateX: #{$radius};
+  --additionalAngle: #{$additionalAngle};
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+  transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--translateX))
+    rotate(calc(-1 * var(--angle))) rotate(var(--additionalAngle));
+}
+
 .hr-ecosystem {
   --sizeCircle: 335px;
 
@@ -452,13 +462,13 @@ $min-font-size-h2: 24;
   overflow: hidden;
   --bottomMargin: calc((var(--sizeCircle) / 3) * -1);
   position: relative;
-  padding-top: 500px;
+  padding-top: 463px;
   --topBigLine: 30%;
   --topMiddleLine: 50%;
 
   &:after,
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0%);
@@ -506,7 +516,7 @@ $min-font-size-h2: 24;
 
     &:after {
       aspect-ratio: 1 / 1;
-      content: "";
+      content: '';
       border-radius: 50%;
       background: var(--color-light-blue);
       filter: blur(64px);
@@ -521,6 +531,9 @@ $min-font-size-h2: 24;
     }
   }
   &__title {
+    &.hidden {
+      display: none;
+    }
     @include font-setup(28, 34, 800, true, $min-font-size-h2);
 
     color: var(--color-light);
@@ -537,6 +550,8 @@ $min-font-size-h2: 24;
   --widthElement: 140px;
 
   --radiusBigLine: calc(var(--sizeBigLine) / 2);
+
+  --radiusMiddleLine: calc(var(--sizeMiddleLine) / 2);
 
   --twoElementBottom: calc(var(--bottomMargin) * -1 + 286px);
 
@@ -578,118 +593,75 @@ $min-font-size-h2: 24;
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    background-color: var(--color-white);
     gap: 12px;
+    justify-content: center;
 
-    // Распределяем 11 элементов равномерно по кругу (360° / 11 ≈ 32.73°)
+    $firstDeg: 192deg;
+    $secondDeg: 224deg;
+    $thirdDeg: 246deg;
+    $fourthDeg: 270deg;
+    $fifthDeg: 295deg;
+    $sixthDeg: 323deg;
+    $seventhDeg: 346deg;
+
+    $eighthDeg: 209deg;
+    $ninthDeg: 247deg;
+    $tenthDeg: 294deg;
+    $eleventhDeg: 331deg;
+
+    // Элементы внешнего круга (слева направо по часовой стрелке, начиная с 195°)
     &:nth-child(1) {
-      --angle: 0deg; // top
-      --translateY: calc(var(--radiusBigLine) + var(--widthElement) / 2);
-      top: 50%;
-      left: 50%;
-      transform-origin: center center;
-      transform: rotate(var(--angle)) translateY(calc(var(--translateY) * -1))
-        rotate(calc(-1 * var(--angle))) translateX(-50%);
+      @include place-on-circle($firstDeg, var(--radiusBigLine)); // Блог Linkedin (слева внизу)
     }
 
     &:nth-child(2) {
-      --angle: 32.73deg; // top-right
-      --translateY: calc(var(--radiusBigLine) + var(--widthElement) / 2);
-      top: 50%;
-      left: 50%;
-      transform-origin: center center;
-      transform: rotate(var(--angle)) translateY(calc(var(--translateY) * -1))
-        rotate(calc(-1 * var(--angle))) translateX(-50%);
+      @include place-on-circle(
+        $secondDeg,
+        var(--radiusBigLine),
+        -5deg
+      ); // Корпоративная культура (слева снизу)
     }
 
     &:nth-child(3) {
-      --angle: 65.46deg; // right
-      --translateY: calc(var(--radiusBigLine) + var(--widthElement) / 2);
-      top: 50%;
-      left: 50%;
-      transform-origin: center center;
-      transform: rotate(var(--angle)) translateY(calc(var(--translateY) * -1))
-        rotate(calc(-1 * var(--angle))) translateX(-50%);
+      @include place-on-circle($thirdDeg, var(--radiusBigLine)); // Битрикс (снизу)
     }
 
     &:nth-child(4) {
-      --angle: 98.19deg; // bottom-right
-      --translateY: calc(var(--radiusBigLine) + var(--widthElement) / 2);
-      top: 50%;
-      left: 50%;
-      transform-origin: center center;
-      transform: rotate(var(--angle)) translateY(calc(var(--translateY) * -1))
-        rotate(calc(-1 * var(--angle)));
+      @include place-on-circle($fourthDeg, var(--radiusBigLine)); // Фриланс (справа снизу)
     }
 
     &:nth-child(5) {
-      --angle: 130.92deg; // bottom
-      --translateY: calc(var(--radiusBigLine) + var(--widthElement) / 2);
-      top: 50%;
-      left: 50%;
-      transform-origin: center center;
-      transform: rotate(var(--angle)) translateY(calc(var(--translateY) * -1))
-        rotate(calc(-1 * var(--angle)));
+      @include place-on-circle($fifthDeg, var(--radiusBigLine)); // Welcome book (справа)
     }
 
     &:nth-child(6) {
-      --angle: 163.65deg; // bottom-left
-      --translateY: calc(var(--radiusBigLine) + var(--widthElement) / 2);
-      top: 50%;
-      left: 50%;
-      transform-origin: center center;
-      transform: rotate(var(--angle)) translateY(calc(var(--translateY) * -1))
-        rotate(calc(-1 * var(--angle)));
+      @include place-on-circle($sixthDeg, var(--radiusBigLine)); // Блог Дзен (справа сверху)
     }
 
     &:nth-child(7) {
-      --angle: 196.38deg; // left
-      --translateY: calc(var(--radiusBigLine) + var(--widthElement) / 2);
-      top: 50%;
-      left: 50%;
-      transform-origin: center center;
-      transform: rotate(var(--angle)) translateY(calc(var(--translateY) * -1))
-        rotate(calc(-1 * var(--angle)));
+      @include place-on-circle($seventhDeg, var(--radiusBigLine), 2deg); // Горячая линия (сверху)
     }
 
     &:nth-child(8) {
-      --angle: 0deg;
-      --translateY: calc(var(--radiusMiddleLine) + var(--widthElement) / 2);
-      top: 50%;
-      left: 50%;
-      transform-origin: center center;
-      transform: rotate(var(--angle)) translateY(calc(var(--translateY) * -1))
-        rotate(calc(-1 * var(--angle)));
+      @include place-on-circle($eighthDeg, var(--radiusMiddleLine)); // Клиенты (слева сверху)
     }
 
+    // Элементы внутреннего круга
     &:nth-child(9) {
-      --angle: 32.73deg; // center-left
-      --translateY: calc(var(--radiusMiddleLine) + var(--widthElement) / 2);
-      top: 50%;
-      left: 50%;
-      transform-origin: center center;
-      transform: rotate(var(--angle)) translateY(calc(var(--translateY) * -1))
-        rotate(calc(-1 * var(--angle)));
+      @include place-on-circle($ninthDeg, var(--radiusMiddleLine)); // TF COIN (слева внизу)
     }
 
     &:nth-child(10) {
-      --angle: 65.46deg; // center-right
-      --translateY: calc(var(--radiusMiddleLine) + var(--widthElement) / 2);
-      top: 50%;
-      left: 50%;
-      transform-origin: center center;
-      transform: rotate(var(--angle)) translateY(calc(var(--translateY) * -1))
-        rotate(calc(-1 * var(--angle)));
+      @include place-on-circle(
+        $tenthDeg,
+        var(--radiusMiddleLine),
+        -6deg
+      ); // Бот обратной связи (снизу)
     }
 
     &:nth-child(11) {
-      --angle: 98.19deg; // special position
-      --translateY: calc(var(--radiusMiddleLine) + var(--widthElement) / 2);
-      top: 50%;
-      left: 50%;
-      transform-origin: center center;
-      transform: rotate(var(--angle)) translateY(calc(var(--translateY) * -1))
-        rotate(calc(-1 * var(--angle)));
+      @include place-on-circle($eleventhDeg, var(--radiusMiddleLine)); // Институт (справа снизу)
     }
 
     &:hover {
@@ -739,13 +711,91 @@ $min-font-size-h2: 24;
   }
 }
 
+@media (max-width: 1180px) {
+  .hr-ecosystem {
+    --sizeCircle: 300px;
+    --sizeMiddleLine: 549px;
+    --sizeBigLine: 889px;
+  }
+
+  .hr-ecosystem__element:nth-child(2) {
+    @include place-on-circle(220deg, var(--radiusBigLine));
+  }
+
+  .hr-ecosystem__element:nth-child(8) {
+    @include place-on-circle(201deg, var(--radiusMiddleLine));
+  }
+
+  .hr-ecosystem__element:nth-child(11) {
+    @include place-on-circle(337deg, var(--radiusMiddleLine));
+  }
+}
+
 @media (max-width: 1040px) {
   .hr-ecosystem__wrapper::after {
     top: -25%;
   }
 
-  .hr-ecosystem__wrapper::before {
-    top: -60%;
+  .hr-ecosystem {
+    padding-block: 80px 24px;
+    &__title {
+      @include font-setup(40px, 48, 700, true, $min-font-size-h2);
+      font-weight: 700;
+      font-size: 40px;
+      position: relative;
+      top: initial !important;
+      left: initial !important;
+      translate: none !important;
+      text-align: left;
+      margin-bottom: 24px;
+      color: var(--color-main);
+      text-shadow: none;
+
+      &:not(.hidden) {
+        display: none;
+      }
+      &.hidden {
+        display: inline-block;
+      }
+    }
+
+    &__wrapper {
+      display: none;
+    }
+
+    &__elements {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      top: initial;
+      left: initial;
+      transform: none;
+      bottom: initial;
+      border-radius: 0;
+      aspect-ratio: initial;
+
+      &__wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(var(--widthElement), 1fr));
+        gap: 16px;
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    &__element {
+      top: initial !important;
+      left: initial !important;
+      max-width: 100%;
+      position: relative;
+      transform: none !important;
+    }
+
+    &::before,
+    &::after {
+      display: none;
+    }
   }
 }
 
@@ -806,7 +856,8 @@ $min-font-size-h2: 24;
 
 @media (max-width: 500px) {
   .zero-hero__feature-card {
-    max-width: 100%;
+    margin-inline: 1px;
+    max-width: calc(100% - 2px);
   }
 
   .footer__contacts {
