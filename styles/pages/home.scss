@@ -1,9 +1,9 @@
 // Header Component Styles
 
-@use '../libs/mixins.scss' as *;
+@use "../libs/mixins.scss" as *;
 
-$min-font-size-h1: 32;
-$min-font-size-h2: 24;
+$min-font-size-h1: 34;
+$min-font-size-h2: 26;
 
 .title-section {
   @include font-setup(40, 48, 700, true, $min-font-size-h2);
@@ -54,7 +54,7 @@ $min-font-size-h2: 24;
       position: relative;
 
       &::after {
-        content: '';
+        content: "";
         position: absolute;
         bottom: -4px;
         left: 0;
@@ -227,7 +227,7 @@ $min-font-size-h2: 24;
         box-shadow: 0 0 10px 0 rgba(253, 253, 253, 0.16);
 
         &::before {
-          content: '';
+          content: "";
           position: absolute;
           bottom: calc(var(--sizeTriangle) * -1);
           right: calc(var(--sizeIcon) / 2);
@@ -269,7 +269,8 @@ $min-font-size-h2: 24;
   --paddingBottom: 108px;
 
   &_inner {
-    padding-block: calc(var(--height-header) + var(--paddingTop)) var(--paddingBottom);
+    padding-block: calc(var(--height-header) + var(--paddingTop))
+      var(--paddingBottom);
   }
 
   &__row {
@@ -455,8 +456,9 @@ $min-font-size-h2: 24;
   top: 50%;
   left: 50%;
   transform-origin: center;
-  transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--translateX))
-    rotate(calc(-1 * var(--angle))) rotate(var(--additionalAngle));
+  transform: translate(-50%, -50%) rotate(var(--angle))
+    translateX(var(--translateX)) rotate(calc(-1 * var(--angle)))
+    rotate(var(--additionalAngle));
 }
 
 .hr-ecosystem {
@@ -473,7 +475,7 @@ $min-font-size-h2: 24;
 
   &:after,
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0%);
@@ -521,7 +523,7 @@ $min-font-size-h2: 24;
 
     &:after {
       aspect-ratio: 1 / 1;
-      content: '';
+      content: "";
       border-radius: 50%;
       background: var(--color-light-blue);
       filter: blur(64px);
@@ -617,7 +619,10 @@ $min-font-size-h2: 24;
 
     // Элементы внешнего круга (слева направо по часовой стрелке, начиная с 195°)
     &:nth-child(1) {
-      @include place-on-circle($firstDeg, var(--radiusBigLine)); // Блог Linkedin (слева внизу)
+      @include place-on-circle(
+        $firstDeg,
+        var(--radiusBigLine)
+      ); // Блог Linkedin (слева внизу)
     }
 
     &:nth-child(2) {
@@ -629,32 +634,54 @@ $min-font-size-h2: 24;
     }
 
     &:nth-child(3) {
-      @include place-on-circle($thirdDeg, var(--radiusBigLine)); // Битрикс (снизу)
+      @include place-on-circle(
+        $thirdDeg,
+        var(--radiusBigLine)
+      ); // Битрикс (снизу)
     }
 
     &:nth-child(4) {
-      @include place-on-circle($fourthDeg, var(--radiusBigLine)); // Фриланс (справа снизу)
+      @include place-on-circle(
+        $fourthDeg,
+        var(--radiusBigLine)
+      ); // Фриланс (справа снизу)
     }
 
     &:nth-child(5) {
-      @include place-on-circle($fifthDeg, var(--radiusBigLine)); // Welcome book (справа)
+      @include place-on-circle(
+        $fifthDeg,
+        var(--radiusBigLine)
+      ); // Welcome book (справа)
     }
 
     &:nth-child(6) {
-      @include place-on-circle($sixthDeg, var(--radiusBigLine)); // Блог Дзен (справа сверху)
+      @include place-on-circle(
+        $sixthDeg,
+        var(--radiusBigLine)
+      ); // Блог Дзен (справа сверху)
     }
 
     &:nth-child(7) {
-      @include place-on-circle($seventhDeg, var(--radiusBigLine), 2deg); // Горячая линия (сверху)
+      @include place-on-circle(
+        $seventhDeg,
+        var(--radiusBigLine),
+        2deg
+      ); // Горячая линия (сверху)
     }
 
     &:nth-child(8) {
-      @include place-on-circle($eighthDeg, var(--radiusMiddleLine)); // Клиенты (слева сверху)
+      @include place-on-circle(
+        $eighthDeg,
+        var(--radiusMiddleLine)
+      ); // Клиенты (слева сверху)
     }
 
     // Элементы внутреннего круга
     &:nth-child(9) {
-      @include place-on-circle($ninthDeg, var(--radiusMiddleLine)); // TF COIN (слева внизу)
+      @include place-on-circle(
+        $ninthDeg,
+        var(--radiusMiddleLine)
+      ); // TF COIN (слева внизу)
     }
 
     &:nth-child(10) {
@@ -666,7 +693,10 @@ $min-font-size-h2: 24;
     }
 
     &:nth-child(11) {
-      @include place-on-circle($eleventhDeg, var(--radiusMiddleLine)); // Институт (справа снизу)
+      @include place-on-circle(
+        $eleventhDeg,
+        var(--radiusMiddleLine)
+      ); // Институт (справа снизу)
     }
 
     &:hover {
@@ -709,7 +739,6 @@ $min-font-size-h2: 24;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  max-height: 825px;
 
   &__inner {
     padding-top: 80px;
@@ -728,6 +757,8 @@ $min-font-size-h2: 24;
 
   &__list {
     overflow-x: auto;
+    max-height: 583px;
+
     /* Дорожка скроллбара (фон, по которому двигается ползунок) */
     &::-webkit-scrollbar-track {
       background: var(--color-light-blue);
@@ -762,28 +793,38 @@ $min-font-size-h2: 24;
       color: var(--color-main);
     }
     &-title {
-      font-weight: 700;
-      font-size: 24px;
+      @include font-setup(24, 29, 700, true, 18);
       color: inherit;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
       text-align: left;
     }
     svg {
-      width: 24px;
+      min-width: 24px;
       height: 24px;
     }
   }
 
   &__content {
     @include flex-center-between();
+    gap: 12px;
+    // flex-wrap: wrap;
   }
 
   &__card {
     background-color: transparent;
+    margin: auto;
+    max-width: 480px;
+    width: 100%;
 
     img {
       border-radius: 8px;
       margin-bottom: 2px;
       aspect-ratio: 480 / 240;
+      max-width: 480px;
       object-fit: cover;
     }
 
@@ -793,25 +834,37 @@ $min-font-size-h2: 24;
       border-radius: 8px;
       max-width: 480px;
       display: flex;
+      min-height: 309px;
+      max-height: 309px;
       flex-direction: column;
     }
 
     &-title {
-      font-weight: 700;
-      font-size: 24px;
+      @include font-setup(24, 29, 700);
       color: var(--color-main);
       margin-bottom: 16px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     &-description {
-      min-height: 88px;
-      max-height: 88px;
+      // --maxHeight: 88px;
+
       overflow: hidden;
       font-family: var(--second-family);
-      font-weight: 400;
-      font-size: 16px;
+      @include font-setup(16, 22, 400);
+
       margin-bottom: 24px;
       color: #727272;
+      flex: 1;
+    }
+
+    .directions__card-button + .directions__card-button {
+      margin-top: 12px;
     }
   }
 
@@ -823,6 +876,120 @@ $min-font-size-h2: 24;
     display: flex;
     flex-direction: column;
     gap: 12px;
+  }
+
+  &__selected {
+    flex: 1;
+  }
+
+  &__selected-empty {
+    @include flex-column();
+    align-items: center;
+    gap: 12px;
+    color: var(--color-light);
+    @include font-setup(24, 32, 700);
+    text-align: center;
+    margin: auto;
+    svg {
+      width: 48px;
+      height: 48px;
+    }
+
+    span {
+      font-family: var(--second-family);
+      font-weight: 400;
+      font-size: 16px;
+      text-align: center;
+    }
+  }
+}
+
+.team {
+  --cardHeight: 200px;
+  --cardWidth: 280px;
+  padding-top: 80px;
+
+  &__title {
+    color: var(--color-main);
+    text-align: center;
+  }
+
+  &__subtitle {
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 16px;
+    color: #727272;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--cardWidth), 1fr));
+    gap: 20px;
+  }
+  &__card {
+    // max-width: var(--cardWidth);
+    height: auto;
+    aspect-ratio: 280 / 200;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    transition-duration: 0.3s;
+
+    &-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition-duration: 0.3s;
+      background-color: #24242466;
+      position: relative;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      transition-duration: 0.3s;
+      background-color: #24242466;
+    }
+
+    &-content {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      padding: 24px;
+      z-index: 2;
+    }
+
+    &-button {
+      margin-bottom: 49px;
+    }
+
+    &-title {
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--color-light);
+      margin-bottom: 12px;
+    }
+
+    &-position {
+      font-family: var(--second-family);
+      font-weight: 400;
+      font-size: 12px;
+      color: var(--color-light);
+    }
+
+    &:hover,
+    &.active {
+      &::after {
+        background-color: transparent;
+      }
+    }
   }
 }
 
@@ -861,13 +1028,27 @@ $min-font-size-h2: 24;
   .hr-ecosystem__wrapper::after {
     top: -25%;
   }
+  .directions {
+    padding-bottom: 24px;
 
+    &__list {
+      padding-right: 0px;
+    }
+
+    &__button {
+      padding-inline: 18px;
+      height: 64px;
+    }
+
+    &__content {
+      gap: 32px;
+    }
+  }
   .hr-ecosystem {
     padding-block: 80px 24px;
     &__title {
-      @include font-setup(40px, 48, 700, true, $min-font-size-h2);
-      font-weight: 700;
-      font-size: 40px;
+      @include font-setup(40, 48, 700, true, $min-font-size-h2);
+
       position: relative;
       top: initial !important;
       left: initial !important;
@@ -897,16 +1078,18 @@ $min-font-size-h2: 24;
       left: initial;
       transform: none;
       bottom: initial;
+      max-height: 100%;
       border-radius: 0;
       aspect-ratio: initial;
 
       &__wrapper {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(var(--widthElement), 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         gap: 16px;
         position: relative;
         width: 100%;
         height: 100%;
+        max-height: 100%;
       }
     }
 
@@ -946,9 +1129,17 @@ $min-font-size-h2: 24;
     flex-direction: column;
     gap: 16px;
   }
+
+  .directions__content {
+    flex-direction: column;
+  }
   .zero-hero__world {
     width: 100%;
     margin-right: 0;
+  }
+
+  .zero-hero_inner {
+    --paddingBottom: 42px;
   }
 
   .header__nav {
@@ -975,7 +1166,7 @@ $min-font-size-h2: 24;
     }
 
     &__feature-card {
-      padding: 20px;
+      padding: 16px;
     }
   }
 }

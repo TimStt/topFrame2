@@ -4,10 +4,12 @@
  * @dependencies: Header, ZeroHero widgets
  * @created: 2024-01-15
  */
-import { Directions } from '@/widgets/mainblocks/directions'
-import { Header } from '@/widgets/mainblocks/header'
-import HREcosystemSection from '@/widgets/mainblocks/hr-ecosystem'
-import { ZeroHero } from '@/widgets/mainblocks/zero-hero'
+
+import { Directions } from "@/widgets/mainblocks/directions";
+import { Header } from "@/widgets/mainblocks/header";
+import HREcosystemSection from "@/widgets/mainblocks/hr-ecosystem";
+import { Team } from "@/widgets/mainblocks/team";
+import { ZeroHero } from "@/widgets/mainblocks/zero-hero";
 
 export default function Home() {
   return (
@@ -16,7 +18,8 @@ export default function Home() {
         <ZeroHero />
         <HREcosystemSection />
         <Directions />
+        <Team />
       </main>
     </>
-  )
+  );
 }

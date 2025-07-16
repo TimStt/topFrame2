@@ -32,7 +32,6 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-sm);
 
   font-family: var(--font-family);
   font-weight: var(--font-weight-semibold);
@@ -40,7 +39,7 @@
   line-height: 1;
   text-align: center;
   text-decoration: none;
-
+  max-width: max-content;
   border: none;
   border-radius: var(--btnBorderRadius);
   cursor: pointer;
@@ -48,6 +47,15 @@
   position: relative;
   overflow: hidden;
   white-space: nowrap;
+
+  &:has(.arrow) {
+    gap: 12px;
+  }
+
+  .arrow {
+    width: 24px;
+    height: 24px;
+  }
 
   // Размеры
   &--small {
@@ -70,13 +78,14 @@
 
   // Варианты стилей
   &--primary {
-    background: var(--color-accent-blue);
+    background-color: var(--color-accent-blue);
     color: var(--color-white);
     border: var(--btnBorderWidth) solid var(--color-accent-blue);
 
     &:hover {
-      background: var(--color-middle-blue);
+      background-color: var(--color-light-blue);
       border-color: var(--color-middle-blue);
+      color: var(--color-accent-blue);
       transform: translateY(-2px);
       box-shadow: var(--btnShadowHover);
     }
@@ -174,6 +183,7 @@
   // Полная ширина
   &--full-width {
     width: 100%;
+    max-width: 100%;
   }
 
   // Элементы кнопки
@@ -208,7 +218,7 @@
     transform: translate(-50%, -50%);
 
     &::after {
-      content: '';
+      content: "";
       width: 16px;
       height: 16px;
       border: 2px solid transparent;
@@ -216,6 +226,19 @@
       border-radius: 50%;
       animation: spin 1s linear infinite;
     }
+  }
+}
+
+.chip {
+  --colorText: var(--color-accent-blue);
+  border-radius: 50px;
+  padding: 8px 24px;
+  width: max-content;
+  background-color: var(--color-light-blue);
+  color: var(--colorText);
+
+  span {
+    @include font-setup(12, 14, 500);
   }
 }
 

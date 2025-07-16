@@ -1,92 +1,103 @@
 export interface IDirectionButtons {
-  id: number
-  title: string
-  description: string
-  icon?: React.ReactNode
-  idCard: number
+  id: number;
+  title: string;
+  description: string;
+  icon?: React.ReactNode;
+  idCard: number;
 }
 
 export interface IDirectionCards {
-  id: number
-  title: string
-  description: string
-  image: string
+  id: number;
+  title: string;
+  description: string;
+  image: string;
 }
 
 export const directionsData: IDirectionButtons[] = [
   {
     id: 1,
-    title: 'Административное направление',
-    description: 'Управление административными процессами и документооборотом',
+    title: "Административное направление",
+    description: "Управление административными процессами и документооборотом",
     idCard: 1,
   },
   {
     id: 2,
-    title: 'Аутсорсинг складских процессов',
-    description: 'Оптимизация складских операций и логистических процессов',
+    title: "Аутсорсинг складских процессов",
+    description: "Оптимизация складских операций и логистических процессов",
     idCard: 2,
   },
   {
     id: 3,
-    title: 'Аудит гостиничного сервиса',
-    description: 'Комплексная оценка качества гостиничных услуг',
+    title: "Аудит гостиничного сервиса",
+    description: "Комплексная оценка качества гостиничных услуг",
     idCard: 3,
   },
   {
     id: 4,
-    title: 'Оценка эффективности руководства и административного УК',
-    description: 'Анализ работы управленческого звена и административных структур',
+    title: "Оценка эффективности руководства и административного УК",
+    description:
+      "Анализ работы управленческого звена и административных структур",
     idCard: 4,
   },
   {
     id: 5,
-    title: 'Специальные инструкции',
-    description: 'Разработка и внедрение специализированных процедур',
+    title: "Специальные инструкции",
+    description: "Разработка и внедрение специализированных процедур",
     idCard: 5,
   },
   {
     id: 6,
-    title: 'Экспертиза фруктов и овощей',
-    description: 'Профессиональная оценка качества сельскохозяйственной продукции',
+    title: "Экспертиза фруктов и овощей",
+    description:
+      "Профессиональная оценка качества сельскохозяйственной продукции",
     idCard: 6,
   },
-]
+  {
+    id: 7,
+    title: "Экспертиза фруктов и овощей",
+    description:
+      "Профессиональная оценка качества сельскохозяйственной продукции",
+    idCard: 7,
+  },
+];
 
 export const directionsCardsData: IDirectionCards[] = [
   {
     id: 1,
-    title: 'Административное направление',
-    description: 'Управление административными процессами и документооборотом',
-    image: '/images/directions-1.jpg',
+    title: "Административное направление",
+    description: "Управление административными процессами и документооборотом",
+    image: "/images/directions-1.jpg",
   },
   {
     id: 2,
-    title: 'Аутсорсинг складских процессов',
-    description: 'Оптимизация складских операций и логистических процессов',
-    image: '/images/directions-2.jpg',
+    title: "Аутсорсинг складских процессов",
+    description: "Оптимизация складских операций и логистических процессов",
+    image: "/images/direction-2.jpg",
   },
   {
     id: 3,
-    title: 'Аудит гостиничного сервиса',
-    description: 'Комплексная оценка качества гостиничных услуг',
-    image: '/images/directions-1.jpg',
+    title: "Аудит гостиничного сервиса",
+    description: "Комплексная оценка качества гостиничных услуг",
+    image: "/images/direction-1.jpg",
   },
   {
     id: 4,
-    title: 'Оценка эффективности руководства и административного УК',
-    description: 'Анализ работы управленческого звена и административных структур',
-    image: '/images/directions-2.jpg',
+    title: "Оценка эффективности руководства и административного УК",
+    description:
+      "Аналsssssd sd sd skadskd laksdk aks dokaso kdoka sodk kaskoads dka dkoda soks dkoas dkas kodkds o akd akos osk kakoaso dkao kda okdoas as as a sa s a sasas as aиз работы управленческого звена и административных структур",
+    image: "/images/direction-2.jpg",
   },
   {
     id: 5,
-    title: 'Специальные инструкции',
-    description: 'Разработка и внедрение специализированных процедур',
-    image: '/images/directions-1.jpg',
+    title: "Специальные инструкции",
+    description: "Разработка и внедрение специализированных процедур",
+    image: "/images/direction-1.jpg",
   },
   {
     id: 6,
-    title: 'Экспертиза фруктов и овощей',
-    description: 'Профессиональная оценка качества сельскохозяйственной продукции',
-    image: '/images/directions-2.jpg',
+    title: "Экспертиза фруктов и овощей",
+    description:
+      "Профессs dddddd ddddd ddd ddddd ddddd ddddd dddd  ddddd dddd sdиональная sd sd sd sd sd kso doasko daoksdo kasodk aoskd ksokda oksd asodk asod kas dokas dokas dkas dka sdok asokd оценка качества сельскохозяйственной продукции",
+    image: "/images/direction-2.jpg",
   },
-]
+];

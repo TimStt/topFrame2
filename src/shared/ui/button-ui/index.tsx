@@ -1,80 +1,78 @@
-import React from 'react'
+import React, { ComponentPropsWithoutRef } from "react";
 
-import classNames from 'classnames'
+import classNames from "classnames";
 
-import { ArrowIconUI } from '../arrow-icon-ui'
+import { ArrowIconUI } from "../arrow-icon-ui";
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+type BaseButtonProps = {
   /** Вариант стиля кнопки */
-  variant?: 'primary' | 'secondary' | 'outline' | 'success' | 'ghost' | 'light'
+  variant?: "primary" | "secondary" | "outline" | "success" | "ghost" | "light";
   /** Размер кнопки */
-  size?: 'small' | 'medium' | 'large'
+  size?: "small" | "medium" | "large";
   /** Состояние загрузки */
-  loading?: boolean
+  loading?: boolean;
   /** Полная ширина */
-  fullWidth?: boolean
+  fullWidth?: boolean;
   /** Иконка слева от текста */
-  leftIcon?: React.ReactNode
+  leftIcon?: React.ReactNode;
   /** Иконка справа от текста */
-  rightIcon?: React.ReactNode
+  rightIcon?: React.ReactNode;
   /** Дочерние элементы (текст кнопки) */
-  children: React.ReactNode
+  children?: React.ReactNode;
+  /** Показывать стрелку */
+  hasArrow?: boolean;
   /** Дополнительные CSS классы */
-  className?: string
-  /** Тип кнопки */
-  type?: 'button' | 'submit' | 'reset'
-  /** Обработчик клика */
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
-  hasArrow?: boolean
-}
+  className?: string;
+};
 
-export const ButtonUI: React.FC<ButtonProps> = ({
-  variant = 'primary',
-  size = 'medium',
+type ButtonAsButton = BaseButtonProps & {
+  as?: "button";
+} & ComponentPropsWithoutRef<"button">;
+
+type ButtonAsLink = BaseButtonProps & {
+  as: "a";
+} & ComponentPropsWithoutRef<"a">;
+
+export type ButtonProps<El extends Extract<React.ElementType, "button" | "a">> =
+  El extends "button" ? ButtonAsButton : El extends "a" ? ButtonAsLink : never;
+
+export const ButtonUI = <
+  El extends Extract<React.ElementType, "button" | "a"> = "button",
+>({
+  variant = "primary",
+  size = "medium",
   loading = false,
   fullWidth = false,
   leftIcon,
   rightIcon,
   children,
   className,
-  disabled,
-  type = 'button',
-  onClick,
   hasArrow = false,
+  as = "button",
   ...rest
-}) => {
+}: ButtonProps<El>) => {
   const buttonClasses = classNames(
-    'btn',
+    "btn",
     `btn--${variant}`,
     `btn--${size}`,
     {
-      'btn--loading': loading,
-      'btn--disabled': disabled || loading,
-      'btn--full-width': fullWidth,
+      "btn--loading": loading,
+      "btn--disabled": ("disabled" in rest && rest.disabled) || loading,
+      "btn--full-width": fullWidth,
     },
-    className,
-  )
+    className
+  );
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (loading || disabled) {
-      event.preventDefault()
-      return
-    }
-    onClick?.(event)
-  }
+  const DEFAULT_ELEMENT = "button";
+
+  const Element = as || DEFAULT_ELEMENT;
 
   return (
-    <button
-      type={type}
-      className={buttonClasses}
-      disabled={disabled || loading}
-      onClick={handleClick}
-      {...rest}
-    >
+    <Element className={buttonClasses} {...rest}>
       {children}
-      {hasArrow && <ArrowIconUI />}
+      {hasArrow && <ArrowIconUI className="arrow" />}
 
       {loading && <span className="btn__loader" />}
-    </button>
-  )
-}
+    </Element>
+  );
+};

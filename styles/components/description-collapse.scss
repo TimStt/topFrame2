@@ -1,0 +1,78 @@
+// description-block.scss
+.description-block {
+  position: relative;
+  color: #222;
+
+  &.expanded {
+    max-height: var(--maxHeight);
+    overflow-y: auto;
+
+    .description-block__more-btn {
+      margin-left: 0.3em;
+    }
+  }
+}
+
+.description-block__text {
+  margin: 0;
+  transition: all 0.3s ease;
+  line-height: inherit;
+
+  &::-webkit-scrollbar {
+    width: 4px; /* Ширина вертикального скроллбара */
+    height: 4px; /* Высота горизонтального скроллбара */
+  }
+}
+
+.description-block__ellipsis {
+  color: #666;
+  margin-right: 0.3em;
+  line-height: inherit;
+}
+
+.description-block__more-btn {
+  background: none;
+  display: inline;
+  border: none;
+  color: var(--color-accent-blue);
+  cursor: pointer;
+  font: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  padding: 0;
+  margin: 0;
+  // float: right;
+  // clear: both;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: (--color-light-blue);
+    text-decoration: underline;
+  }
+}
+
+.description-block__collapse-btn {
+  display: block;
+  margin: 8px 0 0 0;
+  background: none;
+  border: none;
+  color: #0070f3;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+  transition: color 0.2s ease;
+  text-align: left;
+
+  &:hover {
+    color: #0051a3;
+    text-decoration: underline;
+  }
+
+  &:focus {
+    outline: 2px solid #0070f3;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}

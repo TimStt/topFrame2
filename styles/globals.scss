@@ -1,6 +1,6 @@
-@import './libs/normalize.scss';
-@import './libs/fonts.scss';
-@import './libs/variables.scss';
+@import "./libs/normalize.scss";
+@import "./libs/fonts.scss";
+@import "./libs/variables.scss";
 
 html {
   scroll-behavior: smooth;
@@ -9,7 +9,7 @@ html {
 }
 
 body {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-family: var(--font-family);
   font-weight: 500;
   font-size: 16px;
@@ -40,19 +40,35 @@ main {
 /* Дорожка скроллбара (фон, по которому двигается ползунок) */
 ::-webkit-scrollbar-track {
   background: var(--color-light-blue); /* Светло-серый полупрозрачный фон */
-  border-radius: 10px; /* Закругленные углы дорожки */
+  /* Закругленные углы дорожки */
 }
 
 /* Ползунок скроллбара (та часть, которую можно перетаскивать) */
 ::-webkit-scrollbar-thumb {
   background: var(--color-light-blue-2); /* Темно-серый полупрозрачный цвет */
-  border-radius: 50%; /* Закругленные углы ползунка */
+  border-radius: 10px; /* Закругленные углы ползунка */
   transition: background 0.3s ease; /* Плавный переход цвета за 0.3 секунды */
+}
+
+.controls-play-button {
+  width: 48px;
+  height: 48px;
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-white);
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(253, 253, 253, 0.16);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: var(--color-light);
 }
 
 /* Ползунок при наведении курсора */
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-light-blue); /* Более темный цвет при наведении */
+  opacity: 0.8;
 }
 
 /* Угол между вертикальным и горизонтальным скроллбарами */
