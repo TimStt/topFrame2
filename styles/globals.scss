@@ -64,6 +64,10 @@ main {
   cursor: pointer;
   transition: background-color var(--transition-normal) ease;
   color: var(--color-light);
+  svg {
+    width: 22.5px;
+    height: 22.5px;
+  }
 }
 
 /* Ползунок при наведении курсора */

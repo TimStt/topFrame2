@@ -63,13 +63,14 @@ export const ZeroHero = () => {
               <span>Присоединиться к команде</span>
             </ButtonUI>
           </div>
-          <Image
-            className="zero-hero__world"
-            src={"/icons/world.svg"}
-            width="682"
-            height="450"
-            alt="world"
-          />
+          <div className="zero-hero__world">
+            <Image
+              src={"/icons/world.svg"}
+              width="682"
+              height="450"
+              alt="world"
+            />
+          </div>
         </div>
         <div className="zero-hero__features">
           <div className="zero-hero__features-wrapper">
