@@ -1,17 +1,22 @@
-// Button specific variables
+@use "../libs/mixins.scss" as *;
 :root {
   // Button sizes
   --btnHeightSmall: 40px;
   --btnHeightMedium: 48px;
   --btnHeightLarge: 56px;
+  --customHeight: 40px;
+
+  --btnSizeFilter: 46px;
 
   --btnPaddingSmall: 12px 24px;
   --btnPaddingMedium: 12px 24px;
   --btnPaddingLarge: 16px 32px;
+  --btnPaddingCustom: 12px 24px;
 
   --btnFontSizeSmall: 14px;
   --btnFontSizeMedium: 16px;
   --btnFontSizeLarge: 18px;
+  --btnFontSizeCustom: 14px;
 
   // Button styling
   --btnBorderRadius: 60px;
@@ -24,7 +29,7 @@
   --btnShadowHoverSuccess: 0 4px 12px rgba(107, 133, 61, 0.3);
 
   // Button transitions
-  --btnTransition: all 0.3s ease;
+  --btnTransition: all var(--transition-normal) ease;
 }
 
 // Базовый стиль кнопки
@@ -47,6 +52,7 @@
   position: relative;
   overflow: hidden;
   white-space: nowrap;
+  height: var(--customHeight);
 
   &:has(.arrow) {
     gap: 12px;
@@ -55,6 +61,21 @@
   .arrow {
     width: 24px;
     height: 24px;
+  }
+
+  &__filter {
+    width: var(--btnSizeFilter);
+    height: var(--btnSizeFilter);
+    background-color: var(--color-light-blue-2);
+    color: var(--color-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
   }
 
   // Размеры

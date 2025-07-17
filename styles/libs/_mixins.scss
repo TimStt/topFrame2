@@ -10,11 +10,12 @@
   $line-height-px,
   $font-weight: 400,
   $isFluid: false,
-  $min: 16,
-  $max: 44
+  $min: 16px,
+  $max: 44px,
+  $view-port: 1180px
 ) {
   @if $isFluid {
-    @include fluid-text($font-size, $min);
+    @include fluid-text($max, $min, font-size, $view-port);
   } @else {
     font-size: #{$font-size}px;
   }
@@ -48,8 +49,8 @@
   gap: #{$gap};
 }
 
-@mixin fluid-text($max: 48, $min: 16, $property: font-size) {
-  #{$property}: clamp(#{$min}px, #{$max / 1180 * 100}vw, #{$max}px);
+@mixin fluid-text($max: 48px, $min: 16px, $property: font-size, $view-port) {
+  #{$property}: clamp(#{$min}, #{$view-port}, #{$max});
 }
 
 @mixin reset-link {

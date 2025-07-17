@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "../../styles/index.scss";
 import { Header } from "@/widgets/mainblocks/header";
 import Footer from "@/widgets/mainblocks/footer";
+import { ModalAuth } from "@/widgets/auth/modal-auth";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,6 +21,7 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <ModalAuth />
       </body>
     </html>
   );

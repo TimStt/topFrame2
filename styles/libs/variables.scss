@@ -13,6 +13,12 @@
 
   --height-header: 54px;
 
+  --max-font-size-h1-by-main: 44px;
+  --max-font-size-h1: 40px;
+  --max-font-size-h2: 40px;
+
+  --min-font-size-h1: 34px;
+  --min-font-size-h2: 26px;
   // Веса шрифтов
   --font-weight-regular: 400;
   --font-weight-medium: 500;
@@ -33,21 +39,24 @@
   --color-light-blue-2: #5d85b9;
   --color-light-blue: #d5e8f8;
 
+  // Дополнительные цвета для UI
+  --color-error: #e61212;
+  --color-success: #28a745;
+  --color-warning: #ffc107;
+
+  --color-gray: #666666;
+  --color-gray-2: #cdcdcd;
+  --color-light-gray: #dddddd;
+
   // ===== ОТСТУПЫ И РАЗМЕРЫ =====
 
-  // ===== ТЕНИ =====
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
-
   // ===== ПЕРЕХОДЫ =====
-  --transition-fast: 0.15s ease;
-  --transition-normal: 0.3s ease;
-  --transition-slow: 0.5s ease;
+  --transition-fast: 0.15s;
+  --transition-normal: var(--transition-normal);
+  --transition-slow: 0.5s;
 
   // Специальные переходы
-  --hover-transition: all 0.3s ease;
+  --hover-transition: all var(--transition-normal) ease;
 
   // // ===== РАЗМЕРЫ ЭКРАНОВ =====
   // --screen-sm: 640px;

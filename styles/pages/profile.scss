@@ -1,0 +1,37 @@
+.user-avatar {
+  border-radius: 50%;
+  overflow: hidden;
+
+  --sizeBig: 112px;
+  --sizeSmall: 50px;
+
+  --sizeBigIcon: 52px;
+  --sizeSmallIcon: 16px;
+
+  &.fallback {
+    background-color: var(--color-white-1);
+    color: #727272;
+  }
+
+  &.big {
+    width: 100px;
+    height: 100px;
+
+    svg {
+      width: var(--sizeBigIcon);
+      height: var(--sizeBigIcon);
+    }
+  }
+
+  &.small {
+    width: 32px;
+    height: 32px;
+
+    svg {
+      width: var(--sizeSmallIcon);
+      height: var(--sizeSmallIcon);
+    }
+  }
+
+  object-fit: cover;
+}

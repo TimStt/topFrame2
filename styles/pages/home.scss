@@ -2,11 +2,15 @@
 
 @use "../libs/mixins.scss" as *;
 
-$min-font-size-h1: 34;
-$min-font-size-h2: 26;
-
 .title-section {
-  @include font-setup(40, 48, 700, true, $min-font-size-h2);
+  @include font-setup(
+    40,
+    48,
+    700,
+    true,
+    var(--min-font-size-h2),
+    calc(var(--max-font-size-h2) / var(--container-max-width) * 100vw)
+  );
   margin-bottom: 24px;
 }
 
@@ -50,7 +54,7 @@ $min-font-size-h2: 26;
       font-weight: 400;
       font-size: 12px;
       color: var(--color-light);
-      transition: color 0.3s ease;
+      transition: color var(--transition-normal) ease;
       position: relative;
 
       &::after {
@@ -61,7 +65,7 @@ $min-font-size-h2: 26;
         width: 0;
         height: 2px;
         background: var(--color-light);
-        transition: width 0.3s ease;
+        transition: width var(--transition-normal) ease;
       }
 
       &:hover::after {
@@ -89,7 +93,7 @@ $min-font-size-h2: 26;
     border: 1px solid var(--color-light);
     border-radius: 40px;
 
-    transition: all 0.3s ease;
+    transition: all var(--transition-normal) ease;
 
     // &:hover {
     //   background: var(--color-accent-blue);
@@ -203,7 +207,7 @@ $min-font-size-h2: 26;
       height: var(--sizeEmail);
       border-radius: 50%;
       backdrop-filter: blur(8px);
-      transition-duration: 0.3s;
+      transition-duration: var(--transition-normal);
       margin-bottom: 16px;
       background: rgba(253, 253, 253, 0.16);
       svg {
@@ -223,7 +227,7 @@ $min-font-size-h2: 26;
         border-radius: 50px;
         padding: 2px 8px;
         backdrop-filter: blur(8px);
-        transition-duration: 0.3s;
+        transition-duration: var(--transition-normal);
         box-shadow: 0 0 10px 0 rgba(253, 253, 253, 0.16);
 
         &::before {
@@ -279,14 +283,20 @@ $min-font-size-h2: 26;
   }
 
   &__title {
-    @include font-setup(44, 53, 700, true, $min-font-size-h1);
+    @include font-setup(
+      44,
+      53,
+      700,
+      true,
+      var(--min-font-size-h1),
+      calc(var(--max-font-size-h1) / var(--container-max-width) * 100vw)
+    );
+
     margin-bottom: 24px;
     color: var(--color-light);
   }
 
   &__subtitle {
-    @include font-setup(16, 20, 400, true, 14);
-    font-family: var(--second-family);
     margin-bottom: 40px;
     color: var(--color-light);
   }
@@ -302,11 +312,16 @@ $min-font-size-h2: 26;
   }
 
   &__btn-arrow {
-    transition: transform 0.3s ease;
+    transition: transform var(--transition-normal) ease;
   }
 
   &__world {
-    @include fluid-text(682, 50, width);
+    @include fluid-text(
+      682,
+      50,
+      width,
+      calc((var(--titleMinFontSize) / var(--container-max-width)) * 100vw)
+    );
     margin-right: 62px;
     max-width: 682px;
 
@@ -344,7 +359,7 @@ $min-font-size-h2: 26;
     padding: 10px;
     width: var(--sizeButton) !important;
     height: var(--sizeButton) !important;
-    transition-duration: 0.3s;
+    transition-duration: var(--transition-normal);
     display: inline-flex !important;
     &:after {
       display: none;
@@ -389,7 +404,7 @@ $min-font-size-h2: 26;
 
   &__feature-card {
     display: block;
-    transition-duration: 0.3s;
+    transition-duration: var(--transition-normal);
     border-radius: 8px;
     max-height: var(--maxHeight);
 
@@ -428,7 +443,7 @@ $min-font-size-h2: 26;
   }
 
   &__card-head {
-    transition-duration: 0.3s;
+    transition-duration: var(--transition-normal);
     @include flex-center-between();
   }
 
@@ -440,7 +455,7 @@ $min-font-size-h2: 26;
   }
 
   &__card-description {
-    transition-duration: 0.3s;
+    transition-duration: var(--transition-normal);
     font-family: var(--second-family);
     font-weight: 400;
     font-size: 12px;
@@ -541,7 +556,17 @@ $min-font-size-h2: 26;
     &.hidden {
       display: none;
     }
-    @include font-setup(28, 34, 800, true, $min-font-size-h2);
+
+    --maxFontSize: 28;
+
+    @include font-setup(
+      var(--maxFontSize),
+      34,
+      800,
+      true,
+      var(--min-font-size-h2),
+      calc(var(--maxFontSize) / var(--container-max-width) * 100vw)
+    );
 
     color: var(--color-light);
 
@@ -596,7 +621,7 @@ $min-font-size-h2: 26;
     width: 100%;
     max-height: 114px;
     height: 100%;
-    transition-duration: 0.3s;
+    transition-duration: var(--transition-normal);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -716,7 +741,7 @@ $min-font-size-h2: 26;
       background-color: #9fb872;
       width: 36px;
       height: 36px;
-      transition-duration: 0.3s;
+      transition-duration: var(--transition-normal);
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -725,7 +750,7 @@ $min-font-size-h2: 26;
     }
 
     &-title {
-      transition-duration: 0.3s;
+      transition-duration: var(--transition-normal);
       font-weight: 600;
       font-size: 14px;
 
@@ -749,9 +774,6 @@ $min-font-size-h2: 26;
   }
 
   &__subtitle {
-    font-family: var(--second-family);
-    font-weight: 400;
-    font-size: 16px;
     color: var(--color-light);
   }
 
@@ -782,7 +804,7 @@ $min-font-size-h2: 26;
     display: flex;
     align-items: center;
     gap: 21px;
-    transition-duration: 0.3s;
+    transition-duration: var(--transition-normal);
     border: 1px solid transparent;
     color: var(--color-light);
     padding-inline: 28px;
@@ -904,24 +926,26 @@ $min-font-size-h2: 26;
   }
 }
 
+.team__title,
+.new-vacancies__title {
+  color: var(--color-main);
+  text-align: center;
+}
+
+.new-vacancies__subtitle,
+.team__subtitle {
+  color: #727272;
+  text-align: center;
+}
+
+.team,
+.new-vacancies {
+  padding-top: 80px;
+}
+
 .team {
   --cardHeight: 200px;
   --cardWidth: 280px;
-  padding-top: 80px;
-
-  &__title {
-    color: var(--color-main);
-    text-align: center;
-  }
-
-  &__subtitle {
-    font-family: var(--second-family);
-    font-weight: 400;
-    font-size: 16px;
-    color: #727272;
-    text-align: center;
-    margin-bottom: 40px;
-  }
 
   &__list {
     display: grid;
@@ -935,13 +959,13 @@ $min-font-size-h2: 26;
     position: relative;
     border-radius: 8px;
     overflow: hidden;
-    transition-duration: 0.3s;
+    transition-duration: var(--transition-normal);
 
     &-video {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition-duration: 0.3s;
+      transition-duration: var(--transition-normal);
       background-color: #24242466;
       position: relative;
     }
@@ -950,7 +974,7 @@ $min-font-size-h2: 26;
       content: "";
       position: absolute;
       inset: 0;
-      transition-duration: 0.3s;
+      transition-duration: var(--transition-normal);
       background-color: #24242466;
     }
 
@@ -1047,8 +1071,6 @@ $min-font-size-h2: 26;
   .hr-ecosystem {
     padding-block: 80px 24px;
     &__title {
-      @include font-setup(40, 48, 700, true, $min-font-size-h2);
-
       position: relative;
       top: initial !important;
       left: initial !important;

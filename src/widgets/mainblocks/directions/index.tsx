@@ -37,7 +37,7 @@ export const Directions: React.FC = () => {
       <div className="directions__inner container">
         <div className="directions__header">
           <h2 className="directions__title title-section">Наши направления</h2>
-          <p className="directions__subtitle">
+          <p className="directions__subtitle subtitle">
             Широкий спектр профессиональных услуг <br /> для эффективного
             бизнеса
           </p>

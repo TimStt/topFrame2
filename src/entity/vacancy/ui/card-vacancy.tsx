@@ -8,7 +8,7 @@ export interface ICardVacancy {
   id: number;
   title: string;
   resumeParams: string[];
-  children: React.ReactNode;
+  children?: React.ReactNode;
   location: string;
   className?: string;
   diapasonPrices: string;
@@ -39,7 +39,7 @@ export const CardVacancy = ({
       </div>
       <div className="vacancy-card__actions">
         <span className="vacancy-card__actions-text">{diapasonPrices}</span>
-        <ButtonUI size="medium" variant="secondary" hasArrow>
+        <ButtonUI size="medium" variant="secondary" hasArrow as="a" href="/">
           Подробнее
         </ButtonUI>
       </div>

@@ -1,14 +1,23 @@
-import React, { ComponentPropsWithoutRef } from "react";
-
-import classNames from "classnames";
+import React, { ComponentPropsWithoutRef, ElementType, Ref } from "react";
 
 import { ArrowIconUI } from "../arrow-icon-ui";
+import Link from "next/link";
+import { cls } from "@/shared/lib/cls";
 
-type BaseButtonProps = {
+export type IButton<
+  TElementButton extends Extract<React.ElementType, "button" | "a"> = "button",
+> = ComponentPropsWithoutRef<TElementButton> & {
   /** Вариант стиля кнопки */
-  variant?: "primary" | "secondary" | "outline" | "success" | "ghost" | "light";
+  variant?:
+    | "primary"
+    | "secondary"
+    | "outline"
+    | "success"
+    | "ghost"
+    | "light"
+    | "custom";
   /** Размер кнопки */
-  size?: "small" | "medium" | "large";
+  size?: "small" | "medium" | "large" | "custom";
   /** Состояние загрузки */
   loading?: boolean;
   /** Полная ширина */
@@ -19,25 +28,18 @@ type BaseButtonProps = {
   rightIcon?: React.ReactNode;
   /** Дочерние элементы (текст кнопки) */
   children?: React.ReactNode;
+  className?: string;
+  href?: string;
+  as?: TElementButton;
+  rootRef?: Ref<
+    TElementButton extends "button" ? HTMLButtonElement : HTMLAnchorElement
+  >;
   /** Показывать стрелку */
   hasArrow?: boolean;
-  /** Дополнительные CSS классы */
-  className?: string;
 };
 
-type ButtonAsButton = BaseButtonProps & {
-  as?: "button";
-} & ComponentPropsWithoutRef<"button">;
-
-type ButtonAsLink = BaseButtonProps & {
-  as: "a";
-} & ComponentPropsWithoutRef<"a">;
-
-export type ButtonProps<El extends Extract<React.ElementType, "button" | "a">> =
-  El extends "button" ? ButtonAsButton : El extends "a" ? ButtonAsLink : never;
-
 export const ButtonUI = <
-  El extends Extract<React.ElementType, "button" | "a"> = "button",
+  TElementButton extends Extract<React.ElementType, "button" | "a"> = "button",
 >({
   variant = "primary",
   size = "medium",
@@ -45,13 +47,18 @@ export const ButtonUI = <
   fullWidth = false,
   leftIcon,
   rightIcon,
+  type,
   children,
+  as,
   className,
   hasArrow = false,
-  as = "button",
+  rootRef,
   ...rest
-}: ButtonProps<El>) => {
-  const buttonClasses = classNames(
+}: IButton<TElementButton>) => {
+  const DEFAULT_ELEMENT: React.ElementType = "button";
+  const Element: React.ElementType = as || DEFAULT_ELEMENT;
+
+  const buttonClasses = cls(
     "btn",
     `btn--${variant}`,
     `btn--${size}`,
@@ -63,16 +70,25 @@ export const ButtonUI = <
     className
   );
 
-  const DEFAULT_ELEMENT = "button";
-
-  const Element = as || DEFAULT_ELEMENT;
+  if (Element === "a" && rest.href) {
+    return (
+      <Link
+        href={rest.href as string}
+        className={buttonClasses}
+        {...(rest as ComponentPropsWithoutRef<"a">)}
+      >
+        {children}
+      </Link>
+    );
+  }
 
   return (
-    <Element className={buttonClasses} {...rest}>
+    <button
+      className={buttonClasses}
+      {...(rest as ComponentPropsWithoutRef<"button">)}
+    >
       {children}
       {hasArrow && <ArrowIconUI className="arrow" />}
-
-      {loading && <span className="btn__loader" />}
-    </Element>
+    </button>
   );
 };

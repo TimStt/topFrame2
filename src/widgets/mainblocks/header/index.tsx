@@ -8,6 +8,7 @@ import React from "react";
 
 import Image from "next/image";
 import Link from "next/link";
+import { ButtonAuth } from "./ui/button-auth";
 
 export const Header = () => {
   const navigationItems = [
@@ -41,10 +42,7 @@ export const Header = () => {
             ))}
           </ul>
         </nav>
-
-        <div className="header__actions">
-          <button className="header__login-btn">Войти</button>
-        </div>
+        <ButtonAuth />
       </div>
     </header>
   );

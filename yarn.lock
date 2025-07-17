@@ -973,6 +973,11 @@
     "@eslint/core" "^0.15.1"
     levn "^0.4.1"
 
+"@fancyapps/ui@^6.0.14":
+  version "6.0.14"
+  resolved "https://registry.yarnpkg.com/@fancyapps/ui/-/ui-6.0.14.tgz#481469779edd86d87358f3f87ada4ec4962ffa75"
+  integrity sha512-Kska7tgdTo3iNePqNkRvESzepjJ4CqkivGHlsMtM7MHsb/ALHyw4Wfbiyi3WN6cXd7C+MZyTFjgZYNEl2kWWMQ==
+
 "@floating-ui/core@^1.7.2":
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/@floating-ui/core/-/core-1.7.2.tgz#3d1c35263950b314b6d5a72c8bfb9e3c1551aefd"
@@ -1380,6 +1385,18 @@
   version "0.2.7"
   resolved "https://registry.yarnpkg.com/@pkgr/core/-/core-0.2.7.tgz#eb5014dfd0b03e7f3ba2eeeff506eed89b028058"
   integrity sha512-YLT9Zo3oNPJoBjBc4q8G2mjU4tqIbf5CEOORbUUr48dCD9q3umJ3IPlVqOqDakPfd2HuwccBaqlGhN4Gmr5OWg==
+
+"@react-input/core@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@react-input/core/-/core-2.0.2.tgz#c7094c5ab955e740d4c34777688aff54785024a1"
+  integrity sha512-xLLBueYFbant9308uv3cIJQz5NYSixeGspjP3Nt6jogRHTcHYMRmlVFUuSzQiP8Z8/5BdnPkudRSsN0/AJ1fbw==
+
+"@react-input/mask@^2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@react-input/mask/-/mask-2.0.4.tgz#0a8df2694962ac10a76a329469d91f6ed01037b8"
+  integrity sha512-NOielvQSBOlGLVuEcxtkjaGneC0GJFXjC7KOF99ed9H9XSDruWnQirjht5uSbWqLeeiOup0VD2YjM+6FH+aWBg==
+  dependencies:
+    "@react-input/core" "^2.0.2"
 
 "@rtsao/scc@^1.1.0":
   version "1.1.0"
@@ -4073,6 +4090,11 @@ react@^19.0.0:
   version "19.1.0"
   resolved "https://registry.yarnpkg.com/react/-/react-19.1.0.tgz#926864b6c48da7627f004795d6cce50e90793b75"
   integrity sha512-FS+XFBNvn3GTAWq26joslQgWNoFu08F4kl0J4CgdNKADkdSGXQyTCnKteIAJy96Br6YbpEU1LSzV5dYtjMkMDg==
+
+reactjs-popup@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/reactjs-popup/-/reactjs-popup-2.0.6.tgz#ff0e340e31d03785ae62f6b6cf62de1ef48c9605"
+  integrity sha512-A+tt+x9wdgZiZjv0e2WzYLD3IfFwJALaRaqwrCSXGjo0iQdsry/EtBEbQXRSmQs7cHmOi5eytCiSlOm8k4C+dg==
 
 readdirp@^4.0.1:
   version "4.1.2"

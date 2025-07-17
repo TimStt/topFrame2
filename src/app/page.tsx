@@ -10,6 +10,7 @@ import { Header } from "@/widgets/mainblocks/header";
 import HREcosystemSection from "@/widgets/mainblocks/hr-ecosystem";
 import { Team } from "@/widgets/mainblocks/team";
 import { ZeroHero } from "@/widgets/mainblocks/zero-hero";
+import { NewVacancies } from "@/widgets/vacancy/new-vacancies";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
         <HREcosystemSection />
         <Directions />
         <Team />
+        <NewVacancies />
       </main>
     </>
   );

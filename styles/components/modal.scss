@@ -1,0 +1,116 @@
+@use "../libs/mixins.scss" as *;
+
+.modal {
+  --padding: 40px;
+
+  --maxWidth: 380px;
+
+  --paddingMin: 24px;
+
+  --titleSize: 24px;
+
+  --titleLineHeight: 29px;
+
+  --titleMinFontSize: 20px;
+  --titleMarginBottom: 24px;
+
+  --positionCloseButton: 12px;
+
+  max-width: var(--maxWidth);
+  width: 100%;
+  background-color: var(--color-light);
+  border-radius: 8px;
+
+  @include fluid-text(
+    var(--padding),
+    var(--paddingMin),
+    padding,
+    calc(var(--paddingMin) / var(--container-max-width) * 100vw)
+  );
+  padding: var(--padding);
+
+  &__close {
+    position: absolute;
+    top: var(--positionCloseButton);
+    right: var(--positionCloseButton);
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--color-main);
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__title {
+    font-family: var(--font-family);
+    @include font-setup(
+      var(--titleSize),
+      var(--titleLineHeight),
+      700,
+      true,
+      var(--titleMinFontSize),
+      calc(var(--titleMinFontSize) / var(--container-max-width) * 100vw)
+    );
+    color: var(--color-main);
+    text-align: left;
+    margin-bottom: 24px;
+  }
+}
+
+.popup-overlay {
+  background: #72727254;
+
+  // z-index: 1000000000;
+}
+
+[data-popup="tooltip"].popup-overlay {
+  background: transparent;
+}
+
+@keyframes anvil {
+  0% {
+    transform: scale(0) translateY(0px);
+    opacity: 0;
+    box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+  }
+
+  1% {
+    transform: scale(0.96) translateY(50px);
+    opacity: 0;
+    box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+  }
+
+  100% {
+    transform: scale(1) translateY(0px);
+    opacity: 1;
+    box-shadow: 0 0 500px rgba(241, 241, 241, 0);
+  }
+}
+
+.popup-content {
+  -webkit-animation: anvil 0.5s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+}
+
+.modal-auth {
+  &__description {
+    color: var(--color-light);
+    margin-bottom: 40px;
+    text-align: left;
+  }
+
+  &__button-action + &__button-action {
+    margin-top: 12px;
+  }
+
+  &__input:last-child {
+    margin-bottom: 24px;
+  }
+}

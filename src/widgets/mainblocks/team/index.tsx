@@ -18,7 +18,9 @@ export const Team: React.FC = () => {
     <section className="team container">
       <div className="team__header">
         <h2 className="team__title title-section">Наша команда</h2>
-        <p className="team__subtitle">Профессионалы с многолетним опытом</p>
+        <p className="team__subtitle subtitle">
+          Профессионалы с многолетним опытом
+        </p>
       </div>
 
       <div className="team__list">

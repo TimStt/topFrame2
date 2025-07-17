@@ -15,7 +15,7 @@
 
 .description-block__text {
   margin: 0;
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal) ease;
   line-height: inherit;
 
   &::-webkit-scrollbar {

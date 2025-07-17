@@ -1,0 +1,127 @@
+// Checkbox wrapper
+.control {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 5px;
+  padding-top: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  color: var(--color-main);
+  user-select: none;
+}
+
+// Hidden input
+.control__input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+// Checkbox indicator
+.control__indicator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 20px;
+  width: 20px;
+  border: 1px solid var(--color-main);
+  border-radius: 4px;
+  background: var(--color-white);
+  transition-duration: var(--transition-normal);
+}
+
+// Label text
+.control__label {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 14px;
+  font-weight: var(--font-weight-regular);
+  color: var(--color-main);
+  line-height: 1.4;
+}
+
+// Hover states
+.control:hover .control__input:not(:disabled) ~ .control__indicator {
+  border-color: var(--color-accent-blue);
+}
+
+.control:hover .control__input:not(:disabled):checked ~ .control__indicator {
+  background: var(--color-accent-blue);
+  border-color: var(--color-accent-blue);
+}
+
+// Focus states
+.control .control__input:focus ~ .control__indicator {
+  outline: 2px solid var(--color-accent-blue);
+  outline-offset: 2px;
+}
+
+// Checked states
+.control .control__input:checked ~ .control__indicator {
+  background: var(--color-accent-blue);
+  border-color: var(--color-accent-blue);
+}
+
+// Disabled states
+.control .control__input:disabled ~ .control__indicator {
+  background: var(--color-white-1);
+  border-color: #ddd;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.control .control__input:disabled ~ .control__label {
+  color: #999;
+  opacity: 0.6;
+}
+
+// Checkmark and radio dot
+.control__indicator:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.control .control__input:checked ~ .control__indicator:after {
+  display: block;
+}
+
+// Checkbox checkmark
+.control-checkbox .control__indicator:after {
+  left: 6px;
+  top: 3px;
+  width: 3px;
+  height: 8px;
+  border: solid var(--color-white);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+// Radio dot
+.control-radio .control__indicator {
+  border-radius: 50%;
+}
+
+.control-radio .control__indicator:after {
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  background: var(--color-white);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// Disabled checkmark and radio dot
+.control-checkbox .control__input:disabled ~ .control__indicator:after {
+  border-color: #999;
+}
+
+.control-radio .control__input:disabled ~ .control__indicator:after {
+  background: #999;
+}
