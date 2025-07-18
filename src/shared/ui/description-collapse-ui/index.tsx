@@ -210,18 +210,18 @@ export const DescriptionCollapseUI: React.FC<IDescriptionCollapseUIProps> = ({
       ? getComputedStyle(textRef.current).lineHeight
       : "1.5em",
     "--maxHeight": isMaxHeight + "px",
-    overflowY: expanded ? "auto" : "visible",
+    overflowY: expanded ? "auto" : "hidden",
   } as React.CSSProperties;
 
-  useEffect(() => {
-    if (!textRef.current || !isInitial) return;
+  // useEffect(() => {
+  //   if (!textRef.current || !isInitial) return;
 
-    // blockRef.current?.style.setProperty(
-    //   "--maxHeight",
-    //   textRef.current.getBoundingClientRect().height + "px"
-    // );
-    console.log(textRef?.current);
-  }, [textRef.current, isInitial]);
+  //   // blockRef.current?.style.setProperty(
+  //   //   "--maxHeight",
+  //   //   textRef.current.getBoundingClientRect().height + "px"
+  //   // );
+  //   console.log(textRef?.current);
+  // }, [textRef.current, isInitial]);
 
   return (
     <div

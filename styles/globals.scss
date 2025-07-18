@@ -80,6 +80,13 @@ main {
   background: transparent; /* Прозрачный угол */
 }
 
+.head-page {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+}
+
 // /* Для Firefox */
 // * {
 //   scrollbar-width: thin; /* Тонкий скроллбар */

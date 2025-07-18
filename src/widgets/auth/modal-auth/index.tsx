@@ -6,9 +6,12 @@ import { RegisterStep } from "@/widgets/auth/modal-auth/ui/register-step";
 import { useInitialModal } from "@/shared/lib/zustands/use-initial-modal";
 import { ModalUI } from "@/shared/ui/modal-ui";
 import React from "react";
+import { changeStepAuth } from "@/features/auth/change-step-auth";
 
 export const ModalAuth = () => {
-  const { isOpenModal, handleCloseModal } = useInitialModal("auth");
+  const { isOpenModal, handleCloseModal } = useInitialModal("auth", () =>
+    changeStepAuth("login")
+  );
 
   const step = useAuthStore().step;
 

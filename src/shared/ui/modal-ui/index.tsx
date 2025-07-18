@@ -7,10 +7,10 @@ import { cls } from "@/shared/lib/cls";
 export const ModalUI = ({
   className,
   children,
-
+  handleClose,
   modal = true,
   closeOnDocumentClick = true,
-  handleClose,
+
   ...props
 }: Omit<PopupProps, "closeOnEscape"> & {
   classNameInner?: string;
@@ -21,6 +21,7 @@ export const ModalUI = ({
       modal={modal}
       closeOnDocumentClick={closeOnDocumentClick}
       closeOnEscape
+      onClose={handleClose}
       {...props}
     >
       <div className={cls("modal", className)}>

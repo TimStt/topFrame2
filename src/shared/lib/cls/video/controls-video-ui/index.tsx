@@ -23,10 +23,14 @@ export const PlayButtonUI = ({
   className,
   isPlaying,
   onClick,
+  loader,
+  isLoading,
 }: {
   className?: string;
   isPlaying?: boolean;
   onClick: () => void;
+  loader?: React.ReactNode;
+  isLoading?: boolean;
 }) => {
   return (
     <button
@@ -35,7 +39,7 @@ export const PlayButtonUI = ({
       onClick={onClick}
       title={isPlaying ? "Остановить видео" : "Воспроизвести видео"}
     >
-      {isPlaying ? <PauseIcon /> : <PlayIcon />}
+      {isLoading ? loader : isPlaying ? <PauseIcon /> : <PlayIcon />}
     </button>
   );
 };

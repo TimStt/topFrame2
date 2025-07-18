@@ -1,5 +1,6 @@
 import cls from "classnames";
 import React, { useEffect, useState } from "react";
+import { WrapperUI } from "../wrapper-ui";
 
 interface ISafeImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   src?: string;
@@ -9,11 +10,14 @@ interface ISafeImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   fallbackIcon?: React.ReactNode;
   onError?: () => void;
   classNameFallback?: string;
+  children?: React.ReactNode;
+  classNameWrapper?: string;
 }
 
-const DefaultFallbackIcon: React.FC<{ className?: string }> = ({
-  className,
-}) => (
+const DefaultFallbackIcon: React.FC<{
+  className?: string;
+  children?: React.ReactNode;
+}> = ({ className }) => (
   <svg
     className={cls("image-fallback-icon", className)}
     viewBox="0 0 24 24"
@@ -31,6 +35,8 @@ export const SafeImageUI: React.FC<ISafeImageProps> = ({
   fallbackIcon,
   onError,
   classNameFallback,
+  children,
+  classNameWrapper,
   ...props
 }) => {
   const [hasError, setHasError] = useState(false);
@@ -57,12 +63,15 @@ export const SafeImageUI: React.FC<ISafeImageProps> = ({
   }
 
   return (
-    <img
-      {...props}
-      src={src}
-      alt={alt}
-      className={cls(className)}
-      onError={handleError}
-    />
+    <WrapperUI className={classNameWrapper} isVisible={!!children}>
+      <img
+        {...props}
+        src={src}
+        alt={alt}
+        className={cls(className)}
+        onError={handleError}
+      />
+      {children}
+    </WrapperUI>
   );
 };

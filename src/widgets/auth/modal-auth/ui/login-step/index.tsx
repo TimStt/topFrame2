@@ -1,4 +1,4 @@
-import { useAuthStore } from "@/features/auth/auth.store";
+import { useAuthStore, useAuthStoreBase } from "@/features/auth/auth.store";
 import { changeStepAuth } from "@/features/auth/change-step-auth";
 import { useAnimateOnScroll } from "@/shared/hooks/use-animate-on-scroll";
 import { cls } from "@/shared/lib/cls";
@@ -15,23 +15,28 @@ export const LoginStep = () => {
   const { className, ref } = useAnimateOnScroll();
 
   const handleTestAuth = () => {
-    useAuthStore().setIsAuthTest(true);
+    useAuthStoreBase.getState().setIsAuthTest(true);
 
     onToggleModal("auth", false);
   };
 
   return (
-    <div ref={ref} className={cls(className, "modal-auth__login-step fade-in")}>
-      <InputUI
-        classNameWrapper="modal-auth__input input-bottom"
-        label="Ваш логин"
-        placeholder="Логин"
-      />
-      <InputPasswordUI
-        classNameWrapper="modal-auth__input input-bottom"
-        label="Ваш пароль"
-        placeholder="Пароль"
-      />
+    <div
+      ref={ref}
+      className={cls(className, "modal-auth__login-step fade-in ")}
+    >
+      <div className="modal-auth__inputs">
+        <InputUI
+          classNameWrapper="modal-auth__input input-bottom"
+          label="Ваш логин"
+          placeholder="Логин"
+        />
+        <InputPasswordUI
+          classNameWrapper="modal-auth__input input-bottom"
+          label="Ваш пароль"
+          placeholder="Пароль"
+        />
+      </div>
 
       <ButtonSubmitUI className="modal-auth__button-action" hasArrow fullWidth>
         Продолжить

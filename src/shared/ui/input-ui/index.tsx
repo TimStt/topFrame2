@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, forwardRef } from "react";
+import React, { ComponentPropsWithoutRef, forwardRef, useId } from "react";
 import { cls } from "@/shared/lib/cls";
 
 export type IInput = Omit<ComponentPropsWithoutRef<"input">, "size"> & {
@@ -51,15 +51,24 @@ export const InputUI = ({
     },
     classNameWrapper
   );
-
+  const id = useId();
   return (
     <div className={wrapperClasses}>
-      {label && <label className="input-label">{label}</label>}
-      {children}
+      {label && (
+        <label className="input-label" htmlFor={id}>
+          {label}
+        </label>
+      )}
+
       <div className="input-container">
-        <input ref={rootRef} className={inputClasses} {...rest} />
+        <input ref={rootRef} className={inputClasses} {...rest} id={id} />
+        {children}
       </div>
-      {error && <span className="input-error">{error}</span>}
+      {error && (
+        <span className="input-error" aria-live="polite" aria-describedby={id}>
+          {error}
+        </span>
+      )}
     </div>
   );
 };

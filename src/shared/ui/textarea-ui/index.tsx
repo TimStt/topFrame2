@@ -30,7 +30,7 @@ export const TextareaUI = forwardRef<HTMLTextAreaElement, ITextarea>(
       label,
       error,
       className,
-      wrapperClassName,
+      classNameWrapper,
       showCounter = false,
       maxLength,
       minRows = 3,
@@ -90,7 +90,7 @@ export const TextareaUI = forwardRef<HTMLTextAreaElement, ITextarea>(
       {
         "textarea-wrapper--full-width": fullWidth,
       },
-      wrapperClassName
+      classNameWrapper
     );
 
     // Вычисляем стили для автоматического изменения высоты

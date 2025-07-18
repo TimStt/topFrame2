@@ -25,7 +25,7 @@
 .title-h1 {
   font-family: var(--font-family);
   @include font-setup(
-    40,
+    var(--max-font-size-h1),
     48,
     700,
     true,

@@ -11,7 +11,8 @@ export interface ICardVacancy {
   children?: React.ReactNode;
   location: string;
   className?: string;
-  diapasonPrices: string;
+  startPrice: string;
+  endPrice: string;
 }
 
 export const CardVacancy = ({
@@ -21,12 +22,13 @@ export const CardVacancy = ({
   children,
   location,
   className,
-  diapasonPrices,
+  startPrice,
+  endPrice,
 }: ICardVacancy) => {
   return (
     <div className={cls("vacancy-card", className)}>
       <div className="vacancy-card__info">
-        <span className="vacancy-card__title">{title}</span>
+        <h3 className="vacancy-card__title">{title}</h3>
         <div className="vacancy-card__params">
           {resumeParams.map((param) => (
             <ChipUI key={param} text={param} />
@@ -38,7 +40,9 @@ export const CardVacancy = ({
         </div>
       </div>
       <div className="vacancy-card__actions">
-        <span className="vacancy-card__actions-text">{diapasonPrices}</span>
+        <span className="vacancy-card__actions-text">
+          {startPrice}&shy; - {endPrice}
+        </span>
         <ButtonUI size="medium" variant="secondary" hasArrow as="a" href="/">
           Подробнее
         </ButtonUI>

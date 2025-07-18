@@ -253,6 +253,7 @@
 .chip {
   --colorText: var(--color-accent-blue);
   border-radius: 50px;
+
   padding: 8px 24px;
   width: max-content;
   background-color: var(--color-light-blue);
@@ -263,13 +264,9 @@
   }
 }
 
-// Анимация загрузки
-@keyframes spin {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(360deg);
+@media (max-width: 768px) {
+  .chip {
+    padding: 4px 12px;
   }
 }
 
@@ -292,6 +289,32 @@
       height: 36px;
       padding: var(--spacing-sm) var(--spacing-md);
       font-size: 13px;
+    }
+  }
+}
+@media (max-width: 450px) {
+  .btn {
+    &--large {
+      height: var(--btnHeightSmall);
+      padding: 10px 12px;
+      font-size: var(--btnFontSizeSmall);
+    }
+
+    &--medium {
+      height: var(--btnHeightSmall);
+      padding: 10px 12px;
+      font-size: var(--btnFontSizeSmall);
+    }
+
+    &--small {
+      height: var(--btnHeightSmall);
+      padding: 10px 12px;
+      font-size: var(--btnFontSizeSmall);
+    }
+
+    .arrow {
+      width: 16px;
+      height: 16px;
     }
   }
 }

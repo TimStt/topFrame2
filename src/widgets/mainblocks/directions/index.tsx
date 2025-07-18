@@ -47,10 +47,11 @@ export const Directions: React.FC = () => {
             {directionsData.map((direction) => (
               <button
                 className={cls("directions__button", {
-                  active: isSelected === direction.id,
+                  active: isSelected === direction.idCard,
                 })}
                 key={direction.id}
-                onClick={() => setIsSelected(direction.id)}
+                onClick={() => setIsSelected(direction.idCard)}
+                onMouseEnter={() => setIsSelected(direction.idCard)}
               >
                 <span className="directions__button-title">
                   {direction.title}

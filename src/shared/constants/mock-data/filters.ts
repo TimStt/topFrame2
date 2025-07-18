@@ -1,4 +1,4 @@
-import { IQuickFilters } from "@/shared/ui/quick-filters-ui";
+import { IQuickFilters } from "@/shared/ui/search-ui-kit/quick-filters-ui";
 
 export const mockFilters: IQuickFilters[] = [
   {

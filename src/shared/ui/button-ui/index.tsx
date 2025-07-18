@@ -78,6 +78,7 @@ export const ButtonUI = <
         {...(rest as ComponentPropsWithoutRef<"a">)}
       >
         {children}
+        {hasArrow && <ArrowIconUI className="arrow" />}
       </Link>
     );
   }

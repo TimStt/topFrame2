@@ -1,17 +1,17 @@
 @use "../libs/mixins.scss" as *;
 
 .modal {
-  --padding: 40px;
+  --padding: 40;
 
   --maxWidth: 380px;
 
-  --paddingMin: 24px;
+  --paddingMin: 24;
 
-  --titleSize: 24px;
+  --titleSize: 24;
 
-  --titleLineHeight: 29px;
+  --titleLineHeight: 29;
 
-  --titleMinFontSize: 20px;
+  --titleMinFontSize: 20;
   --titleMarginBottom: 24px;
 
   --positionCloseButton: 12px;
@@ -27,7 +27,6 @@
     padding,
     var(--container-max-width)
   );
-  padding: var(--padding);
 
   &__close {
     position: absolute;
@@ -57,6 +56,7 @@
       700,
       true,
       var(--titleMinFontSize),
+      var(--titleSize),
       var(--container-max-width)
     );
     color: var(--color-main);
@@ -101,7 +101,9 @@
 
 .modal-auth {
   &__description {
-    color: var(--color-light);
+    font-family: var(--second-family);
+    @include font-setup(16, 19, 400);
+    color: var(--color-main);
     margin-bottom: 40px;
     text-align: left;
   }
@@ -110,7 +112,19 @@
     margin-top: 12px;
   }
 
-  &__input:last-child {
+  &__inputs {
     margin-bottom: 24px;
+  }
+
+  &__police-text {
+    font-family: var(--second-family);
+    @include font-setup(10, 14, 400);
+    color: #727272;
+    text-align: center;
+    margin-top: 8px;
+
+    a {
+      text-decoration: underline;
+    }
   }
 }

@@ -40,41 +40,106 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
   const {
     ref,
     isPlaying,
-    isLoaded,
+    isLoading,
+    hasError,
     handlePlay,
     handlePause,
-    setIsLoaded,
+    setIsLoading,
+    setHasError,
+    setIsPaused,
+    isPaused,
     Loader,
   } = useVideo();
 
   return (
     <div
-      className={cls("team__card", isPlaying && "active")}
-      onMouseLeave={handlePause}
+      className={cls(
+        "team__card",
+        isPlaying && "active",
+        isPlaying && "video-playing",
+        isPaused && "video-paused"
+      )}
       onMouseEnter={handlePlay}
+      onMouseLeave={handlePause}
+      onClick={handlePlay}
     >
-      <Loader />
-      <video
-        className="team__card-video"
-        poster={member.image}
-        ref={ref}
-        muted
-        loop
-        src={member.video}
-        onLoadedMetadata={() => setIsLoaded(false)}
-        onLoadedData={() => setIsLoaded(true)}
+      {/* Постер как отдельный элемент */}
+      <div
+        className="team__card-poster"
+        style={{ backgroundImage: `url(${member.image})` }}
       />
-      {!isPlaying && (
+
+      <video
+        className={cls("team__card-video", !isLoading && "video-loaded")}
+        ref={ref}
+        loop
+        muted
+        controls={isPlaying}
+        playsInline
+        preload="metadata"
+        onLoadStart={() => {
+          setIsLoading(true);
+          setHasError(false);
+        }}
+        onCanPlay={() => {
+          setIsLoading(false);
+          setIsPaused(false);
+        }}
+        onError={(e) => {
+          console.error("Ошибка загрузки видео:", e);
+          setIsLoading(false);
+          setHasError(true);
+        }}
+        onLoadedMetadata={() => {
+          console.log("Видео метаданные загружены");
+        }}
+        onPlaying={() => {
+          console.log("Видео начало воспроизведение");
+          setIsPaused(false);
+        }}
+        onPause={() => {
+          setIsPaused(true);
+        }}
+      >
+        <source src={member.video} type="video/mp4" />
+      </video>
+
+      {/* <PlayButtonUI
+        className="team__card-button"
+        isPlaying={isPlaying}
+        onClick={() => {
+          if (isPaused) {
+            handlePlay();
+          } else {
+            console.log("pause");
+            ref.current?.pause();
+          }
+        }}
+        isLoading={isLoading}
+      /> */}
+
+      {
         <div className="team__card-content">
           <PlayButtonUI
             className="team__card-button"
             isPlaying={isPlaying}
             onClick={handlePlay}
+            isLoading={isLoading}
+            loader={
+              <Loader
+                className="team__card-loader"
+                width="24px"
+                color="#fff"
+                height="24px"
+                borderWidth="3px"
+              />
+            }
           />
+
           <h3 className="team__card-title">{member.name}</h3>
           <span className="team__card-position">{member.position}</span>
         </div>
-      )}
+      }
     </div>
   );
 };

@@ -1,21 +1,21 @@
 import cls from "classnames";
 import React from "react";
 
+export interface ILoaderUI {
+  borderWidth?: string;
+  width?: string;
+  height?: string;
+  color?: string;
+  className?: string;
+}
+
 const LoaderUI = ({
   color,
   width,
   height,
   className,
   borderWidth,
-  text,
-}: {
-  borderWidth?: string;
-  width?: string;
-  height?: string;
-  color?: string;
-  className?: string;
-  text?: string;
-} & React.HTMLAttributes<HTMLSpanElement>) => {
+}: ILoaderUI & React.HTMLAttributes<HTMLSpanElement>) => {
   const styleProps = {
     "--colorLoader": color,
     "--width": width,

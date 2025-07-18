@@ -52,13 +52,6 @@ export const directionsData: IDirectionButtons[] = [
       "Профессиональная оценка качества сельскохозяйственной продукции",
     idCard: 6,
   },
-  {
-    id: 7,
-    title: "Экспертиза фруктов и овощей",
-    description:
-      "Профессиональная оценка качества сельскохозяйственной продукции",
-    idCard: 7,
-  },
 ];
 
 export const directionsCardsData: IDirectionCards[] = [
