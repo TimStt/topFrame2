@@ -573,8 +573,9 @@
     &.hidden {
       display: none;
     }
-
-    &:has(.hidden) {
+    font-size: 28px;
+    font-weight: 800;
+    &.hidden {
       --maxFontSize: 28;
 
       @include font-setup(
@@ -587,8 +588,7 @@
         var(--container-max-width)
       );
     }
-    font-size: 28px;
-    font-weight: 800;
+
     color: var(--color-light);
 
     text-align: center;
