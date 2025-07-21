@@ -59,6 +59,23 @@
 
     &-item {
       position: relative;
+
+      background-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        transparent 90%,
+        var(--color-light) 90%,
+        var(--color-light) 100%
+      );
+      background-repeat: no-repeat;
+      background-size: 0% 100%;
+      background-position-x: right;
+      transition: background-size 300ms;
+
+      &:hover {
+        background-size: 100% 100%;
+        background-position-x: left;
+      }
     }
 
     &-link {
@@ -68,21 +85,6 @@
       color: var(--color-light);
       transition: color var(--transition-normal) ease;
       position: relative;
-
-      &::after {
-        content: "";
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: var(--color-light);
-        transition: width var(--transition-normal) ease;
-      }
-
-      &:hover::after {
-        width: 100%;
-      }
     }
   }
 
@@ -572,18 +574,21 @@
       display: none;
     }
 
-    --maxFontSize: 28;
+    &:has(.hidden) {
+      --maxFontSize: 28;
 
-    @include font-setup(
-      var(--maxFontSize),
-      34,
-      800,
-      true,
-      var(--min-font-size-h2),
-      var(--max-font-size-h2),
-      var(--container-max-width)
-    );
-
+      @include font-setup(
+        var(--maxFontSize),
+        34,
+        800,
+        true,
+        var(--min-font-size-h2),
+        var(--max-font-size-h2),
+        var(--container-max-width)
+      );
+    }
+    font-size: 28px;
+    font-weight: 800;
     color: var(--color-light);
 
     text-align: center;

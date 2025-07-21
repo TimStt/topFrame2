@@ -19,8 +19,9 @@ import {
 } from "./hr-ecosystem.data";
 
 export const HREcosystemSection: React.FC = () => {
+  const { ref, className } = useAnimateOnScroll();
   return (
-    <section className="hr-ecosystem container">
+    <section className={cls(`hr-ecosystem container`)} ref={ref}>
       <h2 className="hr-ecosystem__title hidden title-section">
         HR пространство TopFrame
       </h2>
@@ -51,9 +52,8 @@ interface HRElementProps {
 }
 
 const HRElement: React.FC<HRElementProps> = ({ element }) => {
-  const { ref, className } = useAnimateOnScroll();
   return (
-    <div className={cls(`hr-ecosystem__element fade-in`, className)} ref={ref}>
+    <div className={cls(`hr-ecosystem__element`)}>
       <span className="hr-ecosystem__element-icon">{element.icon}</span>
       <h4 className="hr-ecosystem__element-title">{element.title}</h4>
     </div>
