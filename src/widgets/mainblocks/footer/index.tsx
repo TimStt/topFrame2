@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 /**
  * @file: Footer section
@@ -6,13 +6,15 @@
  * @dependencies: React, Next.js Link
  * @created: 2024-01-15
  */
-import ArrowIcon from "@/source/icons/arrow.svg";
-import LogoIsArt from "@/source/icons/logo-is-art.svg";
-import EmailIcon from "@/source/icons/email.svg";
-import React from "react";
-import Link from "next/link";
-import { footerNavigation, footerContacts, companyInfo } from "./footer.data";
-import Image from "next/image";
+import React from 'react'
+
+import ArrowIcon from '@/source/icons/arrow.svg'
+import EmailIcon from '@/source/icons/email.svg'
+import LogoIsArt from '@/source/icons/logo-is-art.svg'
+import Image from 'next/image'
+import Link from 'next/link'
+
+import { companyInfo, footerContacts, footerNavigation } from './footer.data'
 
 export const Footer: React.FC = () => {
   return (
@@ -48,39 +50,21 @@ export const Footer: React.FC = () => {
           {/* Центральная колонка - Навигация */}
           <div className="footer__nav">
             <ul className="footer__nav-list">
-              <li className="footer__nav-item">
-                <Link href="/" className="footer__nav-link">
-                  HR пространство TopFrame
-                </Link>
-              </li>
-              <li className="footer__nav-item">
-                <Link href="/directions" className="footer__nav-link">
-                  Наши направления
-                </Link>
-              </li>
-              <li className="footer__nav-item">
-                <Link href="/vacancies" className="footer__nav-link">
-                  Вакансии
-                </Link>
-              </li>
-              <li className="footer__nav-item">
-                <Link href="/team" className="footer__nav-link">
-                  Наша команда
-                </Link>
-              </li>
+              {footerNavigation[0].links.map((link) => (
+                <li key={link.id} className="footer__nav-item">
+                  <Link href={link.href} className="footer__nav-link">
+                    {link.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           {/* Правая колонка - Контакты */}
           <div className="footer__contacts">
-            <a
-              className="footer__contacts__email"
-              href="mailto:info@topframe.ru"
-            >
+            <a className="footer__contacts__email" href="mailto:info@topframe.ru">
               <span className="visually-hidden">Посмотреть почту</span>
               <EmailIcon />
-              <span className="footer__contacts__email-text">
-                написать на почту
-              </span>
+              <span className="footer__contacts__email-text">написать на почту</span>
             </a>
             <a href="tel:+79636843639" className="footer__contacts-phone">
               +7 963 684 36 39
@@ -97,7 +81,7 @@ export const Footer: React.FC = () => {
               © 2001 - {new Date().getFullYear()} TOPFRAME. Все права защищены.
             </p>
 
-            <Link href={""}>Политика конфиденциальности</Link>
+            <Link href={''}>Политика конфиденциальности</Link>
 
             <LogoIsArt />
           </div>
@@ -106,7 +90,7 @@ export const Footer: React.FC = () => {
 
       {/* Нижняя часть футера */}
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

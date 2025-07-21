@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 /**
  * @file: Team section
@@ -6,21 +6,21 @@
  * @dependencies: React, Next.js Image
  * @created: 2024-01-15
  */
-import React, { useRef, useState } from "react";
-import Image from "next/image";
-import { teamData, ITeamMember } from "./team.data";
-import { PlayButtonUI } from "@/shared/lib/cls/video/controls-video-ui";
-import { cls } from "@/shared/lib/cls";
-import { useVideo } from "@/shared/lib/cls/video/use-video";
+import React, { useRef, useState } from 'react'
+
+import { cls } from '@/shared/lib/cls'
+import { PlayButtonUI } from '@/shared/lib/cls/video/controls-video-ui'
+import { useVideo } from '@/shared/lib/cls/video/use-video'
+import Image from 'next/image'
+
+import { ITeamMember, teamData } from './team.data'
 
 export const Team: React.FC = () => {
   return (
     <section className="team container">
       <div className="team__header">
         <h2 className="team__title title-section">Наша команда</h2>
-        <p className="team__subtitle subtitle">
-          Профессионалы с многолетним опытом
-        </p>
+        <p className="team__subtitle subtitle">Профессионалы с многолетним опытом</p>
       </div>
 
       <div className="team__list">
@@ -29,11 +29,11 @@ export const Team: React.FC = () => {
         ))}
       </div>
     </section>
-  );
-};
+  )
+}
 
 interface TeamMemberCardProps {
-  member: ITeamMember;
+  member: ITeamMember
 }
 
 const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
@@ -49,56 +49,54 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
     setIsPaused,
     isPaused,
     Loader,
-  } = useVideo();
+  } = useVideo()
 
   return (
     <div
       className={cls(
-        "team__card",
-        isPlaying && "active",
-        isPlaying && "video-playing",
-        isPaused && "video-paused"
+        'team__card',
+        isPlaying && 'active',
+        isPlaying && 'video-playing',
+        isPaused && 'video-paused',
       )}
-      onMouseEnter={handlePlay}
-      onMouseLeave={handlePause}
+      // onMouseEnter={handlePlay}
+      // onMouseLeave={handlePause}
       onClick={handlePlay}
     >
       {/* Постер как отдельный элемент */}
-      <div
-        className="team__card-poster"
-        style={{ backgroundImage: `url(${member.image})` }}
-      />
+      <div className="team__card-poster" style={{ backgroundImage: `url(${member.image})` }} />
 
       <video
-        className={cls("team__card-video", !isLoading && "video-loaded")}
+        className={cls('team__card-video', !isLoading && 'video-loaded')}
         ref={ref}
         loop
         muted
         controls={isPlaying}
         playsInline
         preload="metadata"
+        crossOrigin="anonymous"
         onLoadStart={() => {
-          setIsLoading(true);
-          setHasError(false);
+          setIsLoading(true)
+          setHasError(false)
         }}
         onCanPlay={() => {
-          setIsLoading(false);
-          setIsPaused(false);
+          setIsLoading(false)
+          setIsPaused(false)
         }}
         onError={(e) => {
-          console.error("Ошибка загрузки видео:", e);
-          setIsLoading(false);
-          setHasError(true);
+          console.error('Ошибка загрузки видео:', e)
+          setIsLoading(false)
+          setHasError(true)
         }}
         onLoadedMetadata={() => {
-          console.log("Видео метаданные загружены");
+          console.log('Видео метаданные загружены')
         }}
         onPlaying={() => {
-          console.log("Видео начало воспроизведение");
-          setIsPaused(false);
+          console.log('Видео начало воспроизведение')
+          setIsPaused(false)
         }}
         onPause={() => {
-          setIsPaused(true);
+          setIsPaused(true)
         }}
       >
         <source src={member.video} type="video/mp4" />
@@ -123,7 +121,10 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
           <PlayButtonUI
             className="team__card-button"
             isPlaying={isPlaying}
-            onClick={handlePlay}
+            onClick={(e) => {
+              e.stopPropagation()
+              handlePlay()
+            }}
             isLoading={isLoading}
             loader={
               <Loader
@@ -141,5 +142,5 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
         </div>
       }
     </div>
-  );
-};
+  )
+}

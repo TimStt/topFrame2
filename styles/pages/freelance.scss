@@ -1,0 +1,134 @@
+@use '../libs/_mixins.scss' as *;
+@use '../libs/variables.scss' as *;
+
+.freelance-page {
+  .freelance-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 120px;
+  }
+  .freelance-info {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 600px;
+  }
+  .freelance-hate {
+    @include font-setup(20, 24, 700, false);
+    color: var(--color-accent-blue);
+    margin-bottom: 24px;
+  }
+  .freelance-main-text {
+    @include font-setup(16, 22, 400, false);
+    color: var(--color-main);
+    & > p + p {
+      margin-top: 16px;
+    }
+    margin-bottom: 40px;
+  }
+
+  .freelance-h2 {
+    @include font-setup(20, 29, 700, false);
+    color: var(--color-main);
+    margin-bottom: 24px;
+  }
+
+  .freelance-benefits {
+    margin-bottom: 40px;
+
+    .freelance-benefits-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .freelance-benefit {
+      flex: 1 1 220px;
+      min-width: 180px;
+      padding: 16px 12px;
+      border: 1px solid var(--color-light-blue);
+      transition-duration: var(--transition-normal);
+      border-radius: 8px;
+      background: var(--color-light);
+      .benefit-title {
+        @include font-setup(16, 20, 700, false);
+        color: var(--color-accent-blue);
+        margin-bottom: 12px;
+      }
+      .benefit-desc {
+        font-family: var(--second-family);
+        @include font-setup(12, 16, 400, false);
+        color: rgb(72, 72, 72);
+      }
+      &:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+  .freelance-how {
+    margin-bottom: 40px;
+
+    .freelance-how-list {
+      counter-reset: item;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      & > li {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 20px;
+        counter-increment: item;
+        .how-num {
+          @include font-setup(24, 29, 700, false);
+          color: var(--color-accent-blue);
+          min-width: 32px;
+          &::before {
+            content: counter(item);
+            display: inline-block;
+          }
+        }
+        .how-text {
+          font-family: var(--second-family);
+          @include font-setup(16, 22, 400, false);
+          color: var(--color-main);
+        }
+      }
+      & > li:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+  .freelance-pay {
+    margin-bottom: 40px;
+    .pay-title {
+      @include font-setup(20, 24, 700, false);
+      color: var(--color-accent-blue);
+      margin-bottom: 8px;
+    }
+    .pay-desc {
+      font-family: var(--second-family);
+      @include font-setup(16, 22, 400, false);
+      color: var(--color-main);
+    }
+  }
+
+  .freelance-img {
+    border-radius: 8px;
+    max-width: 480px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 480/320;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 900px) {
+  .freelance-page {
+    .freelance-content {
+      flex-direction: column;
+    }
+  }
+}

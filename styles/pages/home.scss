@@ -1,6 +1,6 @@
 // Header Component Styles
 
-@use "../libs/mixins.scss" as *;
+@use '../libs/mixins.scss' as *;
 
 .title-section {
   @include font-setup(
@@ -70,7 +70,7 @@
       position: relative;
 
       &::after {
-        content: "";
+        content: '';
         position: absolute;
         bottom: -4px;
         left: 0;
@@ -243,7 +243,7 @@
         box-shadow: 0 0 10px 0 rgba(253, 253, 253, 0.16);
 
         &::before {
-          content: "";
+          content: '';
           position: absolute;
           bottom: calc(var(--sizeTriangle) * -1);
           right: calc(var(--sizeIcon) / 2);
@@ -285,8 +285,7 @@
   --paddingBottom: 108px;
 
   &_inner {
-    padding-block: calc(var(--height-header) + var(--paddingTop))
-      var(--paddingBottom);
+    padding-block: calc(var(--height-header) + var(--paddingTop)) var(--paddingBottom);
   }
 
   &__row {
@@ -486,9 +485,8 @@
   top: 50%;
   left: 50%;
   transform-origin: center;
-  transform: translate(-50%, -50%) rotate(var(--angle))
-    translateX(var(--translateX)) rotate(calc(-1 * var(--angle)))
-    rotate(var(--additionalAngle));
+  transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--translateX))
+    rotate(calc(-1 * var(--angle))) rotate(var(--additionalAngle));
 }
 
 .hr-ecosystem {
@@ -505,7 +503,7 @@
 
   &:after,
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0%);
@@ -553,7 +551,7 @@
 
     &:after {
       aspect-ratio: 1 / 1;
-      content: "";
+      content: '';
       border-radius: 50%;
       background: var(--color-light-blue);
       filter: blur(64px);
@@ -660,10 +658,7 @@
 
     // Элементы внешнего круга (слева направо по часовой стрелке, начиная с 195°)
     &:nth-child(1) {
-      @include place-on-circle(
-        $firstDeg,
-        var(--radiusBigLine)
-      ); // Блог Linkedin (слева внизу)
+      @include place-on-circle($firstDeg, var(--radiusBigLine)); // Блог Linkedin (слева внизу)
     }
 
     &:nth-child(2) {
@@ -675,54 +670,32 @@
     }
 
     &:nth-child(3) {
-      @include place-on-circle(
-        $thirdDeg,
-        var(--radiusBigLine)
-      ); // Битрикс (снизу)
+      @include place-on-circle($thirdDeg, var(--radiusBigLine)); // Битрикс (снизу)
     }
 
     &:nth-child(4) {
-      @include place-on-circle(
-        $fourthDeg,
-        var(--radiusBigLine)
-      ); // Фриланс (справа снизу)
+      @include place-on-circle($fourthDeg, var(--radiusBigLine)); // Фриланс (справа снизу)
     }
 
     &:nth-child(5) {
-      @include place-on-circle(
-        $fifthDeg,
-        var(--radiusBigLine)
-      ); // Welcome book (справа)
+      @include place-on-circle($fifthDeg, var(--radiusBigLine)); // Welcome book (справа)
     }
 
     &:nth-child(6) {
-      @include place-on-circle(
-        $sixthDeg,
-        var(--radiusBigLine)
-      ); // Блог Дзен (справа сверху)
+      @include place-on-circle($sixthDeg, var(--radiusBigLine)); // Блог Дзен (справа сверху)
     }
 
     &:nth-child(7) {
-      @include place-on-circle(
-        $seventhDeg,
-        var(--radiusBigLine),
-        2deg
-      ); // Горячая линия (сверху)
+      @include place-on-circle($seventhDeg, var(--radiusBigLine), 2deg); // Горячая линия (сверху)
     }
 
     &:nth-child(8) {
-      @include place-on-circle(
-        $eighthDeg,
-        var(--radiusMiddleLine)
-      ); // Клиенты (слева сверху)
+      @include place-on-circle($eighthDeg, var(--radiusMiddleLine)); // Клиенты (слева сверху)
     }
 
     // Элементы внутреннего круга
     &:nth-child(9) {
-      @include place-on-circle(
-        $ninthDeg,
-        var(--radiusMiddleLine)
-      ); // TF COIN (слева внизу)
+      @include place-on-circle($ninthDeg, var(--radiusMiddleLine)); // TF COIN (слева внизу)
     }
 
     &:nth-child(10) {
@@ -734,10 +707,7 @@
     }
 
     &:nth-child(11) {
-      @include place-on-circle(
-        $eleventhDeg,
-        var(--radiusMiddleLine)
-      ); // Институт (справа снизу)
+      @include place-on-circle($eleventhDeg, var(--radiusMiddleLine)); // Институт (справа снизу)
     }
 
     &:hover {
@@ -838,15 +808,7 @@
       color: var(--color-main);
     }
     &-title {
-      @include font-setup(
-        24,
-        29,
-        700,
-        true,
-        18,
-        24,
-        var(--container-max-width)
-      );
+      @include font-setup(24, 29, 700, true, 18, 24, var(--container-max-width));
       color: inherit;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -1051,7 +1013,7 @@
     }
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       inset: 0;
       transition: background-color 0.3s ease-in-out;
@@ -1143,6 +1105,75 @@
         z-index: -1;
       }
     }
+
+    // Специальные стили для Opera
+    &.opera-browser {
+      // В Opera убираем hover эффекты для лучшей производительности
+      &:hover {
+        .team__card-poster {
+          opacity: 1;
+        }
+      }
+
+      // Улучшаем показ кнопки в Opera
+      .team__card-button {
+        opacity: 1;
+        z-index: 3;
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 50%;
+        padding: 8px;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.9);
+        }
+      }
+
+      // Показываем контент всегда в Opera
+      .team__card-content {
+        opacity: 1;
+        z-index: 3;
+        pointer-events: auto;
+      }
+
+      &.active {
+        .team__card-content {
+          opacity: 1;
+          z-index: 3;
+          pointer-events: auto;
+        }
+
+        .team__card-button {
+          opacity: 1;
+          z-index: 3;
+        }
+      }
+    }
+
+    // Стили для подсказки
+    &-hint {
+      font-family: var(--second-family);
+      font-weight: 400;
+      font-size: 11px;
+      color: #ffd700;
+      margin-top: 8px;
+      text-align: center;
+      animation: pulse 2s infinite;
+    }
+
+    // Улучшенные стили для ошибки
+    &-error {
+      font-family: var(--second-family);
+      font-weight: 400;
+      font-size: 11px;
+      color: #ff6b6b;
+      margin-top: 8px;
+      text-align: center;
+      background-color: rgba(255, 107, 107, 0.1);
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 107, 107, 0.3);
+    }
   }
 }
 
@@ -1154,6 +1185,17 @@
   }
   50% {
     transform: translateY(-10px);
+  }
+}
+
+// Анимация для подсказки в Opera
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
   }
 }
 

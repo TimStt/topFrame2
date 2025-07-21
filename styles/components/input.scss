@@ -1,4 +1,4 @@
-@use "../libs/mixins.scss" as *;
+@use '../libs/mixins.scss' as *;
 
 // Input wrapper
 .input-wrapper {
@@ -55,15 +55,11 @@
 
   &--with-password {
     &--small {
-      --paddingRightSmall: calc(
-        var(--paddingRightWithPassword) + var(--paddingRightSmall)
-      );
+      --paddingRightSmall: calc(var(--paddingRightWithPassword) + var(--paddingRightSmall));
     }
 
     &--large {
-      --paddingRightMedium: calc(
-        var(--paddingRightWithPassword) + var(--paddingRightMedium)
-      );
+      --paddingRightMedium: calc(var(--paddingRightWithPassword) + var(--paddingRightMedium));
     }
   }
 
@@ -292,10 +288,6 @@
   // Variants inherit from input
   &--primary {
     @extend .input--primary;
-  }
-
-  &--secondary {
-    @extend .input--secondary;
   }
 
   &--outline {

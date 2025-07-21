@@ -1,13 +1,13 @@
-@import "./libs/fonts", "./libs/utils";
-@import "./libs/normalize";
-@import "./globals";
+@import './libs/fonts', './libs/utils';
+@import './libs/normalize';
+@import './globals';
 
 // components ui
-@import "./components/button", "./components/burger-button",
-  "./components/accordion", "./components/description-collapse",
-  "./components/loader", "./components/vacancy-card", "./components/pagination",
-  "./components/input", "./components/breadcrumbs", "./components/checkbox",
-  "./components/select", "./components/image", "./components/modal";
+@import './components/button', './components/burger-button', './components/accordion',
+  './components/description-collapse', './components/loader', './components/vacancy-card',
+  './components/pagination', './components/input', './components/breadcrumbs',
+  './components/checkbox', './components/select', './components/image', './components/modal';
 
 // страницы
-@import "./pages/home", "./pages/catalog-vacancies", "./pages/profile";
+@import './pages/home', './pages/catalog-vacancies', './pages/profile', './pages/hr-topframe',
+  './pages/admin-direction', './pages/freelance';

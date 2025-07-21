@@ -4,19 +4,22 @@
  * @dependencies: Next.js Image, Button component
  * @created: 2024-01-15
  */
-import React from "react";
+import React from 'react'
 
-import Image from "next/image";
-import Link from "next/link";
-import { ButtonAuth } from "./ui/button-auth";
+import { PAGES_PATHS } from '@/shared/constants/pages-paths'
+import Image from 'next/image'
+import Link from 'next/link'
+
+import { ButtonAuth } from './ui/button-auth'
 
 export const Header = () => {
   const navigationItems = [
-    { label: "Все профессии", href: "/freelance" },
-    { label: "Фриланс", href: "/freelance" },
-    { label: "Наши вакансии", href: "/vacancies" },
-    { label: "Наша компания", href: "/about" },
-  ];
+    { label: 'HR пространство', href: PAGES_PATHS.HR_TOPFRAME },
+    { label: 'Административное направление', href: PAGES_PATHS.ADMIN_DIRECTION },
+    { label: 'Фриланс', href: PAGES_PATHS.FREELANCE },
+    { label: 'Наши вакансии', href: PAGES_PATHS.VACANCIES },
+    { label: 'Наша компания', href: '/about' },
+  ]
 
   return (
     <header className="header">
@@ -45,5 +48,5 @@ export const Header = () => {
         <ButtonAuth />
       </div>
     </header>
-  );
-};
+  )
+}

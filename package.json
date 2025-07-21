@@ -19,6 +19,7 @@
     "react": "^19.0.0",
     "react-datepicker": "^8.4.0",
     "react-dom": "^19.0.0",
+    "react-hover-video-player": "^10.0.2",
     "react-input-mask": "^2.0.4",
     "reactjs-popup": "^2.0.6",
     "swiper": "^11.2.10",
