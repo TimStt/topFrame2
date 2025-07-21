@@ -86,6 +86,7 @@ export const ButtonUI = <
   return (
     <button
       className={buttonClasses}
+      type={type as "button" | "submit" | "reset"}
       {...(rest as ComponentPropsWithoutRef<"button">)}
     >
       {children}

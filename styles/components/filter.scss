@@ -1,0 +1,144 @@
+@use "../libs/mixins" as *;
+
+.filter {
+  &__accordion {
+    padding: 16px 12px;
+    border: 1px solid var(--color-light-blue);
+    border-radius: 8px;
+
+    &__summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+
+      color: var(--color-accent-blue);
+
+      svg {
+        transition-duration: var(--transition-normal);
+        width: 16px;
+        height: 16px;
+        transform: rotate(0deg);
+      }
+    }
+    &__title {
+      @include font-setup(20, 24, 600);
+    }
+
+    &__details[open] ~ &__content {
+      margin-top: 24px;
+    }
+
+    &__details[open] .filter__accordion__summary {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+
+    &__list {
+      transition-duration: var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 16px;
+      max-height: 174px;
+      overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        width: 2px;
+        height: 54px;
+      }
+      &::-webkit-scrollbar-track {
+        background: var(--color-white-1);
+        /* Закругленные углы дорожки */
+      }
+
+      /* Ползунок скроллбара (та часть, которую можно перетаскивать) */
+      &::-webkit-scrollbar-thumb {
+        background: var(--color-light-blue-2);
+        border-radius: 2px;
+      }
+    }
+
+    .filter__reset-filters {
+      font-size: 12px;
+      text-align: left;
+    }
+  }
+
+  &__reset-filters {
+    @include font-setup(16, 19, 600);
+    color: #727272;
+    cursor: pointer;
+  }
+
+  &__side-bar {
+    --topPadding: 64px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    transform: translateX(100%);
+    max-width: 430px;
+    width: 100%;
+    transition-duration: var(--transition-normal);
+    height: 100dvh;
+    transition-property: transform;
+    background-color: var(--color-white);
+
+    z-index: var(--z-fixed);
+    padding: var(--topPadding) 130px 0px 20px;
+
+    &__inner {
+      position: relative;
+
+      .modal__close {
+        top: calc(var(--topPadding) / 2 * -1 - var(--size-close-button) / 2);
+        right: 0;
+      }
+    }
+
+    &.is-open {
+      transform: translateX(0);
+
+      &::after {
+        content: "";
+        position: absolute;
+
+        /* inset: 0; */
+        /* LEFT: -100%; */
+        top: 0;
+        height: 100%;
+        right: 100%;
+        bottom: 0;
+        pointer-events: none;
+        width: 100dvw;
+        background: #72727254;
+      }
+    }
+
+    &__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+
+      .filter__reset-filters {
+        font-size: 16px;
+      }
+    }
+
+    &__title {
+      @include font-setup(24, 29, 700);
+      color: var(--color-main);
+    }
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .filter__reset-filters {
+      color: var(--color-gray-2);
+    }
+  }
+}

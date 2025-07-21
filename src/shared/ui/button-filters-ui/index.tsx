@@ -17,6 +17,7 @@ export const ButtonFiltersUI = ({
       size="custom"
       variant="custom"
       onClick={handleOpenFilters}
+      type="button"
     >
       <span className="visually-hidden">открыть фильтры вакансий</span>
       <FilterIcon />

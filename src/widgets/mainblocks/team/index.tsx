@@ -6,12 +6,14 @@
  * @dependencies: React, Next.js Image
  * @created: 2024-01-15
  */
-import React, { useRef, useState } from "react";
+import HoverVideoPlayer from "react-hover-video-player";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { teamData, ITeamMember } from "./team.data";
 import { PlayButtonUI } from "@/shared/lib/cls/video/controls-video-ui";
 import { cls } from "@/shared/lib/cls";
 import { useVideo } from "@/shared/lib/cls/video/use-video";
+import LoaderUI from "@/shared/ui/loader-ui";
 
 export const Team: React.FC = () => {
   return (
@@ -37,39 +39,80 @@ interface TeamMemberCardProps {
 }
 
 const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
-  const {
-    ref,
-    isPlaying,
-    isLoading,
-    hasError,
-    handlePlay,
-    handlePause,
-    setIsLoading,
-    setHasError,
-    setIsPaused,
-    isPaused,
-    Loader,
-  } = useVideo();
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const handlePlay = () => {
+    setIsPlaying(true);
+  };
+
+  const handlePause = () => {
+    setIsPlaying(false);
+    refVideo.current?.pause();
+  };
+
+  const refVideo = useRef<HTMLVideoElement>(null);
+
+  // useEffect(() => {
+  //   if (refVideo.current?.paused) return;
+  //   window.addEventListener("click", (e) => {
+  //     e.stopPropagation();
+  //     e.preventDefault();
+  //     refVideo.current?.pause();
+  //     console.log("click", refVideo.current?.paused);
+  //   });
+
+  //   return () => {
+  //     window.removeEventListener("click", (e) => {
+  //       e.stopPropagation();
+  //       e.preventDefault();
+  //       refVideo.current?.pause();
+  //       console.log("click", refVideo.current?.paused);
+  //     });
+  //   };
+  // }, []);
 
   return (
-    <div
-      className={cls(
-        "team__card",
-        isPlaying && "active",
-        isPlaying && "video-playing",
-        isPaused && "video-paused"
-      )}
-      onMouseEnter={handlePlay}
-      onMouseLeave={handlePause}
-      onClick={handlePlay}
-    >
-      {/* Постер как отдельный элемент */}
-      <div
-        className="team__card-poster"
-        style={{ backgroundImage: `url(${member.image})` }}
+    <div className="team__card">
+      <HoverVideoPlayer
+        videoClassName="team__card-video"
+        className="team__card-video-player"
+        hoverOverlayWrapperClassName="team__card-hover-overlay"
+        loadingOverlayWrapperClassName="team__card-loading-overlay"
+        // disableRemotePlayback={!isPlaying}
+
+        videoSrc={member.video}
+        onPlay={() => {
+          setIsPlaying(true);
+        }}
+        onPause={() => setIsPlaying(false)}
+        videoRef={refVideo}
+        pausedOverlay={
+          <div
+            className="team__card__content"
+            style={{ backgroundImage: `url(${member.image})` }}
+          >
+            <div className="team__card__content-inner">
+              <PlayButtonUI className="team__card-button" onClick={() => {}} />
+
+              <h3 className="team__card-title">{member.name}</h3>
+              <span className="team__card-position">{member.position}</span>
+            </div>
+          </div>
+        }
+        loadingOverlay={
+          <LoaderUI
+            className="team__card-loader"
+            width="24px"
+            color="#fff"
+            height="24px"
+            borderWidth="3px"
+          />
+        }
       />
 
-      <video
+      {/* Постер как отдельный элемент */}
+
+      {/* <video
         className={cls("team__card-video", !isLoading && "video-loaded")}
         ref={ref}
         loop
@@ -102,7 +145,7 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
         }}
       >
         <source src={member.video} type="video/mp4" />
-      </video>
+      </video> */}
 
       {/* <PlayButtonUI
         className="team__card-button"
@@ -118,28 +161,7 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
         isLoading={isLoading}
       /> */}
 
-      {
-        <div className="team__card-content">
-          <PlayButtonUI
-            className="team__card-button"
-            isPlaying={isPlaying}
-            onClick={handlePlay}
-            isLoading={isLoading}
-            loader={
-              <Loader
-                className="team__card-loader"
-                width="24px"
-                color="#fff"
-                height="24px"
-                borderWidth="3px"
-              />
-            }
-          />
-
-          <h3 className="team__card-title">{member.name}</h3>
-          <span className="team__card-position">{member.position}</span>
-        </div>
-      }
+      {}
     </div>
   );
 };

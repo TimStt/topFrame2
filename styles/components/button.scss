@@ -64,14 +64,14 @@
   }
 
   &__filter {
-    width: var(--btnSizeFilter);
+    min-width: var(--btnSizeFilter);
     height: var(--btnSizeFilter);
     background-color: var(--color-light-blue-2);
     color: var(--color-light);
     display: flex;
     align-items: center;
     justify-content: center;
-
+    border-radius: 4px;
     svg {
       width: 24px;
       height: 24px;

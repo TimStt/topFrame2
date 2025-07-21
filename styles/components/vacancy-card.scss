@@ -80,6 +80,7 @@
       var(--maxFontSize),
       29,
       700,
+      true,
       var(--minFontSize),
       var(--maxFontSize),
       var(--container-max-width)
@@ -109,6 +110,12 @@
       width: 16px;
       height: 16px;
     }
+  }
+}
+
+.search-vacancies {
+  &__box form {
+    margin-bottom: 24px;
   }
 }
 

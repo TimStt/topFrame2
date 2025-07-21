@@ -1,3 +1,5 @@
+@use "../libs/mixins" as *;
+
 .user-avatar {
   border-radius: 50%;
   overflow: hidden;
@@ -62,6 +64,140 @@
   &:hover {
     &__button {
       opacity: 1;
+    }
+  }
+}
+
+.profile {
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  &__button-logout {
+    @include font-setup(16, 19, 600);
+    color: var(--color-gray-2);
+    text-align: center;
+    width: 100%;
+    transition-duration: var(--transition-normal);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--color-gray);
+    }
+  }
+
+  &__vacancies-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-block: 35px 41px;
+  }
+
+  &__info-user {
+    max-width: 280px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &__button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    &__about {
+      padding: 20px;
+      border: 1px solid var(--color-light-blue);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      color: var(--color-main);
+    }
+
+    &__avatar {
+      margin-bottom: 24px;
+    }
+
+    &__name {
+      @include font-setup(20, 24, 700);
+      text-align: center;
+
+      margin-bottom: 8px;
+    }
+
+    &__role {
+      @include font-setup(12, 16, 400);
+      font-family: var(--second-family);
+      margin-bottom: 24px;
+    }
+
+    &__button + &__button {
+      margin-top: 12px;
+    }
+
+    &__links {
+      border-radius: 8px;
+      padding: 24px 20px;
+
+      background-color: #f7ffcd;
+
+      &.instructions {
+        background-color: var(--color-light-blue);
+      }
+
+      &-label {
+        display: inline-block;
+        @include font-setup(20, 24, 700);
+        margin-bottom: 24px;
+        color: var(--color-main);
+      }
+
+      &-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      &-item {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        color: var(--color-main);
+        @include font-setup(16, 19, 500);
+        background-color: var(--color-light);
+        padding: 10.5px 12px;
+        width: 100%;
+        border-radius: 40px;
+
+        svg {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 770px) {
+  .profile {
+    &__inner {
+      flex-direction: column;
+      gap: 64px;
+    }
+
+    &__info-user {
+      max-width: 100%;
     }
   }
 }

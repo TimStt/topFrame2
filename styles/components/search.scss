@@ -1,3 +1,5 @@
+@use "../libs/mixins" as *;
+
 .search-box {
   padding: 12px;
   background-color: var(--color-white-1);
@@ -20,6 +22,8 @@
     padding: 12px 24px;
     width: max-content;
     height: 46px;
+    border-radius: 4px;
+    background-color: var(--color-accent-blue);
   }
 
   &__label {
@@ -37,19 +41,21 @@
   &__filters {
     display: flex;
     align-items: center;
-    gap: 8px;
+    flex-direction: column;
+    align-items: flex-start;
 
     &-title {
       @include font-setup(20, 24, 700);
       color: #242424;
-      margin-bottom: 24px;
+      margin-bottom: 16px;
     }
 
     &-list {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 16px 8px;
       flex-wrap: wrap;
+      margin-bottom: 20px;
     }
 
     &-actions {

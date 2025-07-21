@@ -1,3 +1,4 @@
+"use client";
 /**
  * @file: Header component
  * @description: Main website header with navigation and logo
@@ -9,6 +10,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ButtonAuth } from "./ui/button-auth";
+import { useGetScrollWidth } from "@/shared/hooks/use-get-scroll-width";
 
 export const Header = () => {
   const navigationItems = [

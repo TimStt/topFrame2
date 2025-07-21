@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, forwardRef } from "react";
+import React, { ComponentPropsWithoutRef, forwardRef, useId } from "react";
 import { cls } from "@/shared/lib/cls";
 
 export type ICheckbox = ComponentPropsWithoutRef<"input"> & {
@@ -21,6 +21,8 @@ export const CheckboxUI = forwardRef<HTMLInputElement, ICheckbox>(
       wrapperClassName,
       labelClassName,
       children,
+      checked,
+      onChange,
       ...rest
     },
     ref
@@ -31,9 +33,20 @@ export const CheckboxUI = forwardRef<HTMLInputElement, ICheckbox>(
 
     const labelClasses = cls("control__label", labelClassName);
 
+    const id = useId();
+
     return (
-      <label className={controlClasses}>
-        <input ref={ref} type={type} className={inputClasses} {...rest} />
+      <label className={controlClasses} htmlFor={id} id={id + "-label"}>
+        <input
+          ref={ref}
+          type={type}
+          className={inputClasses}
+          id={id}
+          name={id}
+          checked={checked}
+          onChange={onChange}
+          {...rest}
+        />
         <div className="control__indicator"></div>
         {(label || children) && (
           <span className={labelClasses}>{label || children}</span>

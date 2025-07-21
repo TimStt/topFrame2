@@ -11,6 +11,7 @@ export const NewVacancies = () => {
         Найдите свою идеальную позицию в TopFrame
       </p>
       <ListVacancies
+        className="container"
         vacancies={mockVacancies}
         renderButton={
           <ButtonUI variant="primary" size="medium" hasArrow as="a" href="/">

@@ -3,7 +3,7 @@ import React from "react";
 
 export const ButtonLogout = ({ className }: { className?: string }) => {
   return (
-    <button className={cls("button-logout", className)}>
+    <button className={cls("profile__button-logout", className)}>
       Выйти из личного кабинета
     </button>
   );

@@ -16,7 +16,7 @@ export const ListVacancies = ({
   className,
 }: IListVacancies) => {
   return (
-    <div className={cls("vacancy-list container", className)}>
+    <div className={cls("vacancy-list", className)}>
       <div className="vacancy-list__content">
         {vacancies.map((vacancy) => (
           <CardVacancy children={undefined} key={vacancy.id} {...vacancy} />

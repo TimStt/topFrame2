@@ -14,8 +14,6 @@
   --titleMinFontSize: 20;
   --titleMarginBottom: 24px;
 
-  --positionCloseButton: 12px;
-
   max-width: var(--maxWidth);
   width: 100%;
   background-color: var(--color-light);
@@ -30,10 +28,10 @@
 
   &__close {
     position: absolute;
-    top: var(--positionCloseButton);
-    right: var(--positionCloseButton);
-    width: 24px;
-    height: 24px;
+    top: var(--position-close-button);
+    right: var(--position-close-button);
+    width: var(--size-close-button);
+    height: var(--size-close-button);
     display: flex;
     align-items: center;
     justify-content: center;

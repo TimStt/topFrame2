@@ -35,7 +35,7 @@ export const FilePickerUI = (props: IUIPickerFiles) => {
   const id = useId();
   return (
     <label
-      className={cls(classNameLabel, "profile_img_add", {
+      className={cls(className, "profile_img_add", {
         is_loading: isLoading,
       })}
       htmlFor={id}

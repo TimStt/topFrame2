@@ -1,127 +1,106 @@
-// Checkbox wrapper
+@use "../libs/mixins" as *;
+
 .control {
-  display: block;
+  display: flex;
   position: relative;
-  padding-left: 35px;
-  margin-bottom: 5px;
-  padding-top: 6px;
+
   cursor: pointer;
-  font-size: 14px;
-  font-family: var(--font-family);
-  font-weight: var(--font-weight-regular);
-  line-height: 1.4;
+  font-size: 16px;
+  --gap: 8px;
+  --sizeIndicator: 20px;
+  padding-left: calc(var(--sizeIndicator) + var(--gap));
+  font-family: var(--second-family);
+  @include font-setup(16, 22, 400);
   letter-spacing: 0.01em;
+  align-items: center;
+
   color: var(--color-main);
-  user-select: none;
 }
 
-// Hidden input
-.control__input {
+.control .control__input {
   position: absolute;
   z-index: -1;
   opacity: 0;
 }
 
-// Checkbox indicator
 .control__indicator {
-  position: absolute;
+  height: var(--sizeIndicator);
   left: 0;
-  top: 0;
-  height: 20px;
-  width: 20px;
-  border: 1px solid var(--color-main);
+  top: 50%;
+  transform: translate(0%, -50%);
+  width: var(--sizeIndicator);
+  border: 1px solid var(--color-accent-blue);
+  position: absolute;
+  // top: 2px;
+
   border-radius: 4px;
-  background: var(--color-white);
-  transition-duration: var(--transition-normal);
 }
 
-// Label text
-.control__label {
-  display: inline-block;
-  margin-left: 8px;
-  font-size: 14px;
-  font-weight: var(--font-weight-regular);
-  color: var(--color-main);
-  line-height: 1.4;
+.control:hover input ~ .control_indicator,
+.control input:focus ~ .control_indicator {
+  //	background: #ffffff;
 }
 
-// Hover states
-.control:hover .control__input:not(:disabled) ~ .control__indicator {
-  border-color: var(--color-accent-blue);
+.control input:checked ~ .control_indicator {
+  //	background: #ffffff;
 }
 
-.control:hover .control__input:not(:disabled):checked ~ .control__indicator {
-  background: var(--color-accent-blue);
-  border-color: var(--color-accent-blue);
+.control:hover input:not([disabled]):checked ~ .control_indicator,
+.control input:checked:focus ~ .control_indicator {
+  //	background: #ffffff;
 }
 
-// Focus states
-.control .control__input:focus ~ .control__indicator {
-  outline: 2px solid var(--color-accent-blue);
-  outline-offset: 2px;
-}
-
-// Checked states
-.control .control__input:checked ~ .control__indicator {
-  background: var(--color-accent-blue);
-  border-color: var(--color-accent-blue);
-}
-
-// Disabled states
-.control .control__input:disabled ~ .control__indicator {
-  background: var(--color-white-1);
-  border-color: #ddd;
+.control:has(.control__input:disabled) .control__indicator {
+  background: var(--color-gray-2);
   opacity: 0.6;
   pointer-events: none;
 }
 
-.control .control__input:disabled ~ .control__label {
-  color: #999;
-  opacity: 0.6;
-}
-
-// Checkmark and radio dot
-.control__indicator:after {
+.control-checkbox .control__indicator:after {
+  box-sizing: unset;
   content: "";
   position: absolute;
-  display: none;
+  opacity: 0;
+  transition-duration: var(--transition-normal);
 }
 
-.control .control__input:checked ~ .control__indicator:after {
-  display: block;
+.control-checkbox:has(input:checked) .control__indicator {
+  &:after {
+    opacity: 1;
+    z-index: 3;
+  }
+
+  background-color: var(--color-accent-blue);
 }
 
-// Checkbox checkmark
 .control-checkbox .control__indicator:after {
-  left: 6px;
-  top: 3px;
-  width: 3px;
-  height: 8px;
+  left: 50%;
+  top: calc(50% - 3px);
+  transform: translate(10px, 10px);
+  width: 6px;
+  height: 10px;
   border: solid var(--color-white);
   border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
+  transform: translate(-50%, -50%) rotate(45deg);
 }
 
-// Radio dot
-.control-radio .control__indicator {
-  border-radius: 50%;
-}
-
-.control-radio .control__indicator:after {
-  left: 50%;
-  top: 50%;
-  width: 8px;
-  height: 8px;
-  background: var(--color-white);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-}
-
-// Disabled checkmark and radio dot
 .control-checkbox .control__input:disabled ~ .control__indicator:after {
-  border-color: #999;
+  border-color: var(--color-gray-1);
 }
 
-.control-radio .control__input:disabled ~ .control__indicator:after {
-  background: #999;
+.control-checkbox .control__indicator::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin-left: -1.3rem;
+  margin-top: -1.3rem;
+  background: #2aa1c0;
+  border-radius: 3rem;
+  opacity: 0.6;
+  z-index: 99999;
+  transform: scale(0);
 }

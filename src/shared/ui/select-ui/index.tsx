@@ -4,7 +4,7 @@ import { CheckboxUI } from "../checkbox-ui";
 import ArrowIcon from "@/source/icons/arrow2.svg";
 import useOnClickOutside from "@/shared/hooks/use-on-click-outside";
 
-export type ISelectOption = {
+export type ISelectOption<T extends string | number> = {
   /** Значение опции */
   value: string | number;
   /** Текст опции */
@@ -14,13 +14,13 @@ export type ISelectOption = {
   disabled?: boolean;
 };
 
-export type ISelect = {
+export interface ISelect<T extends string | number> {
   /** Массив опций */
-  options: ISelectOption[];
+  options: ISelectOption<T>[];
   /** Выбранные значения */
-  value?: (string | number)[];
+  value?: T[];
   /** Обработчик изменения выбора */
-  onChange?: (value: (string | number)[]) => void;
+  onChange?: (value: T[]) => void;
   /** Placeholder */
   placeholder?: string;
   /** Отключен ли селект */
@@ -33,9 +33,9 @@ export type ISelect = {
   error?: string;
   /** Полная ширина */
   fullWidth?: boolean;
-};
+}
 
-export const SelectUI: React.FC<ISelect> = ({
+export const SelectUI = <T extends string | number>({
   options,
   value = [],
   onChange,
@@ -45,7 +45,7 @@ export const SelectUI: React.FC<ISelect> = ({
   label,
   error,
   fullWidth = false,
-}) => {
+}: ISelect<T>) => {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
 
@@ -70,15 +70,20 @@ export const SelectUI: React.FC<ISelect> = ({
     optionValue: string | number,
     checked: boolean
   ) => {
+    console.log(optionValue, checked, value);
     if (!onChange) return;
 
-    let newValue: (string | number)[];
+    let newValue: T[];
     if (checked) {
-      newValue = [...value, optionValue];
+      if (!value) {
+        newValue = [optionValue as T];
+      } else {
+        newValue = [...value, optionValue as T];
+      }
     } else {
-      newValue = value.filter((v) => v !== optionValue);
+      newValue = value.filter((v) => v !== optionValue) as T[];
     }
-
+    console.log(newValue);
     onChange(newValue);
   };
 
@@ -92,14 +97,23 @@ export const SelectUI: React.FC<ISelect> = ({
           .map((v) => options.find((opt) => opt.value === v)?.label)
           .filter(Boolean)
           .join(", ")
-      : placeholder;
+      : "";
 
   return (
     <div className="select-wrapper">
-      {label && <label className="select-label">{label}</label>}
       <div ref={selectRef} className={selectClasses}>
         <div className="select__trigger" onClick={handleToggle}>
-          <span className="select__value">{displayText}</span>
+          {displayText && <span className="select__value">{displayText}</span>}
+          {
+            <span
+              className={cls("select__label", { "not-empty": !!displayText })}
+            >
+              {label}
+            </span>
+          }
+          {!displayText && (
+            <span className="select__label-placeholder">{label}</span>
+          )}
           <ArrowIcon className="select__arrow" />
         </div>
 
@@ -110,9 +124,9 @@ export const SelectUI: React.FC<ISelect> = ({
                 <div key={option.value} className="select__option">
                   <CheckboxUI
                     type={option.type}
-                    checked={value.includes(option.value)}
+                    checked={value.includes(option.value as T)}
                     onChange={(e) =>
-                      handleOptionChange(option.value, e.target.checked)
+                      handleOptionChange(option.value as T, e.target.checked)
                     }
                     disabled={option.disabled}
                     label={option.label}

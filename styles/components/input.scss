@@ -122,7 +122,7 @@
   }
 
   &--outline {
-    border: 2px solid var(--color-accent-blue);
+    border: 1px solid var(--color-accent-blue);
 
     &::placeholder {
       font-family: var(--second-family);
@@ -292,10 +292,6 @@
   // Variants inherit from input
   &--primary {
     @extend .input--primary;
-  }
-
-  &--secondary {
-    @extend .input--secondary;
   }
 
   &--outline {
