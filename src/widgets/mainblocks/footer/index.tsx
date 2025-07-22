@@ -8,6 +8,7 @@
  */
 import React from 'react'
 
+import { BACKGROUND_IMAGE_BLUE } from '@/shared/constants/other'
 import ArrowIcon from '@/source/icons/arrow.svg'
 import EmailIcon from '@/source/icons/email.svg'
 import LogoIsArt from '@/source/icons/logo-is-art.svg'
@@ -21,7 +22,7 @@ export const Footer: React.FC = () => {
     <footer
       className="footer"
       style={{
-        backgroundImage: `url("/icons/bg-main.svg")`,
+        backgroundImage: `url(${BACKGROUND_IMAGE_BLUE})`,
       }}
     >
       {/* Основная часть футера */}

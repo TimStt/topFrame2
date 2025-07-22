@@ -2,6 +2,7 @@
 @use '../libs/variables.scss' as *;
 
 .admin-direction-page {
+  margin-bottom: 120px;
   .admin-direction-content {
     display: flex;
     justify-content: space-between;
@@ -23,5 +24,13 @@
     height: 320px;
     object-fit: cover;
     flex-shrink: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .admin-direction-page {
+    .admin-direction-content {
+      flex-direction: column;
+    }
   }
 }

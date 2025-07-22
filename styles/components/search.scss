@@ -1,12 +1,10 @@
-@use "../libs/mixins" as *;
+@use '../libs/mixins' as *;
 
 .search-box {
   padding: 12px;
   background-color: var(--color-white-1);
   border-radius: 8px;
   width: 100%;
-
-  --heightInput: 46px;
 
   &__form {
     display: flex;
@@ -16,7 +14,7 @@
 
   &__input {
     width: 100%;
-    height: var(--heightInput);
+    height: var(--height-search-input);
   }
 
   &__button-search {
@@ -24,7 +22,7 @@
     color: var(--color-light);
     padding: 12px 24px;
     width: max-content;
-    height: var(--heightInput);
+    height: var(--height-search-input);
     border-radius: 4px;
     background-color: var(--color-accent-blue);
   }

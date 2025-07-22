@@ -1,24 +1,26 @@
 // ===== ШРИФТЫ =====
 :root {
-  --font-family: "Lato", sans-serif;
-  --second-family: "Open Sans", sans-serif;
-  --third-family: "Inter", sans-serif;
+  --font-family: 'Lato', sans-serif;
+  --second-family: 'Open Sans', sans-serif;
+  --third-family: 'Inter', sans-serif;
 
   --container-max-width: 1180;
   --position-close-button: 12px;
   --size-close-button: 24px;
   --container-padding-x: 40px;
-  --container-current-width: calc(
-    var(--container-max-width) + var(--container-padding-x) * 2
-  );
+  --container-current-width: calc(var(--container-max-width) + var(--container-padding-x) * 2);
+
+  --height-search-input: 46px;
 
   --height-header: 54px;
+
+  --width-side-bar-filter: 430px;
 
   --max-font-size-h1-by-main: 44;
   --max-font-size-h1: 40;
   --max-font-size-h2: 40;
 
-  --min-font-size-h1: 34;
+  --min-font-size-h1: 32;
   --min-font-size-h2: 26;
   // Веса шрифтов
   --font-weight-regular: 400;

@@ -1,5 +1,38 @@
-.catalog-vacancies__head {
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+.vacancies {
+  --paddingSearchBox: 4px;
+
+  .search-box {
+    padding: var(--paddingSearchBox);
+    margin-bottom: 37px;
+  }
+
+  .breadcrumbs__list .breadcrumbs__item {
+    color: var(--color-light);
+
+    &--active {
+      color: var(--color-white-1);
+    }
+  }
+
+  .breadcrumbs__list .breadcrumbs__separator {
+    color: var(--color-white-1);
+  }
+
+  .title-h1 {
+    color: var(--color-light);
+  }
+
+  &__head {
+    --heightSearchBox: calc(var(--height-search-input) + var(--paddingSearchBox) * 2);
+
+    --halfHeightSearchBox: calc(var(--heightSearchBox) / 2);
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-top: calc(var(--height-header) * -1);
+    padding-top: var(--height-header);
+    margin-bottom: calc(var(--halfHeightSearchBox) * -1);
+    padding-bottom: var(--halfHeightSearchBox);
+  }
 }

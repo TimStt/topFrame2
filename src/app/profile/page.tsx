@@ -6,6 +6,7 @@ export default function Page() {
   return (
     <main className="profile">
       <HeadPage title="Личный кабинет" />
+      Hea
       <div className="profile__inner container">
         <InfoUser />
         <SearchVacancies />

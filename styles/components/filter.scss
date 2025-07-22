@@ -1,7 +1,6 @@
-@use "../libs/mixins" as *;
+@use '../libs/mixins' as *;
 
 .filter {
-  --widthSideBar: 430px;
   &__accordion {
     padding: 16px 12px;
     border: 1px solid var(--color-light-blue);
@@ -23,11 +22,11 @@
       }
     }
     &__title {
-      @include font-setup(20, 24, 600);
+      @include font-setup(16, 15, 600);
     }
 
     &__details[open] ~ &__content {
-      margin-top: 24px;
+      margin-top: 16px;
     }
 
     &__details[open] .filter__accordion__summary {
@@ -40,10 +39,18 @@
       transition-duration: var(--transition-normal);
       display: flex;
       flex-direction: column;
-      gap: 16px;
+
       margin-bottom: 16px;
       max-height: 174px;
       overflow-y: auto;
+
+      .control {
+        padding-top: 8px;
+      }
+
+      .control:not(:last-child) {
+        padding-bottom: 8px;
+      }
 
       &::-webkit-scrollbar {
         width: 2px;
@@ -80,7 +87,7 @@
     top: 0;
     right: 0;
     transform: translateX(100%);
-    max-width: var(--width);
+    max-width: var(--width-side-bar-filter);
     width: 100%;
     transition-duration: var(--transition-normal);
     height: 100dvh;
@@ -99,11 +106,15 @@
       }
     }
 
+    &__apply {
+      margin-top: 24px;
+    }
+
     &.is-open {
       transform: translateX(0);
 
       &::after {
-        content: "";
+        content: '';
         position: absolute;
 
         /* inset: 0; */
@@ -130,7 +141,17 @@
     }
 
     &__title {
-      @include font-setup(24, 29, 700);
+      --minFontSize: 20;
+      --maxFontSize: 24;
+      @include font-setup(
+        var(--maxFontSize),
+        29,
+        700,
+        true,
+        var(--minFontSize),
+        var(--maxFontSize),
+        var(--container-max-width)
+      );
       color: var(--color-main);
     }
 
@@ -145,8 +166,17 @@
   }
 }
 
-@media (max-width: var(--widthSideBar)) {
+@media (max-width: 430px) {
   .filter {
-    --widthSideBar: 100%;
+    --width-side-bar-filter: 100%;
+
+    &__side-bar {
+      padding-inline: var(--container-padding-x);
+
+      &__apply {
+        max-width: 100%;
+        width: 100%;
+      }
+    }
   }
 }

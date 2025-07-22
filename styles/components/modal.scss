@@ -1,4 +1,4 @@
-@use "../libs/mixins.scss" as *;
+@use '../libs/mixins.scss' as *;
 
 .modal {
   --padding: 40;
@@ -19,12 +19,7 @@
   background-color: var(--color-light);
   border-radius: 8px;
 
-  @include fluid-text(
-    var(--padding),
-    var(--paddingMin),
-    padding,
-    var(--container-max-width)
-  );
+  @include fluid-text(var(--padding), var(--paddingMin), padding, var(--container-max-width));
 
   &__close {
     position: absolute;
@@ -65,11 +60,11 @@
 
 .popup-overlay {
   background: #72727254;
-
+  z-index: var(--z-modal) !important;
   // z-index: 1000000000;
 }
 
-[data-popup="tooltip"].popup-overlay {
+[data-popup='tooltip'].popup-overlay {
   background: transparent;
 }
 

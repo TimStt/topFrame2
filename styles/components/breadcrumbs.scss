@@ -1,4 +1,4 @@
-@use "../libs/_mixins.scss" as *;
+@use '../libs/_mixins.scss' as *;
 
 // Breadcrumbs wrapper
 .breadcrumbs {
@@ -10,27 +10,15 @@
 
 // Breadcrumbs list
 .breadcrumbs__list {
-  display: flex;
-  align-items: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.breadcrumbs__list-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
 // Breadcrumbs item
 .breadcrumbs__item {
   text-decoration: none;
-  color: var(--color-light);
+  color: var(--color-main);
 
   transition-duration: var(--transition-normal);
+  user-select: none;
 
   @include font-setup(12, 16, 400);
 
@@ -38,7 +26,6 @@
     cursor: pointer;
 
     &:hover {
-      color: var(--color-primary);
       text-decoration: underline;
     }
 
@@ -50,13 +37,13 @@
   }
 
   &--active {
-    color: var(--color-white-1);
+    color: #727272;
   }
 }
 
 // Breadcrumbs separator
 .breadcrumbs__separator {
-  color: var(--color-white-1);
+  color: #727272;
   font-weight: 400;
   pointer-events: none;
   user-select: none;
