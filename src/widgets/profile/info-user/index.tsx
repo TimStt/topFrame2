@@ -39,9 +39,11 @@ export const InfoUser = () => {
           <span>Москва</span>
         </ButtonUI>
         {role === "recruiter" && (
-          <ButtonUI className="profile__info-user__button" fullWidth>
-            HR департамент
-          </ButtonUI>
+          <ButtonUI
+            className="profile__info-user__button"
+            fullWidth
+            text="HR департамент"
+          />
         )}
       </div>
 

@@ -1,4 +1,4 @@
-@use '../libs/mixins.scss' as *;
+@use "../libs/mixins.scss" as *;
 :root {
   // Button sizes
   --btnHeightSmall: 40px;
@@ -39,9 +39,7 @@
   justify-content: center;
 
   font-family: var(--font-family);
-  font-weight: var(--font-weight-semibold);
-  font-size: var(--btnFontSizeMedium);
-  line-height: 1;
+
   text-align: center;
   text-decoration: none;
   max-width: max-content;
@@ -53,14 +51,21 @@
   overflow: hidden;
   white-space: nowrap;
   height: var(--customHeight);
+  padding-inline: 24px;
+
+  span {
+    @include font-setup(16, 19, 600);
+  }
 
   &:has(.arrow) {
     gap: 12px;
   }
 
   .arrow {
-    width: 24px;
-    height: 24px;
+    min-width: 24px;
+    max-width: 24px;
+    min-height: 24px;
+    max-height: 24px;
   }
 
   &__filter {
@@ -82,19 +87,15 @@
   &--small {
     height: var(--btnHeightSmall);
     padding: var(--btnPaddingSmall);
-    font-size: var(--btnFontSizeSmall);
   }
 
   &--medium {
     height: var(--btnHeightMedium);
-    padding: var(--btnPaddingMedium);
-    font-size: var(--btnFontSizeMedium);
   }
 
   &--large {
     height: var(--btnHeightLarge);
     padding: var(--btnPaddingLarge);
-    font-size: var(--btnFontSizeLarge);
   }
 
   // Варианты стилей
@@ -208,25 +209,6 @@
   }
 
   // Элементы кнопки
-  &__icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &--left {
-      order: -1;
-    }
-
-    &--right {
-      order: 1;
-    }
-
-    svg {
-      width: 16px;
-      height: 16px;
-      fill: currentColor;
-    }
-  }
 
   &__text {
     transition: var(--transition-normal);
@@ -239,7 +221,7 @@
     transform: translate(-50%, -50%);
 
     &::after {
-      content: '';
+      content: "";
       width: 16px;
       height: 16px;
       border: 2px solid transparent;
@@ -285,12 +267,6 @@
       padding: 10px 20px;
       font-size: 15px;
     }
-
-    &--small {
-      height: 36px;
-      padding: var(--spacing-sm) var(--spacing-md);
-      font-size: 13px;
-    }
   }
 }
 @media (max-width: 450px) {
@@ -302,12 +278,6 @@
     }
 
     &--medium {
-      height: var(--btnHeightSmall);
-      padding: 10px 12px;
-      font-size: var(--btnFontSizeSmall);
-    }
-
-    &--small {
       height: var(--btnHeightSmall);
       padding: 10px 12px;
       font-size: var(--btnFontSizeSmall);

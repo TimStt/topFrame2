@@ -30,6 +30,7 @@ export const InputUI = ({
   className,
   classNameWrapper,
   children,
+  placeholder,
   rootRef,
   ...rest
 }: IInput) => {
@@ -61,7 +62,13 @@ export const InputUI = ({
       )}
 
       <div className="input-container">
-        <input ref={rootRef} className={inputClasses} {...rest} id={id} />
+        <input
+          ref={rootRef}
+          className={inputClasses}
+          {...rest}
+          id={id}
+          placeholder={placeholder}
+        />
         {children}
       </div>
       {error && (

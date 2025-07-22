@@ -10,8 +10,9 @@ import { AccordionUI } from "../accordion-ui";
 import { CheckboxUI } from "../checkbox-ui";
 import { cls } from "@/shared/lib/cls";
 import ArrowIcon from "@/source/icons/arrow2.svg";
-import { IQuickFilters } from "../search-ui-kit/quick-filters-ui";
 import useOnClickOutside from "@/shared/hooks/use-on-click-outside";
+import { handleOptionChange } from "@/shared/utils/handle-change-checkbox";
+import { ISelectOption, ISelectOptions } from "../select-ui";
 
 export interface AccordionFilterOption {
   label: string;
@@ -24,9 +25,9 @@ export interface AccordionFilterGroup {
 }
 
 export interface AccordionFilterUIProps {
-  filter: IQuickFilters;
-  values?: string[];
-  onChange: (name: string, value: string[]) => void;
+  filter: ISelectOption;
+  activeValue?: ISelectOptions[];
+  onChange: (name: string, options: ISelectOption) => void;
 
   className?: string;
   renderReset?: React.ReactNode;
@@ -34,7 +35,7 @@ export interface AccordionFilterUIProps {
 
 export const AccordionFilterUI: React.FC<AccordionFilterUIProps> = ({
   filter,
-  values,
+  activeValue,
   onChange,
 
   className,
@@ -45,10 +46,23 @@ export const AccordionFilterUI: React.FC<AccordionFilterUIProps> = ({
   useOnClickOutside(refAccordion, () => {
     setIsOpen(false);
   });
+
+  const handleChange = handleOptionChange(
+    filter.type,
+    activeValue || [],
+    (currentValue) => {
+      onChange(filter.label, {
+        options: currentValue,
+        type: filter.type,
+        label: filter.label,
+      });
+    }
+  );
+
   return (
     <>
       <AccordionUI
-        key={filter.title}
+        key={filter.label}
         rootRef={refAccordion}
         open={isOpen}
         classNameRoot="filter__accordion"
@@ -58,7 +72,7 @@ export const AccordionFilterUI: React.FC<AccordionFilterUIProps> = ({
         rootOnClick={() => setIsOpen(!isOpen)}
         summaryContent={
           <>
-            <span className="filter__accordion__title">{filter.title}</span>
+            <span className="filter__accordion__title">{filter.label}</span>
             <ArrowIcon />
           </>
         }
@@ -69,15 +83,14 @@ export const AccordionFilterUI: React.FC<AccordionFilterUIProps> = ({
               <CheckboxUI
                 key={option.value}
                 label={option.label}
-                checked={values?.includes(option.value.toString()) || false}
-                onChange={(e) => {
-                  const checked = e.target.checked;
-                  const prev = values || [];
-                  const next = checked
-                    ? [...prev, option.value.toString()]
-                    : prev.filter((v) => v !== option.value.toString());
-                  onChange(filter.title, next);
+                checked={activeValue?.some((v) => v.value === option.value)}
+                onChangeCheckbox={(checked) => {
+                  handleChange(
+                    { value: option.value, label: option.label },
+                    !!checked
+                  );
                 }}
+                type={filter.type}
               />
             ))}
           </div>

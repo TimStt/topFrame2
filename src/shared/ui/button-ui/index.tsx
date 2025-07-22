@@ -36,6 +36,8 @@ export type IButton<
   >;
   /** Показывать стрелку */
   hasArrow?: boolean;
+  /** Текст кнопки */
+  text?: string;
 };
 
 export const ButtonUI = <
@@ -50,6 +52,7 @@ export const ButtonUI = <
   type,
   children,
   as,
+  text,
   className,
   hasArrow = false,
   rootRef,
@@ -77,6 +80,7 @@ export const ButtonUI = <
         className={buttonClasses}
         {...(rest as ComponentPropsWithoutRef<"a">)}
       >
+        <span>{text}</span>
         {children}
         {hasArrow && <ArrowIconUI className="arrow" />}
       </Link>
@@ -89,6 +93,7 @@ export const ButtonUI = <
       type={type as "button" | "submit" | "reset"}
       {...(rest as ComponentPropsWithoutRef<"button">)}
     >
+      <span>{text}</span>
       {children}
       {hasArrow && <ArrowIconUI className="arrow" />}
     </button>

@@ -38,7 +38,10 @@ export const AccordionUI = ({
   return (
     <div
       className={classNameRoot}
-      onClick={rootOnClick}
+      onClick={(e) => {
+        e.stopPropagation();
+        rootOnClick?.();
+      }}
       onMouseEnter={rootMouseEnter}
       onMouseLeave={rootMouseLeave}
       ref={rootRef}

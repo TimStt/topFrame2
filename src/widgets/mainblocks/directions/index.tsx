@@ -105,18 +105,16 @@ export const DirectionCard: React.FC<IDirectionCards> = ({
           variant="primary"
           size="medium"
           hasArrow
-        >
-          Присоединиться к компании
-        </ButtonUI>
+          text="Присоединиться к компании"
+        />
         <ButtonUI
           className="directions__card-button"
           variant="secondary"
           size="medium"
           hasArrow
           fullWidth={false}
-        >
-          Подробнее
-        </ButtonUI>
+          text="Подробнее"
+        />
       </div>
     </article>
   );

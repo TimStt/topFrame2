@@ -1,26 +1,32 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useId } from "react";
 import { cls } from "@/shared/lib/cls";
 import { CheckboxUI } from "../checkbox-ui";
 import ArrowIcon from "@/source/icons/arrow2.svg";
 import useOnClickOutside from "@/shared/hooks/use-on-click-outside";
+import { handleOptionChange } from "@/shared/utils/handle-change-checkbox";
 
-export type ISelectOption<T extends string | number> = {
+export interface ISelectOptions {
+  value: string;
+  label: string;
+}
+
+export type ISelectOption = {
   /** Значение опции */
-  value: string | number;
+  options: ISelectOptions[];
   /** Текст опции */
   type: "checkbox" | "radio";
   label: string;
   /** Отключена ли опция */
-  disabled?: boolean;
 };
 
-export interface ISelect<T extends string | number> {
+export interface ISelect {
   /** Массив опций */
-  options: ISelectOption<T>[];
+
   /** Выбранные значения */
-  value?: T[];
+  value: ISelectOption;
+  activeValue: ISelectOptions[];
   /** Обработчик изменения выбора */
-  onChange?: (value: T[]) => void;
+  onChange?: (name: string, value: ISelectOption) => void;
   /** Placeholder */
   placeholder?: string;
   /** Отключен ли селект */
@@ -36,16 +42,16 @@ export interface ISelect<T extends string | number> {
 }
 
 export const SelectUI = <T extends string | number>({
-  options,
-  value = [],
+  value,
   onChange,
   placeholder = "Выберите значение",
   disabled = false,
   className,
+  activeValue,
   label,
   error,
   fullWidth = false,
-}: ISelect<T>) => {
+}: ISelect) => {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
 
@@ -66,47 +72,44 @@ export const SelectUI = <T extends string | number>({
     }
   };
 
-  const handleOptionChange = (
-    optionValue: string | number,
-    checked: boolean
-  ) => {
-    console.log(optionValue, checked, value);
-    if (!onChange) return;
-
-    let newValue: T[];
-    if (checked) {
-      if (!value) {
-        newValue = [optionValue as T];
-      } else {
-        newValue = [...value, optionValue as T];
-      }
-    } else {
-      newValue = value.filter((v) => v !== optionValue) as T[];
+  const handleChange = handleOptionChange(
+    value.type,
+    activeValue || [],
+    (currentValue) => {
+      onChange?.(label || "", {
+        options: currentValue,
+        type: value?.type,
+        label: label || "",
+      });
     }
-    console.log(newValue);
-    onChange(newValue);
-  };
+  );
 
   // Закрытие при клике вне компонента
   useOnClickOutside(selectRef, () => setIsOpen(false));
 
   // Формирование отображаемого текста
   const displayText =
-    value.length > 0
-      ? value
-          .map((v) => options.find((opt) => opt.value === v)?.label)
-          .filter(Boolean)
-          .join(", ")
+    value.options?.length > 0
+      ? activeValue.map((opt) => opt.label).join(",")
       : "";
+
+  const id = useId();
 
   return (
     <div className="select-wrapper">
       <div ref={selectRef} className={selectClasses}>
-        <div className="select__trigger" onClick={handleToggle}>
+        <button
+          className="select__trigger"
+          onClick={handleToggle}
+          aria-expanded={isOpen}
+          aria-labelledby={`select-${id}`}
+          aria-haspopup="listbox"
+        >
           {displayText && <span className="select__value">{displayText}</span>}
           {
             <span
               className={cls("select__label", { "not-empty": !!displayText })}
+              aria-hidden="true"
             >
               {label}
             </span>
@@ -115,25 +118,44 @@ export const SelectUI = <T extends string | number>({
             <span className="select__label-placeholder">{label}</span>
           )}
           <ArrowIcon className="select__arrow" />
-        </div>
+        </button>
 
         {isOpen && (
           <div className="select__dropdown">
-            <div className="select__options">
-              {options.map((option) => (
-                <div key={option.value} className="select__option">
+            <ul
+              className="select__options"
+              role="listbox"
+              tabIndex={0}
+              aria-labelledby={`select-${id}`}
+              aria-multiselectable={true}
+            >
+              {value.options.map((option) => (
+                <li
+                  key={option.value}
+                  className="select__option"
+                  aria-selected={value.options.some(
+                    (opt) => opt.value === option.value
+                  )}
+                  id={`select-option-${option.value}`}
+                  role="option"
+                >
                   <CheckboxUI
-                    type={option.type}
-                    checked={value.includes(option.value as T)}
-                    onChange={(e) =>
-                      handleOptionChange(option.value as T, e.target.checked)
+                    key={option.value}
+                    type={value.type}
+                    checked={activeValue.some(
+                      (opt) => opt.value === option.value
+                    )}
+                    onChangeCheckbox={(checked) =>
+                      handleChange(
+                        { value: option.value, label: option.label },
+                        !!checked
+                      )
                     }
-                    disabled={option.disabled}
                     label={option.label}
                   />
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         )}
       </div>

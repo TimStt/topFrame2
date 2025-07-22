@@ -43,9 +43,14 @@ export const CardVacancy = ({
         <span className="vacancy-card__actions-text">
           {startPrice}&shy; - {endPrice}
         </span>
-        <ButtonUI size="medium" variant="secondary" hasArrow as="a" href="/">
-          Подробнее
-        </ButtonUI>
+        <ButtonUI
+          size="medium"
+          variant="secondary"
+          hasArrow
+          as="a"
+          href="/"
+          text="Подробнее"
+        />
       </div>
     </div>
   );

@@ -3,26 +3,34 @@
 .pagination {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+
+  --sizeButton: 26px;
 
   &__button {
     @include font-setup(16, 22, 400);
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 44px;
-    height: 44px;
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: 1px solid var(--color-accent-blue);
-    background-color: transparent;
-    color: var(--color-main);
-    cursor: pointer;
-    transition: all var(--transition-normal) ease;
+    min-width: var(--sizeButton);
+    height: var(--sizeButton);
 
-    &:hover {
+    border-radius: 50%;
+    background-color: transparent;
+
+    cursor: pointer;
+    transition-duration: var(--transition-normal);
+    color: var(--color-main);
+
+    @include hover-btn() {
       background-color: var(--color-accent-blue);
       color: var(--color-light);
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
     }
 
     &:disabled {
@@ -35,21 +43,21 @@
       }
     }
 
-    &--active {
+    &.active {
       background-color: var(--color-accent-blue);
       color: var(--color-light);
+    }
 
-      &:hover {
-        background-color: var(--color-accent-blue);
-        color: var(--color-light);
-      }
+    user-select: none;
+
+    &:has(.pagination__button__ellipsis) {
+      pointer-events: none;
     }
   }
 
-  &__ellipsis {
-    @include font-setup(16, 22, 400);
-    color: var(--color-main);
-    padding: 8px 4px;
-    user-select: none;
+  &__show-more {
+    display: flex;
+    margin-top: 40px;
+    margin-inline: auto;
   }
 }

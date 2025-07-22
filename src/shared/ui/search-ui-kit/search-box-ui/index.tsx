@@ -8,7 +8,7 @@ export const SearchBoxUI = ({
   renderQuickFilters,
   renderActions,
   renderHints,
-  placeholder,
+
   className,
   classNameForm,
   ...props
@@ -16,14 +16,14 @@ export const SearchBoxUI = ({
   renderQuickFilters?: React.ReactNode;
   renderActions?: React.ReactNode;
   renderHints?: React.ReactNode;
-  placeholder?: string;
+
   classNameForm?: string;
 } & Omit<ComponentPropsWithoutRef<"input">, "size">) => {
   return (
     <search className={cls("search-box", className)}>
       <form className="search-box__form">
         <InputUI
-          className="search-box__  input"
+          className="search-box__input"
           variant="outline"
           fullWidth
           {...props}

@@ -59,9 +59,8 @@ export const ZeroHero = () => {
               className="zero-hero__cta-btn"
               variant="secondary"
               size="medium"
-            >
-              <span>Присоединиться к команде</span>
-            </ButtonUI>
+              text="Присоединиться к команде"
+            />
           </div>
           <div className="zero-hero__world">
             <Image

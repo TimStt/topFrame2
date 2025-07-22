@@ -10,50 +10,52 @@ export type ICheckbox = ComponentPropsWithoutRef<"input"> & {
   wrapperClassName?: string;
   /** Дополнительные классы для лейбла */
   labelClassName?: string;
+  /** Обработчик изменения */
+  onChangeCheckbox?: (checked?: boolean) => void;
 };
 
-export const CheckboxUI = forwardRef<HTMLInputElement, ICheckbox>(
-  (
-    {
-      label,
-      type = "checkbox",
-      className,
-      wrapperClassName,
-      labelClassName,
-      children,
-      checked,
-      onChange,
-      ...rest
-    },
-    ref
-  ) => {
-    const controlClasses = cls("control", `control-${type}`, wrapperClassName);
+export const CheckboxUI = ({
+  label,
+  type = "checkbox",
+  className,
+  wrapperClassName,
+  labelClassName,
+  children,
+  checked,
+  onChange,
+  onChangeCheckbox,
+  ...rest
+}: ICheckbox) => {
+  const controlClasses = cls("control", `control-${type}`, wrapperClassName);
 
-    const inputClasses = cls("control__input", className);
+  const inputClasses = cls("control__input", className);
 
-    const labelClasses = cls("control__label", labelClassName);
+  const labelClasses = cls("control__label", labelClassName);
 
-    const id = useId();
+  const id = useId();
 
-    return (
-      <label className={controlClasses} htmlFor={id} id={id + "-label"}>
-        <input
-          ref={ref}
-          type={type}
-          className={inputClasses}
-          id={id}
-          name={id}
-          checked={checked}
-          onChange={onChange}
-          {...rest}
-        />
-        <div className="control__indicator"></div>
-        {(label || children) && (
-          <span className={labelClasses}>{label || children}</span>
-        )}
-      </label>
-    );
-  }
-);
+  const handleChange = (checked?: boolean) => {
+    onChangeCheckbox?.(checked);
+  };
+
+  return (
+    <label className={controlClasses} htmlFor={id} id={id + "-label"}>
+      <input
+        type={type}
+        className={inputClasses}
+        id={id}
+        name={id}
+        checked={!!checked}
+        onChange={!checked ? (e) => handleChange(e.target.checked) : (e) => {}}
+        onClick={checked ? () => handleChange(false) : undefined}
+        {...rest}
+      />
+      <div className="control__indicator"></div>
+      {(label || children) && (
+        <span className={labelClasses}>{label || children}</span>
+      )}
+    </label>
+  );
+};
 
 CheckboxUI.displayName = "CheckboxUI";

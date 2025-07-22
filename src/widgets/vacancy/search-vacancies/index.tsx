@@ -20,7 +20,7 @@ import { LabelSearchUI } from "@/shared/ui/search-ui-kit/label-search-ui";
 import { QuickFiltersUI } from "@/shared/ui/search-ui-kit/quick-filters-ui";
 import { SearchBoxUI } from "@/shared/ui/search-ui-kit/search-box-ui";
 import { TotalResultsUI } from "@/shared/ui/search-ui-kit/total-results-ui";
-import { SelectUI } from "@/shared/ui/select-ui";
+import { ISelectOption, SelectUI } from "@/shared/ui/select-ui";
 import React, { useState } from "react";
 import { AccordionFilterUI } from "@/shared/ui/accordion-filter-ui";
 
@@ -33,23 +33,29 @@ export const SearchVacancies = ({
   withHead?: boolean;
   className?: string;
 }) => {
-  const [filters, setFilters] = useState<
-    {
-      name: string;
-      value: string[];
-    }[]
-  >([]);
+  const [isActiveFilters, setIsActiveFilters] = useState<ISelectOption[]>([]);
 
-  const handleChangeFilter = (name: string, value: string[]) => {
-    const filterSelected = filters.findIndex((f) => f.name === name);
+  const handleChangeFilter = (label: string, values: ISelectOption) => {
+    const filterSelected = isActiveFilters.findIndex((f) => f.label === label);
     if (filterSelected !== -1) {
-      const newFilters = [...filters];
-      newFilters[filterSelected] = { name, value };
-      setFilters(newFilters);
+      const newFilters = [...isActiveFilters];
+      newFilters[filterSelected] = {
+        label,
+        options: values.options,
+        type: values.type,
+      };
+      setIsActiveFilters(newFilters);
     } else {
-      setFilters([...(filters || []), { name, value }]);
+      setIsActiveFilters([
+        ...(isActiveFilters || []),
+        {
+          label,
+          options: values.options,
+          type: values.type,
+        },
+      ]);
     }
-    console.log(filters);
+    console.log(isActiveFilters);
   };
 
   const modalFilter = useInitialModal("filter", undefined, false, [
@@ -60,22 +66,25 @@ export const SearchVacancies = ({
     <div className={cls("search-vacancies", className)}>
       <SearchBoxUI
         className="search-vacancies__box"
+        placeholder="Поиск по названию вакансии, навыкам, ключевым словам..."
         renderQuickFilters={
           withQuickFilters && (
             <QuickFiltersUI
               filters={mockFilters.map((filter) => (
                 <SelectUI
-                  options={filter.options}
-                  onChange={(value) => {
-                    handleChangeFilter(filter.title, value);
-                  }}
-                  value={filters.find((f) => f.name === filter.title)?.value}
-                  label={filter.title}
+                  key={filter.label}
+                  value={filter}
+                  activeValue={
+                    isActiveFilters.find((f) => f.label === filter.label)
+                      ?.options || []
+                  }
+                  onChange={handleChangeFilter}
+                  label={filter.label}
                 />
               ))}
               renderActions={
                 <>
-                  <ButtonUI hasArrow>Применить фильтры</ButtonUI>
+                  <ButtonUI hasArrow text="Применить фильтры" />
                   <button className="filter__reset-filters">Сбросить</button>
                 </>
               }
@@ -107,9 +116,12 @@ export const SearchVacancies = ({
           }
           renderFilters={mockFilters.map((filter) => (
             <AccordionFilterUI
-              key={filter.title}
+              key={filter.label}
               filter={filter}
-              values={filters.find((f) => f.name === filter.title)?.value}
+              activeValue={
+                isActiveFilters.find((f) => f.label === filter.label)
+                  ?.options || []
+              }
               onChange={handleChangeFilter}
               renderReset={
                 <button className="filter__reset-filters">Сбросить</button>

@@ -1,8 +1,8 @@
-@use '../libs/_mixins.scss' as *;
-@use '../libs/variables.scss' as *;
+@use "../libs/_mixins.scss" as *;
+@use "../libs/variables.scss" as *;
 
 .freelance-page {
-  .freelance-content {
+  &__content {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -10,17 +10,18 @@
     flex-wrap: wrap;
     margin-bottom: 120px;
   }
-  .freelance-info {
+  &__info {
     flex: 1 1 0;
     min-width: 0;
     max-width: 600px;
   }
-  .freelance-hate {
+  &__facts {
+    display: inline-block;
     @include font-setup(20, 24, 700, false);
     color: var(--color-accent-blue);
     margin-bottom: 24px;
   }
-  .freelance-main-text {
+  &__main-text {
     @include font-setup(16, 22, 400, false);
     color: var(--color-main);
     & > p + p {
@@ -29,21 +30,21 @@
     margin-bottom: 40px;
   }
 
-  .freelance-h2 {
+  &__title {
     @include font-setup(20, 29, 700, false);
     color: var(--color-main);
     margin-bottom: 24px;
   }
 
-  .freelance-benefits {
+  &__benefits {
     margin-bottom: 40px;
 
-    .freelance-benefits-list {
+    &__list {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
     }
-    .freelance-benefit {
+    &__item {
       flex: 1 1 220px;
       min-width: 180px;
       padding: 16px 12px;
@@ -51,12 +52,12 @@
       transition-duration: var(--transition-normal);
       border-radius: 8px;
       background: var(--color-light);
-      .benefit-title {
+      &-title {
         @include font-setup(16, 20, 700, false);
         color: var(--color-accent-blue);
         margin-bottom: 12px;
       }
-      .benefit-desc {
+      &-desc {
         font-family: var(--second-family);
         @include font-setup(12, 16, 400, false);
         color: rgb(72, 72, 72);
@@ -67,10 +68,10 @@
       }
     }
   }
-  .freelance-how {
+  &__how {
     margin-bottom: 40px;
 
-    .freelance-how-list {
+    &__list {
       counter-reset: item;
       list-style: none;
       padding: 0;
@@ -78,19 +79,19 @@
       & > li {
         display: flex;
         align-items: flex-start;
+        align-items: center;
         gap: 12px;
         margin-bottom: 20px;
         counter-increment: item;
-        .how-num {
+
+        &::before {
+          content: counter(item);
+          display: inline-block;
           @include font-setup(24, 29, 700, false);
           color: var(--color-accent-blue);
-          min-width: 32px;
-          &::before {
-            content: counter(item);
-            display: inline-block;
-          }
         }
-        .how-text {
+
+        &-text {
           font-family: var(--second-family);
           @include font-setup(16, 22, 400, false);
           color: var(--color-main);
@@ -101,21 +102,21 @@
       }
     }
   }
-  .freelance-pay {
+  &__pay {
     margin-bottom: 40px;
-    .pay-title {
+    &-title {
       @include font-setup(20, 24, 700, false);
       color: var(--color-accent-blue);
       margin-bottom: 8px;
     }
-    .pay-desc {
+    &-desc {
       font-family: var(--second-family);
       @include font-setup(16, 22, 400, false);
       color: var(--color-main);
     }
   }
 
-  .freelance-img {
+  &__img {
     border-radius: 8px;
     max-width: 480px;
     width: 100%;
@@ -127,7 +128,7 @@
 
 @media (max-width: 900px) {
   .freelance-page {
-    .freelance-content {
+    &__content {
       flex-direction: column;
     }
   }

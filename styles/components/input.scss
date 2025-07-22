@@ -1,4 +1,4 @@
-@use '../libs/mixins.scss' as *;
+@use "../libs/mixins.scss" as *;
 
 // Input wrapper
 .input-wrapper {
@@ -50,16 +50,19 @@
   &::placeholder {
     font-family: var(--third-family);
     @include font-setup(16, 19, 400);
-    color: var(--color-gray-2);
   }
 
   &--with-password {
     &--small {
-      --paddingRightSmall: calc(var(--paddingRightWithPassword) + var(--paddingRightSmall));
+      --paddingRightSmall: calc(
+        var(--paddingRightWithPassword) + var(--paddingRightSmall)
+      );
     }
 
     &--large {
-      --paddingRightMedium: calc(var(--paddingRightWithPassword) + var(--paddingRightMedium));
+      --paddingRightMedium: calc(
+        var(--paddingRightWithPassword) + var(--paddingRightMedium)
+      );
     }
   }
 
@@ -115,6 +118,10 @@
   // Variants
   &--primary {
     border-color: #727272;
+
+    &::placeholder {
+      color: var(--color-gray-2);
+    }
   }
 
   &--outline {
@@ -127,6 +134,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      max-width: max-content;
     }
   }
 

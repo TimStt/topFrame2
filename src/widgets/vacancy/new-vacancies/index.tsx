@@ -14,9 +14,14 @@ export const NewVacancies = () => {
         className="container"
         vacancies={mockVacancies}
         renderButton={
-          <ButtonUI variant="primary" size="medium" hasArrow as="a" href="/">
-            Посмотреть все вакансии
-          </ButtonUI>
+          <ButtonUI
+            variant="primary"
+            size="medium"
+            hasArrow
+            as="a"
+            href="/"
+            text="Посмотреть все вакансии"
+          />
         }
       />
     </section>
