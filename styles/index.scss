@@ -7,8 +7,8 @@
   "./components/accordion", "./components/description-collapse",
   "./components/loader", "./components/vacancy-card", "./components/pagination",
   "./components/input", "./components/breadcrumbs", "./components/checkbox",
-  "./components/select", "./components/image", "./components/modal",
-  "./components/search", "./components/filter";
+  "./components/select", "./components/image", "./components/modal";
 
 // страницы
-@import "./pages/home", "./pages/catalog-vacancies", "./pages/profile";
+@import "./pages/home", "./pages/catalog-vacancies", "./pages/profile",
+  "./pages/hr-topframe", "./pages/admin-direction", "./pages/freelance";

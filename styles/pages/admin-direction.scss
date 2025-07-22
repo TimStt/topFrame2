@@ -1,0 +1,27 @@
+@use '../libs/_mixins.scss' as *;
+@use '../libs/variables.scss' as *;
+
+.admin-direction-page {
+  .admin-direction-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  .admin-direction-text {
+    font-family: var(--second-family);
+    @include font-setup(16, 22, 400, false);
+    color: var(--color-main);
+    & > p + p {
+      margin-top: 16px;
+    }
+  }
+  .admin-direction-img {
+    border-radius: 8px;
+    width: 480px;
+    height: 320px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+}

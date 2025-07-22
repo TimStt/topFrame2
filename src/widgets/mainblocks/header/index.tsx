@@ -7,16 +7,21 @@
  */
 import React from "react";
 
+import { PAGES_PATHS } from "@/shared/constants/pages-paths";
 import Image from "next/image";
 import Link from "next/link";
+
 import { ButtonAuth } from "./ui/button-auth";
-import { useGetScrollWidth } from "@/shared/hooks/use-get-scroll-width";
 
 export const Header = () => {
   const navigationItems = [
-    { label: "Все профессии", href: "/freelance" },
-    { label: "Фриланс", href: "/freelance" },
-    { label: "Наши вакансии", href: "/vacancies" },
+    { label: "HR пространство", href: PAGES_PATHS.HR_TOPFRAME },
+    {
+      label: "Административное направление",
+      href: PAGES_PATHS.ADMIN_DIRECTION,
+    },
+    { label: "Фриланс", href: PAGES_PATHS.FREELANCE },
+    { label: "Наши вакансии", href: PAGES_PATHS.VACANCIES },
     { label: "Наша компания", href: "/about" },
   ];
 

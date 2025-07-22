@@ -120,28 +120,29 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
         controls={isPlaying}
         playsInline
         preload="metadata"
+        crossOrigin="anonymous"
         onLoadStart={() => {
-          setIsLoading(true);
-          setHasError(false);
+          setIsLoading(true)
+          setHasError(false)
         }}
         onCanPlay={() => {
-          setIsLoading(false);
-          setIsPaused(false);
+          setIsLoading(false)
+          setIsPaused(false)
         }}
         onError={(e) => {
-          console.error("Ошибка загрузки видео:", e);
-          setIsLoading(false);
-          setHasError(true);
+          console.error('Ошибка загрузки видео:', e)
+          setIsLoading(false)
+          setHasError(true)
         }}
         onLoadedMetadata={() => {
-          console.log("Видео метаданные загружены");
+          console.log('Видео метаданные загружены')
         }}
         onPlaying={() => {
-          console.log("Видео начало воспроизведение");
-          setIsPaused(false);
+          console.log('Видео начало воспроизведение')
+          setIsPaused(false)
         }}
         onPause={() => {
-          setIsPaused(true);
+          setIsPaused(true)
         }}
       >
         <source src={member.video} type="video/mp4" />

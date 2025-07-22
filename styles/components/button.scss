@@ -1,4 +1,4 @@
-@use "../libs/mixins.scss" as *;
+@use '../libs/mixins.scss' as *;
 :root {
   // Button sizes
   --btnHeightSmall: 40px;
@@ -239,7 +239,7 @@
     transform: translate(-50%, -50%);
 
     &::after {
-      content: "";
+      content: '';
       width: 16px;
       height: 16px;
       border: 2px solid transparent;
@@ -251,6 +251,7 @@
 }
 
 .chip {
+  text-wrap: nowrap;
   --colorText: var(--color-accent-blue);
   border-radius: 50px;
 
