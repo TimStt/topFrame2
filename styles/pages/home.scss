@@ -1,6 +1,6 @@
 // Header Component Styles
 
-@use '../libs/mixins.scss' as *;
+@use "../libs/mixins.scss" as *;
 
 .title-section {
   @include font-setup(
@@ -88,7 +88,7 @@
       position: relative;
 
       &::after {
-        content: '';
+        content: "";
         position: absolute;
         bottom: -4px;
         left: 0;
@@ -262,7 +262,7 @@
         box-shadow: 0 0 10px 0 rgba(253, 253, 253, 0.16);
 
         &::before {
-          content: '';
+          content: "";
           position: absolute;
           bottom: calc(var(--sizeTriangle) * -1);
           right: calc(var(--sizeIcon) / 2);
@@ -304,7 +304,8 @@
   --paddingBottom: 108px;
 
   &_inner {
-    padding-block: calc(var(--height-header) + var(--paddingTop)) var(--paddingBottom);
+    padding-block: calc(var(--height-header) + var(--paddingTop))
+      var(--paddingBottom);
   }
 
   &__row {
@@ -504,8 +505,9 @@
   top: 50%;
   left: 50%;
   transform-origin: center;
-  transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--translateX))
-    rotate(calc(-1 * var(--angle))) rotate(var(--additionalAngle));
+  transform: translate(-50%, -50%) rotate(var(--angle))
+    translateX(var(--translateX)) rotate(calc(-1 * var(--angle)))
+    rotate(var(--additionalAngle));
 }
 
 .hr-ecosystem {
@@ -522,7 +524,7 @@
 
   &:after,
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0%);
@@ -570,7 +572,7 @@
 
     &:after {
       aspect-ratio: 1 / 1;
-      content: '';
+      content: "";
       border-radius: 50%;
       background: var(--color-light-blue);
       filter: blur(64px);
@@ -680,7 +682,10 @@
 
     // Элементы внешнего круга (слева направо по часовой стрелке, начиная с 195°)
     &:nth-child(1) {
-      @include place-on-circle($firstDeg, var(--radiusBigLine)); // Блог Linkedin (слева внизу)
+      @include place-on-circle(
+        $firstDeg,
+        var(--radiusBigLine)
+      ); // Блог Linkedin (слева внизу)
     }
 
     &:nth-child(2) {
@@ -692,32 +697,54 @@
     }
 
     &:nth-child(3) {
-      @include place-on-circle($thirdDeg, var(--radiusBigLine)); // Битрикс (снизу)
+      @include place-on-circle(
+        $thirdDeg,
+        var(--radiusBigLine)
+      ); // Битрикс (снизу)
     }
 
     &:nth-child(4) {
-      @include place-on-circle($fourthDeg, var(--radiusBigLine)); // Фриланс (справа снизу)
+      @include place-on-circle(
+        $fourthDeg,
+        var(--radiusBigLine)
+      ); // Фриланс (справа снизу)
     }
 
     &:nth-child(5) {
-      @include place-on-circle($fifthDeg, var(--radiusBigLine)); // Welcome book (справа)
+      @include place-on-circle(
+        $fifthDeg,
+        var(--radiusBigLine)
+      ); // Welcome book (справа)
     }
 
     &:nth-child(6) {
-      @include place-on-circle($sixthDeg, var(--radiusBigLine)); // Блог Дзен (справа сверху)
+      @include place-on-circle(
+        $sixthDeg,
+        var(--radiusBigLine)
+      ); // Блог Дзен (справа сверху)
     }
 
     &:nth-child(7) {
-      @include place-on-circle($seventhDeg, var(--radiusBigLine), 2deg); // Горячая линия (сверху)
+      @include place-on-circle(
+        $seventhDeg,
+        var(--radiusBigLine),
+        2deg
+      ); // Горячая линия (сверху)
     }
 
     &:nth-child(8) {
-      @include place-on-circle($eighthDeg, var(--radiusMiddleLine)); // Клиенты (слева сверху)
+      @include place-on-circle(
+        $eighthDeg,
+        var(--radiusMiddleLine)
+      ); // Клиенты (слева сверху)
     }
 
     // Элементы внутреннего круга
     &:nth-child(9) {
-      @include place-on-circle($ninthDeg, var(--radiusMiddleLine)); // TF COIN (слева внизу)
+      @include place-on-circle(
+        $ninthDeg,
+        var(--radiusMiddleLine)
+      ); // TF COIN (слева внизу)
     }
 
     &:nth-child(10) {
@@ -729,7 +756,10 @@
     }
 
     &:nth-child(11) {
-      @include place-on-circle($eleventhDeg, var(--radiusMiddleLine)); // Институт (справа снизу)
+      @include place-on-circle(
+        $eleventhDeg,
+        var(--radiusMiddleLine)
+      ); // Институт (справа снизу)
     }
 
     &:hover {
@@ -830,7 +860,15 @@
       color: var(--color-main);
     }
     &-title {
-      @include font-setup(24, 29, 700, true, 18, 24, var(--container-max-width));
+      @include font-setup(
+        24,
+        29,
+        700,
+        true,
+        18,
+        24,
+        var(--container-max-width)
+      );
       color: inherit;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -1051,7 +1089,7 @@
     }
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       inset: 0;
       transition: background-color 0.3s ease-in-out;
@@ -1387,6 +1425,10 @@
   .header__nav {
     display: none;
   }
+
+  .zero-hero {
+    --paddingBottom: 64px;
+  }
 }
 
 // Responsive styles
@@ -1399,6 +1441,12 @@
   .directions__card img,
   .directions__card {
     max-width: 100%;
+  }
+  .zero-hero__feature-card {
+    max-width: 100%;
+  }
+  .zero-hero {
+    --paddingBottom: 24px;
   }
 
   .directions__card {
