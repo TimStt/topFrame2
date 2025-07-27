@@ -74,59 +74,132 @@ export const ZeroHero = () => {
             />
           </div>
           <div className="zero-hero__world">
-            <Image src={'/icons/world.svg'} width={682} height={450} alt="world" />
             {/* Линии с анимацией - позиционирование как на фото */}
-            <div className="zero-hero__world__lines">
-              {/* Линия 1 - верхняя длинная дуга (Канада - Европа) */}
-              <div className="zero-hero__world-line zero-hero__world-line--1">
-                <Line1 className="glow-line" viewBox="0 0 300 285" />
-              </div>
+            <svg
+              className="zero-hero__world__lines"
+              viewBox="0 0 682 450"
+              preserveAspectRatio="xMinYMin meet"
+              fill="none"
+            >
+              <image href={'/icons/world.svg'} />
+
+              <defs>
+                <filter
+                  id="circle-filter"
+                  x="0"
+                  y="153"
+                  width="16"
+                  height="16"
+                  filterUnits="userSpaceOnUse"
+                  color-interpolation-filters="sRGB"
+                >
+                  <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                  <feBlend
+                    mode="normal"
+                    in="SourceGraphic"
+                    in2="BackgroundImageFix"
+                    result="shape"
+                  />
+                  <feGaussianBlur stdDeviation="1" result="effect1_foregroundBlur_298_5943" />
+                </filter>
+                <radialGradient
+                  id="circle-gradient"
+                  cx="0"
+                  cy="0"
+                  r="1"
+                  gradientUnits="userSpaceOnUse"
+                  gradientTransform="translate(8 161) rotate(90) scale(6)"
+                >
+                  <stop stop-color="#FDFDFD" />
+                  <stop offset="1" stop-color="#F7FFCD" />
+                </radialGradient>
+              </defs>
+
+              <path
+                d="M297 131C248 59.5 109.219 68.8051 15.0002 157.822"
+                preserveAspectRatio="xMinYMin meet"
+                stroke="#FDFDFD"
+              />
+              <g filter="url(#circle-filter)">
+                <circle cx="17" cy="154.822" r="9" fill="url(#circle-gradient)" />
+              </g>
 
               {/* Линия 2 - короткая (Канада - Скандинавия) */}
-              <div className="zero-hero__world-line zero-hero__world-line--2">
-                <Line2 className="glow-line" viewBox="0 0 99 91" />
-              </div>
 
-              {/* Линия 3 - средняя (Канада - Россия) */}
-              <div className="zero-hero__world-line zero-hero__world-line--3">
-                <Line3 className="glow-line" viewBox="0 0 218 224" />
-              </div>
+              <path d="M98.0001 43C79.0104 33.7913 34.0247 21.899 6.00011 48" stroke="#FDFDFD" />
+              <g filter="url(#circle-filter)">
+                <circle cx="8" cy="45" r="6" fill="url(#circle-gradient)" />
+              </g>
+
+              {/* Линия 3 - средняя (Канада -     Россия) */}
+
+              <path d="M217.5 74.5C175.5 59.5 100.219 60.2093 6.00027 149.226" stroke="#FDFDFD" />
+              <g filter="url(#circle-filter)">
+                <circle cx="8" cy="146.226" r="6" fill="url(#circle-gradient)" />
+              </g>
 
               {/* Линия 4 - из России вниз (Россия - Индия) */}
-              <div className="zero-hero__world-line zero-hero__world-line--4">
-                <Line4 className="glow-line" viewBox="0 0 187 155" />
-              </div>
+              <g className="zero-hero__world-line zero-hero__world-line--4">
+                <path d="M186 1C135.605 11.2749 31.2508 53.2598 17 139" stroke="#FDFDFD" />
+                <g filter="url(#circle-filter)">
+                  <circle cx="17" cy="138" r="9" fill="url(#circle-gradient)" />
+                </g>
+              </g>
 
               {/* Линия 5 - короткая горизонтальная (Африка - Ближний Восток) */}
-              <div className="zero-hero__world-line zero-hero__world-line--5">
-                <Line5 className="glow-line" viewBox="0 0 56 49" />
-              </div>
+              <g className="zero-hero__world-line zero-hero__world-line--5">
+                <path d="M7.40635 34.5154C13.3645 25.3829 36.5 15 56 15" stroke="#FDFDFD" />
+                <g filter="url(#circle-filter)">
+                  <circle cx="8.66431" cy="33" r="6" fill="url(#circle-gradient)" />
+                </g>
+              </g>
 
               {/* Линия 6 - вертикальная (Европа - Африка) */}
-              <div className="zero-hero__world-line zero-hero__world-line--6">
-                <Line6 className="glow-line" viewBox="0 0 68 91" />
-              </div>
+              <g className="zero-hero__world-line zero-hero__world-line--6">
+                <path d="M68 1C42.0002 1 13.0002 38.5 17 74.5" stroke="#FDFDFD" />
+                <g filter="url(#circle-filter)">
+                  <circle cx="17" cy="73.5" r="9" fill="url(#circle-gradient)" />
+                </g>
+              </g>
 
               {/* Линия 7 - длинная вертикальная (Россия - Африка) */}
-              <div className="zero-hero__world-line zero-hero__world-line--7">
-                <Line7 className="glow-line" viewBox="0 0 74 169" />
-              </div>
+              <g className="zero-hero__world-line zero-hero__world-line--7">
+                <path d="M73 0.5C29.5 40 3.99997 108.5 8.00005 162" stroke="#FDFDFD" />
+                <g filter="url(#filter0_f_298_5943)">
+                  <circle cx="8" cy="161" r="6" fill="url(#paint0_radial_298_5943)" />
+                </g>
+              </g>
 
               {/* Линия 8 - короткая (Австралия - вверх) */}
-              <div className="zero-hero__world-line zero-hero__world-line--8">
-                <Line8 className="glow-line" viewBox="0 0 51 58" />
-              </div>
+              <g className="zero-hero__world-line zero-hero__world-line--8">
+                <path
+                  d="M24.4064 51.5154C30.3646 42.3829 39.0397 19.4943 26.0745 0.99999"
+                  stroke="#FDFDFD"
+                />
+                <g filter="url(#circle-filter)">
+                  <circle cx="25.6643" cy="50" r="6" fill="url(#circle-gradient)" />
+                </g>
+              </g>
 
               {/* Линия 9 -   средняя (Австралия - Азия) */}
-              <div className="zero-hero__world-line zero-hero__world-line--9">
-                <Line9 className="glow-line" viewBox="0 0 80 85" />
-              </div>
+              <g className="zero-hero__world-line zero-hero__world-line--9">
+                <path
+                  d="M29.742 78.5154C42.3457 62.5285 64.0424 24.6437 50 0.999998"
+                  stroke="#FDFDFD"
+                />
+                <g filter="url(#circle-filter)">
+                  <circle cx="31" cy="77" r="6" fill="url(#circle-gradient)" />
+                </g>
+              </g>
 
               {/* Линия 10 - длинная (Австралия - Россия) */}
-              <div className="zero-hero__world-line zero-hero__world-line--10">
-                <Line10 className="glow-line" viewBox="0 0 140 183" />
-              </div>
-            </div>
+              <g className="zero-hero__world-line zero-hero__world-line--10">
+                <path d="M94 167C100.62 124.603 100.287 32.0477 46 0.999992" stroke="#FDFDFD" />
+                <g filter="url(#circle-filter)">
+                  <circle cx="94" cy="166" r="9" fill="url(#circle-gradient)" />
+                </g>
+              </g>
+            </svg>
           </div>
         </div>
         <div className="zero-hero__features">
