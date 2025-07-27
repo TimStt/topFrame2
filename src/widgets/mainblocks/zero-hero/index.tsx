@@ -13,8 +13,19 @@ import { AccordionUI } from '@/shared/ui/accordion-ui'
 import { ArrowIconUI } from '@/shared/ui/arrow-icon-ui'
 import { ButtonUI } from '@/shared/ui/button-ui'
 import BgMain from '@/source/icons/bg-main.svg'
+import Line1 from '@/source/icons/line1.svg'
+import Line2 from '@/source/icons/line2.svg'
+import Line3 from '@/source/icons/line3.svg'
+import Line4 from '@/source/icons/line4.svg'
+import Line5 from '@/source/icons/line5.svg'
+import Line6 from '@/source/icons/line6.svg'
+import Line7 from '@/source/icons/line7.svg'
+import Line8 from '@/source/icons/line8.svg'
+import Line9 from '@/source/icons/line9.svg'
+import Line10 from '@/source/icons/line10.svg'
 import Warning from '@/source/icons/warning.svg'
 import World from '@/source/icons/world.svg'
+import IconWorld from '@/source/icons/world.svg'
 import Image from 'next/image'
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -63,7 +74,59 @@ export const ZeroHero = () => {
             />
           </div>
           <div className="zero-hero__world">
-            <Image src={'/icons/world.svg'} width="682" height="450" alt="world" />
+            <Image src={'/icons/world.svg'} width={682} height={450} alt="world" />
+            {/* Линии с анимацией - позиционирование как на фото */}
+            <div className="zero-hero__world__lines">
+              {/* Линия 1 - верхняя длинная дуга (Канада - Европа) */}
+              <div className="zero-hero__world-line zero-hero__world-line--1">
+                <Line1 className="glow-line" viewBox="0 0 300 285" />
+              </div>
+
+              {/* Линия 2 - короткая (Канада - Скандинавия) */}
+              <div className="zero-hero__world-line zero-hero__world-line--2">
+                <Line2 className="glow-line" viewBox="0 0 99 91" />
+              </div>
+
+              {/* Линия 3 - средняя (Канада - Россия) */}
+              <div className="zero-hero__world-line zero-hero__world-line--3">
+                <Line3 className="glow-line" viewBox="0 0 218 224" />
+              </div>
+
+              {/* Линия 4 - из России вниз (Россия - Индия) */}
+              <div className="zero-hero__world-line zero-hero__world-line--4">
+                <Line4 className="glow-line" viewBox="0 0 187 155" />
+              </div>
+
+              {/* Линия 5 - короткая горизонтальная (Африка - Ближний Восток) */}
+              <div className="zero-hero__world-line zero-hero__world-line--5">
+                <Line5 className="glow-line" viewBox="0 0 56 49" />
+              </div>
+
+              {/* Линия 6 - вертикальная (Европа - Африка) */}
+              <div className="zero-hero__world-line zero-hero__world-line--6">
+                <Line6 className="glow-line" viewBox="0 0 68 91" />
+              </div>
+
+              {/* Линия 7 - длинная вертикальная (Россия - Африка) */}
+              <div className="zero-hero__world-line zero-hero__world-line--7">
+                <Line7 className="glow-line" viewBox="0 0 74 169" />
+              </div>
+
+              {/* Линия 8 - короткая (Австралия - вверх) */}
+              <div className="zero-hero__world-line zero-hero__world-line--8">
+                <Line8 className="glow-line" viewBox="0 0 51 58" />
+              </div>
+
+              {/* Линия 9 -   средняя (Австралия - Азия) */}
+              <div className="zero-hero__world-line zero-hero__world-line--9">
+                <Line9 className="glow-line" viewBox="0 0 80 85" />
+              </div>
+
+              {/* Линия 10 - длинная (Австралия - Россия) */}
+              <div className="zero-hero__world-line zero-hero__world-line--10">
+                <Line10 className="glow-line" viewBox="0 0 140 183" />
+              </div>
+            </div>
           </div>
         </div>
         <div className="zero-hero__features">

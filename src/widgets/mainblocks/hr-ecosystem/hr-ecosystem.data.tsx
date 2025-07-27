@@ -1,101 +1,102 @@
-import StarIcon from "@/source/icons/star.svg";
-import ChatIcon from "@/source/icons/chat.svg";
-import BriefcaseIcon from "@/source/icons/briefcase.svg";
-import GlobeIcon from "@/source/icons/globe.svg";
-import BookIcon from "@/source/icons/book.svg";
-import SettingsIcon from "@/source/icons/settings.svg";
-import BrainIcon from "@/source/icons/brain.svg";
-import HeadphonesIcon from "@/source/icons/headphones.svg";
+import BookIcon from '@/source/icons/book.svg'
+import BrainIcon from '@/source/icons/brain.svg'
+import BriefcaseIcon from '@/source/icons/briefcase.svg'
+import ChatIcon from '@/source/icons/chat.svg'
+import GlobeIcon from '@/source/icons/globe.svg'
+import HeadphonesIcon from '@/source/icons/headphones.svg'
+import SettingsIcon from '@/source/icons/settings.svg'
+import StarIcon from '@/source/icons/star.svg'
 
 export interface IHRElement {
-  id: number;
-  title: string;
-  icon?: React.ReactNode;
-  position:
-    | "top"
-    | "top-right"
-    | "right"
-    | "bottom-right"
-    | "bottom"
-    | "bottom-left"
-    | "left"
-    | "top-left"
-    | "center-left"
-    | "center-right"
-    | "special";
-  highlighted?: boolean;
+  id: number
+  title: string
+  icon?: React.ReactNode
+  layer: 'outer' | 'inner'
+  highlighted?: boolean
+  link: string
 }
 
 export const hrEcosystemData: IHRElement[] = [
   {
     id: 1,
-    title: "Горячая линия",
-    position: "top",
+    title: 'Горячая линия',
+    layer: 'outer',
     icon: <HeadphonesIcon />,
+    link: '/',
   },
   {
     id: 2,
-    title: "Блог Джен",
-    position: "top-right",
+    title: 'Блог Джен',
+    layer: 'outer',
     icon: <BrainIcon />,
+    link: '/',
   },
   {
     id: 3,
-    title: "Клиенты",
-    position: "left",
+    title: 'Клиенты',
+    layer: 'outer',
     icon: <StarIcon />,
+    link: '/',
   },
   {
     id: 4,
-    title: "Бот обратной связи",
-    position: "center-left",
+    title: 'Бот обратной связи',
+    layer: 'inner',
     icon: <ChatIcon />,
+    link: '/',
   },
   {
     id: 5,
-    title: "Институт",
-    position: "center-right",
+    title: 'Институт',
+    layer: 'inner',
     icon: <BookIcon />,
+    link: '/',
   },
   {
     id: 6,
-    title: "Бот LinkedIn",
-    position: "bottom-left",
+    title: 'Бот LinkedIn',
+    layer: 'inner',
     icon: <GlobeIcon />,
+    link: '/',
   },
   {
     id: 7,
-    title: "Корпоративная культура",
-    position: "bottom",
+    title: 'Корпоративная культура',
+    layer: 'outer',
     icon: <SettingsIcon />,
+    link: '/',
   },
   {
     id: 8,
-    title: "Битрикс",
-    position: "bottom-right",
+    title: 'Битрикс',
+    layer: 'outer',
     icon: <BriefcaseIcon />,
+    link: '/',
   },
   {
     id: 9,
-    title: "Welcome book",
-    position: "right",
+    title: 'Welcome book',
+    layer: 'outer',
     icon: <BookIcon />,
+    link: '/',
   },
   {
     id: 10,
-    title: "Фриланс",
-    position: "bottom-right",
+    title: 'Фриланс',
+    layer: 'inner',
     icon: <BriefcaseIcon />,
+    link: '/',
   },
   {
     id: 11,
-    title: "TT COIN",
-    position: "special",
+    title: 'TT COIN',
+    layer: 'outer',
     highlighted: true,
+    link: '/',
   },
-];
+]
 
 export const centralElement = {
-  title: "HR пространство TopFrame",
-  subtitle: "Центр управления человеческими ресурсами",
-};
+  title: 'HR пространство TopFrame',
+  subtitle: 'Центр управления человеческими ресурсами',
+}

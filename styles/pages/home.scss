@@ -1,6 +1,6 @@
 // Header Component Styles
 
-@use "../libs/mixins.scss" as *;
+@use '../libs/mixins.scss' as *;
 
 .title-section {
   @include font-setup(
@@ -88,7 +88,7 @@
       position: relative;
 
       &::after {
-        content: "";
+        content: '';
         position: absolute;
         bottom: -4px;
         left: 0;
@@ -262,7 +262,7 @@
         box-shadow: 0 0 10px 0 rgba(253, 253, 253, 0.16);
 
         &::before {
-          content: "";
+          content: '';
           position: absolute;
           bottom: calc(var(--sizeTriangle) * -1);
           right: calc(var(--sizeIcon) / 2);
@@ -301,16 +301,15 @@
   background-repeat: no-repeat;
   margin-top: calc(var(--height-header) * -1);
   --paddingTop: 17px;
-  --paddingBottom: 108px;
+  --paddingBottom: 42px;
 
   &_inner {
-    padding-block: calc(var(--height-header) + var(--paddingTop))
-      var(--paddingBottom);
+    padding-block: calc(var(--height-header) + var(--paddingTop)) var(--paddingBottom);
   }
 
   &__row {
     @include flex-center-between();
-    margin-bottom: 40px;
+    // margin-bottom: 40px;
   }
 
   &__title {
@@ -348,17 +347,212 @@
   }
 
   &__world {
+    position: relative;
     // @include fluid-text(682, 50, width, var(--container-max-width));
     margin-right: 62px;
     max-width: 682px;
+    aspect-ratio: 682 / 450;
     width: 100%;
+    height: auto;
 
-    animation: float 6s ease-in-out infinite;
+    // animation: float 6s ease-in-out infinite;
 
-    img {
+    svg {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
+    }
+
+    // Применение анимаций к линиям на карте мира
+    .glow-line {
+      stroke: var(--color-accent-blue);
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+
+      // // Асинхронная анимация для каждой линии
+      // &:nth-child(1) {
+      //   animation: glow-line-animation 3s ease-in-out infinite;
+      //   animation-delay: 0s;
+      // }
+
+      // &:nth-child(2) {
+      //   animation: glow-line-animation 3s ease-in-out infinite;
+      //   animation-delay: 0.5s;
+      // }
+
+      // &:nth-child(3) {
+      //   animation: glow-line-animation 3s ease-in-out infinite;
+      //   animation-delay: 1s;
+      // }
+
+      // &:nth-child(4) {
+      //   animation: glow-line-animation 3s ease-in-out infinite;
+      //   animation-delay: 1.5s;
+      // }
+
+      // &:nth-child(5) {
+      //   animation: glow-line-animation 3s ease-in-out infinite;
+      //   animation-delay: 2s;
+      // }
+
+      // &:nth-child(6) {
+      //   animation: glow-line-animation 3s ease-in-out infinite;
+      //   animation-delay: 2.5s;
+      // }
+    }
+
+    // Стили для точек свечения на конце линий
+
+    // Контейнер для всех линий
+    &__lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    // Общие стили для линий
+    &-line {
+      position: absolute;
+      pointer-events: none;
+
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      // Линия 1 - верхняя длинная дуга (Канада - Европа)
+      &--1 {
+        top: 8%;
+        left: 15%;
+
+        z-index: 1;
+
+        // .glow-line {
+        //   animation: glow-line-animation 4s ease-in-out infinite;
+        //   animation-delay: 0s;
+        // }
+      }
+
+      // Линия 2 - короткая (Канада - Скандинавия)
+      &--2 {
+        top: 18%;
+        left: 23%;
+
+        z-index: 2;
+
+        // .glow-line {
+        //   animation: glow-line-animation 4s ease-in-out infinite;
+        //   animation-delay: 0.6s;
+        // }
+      }
+
+      // Линия 3 - средняя (Канада - Россия)
+      &--3 {
+        top: 12%;
+        left: 35%;
+
+        z-index: 3;
+
+        // .glow-line {
+        //   animation: glow-line-animation 4s ease-in-out infinite;
+        //   animation-delay: 1.2s;
+        // }
+      }
+
+      // Линия 4 - из России вниз (Россия - Индия)
+      &--4 {
+        top: 22%;
+        right: 18%;
+
+        z-index: 4;
+
+        // .glow-line {
+        //   animation: glow-line-animation 4s ease-in-out infinite;
+        //   animation-delay: 1.8s;
+        // }
+      }
+
+      // Линия 5 - короткая горизонтальная (Африка - Ближний Восток)
+      &--5 {
+        top: 62%;
+        left: 48%;
+
+        z-index: 5;
+
+        // .glow-line {
+        //   animation: glow-line-animation 4s ease-in-out infinite;
+        //   animation-delay: 2.4s;
+        // }
+      }
+
+      // Линия 6 - вертикальная (Европа - Африка)
+      &--6 {
+        top: 42%;
+        left: 42%;
+
+        z-index: 6;
+
+        // .glow-line {
+        //   animation: glow-line-animation 4s ease-in-out infinite;
+        //   animation-delay: 3s;
+        // }
+      }
+
+      // Линия 7 - длинная вертикальная (Россия - Африка)
+      &--7 {
+        top: 35%;
+        left: 54%;
+
+        z-index: 7;
+
+        // .glow-line {
+        //   animation: glow-line-animation 4s ease-in-out infinite;
+        //   animation-delay: 3.6s;
+        // }
+      }
+
+      // Линия 8 - короткая (Австралия - вверх)
+      &--8 {
+        top: 72%;
+        right: 8%;
+
+        z-index: 8;
+
+        // .glow-line {
+        //   animation: glow-line-animation 4s ease-in-out infinite;
+        //   animation-delay: 0.4s;
+        // }
+      }
+
+      // Линия 9 - средняя (Австралия - Азия)
+      &--9 {
+        top: 58%;
+        right: 5%;
+
+        z-index: 9;
+
+        // .glow-line {
+        //   animation: glow-line-animation 4s ease-in-out infinite;
+        //   animation-delay: 1s;
+        // }
+      }
+
+      // Линия 10 - длинная (Австралия - Россия)
+      &--10 {
+        top: 28%;
+        right: 3%;
+
+        z-index: 10;
+
+        // .glow-line {
+        //   animation: glow-line-animation 4s ease-in-out infinite;
+        //   animation-delay: 1.6s;
+        // }
+      }
     }
   }
 
@@ -505,9 +699,8 @@
   top: 50%;
   left: 50%;
   transform-origin: center;
-  transform: translate(-50%, -50%) rotate(var(--angle))
-    translateX(var(--translateX)) rotate(calc(-1 * var(--angle)))
-    rotate(var(--additionalAngle));
+  transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--translateX))
+    rotate(calc(-1 * var(--angle))) rotate(var(--additionalAngle));
 }
 
 .hr-ecosystem {
@@ -524,7 +717,7 @@
 
   &:after,
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0%);
@@ -549,6 +742,7 @@
     top: var(--topBigLine);
     max-height: var(--sizeBigLine);
   }
+
   &__wrapper {
     position: relative;
 
@@ -572,7 +766,7 @@
 
     &:after {
       aspect-ratio: 1 / 1;
-      content: "";
+      content: '';
       border-radius: 50%;
       background: var(--color-light-blue);
       filter: blur(64px);
@@ -626,15 +820,27 @@
   --twoElementBottom: calc(var(--bottomMargin) * -1 + 286px);
 
   &__elements {
+    --top: 50%;
+    --size: 100%;
     position: absolute;
+
+    &.all {
+      display: none;
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+
+      position: relative;
+    }
     /* left: 50%; */
+    // animation: rotate 10s linear infinite;
     inset: 0;
     width: 100%;
-    max-width: var(--sizeBigLine);
+    max-width: var(--size);
     aspect-ratio: 1;
-    max-height: var(--sizeBigLine);
+    max-height: var(--size);
     height: auto;
-    top: var(--topBigLine);
+    top: var(--top);
     left: 50%;
     transform: translate(-50%, 0%);
     /* top: 50%; */
@@ -652,127 +858,80 @@
 
   &__element {
     position: absolute;
-    border: 1px solid #6b853d;
-    border-radius: 8px;
-    padding: 16px;
+
+    transition-duration: var(--transition-normal);
     max-width: var(--widthElement);
     width: 100%;
     max-height: 114px;
     height: 100%;
-    transition-duration: var(--transition-normal);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--color-white);
-    gap: 12px;
-    justify-content: center;
 
-    $firstDeg: 192deg;
-    $secondDeg: 224deg;
-    $thirdDeg: 246deg;
-    $fourthDeg: 270deg;
-    $fifthDeg: 295deg;
-    $sixthDeg: 323deg;
-    $seventhDeg: 346deg;
+    --angle: 0deg;
+    --endAngle: calc(var(--angle) + 360deg);
+    --additionalAngle: calc(var(--angle) * -1);
 
-    $eighthDeg: 209deg;
-    $ninthDeg: 247deg;
-    $tenthDeg: 294deg;
-    $eleventhDeg: 331deg;
+    --translateX: 0px;
 
+    &-content {
+      display: flex;
+      background-color: var(--color-white);
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+      border-radius: 8px;
+      padding: 16px;
+      border: 1px solid #6b853d;
+
+      width: 100%;
+      height: 100%;
+      &:hover {
+        box-shadow: 0 0 20px 0 rgba(247, 255, 205, 0.95);
+        background: #f7ffcd;
+        .hr-ecosystem__element-icon {
+          background-color: #6b853d;
+        }
+
+        .hr-ecosystem__element-title {
+          color: #6b853d;
+        }
+      }
+
+      animation: shake 5s ease-in-out infinite;
+
+      @keyframes shake {
+        0%,
+        100% {
+          rotate: -8deg;
+        }
+        50% {
+          rotate: 8deg;
+        }
+      }
+    }
+
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--translateX))
+      rotate(calc(-1 * var(--angle)));
+
+    // напиши цикл для элементов
+
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
     // Элементы внешнего круга (слева направо по часовой стрелке, начиная с 195°)
-    &:nth-child(1) {
-      @include place-on-circle(
-        $firstDeg,
-        var(--radiusBigLine)
-      ); // Блог Linkedin (слева внизу)
-    }
-
-    &:nth-child(2) {
-      @include place-on-circle(
-        $secondDeg,
-        var(--radiusBigLine),
-        -5deg
-      ); // Корпоративная культура (слева снизу)
-    }
-
-    &:nth-child(3) {
-      @include place-on-circle(
-        $thirdDeg,
-        var(--radiusBigLine)
-      ); // Битрикс (снизу)
-    }
-
-    &:nth-child(4) {
-      @include place-on-circle(
-        $fourthDeg,
-        var(--radiusBigLine)
-      ); // Фриланс (справа снизу)
-    }
-
-    &:nth-child(5) {
-      @include place-on-circle(
-        $fifthDeg,
-        var(--radiusBigLine)
-      ); // Welcome book (справа)
-    }
-
-    &:nth-child(6) {
-      @include place-on-circle(
-        $sixthDeg,
-        var(--radiusBigLine)
-      ); // Блог Дзен (справа сверху)
-    }
-
-    &:nth-child(7) {
-      @include place-on-circle(
-        $seventhDeg,
-        var(--radiusBigLine),
-        2deg
-      ); // Горячая линия (сверху)
-    }
-
-    &:nth-child(8) {
-      @include place-on-circle(
-        $eighthDeg,
-        var(--radiusMiddleLine)
-      ); // Клиенты (слева сверху)
-    }
-
-    // Элементы внутреннего круга
-    &:nth-child(9) {
-      @include place-on-circle(
-        $ninthDeg,
-        var(--radiusMiddleLine)
-      ); // TF COIN (слева внизу)
-    }
-
-    &:nth-child(10) {
-      @include place-on-circle(
-        $tenthDeg,
-        var(--radiusMiddleLine),
-        -6deg
-      ); // Бот обратной связи (снизу)
-    }
-
-    &:nth-child(11) {
-      @include place-on-circle(
-        $eleventhDeg,
-        var(--radiusMiddleLine)
-      ); // Институт (справа снизу)
-    }
-
-    &:hover {
-      box-shadow: 0 0 20px 0 rgba(247, 255, 205, 0.95);
-      background: #f7ffcd;
-      .hr-ecosystem__element-icon {
-        background-color: #6b853d;
+    animation: rotate 30s linear infinite;
+    // напиши анимация вращения элемента от исходной позиции --angle 0deg до 360deg
+    @keyframes rotate {
+      from {
+        transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--translateX))
+          rotate(calc(-1 * var(--angle)));
       }
-
-      .hr-ecosystem__element-title {
-        color: #6b853d;
+      to {
+        transform: translate(-50%, -50%) rotate(var(--endAngle)) translateX(var(--translateX))
+          rotate(calc(-1 * var(--endAngle)));
       }
     }
+
+    // анимация легкого покачивания элемента во время rotate
 
     &-icon {
       border-radius: 50%;
@@ -860,15 +1019,7 @@
       color: var(--color-main);
     }
     &-title {
-      @include font-setup(
-        24,
-        29,
-        700,
-        true,
-        18,
-        24,
-        var(--container-max-width)
-      );
+      @include font-setup(24, 29, 700, true, 18, 24, var(--container-max-width));
       color: inherit;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -1089,7 +1240,7 @@
     }
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       inset: 0;
       transition: background-color 0.3s ease-in-out;
@@ -1169,6 +1320,49 @@
   }
 
   // Специальные стили для Opera
+
+  // В Opera убираем hover эффекты для лучшей производительности
+  &:hover {
+    .team__card-poster {
+      opacity: 1;
+    }
+  }
+
+  // Улучшаем показ кнопки в Opera
+  .team__card-button {
+    opacity: 1;
+    z-index: 3;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    padding: 8px;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+  }
+
+  // Показываем контент всегда в Opera
+  .team__card-content {
+    opacity: 1;
+    z-index: 3;
+    pointer-events: auto;
+  }
+
+  &.active {
+    &::after {
+      background-color: transparent;
+      z-index: -1;
+    }
+
+    &-content {
+      opacity: 0;
+
+      z-index: -1;
+    }
+  }
+
+  // Специальные стили для Opera
   &.opera-browser {
     // В Opera убираем hover эффекты для лучшей производительности
     &:hover {
@@ -1199,86 +1393,42 @@
     }
 
     &.active {
-      &::after {
-        background-color: transparent;
-        z-index: -1;
-      }
-
-      &-content {
-        opacity: 0;
-
-        z-index: -1;
-      }
-    }
-
-    // Специальные стили для Opera
-    &.opera-browser {
-      // В Opera убираем hover эффекты для лучшей производительности
-      &:hover {
-        .team__card-poster {
-          opacity: 1;
-        }
-      }
-
-      // Улучшаем показ кнопки в Opera
-      .team__card-button {
-        opacity: 1;
-        z-index: 3;
-        background-color: rgba(0, 0, 0, 0.7);
-        border-radius: 50%;
-        padding: 8px;
-        transition: background-color 0.2s ease;
-
-        &:hover {
-          background-color: rgba(0, 0, 0, 0.9);
-        }
-      }
-
-      // Показываем контент всегда в Opera
       .team__card-content {
         opacity: 1;
         z-index: 3;
         pointer-events: auto;
       }
 
-      &.active {
-        .team__card-content {
-          opacity: 1;
-          z-index: 3;
-          pointer-events: auto;
-        }
-
-        .team__card-button {
-          opacity: 1;
-          z-index: 3;
-        }
+      .team__card-button {
+        opacity: 1;
+        z-index: 3;
       }
     }
+  }
 
-    // Стили для подсказки
-    &-hint {
-      font-family: var(--second-family);
-      font-weight: 400;
-      font-size: 11px;
-      color: #ffd700;
-      margin-top: 8px;
-      text-align: center;
-      animation: pulse 2s infinite;
-    }
+  // Стили для подсказки
+  &-hint {
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 11px;
+    color: #ffd700;
+    margin-top: 8px;
+    text-align: center;
+    animation: pulse 2s infinite;
+  }
 
-    // Улучшенные стили для ошибки
-    &-error {
-      font-family: var(--second-family);
-      font-weight: 400;
-      font-size: 11px;
-      color: #ff6b6b;
-      margin-top: 8px;
-      text-align: center;
-      background-color: rgba(255, 107, 107, 0.1);
-      padding: 4px 8px;
-      border-radius: 4px;
-      border: 1px solid rgba(255, 107, 107, 0.3);
-    }
+  // Улучшенные стили для ошибки
+  &-error {
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 11px;
+    color: #ff6b6b;
+    margin-top: 8px;
+    text-align: center;
+    background-color: rgba(255, 107, 107, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 107, 107, 0.3);
   }
 }
 
@@ -1304,6 +1454,41 @@
   }
 }
 
+// Анимация линий с свечением на конце
+@keyframes glow-line-animation {
+  0% {
+    stroke-dasharray: 100 0;
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  50% {
+    stroke-dasharray: 0 100;
+    stroke-dashoffset: -100;
+    opacity: 0.8;
+  }
+  100% {
+    stroke-dasharray: 100 0;
+    stroke-dashoffset: -100;
+    opacity: 1;
+  }
+}
+
+// Анимация свечения на конце линии
+// @keyframes glow-dot-animation {
+//   0% {
+//     opacity: 1;
+//     transform: scale(1);
+//   }
+//   50% {
+//     opacity: 0;
+//     transform: scale(0.5);
+//   }
+//   100% {
+//     opacity: 1;
+//     transform: scale(1.2);
+//   }
+// }
+
 @media (max-width: 1180px) {
   .hr-ecosystem {
     --sizeCircle: 300px;
@@ -1311,17 +1496,17 @@
     --sizeBigLine: 889px;
   }
 
-  .hr-ecosystem__element:nth-child(2) {
-    @include place-on-circle(220deg, var(--radiusBigLine));
-  }
+  // .hr-ecosystem__element:nth-child(2) {
+  //   @include place-on-circle(220deg, var(--radiusBigLine));
+  // }
 
-  .hr-ecosystem__element:nth-child(8) {
-    @include place-on-circle(201deg, var(--radiusMiddleLine));
-  }
+  // .hr-ecosystem__element:nth-child(8) {
+  //   @include place-on-circle(201deg, var(--radiusMiddleLine));
+  // }
 
-  .hr-ecosystem__element:nth-child(11) {
-    @include place-on-circle(337deg, var(--radiusMiddleLine));
-  }
+  // .hr-ecosystem__element:nth-child(11) {
+  //   @include place-on-circle(337deg, var(--radiusMiddleLine));
+  // }
 }
 
 @media (max-width: 1040px) {
@@ -1369,19 +1554,24 @@
     }
 
     &__elements {
-      position: relative;
-      height: 100%;
-      width: 100%;
-      top: initial;
-      left: initial;
-      transform: none;
-      bottom: initial;
-      max-height: 100%;
-      border-radius: 0;
-      aspect-ratio: initial;
+      display: none;
 
-      &__wrapper {
-        display: grid;
+      &.all {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        top: initial;
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+        left: initial;
+        transform: none;
+        bottom: initial;
+        max-height: 100%;
+        border-radius: 0;
+        aspect-ratio: initial;
+
+        display: grid !important;
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         gap: 16px;
         position: relative;
@@ -1396,7 +1586,12 @@
       left: initial !important;
       max-width: 100%;
       position: relative;
+      animation: none;
       transform: none !important;
+
+      &-content {
+        animation: none;
+      }
     }
 
     &::before,
