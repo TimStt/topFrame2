@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * @file: ZeroHero section
  * @description: Main hero section with title, background and feature cards
@@ -14,16 +12,10 @@ import { ArrowIconUI } from "@/shared/ui/arrow-icon-ui";
 import { ButtonUI } from "@/shared/ui/button-ui";
 import BgMain from "@/source/icons/bg-main.svg";
 
-import Image from "next/image";
-import "swiper/css";
-import "swiper/css/navigation";
-import { Autoplay, Navigation } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-
-import { featureCards } from "./feature-card.data";
-import { sliderConfig } from "./slider.config";
-import { AccordionInfo } from "./ui/accordion-info";
 import { WorldIconUI } from "@/shared/ui/world-icon-ui";
+import { AnimationEllipses } from "@/shared/ui/animation-ellipses-ui";
+import { MainInfo } from "./ui/main-info";
+import { Slider } from "./ui/slider";
 
 interface ZeroHeroProps {
   className?: string;
@@ -40,31 +32,18 @@ export interface IFeatureCard {
 export const ZeroHero = () => {
   return (
     <section
-      className="zero-hero"
+      className="zero-hero transform-ellipses"
       style={{
         backgroundImage: `url(${BACKGROUND_IMAGE_BLUE})`,
       }}
     >
+      <AnimationEllipses className="zero-hero__animation-ellipses" length={3} />
       <div className="zero-hero_inner container">
         <div className="zero-hero__row">
           <div className="zero-hero__text-content">
-            <h1 className="zero-hero__title">
-              Строим будущее <br />
-              России вместе
-            </h1>
-            <p className="zero-hero__subtitle subtitle">
-              Мы как Российская компания помогаем России строить полюса в новом
-              многополярном мире
-            </p>
-            <ButtonUI
-              className="zero-hero__cta-btn"
-              variant="secondary"
-              size="medium"
-              text="Присоединиться к команде"
-            />
+            <MainInfo />
           </div>
           <div className="zero-hero__world">
-            {/* Линии с анимацией - позиционирование как на фото */}
             <WorldIconUI />
           </div>
         </div>
@@ -77,15 +56,7 @@ export const ZeroHero = () => {
               <ArrowIconUI />
             </div>
           </div>
-          <Swiper className="zero-hero__swiper" {...sliderConfig}>
-            {featureCards.map((card) => {
-              return (
-                <SwiperSlide key={card.id} className="zero-hero__card-slide">
-                  <AccordionInfo card={card} />
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
+          <Slider />
         </div>
       </div>
     </section>

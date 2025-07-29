@@ -1,3 +1,22 @@
-export default function Page() {
-  return <div>Заглушка страницы</div>;
+import React from "react";
+import { ButtonUI } from "@/shared/ui/button-ui";
+import { PAGES_PATHS } from "@/shared/constants/pages-paths";
+
+export default function NotFoundPage() {
+  return (
+    <main className="not-found">
+      <h1 className="not-found__title">404</h1>
+      <span className="not-found__text">Страницы не найдена</span>
+      <ButtonUI
+        className="not-found__btn"
+        variant="secondary"
+        size="medium"
+        as="a"
+        hasArrow
+        href={PAGES_PATHS.HOME}
+      >
+        Вернуться на главную
+      </ButtonUI>
+    </main>
+  );
 }

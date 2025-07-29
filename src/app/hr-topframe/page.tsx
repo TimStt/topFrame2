@@ -19,7 +19,7 @@ const tabs = [
 export default function Page() {
   return (
     <main>
-      <HeadPage title="HR пространство TopFrame" />
+      <HeadPage className="container" title="HR пространство TopFrame" />
       <div className="container hr-topframe-page">
         <div className="hr-topframe-tabs">
           {tabs.map((tab, idx) => (

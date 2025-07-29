@@ -1,22 +1,28 @@
-import { cls } from '@/shared/lib/cls'
-import { BreadcrumbsUI } from '@/shared/ui/breadcrumbs-ui'
+import { cls } from "@/shared/lib/cls";
+import { BreadcrumbsUI } from "@/shared/ui/breadcrumbs-ui";
 
-export const HeadPage = ({ className, title }: { className?: string; title: string }) => {
+export const HeadPage = ({
+  className,
+  title,
+}: {
+  className?: string;
+  title: string;
+}) => {
   return (
-    <div className={cls('head-page container', className)}>
+    <div className={cls("head-page", className)}>
       <BreadcrumbsUI
         items={[
           {
-            label: 'Главная',
-            href: '/',
+            label: "Главная",
+            href: "/",
           },
           {
-            label: 'Личный кабинет',
-            href: '/profile',
+            label: "Личный кабинет",
+            href: "/profile",
           },
         ]}
       />
       <h1 className="title-h1">{title}</h1>
     </div>
-  )
-}
+  );
+};

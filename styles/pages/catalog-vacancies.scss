@@ -1,9 +1,27 @@
 .vacancies {
   --paddingSearchBox: 4px;
 
+  &__animation-ellipses {
+    svg {
+      min-width: 299px;
+      height: 299px;
+    }
+    svg:first-child {
+      top: -56%;
+      left: -35%;
+    }
+
+    svg:nth-child(2) {
+      right: -38%;
+      bottom: -42%;
+    }
+  }
+
   .search-box {
+    position: relative;
     padding: var(--paddingSearchBox);
     margin-bottom: 37px;
+    z-index: 3;
   }
 
   .breadcrumbs__list .breadcrumbs__item {
@@ -23,7 +41,9 @@
   }
 
   &__head {
-    --heightSearchBox: calc(var(--height-search-input) + var(--paddingSearchBox) * 2);
+    --heightSearchBox: calc(
+      var(--height-search-input) + var(--paddingSearchBox) * 2
+    );
 
     --halfHeightSearchBox: calc(var(--heightSearchBox) / 2);
 

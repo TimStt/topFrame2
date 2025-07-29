@@ -1,0 +1,161 @@
+@use "../libs/mixins" as *;
+
+.vacancy-page {
+  .title-h1 {
+    margin-bottom: 24px;
+  }
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  li + li {
+    margin-top: 16px;
+  }
+
+  li {
+    --sizeDot: 6px;
+    --marginDot: 8px;
+    padding-left: calc(var(--sizeDot) + var(--marginDot));
+    position: relative;
+    --lineHeight: 22;
+    font-family: var(--second-family);
+    @include font-setup(16, var(--lineHeight), 400);
+
+    &::before {
+      content: "";
+      position: absolute;
+      aspect-ratio: 1/1;
+      left: 0;
+      top: 0;
+      display: block;
+      min-width: var(--sizeDot);
+      min-height: var(--sizeDot);
+      max-width: var(--sizeDot);
+      max-height: var(--sizeDot);
+      background-color: var(--color-main);
+      border-radius: 50%;
+      margin-top: calc(((var(--lineHeight) * 1px) / 2) - (var(--sizeDot) / 2));
+      margin-right: var(--marginDot);
+    }
+  }
+
+  &__content {
+    display: flex;
+
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 32px;
+    margin-bottom: 120px;
+  }
+
+  &__salary {
+    display: inline-block;
+    @include font-setup(20, 24, 500);
+    color: var(--color-accent-blue);
+    margin-bottom: 24px;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 24px;
+
+    span {
+      color: var(--color-main);
+    }
+  }
+  &__location {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 24px;
+
+    @include font-setup(16, 22, 400);
+    font-family: var(--second-family);
+    color: var(--color-main);
+  }
+
+  &__button {
+    margin-bottom: 40px;
+  }
+
+  &__info {
+    box-shadow: 0 3px 10px 0 rgba(46, 88, 124, 0.04);
+    padding: 20px;
+    border: 1px solid var(--color-light-blue);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+    max-width: 780px;
+    width: 100%;
+
+    h3 {
+      @include font-setup(24, 29, 600);
+
+      margin-bottom: 24px;
+    }
+
+    p {
+      font-family: var(--second-family);
+      @include font-setup(16, 22, 400);
+    }
+    p + p {
+      margin-top: 16px;
+    }
+  }
+
+  &__benefits {
+    padding: 20px;
+    background-color: #f7ffcd;
+    border-radius: 8px;
+    position: sticky;
+    top: 0px;
+    margin-top: 101px;
+    height: fit-content;
+
+    h3 {
+      @include font-setup(20, 24, 700);
+
+      margin-bottom: 24px;
+    }
+  }
+}
+
+@media (max-width: 1210px) {
+  .vacancy-page__benefits {
+    position: static;
+    margin-top: 0;
+  }
+}
+
+// .vacancy-card {
+//   background: var(--color-white);
+//   border-radius: 12px;
+//   box-shadow: 0 3px 10px rgba(46, 88, 124, 0.08);
+//   padding: 32px;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 16px;
+
+//   &__title {
+//     font-family: var(--font-family);
+//     font-weight: 600;
+//     font-size: 24px;
+//     color: #242424;
+//   }
+
+//   &__salary {
+//     font-family: var(--font-family);
+//     font-weight: 500;
+//     font-size: 20px;
+//     color: #2e587c;
+//   }
+
+//   &__meta {
+//     display: flex;
+//     gap: 8px;
+//     margin-bottom: 8px;
+//   }
+// }

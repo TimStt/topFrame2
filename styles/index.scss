@@ -1,14 +1,16 @@
-@import './libs/fonts', './libs/utils';
-@import './libs/normalize';
-@import './globals';
+@import "./libs/fonts", "./libs/utils";
+@import "./libs/normalize";
+@import "./globals";
 
 // components ui
-@import './components/button', './components/burger-button', './components/accordion',
-  './components/description-collapse', './components/loader', './components/vacancy-card',
-  './components/pagination', './components/input', './components/breadcrumbs',
-  './components/checkbox', './components/select', './components/image', './components/modal',
-  './components/filter', './components/search', './components/mobile-menu';
+@import "./components/button", "./components/burger-button",
+  "./components/accordion", "./components/description-collapse",
+  "./components/loader", "./components/vacancy-card", "./components/pagination",
+  "./components/input", "./components/breadcrumbs", "./components/checkbox",
+  "./components/select", "./components/image", "./components/modal",
+  "./components/filter", "./components/search", "./components/mobile-menu";
 
 // страницы
-@import './pages/home', './pages/catalog-vacancies', './pages/profile', './pages/hr-topframe',
-  './pages/admin-direction', './pages/freelance';
+@import "./pages/home", "./pages/catalog-vacancies", "./pages/profile",
+  "./pages/hr-topframe", "./pages/admin-direction", "./pages/freelance",
+  "./pages/vacancy-page", "./pages/policy", "./pages/404";

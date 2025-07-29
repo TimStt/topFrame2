@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function Page() {
   return (
     <main>
-      <HeadPage title="Фриланс" />
+      <HeadPage className="container" title="Фриланс" />
       <div className="container freelance-page">
         <div className="freelance-page__content">
           <div className="freelance-page__info">

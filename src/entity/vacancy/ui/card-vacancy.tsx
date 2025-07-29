@@ -3,6 +3,8 @@ import React from "react";
 import LocationIcon from "@/source/icons/location.svg";
 import { cls } from "@/shared/lib/cls";
 import { ButtonUI } from "@/shared/ui/button-ui";
+import Link from "next/link";
+import { PAGES_PATHS } from "@/shared/constants/pages-paths";
 
 export interface ICardVacancy {
   id: number;
@@ -27,6 +29,10 @@ export const CardVacancy = ({
 }: ICardVacancy) => {
   return (
     <div className={cls("vacancy-card", className)}>
+      <Link
+        className="vacancy-card__link"
+        href={PAGES_PATHS.VACANCY_PAGE(title.toLowerCase().replace(/ /g, "-"))}
+      />
       <div className="vacancy-card__info">
         <h3 className="vacancy-card__title">{title}</h3>
         <div className="vacancy-card__params">
@@ -48,7 +54,9 @@ export const CardVacancy = ({
           variant="secondary"
           hasArrow
           as="a"
-          href="/"
+          href={PAGES_PATHS.VACANCY_PAGE(
+            title.toLowerCase().replace(/ /g, "-")
+          )}
           text="Подробнее"
         />
       </div>

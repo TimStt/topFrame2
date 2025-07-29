@@ -41,8 +41,23 @@
   display: flex;
   justify-content: space-between;
   gap: 16px;
+  position: relative;
+
   &:hover {
     box-shadow: 0 0 20px 0 #f7ffcd;
+  }
+
+  &__link {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+    }
   }
 
   &__actions {

@@ -1,13 +1,17 @@
-import { Navigation } from 'swiper/modules'
-import { SwiperOptions } from 'swiper/types'
+import { Autoplay, Navigation } from "swiper/modules";
+import { SwiperOptions } from "swiper/types";
 
 export const sliderConfig: SwiperOptions = {
   spaceBetween: 20,
   slidesPerView: 4,
-  modules: [Navigation],
+  modules: [Navigation, Autoplay],
+  autoplay: {
+    delay: 2500,
+    disableOnInteraction: false,
+  },
   navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
   },
 
   breakpoints: {
@@ -29,4 +33,4 @@ export const sliderConfig: SwiperOptions = {
       spaceBetween: 30,
     },
   },
-}
+};

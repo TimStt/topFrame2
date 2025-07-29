@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function Page() {
   return (
     <main>
-      <HeadPage title="Административное направление" />
+      <HeadPage className="container" title="Административное направление" />
       <div className="admin-direction-page container">
         <div className="admin-direction-content">
           <div className="admin-direction-text">

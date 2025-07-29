@@ -1,0 +1,104 @@
+@use "../libs/mixins" as *;
+.policy {
+  &__subtitle {
+    display: inline-block;
+
+    @include font-setup(20, 24, 700);
+
+    margin-bottom: 24px;
+  }
+
+  &__content {
+    font-family: var(--second-family);
+
+    margin-bottom: 120px;
+
+    h2 {
+      @include font-setup(20, 24, 700);
+
+      margin-bottom: 24px;
+    }
+
+    & > ol {
+      & > li:not(:first-child) {
+        margin-top: 24px;
+      }
+    }
+
+    ol {
+      counter-reset: item;
+
+      li {
+        display: block;
+        position: relative;
+        margin-bottom: 10px;
+        padding-left: 20px;
+        @include font-setup(16, 24, 400);
+
+        &:before {
+          counter-increment: item;
+          content: counters(item, ".") ".";
+          @include font-setup(20, 24, 700);
+          position: absolute;
+          left: -8px;
+        }
+
+        ol {
+          counter-reset: subitem;
+
+          li {
+            &:before {
+              content: counters(item, ".") "." counters(subitem, ".") " ";
+              counter-increment: subitem;
+              left: -20px;
+              @include font-setup(16, 24, 400);
+              color: var(--color-main);
+            }
+
+            ol {
+              counter-reset: subsubitem;
+
+              li {
+                &:before {
+                  content: counters(item, ".") counters(subitem, ".")
+                    counters(subsubitem, ".") ".";
+                  counter-increment: subsubitem;
+                }
+              }
+            }
+          }
+        }
+
+        ul {
+          list-style-type: none;
+          margin-left: 24px;
+
+          li {
+            --sizeDot: 6px;
+            --marginDot: 8px;
+            padding-left: calc(var(--sizeDot) + var(--marginDot));
+            position: relative;
+            --lineHeight: 22;
+            font-family: var(--second-family);
+            @include font-setup(16, var(--lineHeight), 400);
+
+            &::before {
+              content: "•";
+              position: absolute;
+              /* aspect-ratio: 1 / 1; */
+              left: 0;
+              top: 0;
+              display: block;
+              /* min-width: var(--sizeDot); */
+              /* min-height: var(--sizeDot); */
+              /* max-width: var(--sizeDot); */
+              /* max-height: var(--sizeDot); */
+              /* margin-top: calc(var(--lineHeight) * 1px / 2 - var(--sizeDot) / 2); */
+              margin-right: var(--marginDot);
+            }
+          }
+        }
+      }
+    }
+  }
+}
