@@ -28,7 +28,8 @@ export const DescriptionCollapseUI: React.FC<IDescriptionCollapseUIProps> = ({
   const [showButton, setShowButton] = useState(false);
   const textRef = useRef<HTMLDivElement>(null);
   const blockRef = useRef<HTMLDivElement>(null);
-  const [isMaxRows, setIsMaxRows] = useState(maxRows);
+
+  const [isCurrentMaxRows, setIsCurrentMaxRows] = useState(maxRows);
 
   const [isInitial, setIsInitial] = useState(false);
 
@@ -42,20 +43,20 @@ export const DescriptionCollapseUI: React.FC<IDescriptionCollapseUIProps> = ({
     const lineHeight = parseFloat(computedStyle.lineHeight);
     const textHeight = blockRef.current?.getBoundingClientRect().height || 0;
 
-    let maxCurrentHeight = lineHeight * maxRows;
+    let maxCurrentHeight = lineHeight * isCurrentMaxRows;
 
     // получить из блока переменную --maxHeight
     console.log("maxCurrentHeight", maxCurrentHeight);
     console.log("textHeight", textHeight);
-    console.log("maxRows", maxRows);
+    console.log("maxRows", isCurrentMaxRows);
 
     console.log("blockRef.current", blockRef.current);
     // Если текст не помещается в заданное количество строк, то уменьшаем количество строк
-    for (let i = maxRows; textHeight < maxCurrentHeight; i--) {
+    for (let i = isCurrentMaxRows; textHeight < maxCurrentHeight; i--) {
       maxCurrentHeight = lineHeight * i;
       maxRows = i;
     }
-    setIsMaxRows(maxRows);
+
     setIsMaxHeight(maxCurrentHeight);
 
     // обновить переменную --maxHeight
@@ -197,7 +198,7 @@ export const DescriptionCollapseUI: React.FC<IDescriptionCollapseUIProps> = ({
     }
     setIsInitial(true);
     document.body.removeChild(testElement);
-  }, [text, maxRows, textMore, isInitial]);
+  }, [text, textMore, isInitial]);
 
   const handleToggle = () => {
     setExpanded((prev) => !prev);
@@ -205,7 +206,7 @@ export const DescriptionCollapseUI: React.FC<IDescriptionCollapseUIProps> = ({
   };
 
   const cssTextProperties = {
-    "--maxLines": isMaxRows,
+    "--maxLines": isCurrentMaxRows,
     "--lineHeight": textRef.current
       ? getComputedStyle(textRef.current).lineHeight
       : "1.5em",

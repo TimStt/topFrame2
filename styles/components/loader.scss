@@ -33,6 +33,13 @@
   }
 }
 
+.loader-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
 .position-center-loader {
   position: absolute;
   top: calc(50% - (var(--width) / 2));

@@ -19,6 +19,7 @@ export const useVideo = () => {
   const [isNotVolume, setIsNotVolume] = useState(true);
 
   useEffect(() => {
+    const video = ref.current;
     const handleClick = () => {
       if (ref.current && ref.current.muted) {
         ref.current.muted = false;
@@ -26,27 +27,22 @@ export const useVideo = () => {
         setIsNotVolume(false);
       }
     };
-    if (ref.current && isNotVolume) {
-      ref.current.muted = true;
+    if (video && isNotVolume) {
+      video.muted = true;
     }
     /// отследить любой клик по документу
     document.addEventListener("click", handleClick);
-    ref.current?.addEventListener("click", handleClick);
-    ref.current?.addEventListener("pointerup", (e) => {
-      console.log("pointerup");
-    });
+    video?.addEventListener("click", handleClick);
 
     return () => {
-      if (ref.current) {
-        managerActiveVideo.unregisterVideo(ref.current);
+      if (video) {
+        managerActiveVideo.unregisterVideo(video);
       }
-      ref.current?.removeEventListener("pointerup", (e) => {
-        console.log("pointerup");
-      });
+
       document.removeEventListener("click", handleClick);
-      ref.current?.removeEventListener("click", handleClick);
+      video?.removeEventListener("click", handleClick);
     };
-  }, []);
+  }, [isNotVolume]);
 
   useManagerActiveVideo(ref.current);
 

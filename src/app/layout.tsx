@@ -6,6 +6,8 @@ import type { Metadata } from "next";
 
 import "../../styles/index.scss";
 import { ModalToastUI } from "@/shared/ui/modal-toast-ui";
+import { Suspense } from "react";
+import LoaderUI from "@/shared/ui/loader-ui";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,12 +22,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
-        <MobileMenu />
-        {children}
-        <Footer />
-        <ModalAuth />
-        <ModalToastUI />
+        <Suspense
+          fallback={
+            <div className="loader-wrapper">
+              <LoaderUI className="position-center-loader" />
+            </div>
+          }
+        >
+          <Header />
+          <MobileMenu />
+          {children}
+          <Footer />
+          <ModalAuth />
+          <ModalToastUI />
+        </Suspense>
       </body>
     </html>
   );

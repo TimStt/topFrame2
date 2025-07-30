@@ -60,7 +60,7 @@ export const ModalToastUI: React.FC<ModalToastUIProps> = ({ className }) => {
         cancelAnimationFrame(id);
       };
     }
-  }, [isOpenModal]);
+  }, [isOpenModal, delay]);
 
   return (
     <ModalUI

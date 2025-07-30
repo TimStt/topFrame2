@@ -63,7 +63,7 @@ export const useManagerActiveVideo = (video: HTMLVideoElement | null) => {
     if (video) {
       managerActiveVideo.registerVideo(video);
     }
-  }, []);
+  }, [video]);
 
   return { isActive, setIsActive };
 };

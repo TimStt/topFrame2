@@ -2,7 +2,7 @@ import { HeadPage } from "@/widgets/mainblocks/head-page";
 import { InfoUser } from "@/widgets/profile/info-user";
 import { SearchVacancies } from "@/widgets/vacancy/search-vacancies";
 
-export default function Page() {
+const Page = () => {
   return (
     <main className="profile">
       <HeadPage className="container" title="Личный кабинет" />
@@ -13,4 +13,6 @@ export default function Page() {
       </div>
     </main>
   );
-}
+};
+
+export default Page;

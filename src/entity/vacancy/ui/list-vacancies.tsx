@@ -19,7 +19,7 @@ export const ListVacancies = ({
     <div className={cls("vacancy-list", className)}>
       <div className="vacancy-list__content">
         {vacancies.map((vacancy) => (
-          <CardVacancy children={undefined} key={vacancy.id} {...vacancy} />
+          <CardVacancy key={vacancy.id} {...vacancy} />
         ))}
       </div>
 
