@@ -1,4 +1,4 @@
-@use "../libs/mixins.scss" as *;
+@use '../libs/mixins.scss' as *;
 
 // Input wrapper
 .input-wrapper {
@@ -26,8 +26,22 @@
   // margin-bottom: 4px;
 }
 
+input:focus-within + .input-placeholder {
+  opacity: 0;
+}
+
+input::placeholder {
+  color: var(--color-gray-2);
+  font-family: var(--third-family);
+  font-family: var(--third-family);
+  @include font-setup(16, 19, 400);
+}
+
 // Input container
 .input-container {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   position: relative;
   display: flex;
   align-items: center;
@@ -54,15 +68,11 @@
 
   &--with-password {
     &--small {
-      --paddingRightSmall: calc(
-        var(--paddingRightWithPassword) + var(--paddingRightSmall)
-      );
+      --paddingRightSmall: calc(var(--paddingRightWithPassword) + var(--paddingRightSmall));
     }
 
     &--large {
-      --paddingRightMedium: calc(
-        var(--paddingRightWithPassword) + var(--paddingRightMedium)
-      );
+      --paddingRightMedium: calc(var(--paddingRightWithPassword) + var(--paddingRightMedium));
     }
   }
 
@@ -96,6 +106,10 @@
       padding-left: 36px;
     }
 
+    .input-placeholder {
+      max-width: calc(100% - var(--paddingSmall));
+    }
+
     &.input--with-right-icon {
       padding-right: 36px;
     }
@@ -108,10 +122,22 @@
 
     &.input--with-left-icon {
       padding-left: 56px;
+
+      .input-placeholder {
+        max-width: calc(100% - 56px);
+      }
     }
 
     &.input--with-right-icon {
       padding-right: 56px;
+
+      .input-placeholder {
+        max-width: calc(100% - 56px);
+      }
+    }
+
+    .input-placeholder {
+      max-width: calc(100% - var(--paddingLarge));
     }
   }
 

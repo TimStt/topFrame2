@@ -1,4 +1,4 @@
-@use "../libs/_mixins.scss" as *;
+@use '../libs/_mixins.scss' as *;
 
 // Select wrapper
 .select-wrapper {
@@ -177,3 +177,9 @@
 }
 
 // Responsive
+
+@media (max-width: 450px) {
+  .select-wrapper {
+    width: 100%;
+  }
+}

@@ -1,29 +1,30 @@
-import React, { ComponentPropsWithoutRef, forwardRef, useId } from "react";
-import { cls } from "@/shared/lib/cls";
+import React, { ComponentPropsWithoutRef, forwardRef, useId } from 'react'
 
-export type IInput = Omit<ComponentPropsWithoutRef<"input">, "size"> & {
+import { cls } from '@/shared/lib/cls'
+
+export type IInput = Omit<ComponentPropsWithoutRef<'input'>, 'size'> & {
   /** Вариант стиля инпута */
-  variant?: "primary" | "secondary" | "outline" | "error" | "success";
+  variant?: 'primary' | 'secondary' | 'outline' | 'error' | 'success'
   /** Размер инпута */
-  size?: "small" | "medium" | "large";
+  size?: 'small' | 'medium' | 'large'
   /** Полная ширина */
-  fullWidth?: boolean;
+  fullWidth?: boolean
 
   /** Лейбл инпута */
-  label?: string;
+  label?: string
   /** Текст ошибки */
-  error?: string;
+  error?: string
   /** Дополнительные классы */
-  className?: string;
+  className?: string
   /** Дополнительные классы для враппера */
-  classNameWrapper?: string;
+  classNameWrapper?: string
 
-  rootRef?: React.RefObject<HTMLInputElement>;
-};
+  rootRef?: React.RefObject<HTMLInputElement>
+}
 
 export const InputUI = ({
-  variant = "primary",
-  size = "medium",
+  variant = 'primary',
+  size = 'medium',
   fullWidth = false,
   label,
   error,
@@ -35,24 +36,24 @@ export const InputUI = ({
   ...rest
 }: IInput) => {
   const inputClasses = cls(
-    "input",
+    'input',
     `input--${variant}`,
     `input--${size}`,
     {
-      "input--full-width": fullWidth,
-      "input--error": error,
+      'input--full-width': fullWidth,
+      'input--error': error,
     },
-    className
-  );
+    className,
+  )
 
   const wrapperClasses = cls(
-    "input-wrapper",
+    'input-wrapper',
     {
-      "input-wrapper--full-width": fullWidth,
+      'input-wrapper--full-width': fullWidth,
     },
-    classNameWrapper
-  );
-  const id = useId();
+    classNameWrapper,
+  )
+  const id = useId()
   return (
     <div className={wrapperClasses}>
       {label && (
@@ -62,13 +63,7 @@ export const InputUI = ({
       )}
 
       <div className="input-container">
-        <input
-          ref={rootRef}
-          className={inputClasses}
-          {...rest}
-          id={id}
-          placeholder={placeholder}
-        />
+        <input ref={rootRef} className={inputClasses} {...rest} id={id} placeholder={placeholder} />
         {children}
       </div>
       {error && (
@@ -77,7 +72,7 @@ export const InputUI = ({
         </span>
       )}
     </div>
-  );
-};
+  )
+}
 
-InputUI.displayName = "InputUI";
+InputUI.displayName = 'InputUI'

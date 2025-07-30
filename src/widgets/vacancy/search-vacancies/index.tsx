@@ -64,7 +64,7 @@ export const SearchVacancies = ({
     <div className={cls('search-vacancies', className)}>
       <SearchBoxUI
         className="search-vacancies__box"
-        placeholder="Поиск по названию вакансии, навыкам, ключевым словам..."
+        placeholder="Поиск по названию вакансии, навыкам, ключевым словам"
         renderQuickFilters={
           withQuickFilters && (
             <QuickFiltersUI
