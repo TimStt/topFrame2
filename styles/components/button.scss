@@ -1,4 +1,4 @@
-@use "../libs/mixins.scss" as *;
+@use '../libs/mixins.scss' as *;
 :root {
   // Button sizes
   --btnHeightSmall: 40px;
@@ -217,7 +217,7 @@
     }
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       z-index: 1;
       top: 0;
@@ -256,7 +256,7 @@
     transform: translate(-50%, -50%);
 
     &::after {
-      content: "";
+      content: '';
       width: 16px;
       height: 16px;
       border: 2px solid transparent;
@@ -271,14 +271,16 @@
   text-wrap: nowrap;
   --colorText: var(--color-accent-blue);
   border-radius: 50px;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 8px 24px;
   width: max-content;
   background-color: var(--color-light-blue);
   color: var(--colorText);
 
   span {
-    @include font-setup(12, 14, 500);
+    @include font-setup(12, 12, 500);
   }
 }
 

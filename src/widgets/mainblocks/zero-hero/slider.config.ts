@@ -1,5 +1,5 @@
-import { Autoplay, Navigation } from "swiper/modules";
-import { SwiperOptions } from "swiper/types";
+import { Autoplay, Navigation } from 'swiper/modules'
+import { SwiperOptions } from 'swiper/types'
 
 export const sliderConfig: SwiperOptions = {
   spaceBetween: 20,
@@ -11,8 +11,8 @@ export const sliderConfig: SwiperOptions = {
     pauseOnMouseEnter: true,
   },
   navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
   },
 
   breakpoints: {
@@ -34,4 +34,4 @@ export const sliderConfig: SwiperOptions = {
       spaceBetween: 30,
     },
   },
-};
+}

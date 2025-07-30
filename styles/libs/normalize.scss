@@ -8,6 +8,19 @@ button {
   border: none;
 }
 
+details > summary::marker {
+  display: none;
+  content: ''; /* Прощай, стрелочка, теперь ты здесь не нужна! */
+}
+
+details > summary::-webkit-details-marker {
+  display: none; /* Эй, Chrome, смотри, стрелка исчезла! */
+}
+
+details:not(summary) {
+  list-style: none; /* Если нет summary, то и стрелки нет! */
+}
+
 h2,
 h3,
 h4,
@@ -82,10 +95,10 @@ h1 {
   margin-block-start: 0;
 }
 
-input[type="date"]::-webkit-datetime-edit-day-field,
-input[type="date"]::-webkit-datetime-edit-month-field,
-input[type="date"]::-webkit-datetime-edit-year-field,
-input[type="date"]::-webkit-datetime-edit-text {
+input[type='date']::-webkit-datetime-edit-day-field,
+input[type='date']::-webkit-datetime-edit-month-field,
+input[type='date']::-webkit-datetime-edit-year-field,
+input[type='date']::-webkit-datetime-edit-text {
   color: var(--color-black);
   background-color: transparent;
 }

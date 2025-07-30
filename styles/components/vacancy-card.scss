@@ -1,4 +1,4 @@
-@use "../libs/_mixins.scss" as *;
+@use '../libs/_mixins.scss' as *;
 
 .vacancy-list {
   display: flex;
@@ -28,12 +28,7 @@
   border: 1px solid var(--color-light-blue);
   border-radius: 8px;
 
-  @include fluid-text(
-    var(--maxPadding),
-    var(--minPadding),
-    padding,
-    var(--container-max-width)
-  );
+  @include fluid-text(var(--maxPadding), var(--minPadding), padding, var(--container-max-width));
   max-width: calc(var(--container-max-width) * 1px);
   width: 100%;
   background-color: var(--color-light);
@@ -42,8 +37,7 @@
   justify-content: space-between;
   gap: 16px;
   position: relative;
-
-  &:hover {
+  @include hover-btn() {
     box-shadow: 0 0 20px 0 #f7ffcd;
   }
 
@@ -54,7 +48,7 @@
     width: 100%;
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       inset: 0;
     }
