@@ -1,6 +1,6 @@
 // Header Component Styles
 
-@use "../libs/mixins.scss" as *;
+@use '../libs/mixins.scss' as *;
 
 .title-section {
   @include font-setup(
@@ -88,7 +88,7 @@
       position: relative;
 
       &::after {
-        content: "";
+        content: '';
         position: absolute;
         bottom: -4px;
         left: 0;
@@ -253,6 +253,7 @@
         text-wrap: nowrap;
         opacity: 0;
         right: 0;
+        z-index: 10;
         background: rgba(253, 253, 253, 0.16);
         top: calc((100% + var(--sizeTriangle)) * -1);
         border-radius: 50px;
@@ -262,7 +263,7 @@
         box-shadow: 0 0 10px 0 rgba(253, 253, 253, 0.16);
 
         &::before {
-          content: "";
+          content: '';
           position: absolute;
           bottom: calc(var(--sizeTriangle) * -1);
           right: calc(var(--sizeIcon) / 2);
@@ -320,8 +321,7 @@
   }
 
   &_inner {
-    padding-block: calc(var(--height-header) + var(--paddingTop))
-      var(--paddingBottom);
+    padding-block: calc(var(--height-header) + var(--paddingTop)) var(--paddingBottom);
     position: relative;
     z-index: 2;
   }
@@ -592,9 +592,8 @@
   top: 50%;
   left: 50%;
   transform-origin: center;
-  transform: translate(-50%, -50%) rotate(var(--angle))
-    translateX(var(--translateX)) rotate(calc(-1 * var(--angle)))
-    rotate(var(--additionalAngle));
+  transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--translateX))
+    rotate(calc(-1 * var(--angle))) rotate(var(--additionalAngle));
 }
 
 .hr-ecosystem {
@@ -611,7 +610,7 @@
 
   &:after,
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0%);
@@ -660,7 +659,7 @@
 
     &:after {
       aspect-ratio: 1 / 1;
-      content: "";
+      content: '';
       border-radius: 50%;
       background: var(--color-light-blue);
       filter: blur(64px);
@@ -803,8 +802,8 @@
       }
     }
 
-    transform: translate(-50%, -50%) rotate(var(--angle))
-      translateX(var(--translateX)) rotate(calc(-1 * var(--angle)));
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--translateX))
+      rotate(calc(-1 * var(--angle)));
 
     // напиши цикл для элементов
 
@@ -816,12 +815,12 @@
     // напиши анимация вращения элемента от исходной позиции --angle 0deg до 360deg
     @keyframes rotate {
       from {
-        transform: translate(-50%, -50%) rotate(var(--angle))
-          translateX(var(--translateX)) rotate(calc(-1 * var(--angle)));
+        transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--translateX))
+          rotate(calc(-1 * var(--angle)));
       }
       to {
-        transform: translate(-50%, -50%) rotate(var(--endAngle))
-          translateX(var(--translateX)) rotate(calc(-1 * var(--endAngle)));
+        transform: translate(-50%, -50%) rotate(var(--endAngle)) translateX(var(--translateX))
+          rotate(calc(-1 * var(--endAngle)));
       }
     }
 
@@ -928,15 +927,7 @@
       color: var(--color-main);
     }
     &-title {
-      @include font-setup(
-        24,
-        29,
-        700,
-        true,
-        18,
-        24,
-        var(--container-max-width)
-      );
+      @include font-setup(24, 29, 700, true, 18, 24, var(--container-max-width));
       color: inherit;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -1166,7 +1157,7 @@
     }
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       inset: 0;
       transition: background-color 0.3s ease-in-out;

@@ -54,7 +54,7 @@ export const useVideo = ({ videoId }: { videoId: number }) => {
 
   const handlePlay = async () => {
     if (!ref.current) return
-    if (isLoading || isPlaying) return
+    if (isLoading || isPlaying || !ref.current.paused) return
     managerActiveVideo.stopAllExcept(ref.current)
     setHasError(false)
     setIsLoading(true)
@@ -109,9 +109,10 @@ export const useVideo = ({ videoId }: { videoId: number }) => {
     console.log('handlePause')
     setActiveVideo(null)
     setIsLoading(false)
-
-    ref.current.pause()
-    ref.current.currentTime = 0
+    if (!ref.current.paused) {
+      ref.current.pause()
+      ref.current.currentTime = 0
+    }
   }
 
   const Loader = ({ className, ...props }: { className?: string } & ILoaderUI) => {

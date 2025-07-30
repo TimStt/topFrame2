@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 /**
  * @file: Footer section
@@ -6,17 +6,17 @@
  * @dependencies: React, Next.js Link
  * @created: 2024-01-15
  */
-import React from "react";
+import React from 'react'
 
-import { BACKGROUND_IMAGE_BLUE } from "@/shared/constants/other";
-import ArrowIcon from "@/source/icons/arrow.svg";
-import EmailIcon from "@/source/icons/email.svg";
-import LogoIsArt from "@/source/icons/logo-is-art.svg";
-import Image from "next/image";
-import Link from "next/link";
+import { BACKGROUND_IMAGE_BLUE } from '@/shared/constants/other'
+import { PAGES_PATHS } from '@/shared/constants/pages-paths'
+import ArrowIcon from '@/source/icons/arrow.svg'
+import EmailIcon from '@/source/icons/email.svg'
+import LogoIsArt from '@/source/icons/logo-is-art.svg'
+import Image from 'next/image'
+import Link from 'next/link'
 
-import { companyInfo, footerContacts, footerNavigation } from "./footer.data";
-import { PAGES_PATHS } from "@/shared/constants/pages-paths";
+import { companyInfo, footerContacts, footerNavigation } from './footer.data'
 
 export const Footer: React.FC = () => {
   return (
@@ -63,15 +63,9 @@ export const Footer: React.FC = () => {
           </div>
           {/* Правая колонка - Контакты */}
           <div className="footer__contacts">
-            <a
-              className="footer__contacts__email"
-              href="mailto:info@topframe.ru"
-            >
+            <a className="footer__contacts__email" href="mailto:info@topframe.ru">
               <span className="visually-hidden">Посмотреть почту</span>
               <EmailIcon />
-              <span className="footer__contacts__email-text">
-                написать на почту
-              </span>
             </a>
             <a href="tel:+79636843639" className="footer__contacts-phone">
               +7 963 684 36 39
@@ -99,7 +93,7 @@ export const Footer: React.FC = () => {
 
       {/* Нижняя часть футера */}
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer
