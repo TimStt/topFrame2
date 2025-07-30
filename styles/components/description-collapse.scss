@@ -7,6 +7,20 @@
     max-height: var(--maxHeight);
     overflow-y: auto;
 
+    &::-webkit-scrollbar {
+      width: 2px;
+      height: 20px;
+    }
+    &::-webkit-scrollbar-track {
+      background: var(--color-white-1);
+      /* Закругленные углы дорожки */
+    }
+    &::-webkit-scrollbar-thumb {
+      background: var(--color-light-blue-2);
+
+      border-radius: 2px;
+    }
+
     .description-block__more-btn {
       margin-left: 0.3em;
     }
@@ -17,11 +31,6 @@
   margin: 0;
   transition: all var(--transition-normal) ease;
   line-height: inherit;
-
-  &::-webkit-scrollbar {
-    width: 4px; /* Ширина вертикального скроллбара */
-    height: 4px; /* Высота горизонтального скроллбара */
-  }
 }
 
 .description-block__ellipsis {

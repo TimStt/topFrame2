@@ -87,16 +87,19 @@
 
   // Размеры
   &--small {
-    height: var(--btnHeightSmall);
+    min-height: var(--btnHeightSmall);
+    max-height: var(--btnHeightSmall);
     padding: var(--btnPaddingSmall);
   }
 
   &--medium {
-    height: var(--btnHeightMedium);
+    min-height: var(--btnHeightMedium);
+    max-height: var(--btnHeightMedium);
   }
 
   &--large {
-    height: var(--btnHeightLarge);
+    min-height: var(--btnHeightLarge);
+    max-height: var(--btnHeightLarge);
     padding: var(--btnPaddingLarge);
   }
 

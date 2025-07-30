@@ -43,14 +43,3 @@ next-env.d.ts
 
 public/video/*
 
-# Видео файлы
-*.mp4
-*.mov
-*.avi
-*.mkv
-*.webm
-*.flv
-*.wmv
-*.mpeg
-*.mpg
-*.m4v

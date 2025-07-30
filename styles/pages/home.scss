@@ -386,6 +386,7 @@
     .circle {
       filter: drop-shadow(0 0 5px #fdfdfd) drop-shadow(0 0 5px #f7ffcd);
       position: relative;
+      opacity: 0;
 
       // // Асинхронная анимация для каждой линии
       // &:nth-child(1) {
@@ -883,23 +884,25 @@
   &__list {
     overflow-x: auto;
     max-height: 583px;
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-light) #d5e8f852;
+    // scrollbar-width: thin;
+    // scrollbar-color: var(--color-light) #d5e8f852;
     /* Дорожка скроллбара (фон, по которому двигается ползунок) */
     &::-webkit-scrollbar {
       width: 2px;
+      height: 33px;
     }
     &::-webkit-scrollbar-track {
-      background: var(--color-light-blue);
+      background: var(--color-white-1);
       /* Закругленные углы дорожки */
     }
-    padding-right: 24px;
-    /* Ползунок скроллбара (та часть, которую можно перетаскивать) */
     &::-webkit-scrollbar-thumb {
-      background: #d5e8f852;
+      background: var(--color-accent-blue);
 
       border-radius: 2px;
     }
+
+    padding-right: 24px;
+    /* Ползунок скроллбара (та часть, которую можно перетаскивать) */
   }
 
   &__button {
