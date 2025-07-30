@@ -28,6 +28,10 @@ import { AnimationEllipses } from "@/shared/ui/animation-ellipses-ui";
 export const Directions: React.FC = () => {
   const [isSelected, setIsSelected] = useState<number | null>(null);
 
+  const selectedCard = directionsCardsData.find(
+    (card) => card.id === isSelected
+  );
+
   return (
     <section
       className="directions transform-ellipses"
@@ -66,8 +70,8 @@ export const Directions: React.FC = () => {
             ))}
           </div>
           <div className="directions__selected">
-            {isSelected ? (
-              <DirectionCard {...directionsCardsData[isSelected]} />
+            {selectedCard ? (
+              <DirectionCard {...selectedCard} />
             ) : (
               <div className="directions__selected-empty">
                 <FoundIcon />
@@ -83,25 +87,28 @@ export const Directions: React.FC = () => {
   );
 };
 
-export const DirectionCard: React.FC<IDirectionCards> = ({
-  id,
-  title,
-  description,
-  image,
-}) => {
+export const DirectionCard: React.FC<IDirectionCards | undefined> = (card) => {
   const { ref, className } = useAnimateOnScroll();
+
+  if (!card) return null;
+
   return (
     <article
       className={cls("directions__card fade-in", className)}
-      key={id}
+      key={card?.id}
       ref={ref}
     >
-      <Image src={image} alt={title} width={480} height={240} />
+      <Image
+        src={card?.image || ""}
+        alt={card?.title || ""}
+        width={480}
+        height={240}
+      />
       <div className="directions__card__text-container">
-        <h4 className="directions__card-title">{title}</h4>
+        <h4 className="directions__card-title">{card?.title}</h4>
         <DescriptionCollapseUI
           className="directions__card-description"
-          text={description}
+          text={card?.description || ""}
           maxRows={4}
         />
 

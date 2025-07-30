@@ -31,7 +31,6 @@ export const QuickFiltersUI = ({
       </div>
       <ButtonUI
         className="search-box__filters-toggle"
-        size="small"
         fullWidth
         variant="secondary"
         onClick={() => setIsOpen(!isOpen)}

@@ -19,6 +19,8 @@ export type ITextarea = Omit<IInput, "leftIcon" | "rightIcon"> &
     maxRows?: number;
     /** Автоматическое изменение высоты */
     autoResize?: boolean;
+    /** Показывать счетчик символов */
+    shouldShowCounter?: boolean;
   };
 
 export const TextareaUI = forwardRef<HTMLTextAreaElement, ITextarea>(
@@ -31,7 +33,7 @@ export const TextareaUI = forwardRef<HTMLTextAreaElement, ITextarea>(
       error,
       className,
       classNameWrapper,
-      showCounter = false,
+      shouldShowCounter = false,
       maxLength,
       minRows = 3,
       maxRows,
@@ -44,12 +46,6 @@ export const TextareaUI = forwardRef<HTMLTextAreaElement, ITextarea>(
   ) => {
     const [currentLength, setCurrentLength] = useState(0);
     const [textareaValue, setTextareaValue] = useState(value || "");
-
-    useEffect(() => {
-      const valueStr = String(value || "");
-      setTextareaValue(valueStr);
-      setCurrentLength(valueStr.length);
-    }, [value]);
 
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       const newValue = e.target.value;
@@ -93,22 +89,7 @@ export const TextareaUI = forwardRef<HTMLTextAreaElement, ITextarea>(
       classNameWrapper
     );
 
-    // Вычисляем стили для автоматического изменения высоты
-    const textareaStyles: React.CSSProperties = {};
-    if (autoResize) {
-      textareaStyles.resize = "none";
-      textareaStyles.overflow = "hidden";
-    }
-    if (minRows) {
-      textareaStyles.minHeight = `${minRows * 1.5}em`;
-    }
-    if (maxRows) {
-      textareaStyles.maxHeight = `${maxRows * 1.5}em`;
-    }
-
     // Определяем, показывать ли счетчик
-    const shouldShowCounter = showCounter || (maxLength && maxLength > 0);
-
     // Определяем, превышен ли лимит символов
     const isOverLimit = maxLength ? currentLength > maxLength : false;
 
@@ -119,23 +100,11 @@ export const TextareaUI = forwardRef<HTMLTextAreaElement, ITextarea>(
           <textarea
             ref={ref}
             className={textareaClasses}
-            style={textareaStyles}
             value={textareaValue}
             onChange={handleChange}
             maxLength={maxLength}
             {...rest}
           />
-          {shouldShowCounter && (
-            <div
-              className={cls("textarea-counter", {
-                "textarea-counter--error": isOverLimit,
-                "textarea-counter--warning":
-                  maxLength && currentLength > maxLength * 0.9,
-              })}
-            >
-              {maxLength ? `${currentLength}/${maxLength}` : currentLength}
-            </div>
-          )}
         </div>
         {error && <span className="textarea-error">{error}</span>}
       </div>

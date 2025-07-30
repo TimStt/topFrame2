@@ -1,4 +1,4 @@
-@use '../libs/mixins.scss' as *;
+@use "../libs/mixins.scss" as *;
 :root {
   // Button sizes
   --btnHeightSmall: 40px;
@@ -54,7 +54,7 @@
   padding-inline: 24px;
 
   span {
-    @include font-setup(16, 19, 600);
+    @include font-setup(16, 16, 600);
   }
 
   &:has(.arrow) {
@@ -214,7 +214,7 @@
     }
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       z-index: 1;
       top: 0;
@@ -253,7 +253,7 @@
     transform: translate(-50%, -50%);
 
     &::after {
-      content: '';
+      content: "";
       width: 16px;
       height: 16px;
       border: 2px solid transparent;
@@ -316,8 +316,10 @@
     }
 
     .arrow {
-      width: 16px;
-      height: 16px;
+      min-width: 18px;
+      max-width: 18px;
+      min-height: 18px;
+      max-height: 18px;
     }
   }
 }

@@ -1093,11 +1093,12 @@
   }
   &__card {
     // max-width: var(--cardWidth);
-    height: auto;
+    width: 100%;
+    height: 100%;
     aspect-ratio: 280 / 200;
     position: relative;
     border-radius: 8px;
-    overflow: hidden;
+    // overflow: hidden;
     transition-duration: var(--transition-normal);
     transition-property: opacity;
 
@@ -1120,6 +1121,11 @@
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
     }
 
     &-video {
@@ -1191,6 +1197,55 @@
       @include font-setup(12, 16, 400);
       color: var(--color-light);
     }
+
+    &-volume {
+      font-family: var(--second-family);
+      @include font-setup(12, 16, 400);
+      color: var(--color-light);
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
+    &:has(video:hover) .team__card-volume {
+      z-index: 10;
+      opacity: 1;
+    }
+
+    &.active,
+    &:hover {
+      .team__card-content {
+        z-index: -1;
+        display: none;
+        pointer-events: none;
+      }
+
+      .team__card-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+        opacity: 0;
+        z-index: 2;
+        transform: translate(-50%, -50%);
+      }
+
+      .team__card-poster {
+        opacity: 0;
+        z-index: -1;
+      }
+
+      &::after {
+        background-color: transparent;
+        z-index: -1;
+        pointer-events: none;
+        display: none;
+      }
+    }
   }
 
   &-button {
@@ -1222,40 +1277,10 @@
     margin-top: 8px;
     text-align: center;
   }
-  &.active,
-  &:hover {
-    .team__card-content {
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    .team__card-button {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-
-      opacity: 0;
-      z-index: 2;
-      transform: translate(-50%, -50%);
-    }
-  }
-
-  &.active {
-    &-content {
-      opacity: 0;
-
-      z-index: -1;
-    }
-  }
 
   // Специальные стили для Opera
 
   // В Opera убираем hover эффекты для лучшей производительности
-  &:hover {
-    .team__card-poster {
-      opacity: 1;
-    }
-  }
 
   // Улучшаем показ кнопки в Opera
   .team__card-button {
@@ -1290,19 +1315,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
-
-  &.active {
-    &::after {
-      background-color: transparent;
-      z-index: -1;
-    }
-
-    &-content {
-      opacity: 0;
-      position: relative;
-      z-index: -1;
-    }
   }
 }
 

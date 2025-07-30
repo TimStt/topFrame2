@@ -7,7 +7,9 @@ import { createSelectors } from "./create-selectors";
 
 export interface IInitialStateModals {
   auth?: boolean;
+  toast?: boolean;
   setIsOpenModal: (name: keyof IInitialStateModals, value: boolean) => void;
+  addResponse?: boolean;
   filter?: boolean;
 }
 

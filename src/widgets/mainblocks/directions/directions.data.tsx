@@ -52,6 +52,13 @@ export const directionsData: IDirectionButtons[] = [
       "Профессиональная оценка качества сельскохозяйственной продукции",
     idCard: 6,
   },
+  {
+    id: 7,
+    title: "Экспертиза фруктов и овощей",
+    description:
+      "Профессиональная оценка качества сельскохозяйственной продукции 2",
+    idCard: 7,
+  },
 ];
 
 export const directionsCardsData: IDirectionCards[] = [
@@ -59,7 +66,7 @@ export const directionsCardsData: IDirectionCards[] = [
     id: 1,
     title: "Административное направление",
     description: "Управление административными процессами и документооборотом",
-    image: "/images/directions-1.jpg",
+    image: "/images/direction-1.jpg",
   },
   {
     id: 2,
@@ -91,6 +98,13 @@ export const directionsCardsData: IDirectionCards[] = [
     title: "Экспертиза фруктов и овощей",
     description:
       "Профессs dddddd ddddd ddd ddddd ddddd ddddd dddd  ddddd dddd sdиональная sd sd sd sd sd kso doasko daoksdo kasodk aoskd ksokda oksd asodk asod kas dokas dokas dkas dka sdok asokd оценка качества сельскохозяйственной продукции",
+    image: "/images/direction-2.jpg",
+  },
+  {
+    id: 7,
+    title: "Экспертиза фруктов и овощей",
+    description:
+      "Профессиональная оценка качества сельскохозяйственной продукции 2",
     image: "/images/direction-2.jpg",
   },
 ];

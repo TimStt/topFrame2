@@ -8,6 +8,7 @@ export const sliderConfig: SwiperOptions = {
   autoplay: {
     delay: 2500,
     disableOnInteraction: false,
+    pauseOnMouseEnter: true,
   },
   navigation: {
     nextEl: ".swiper-button-next",

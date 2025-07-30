@@ -3,6 +3,7 @@ import { HeadPage } from "@/widgets/mainblocks/head-page";
 import { ChipUI } from "@/shared/ui/chip-ui";
 import { ButtonUI } from "@/shared/ui/button-ui";
 import LocationIcon from "@/source/icons/location.svg";
+import { ModalAddResponse } from "@/widgets/vacancy/modal-add-response";
 export default function VacanciesPage() {
   return (
     <main className="vacancy-page">
@@ -21,12 +22,7 @@ export default function VacanciesPage() {
             <span>Москва</span>
           </div>
 
-          <ButtonUI
-            className="vacancy-page__button"
-            variant="secondary"
-            text="Откликнуться"
-            hasArrow
-          />
+          <ModalAddResponse />
 
           <div className="vacancy-page__info">
             <div className="vacancy-page__info-item">

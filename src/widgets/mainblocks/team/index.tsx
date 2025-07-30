@@ -17,7 +17,7 @@ import LoaderUI from "@/shared/ui/loader-ui";
 
 export const Team: React.FC = () => {
   return (
-    <section className="team container">
+    <section className="team container" id="team">
       <div className="team__header">
         <h2 className="team__title title-section">Наша команда</h2>
         <p className="team__subtitle subtitle">
@@ -50,6 +50,7 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
     setHasError,
     setIsPaused,
     isPaused,
+    isNotVolume,
     Loader,
   } = useVideo();
 
@@ -61,9 +62,25 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
         isPlaying && "video-playing",
         isPaused && "video-paused"
       )}
-      // onMouseEnter={handlePlay}
-      // onMouseLeave={handlePause}
-      onClick={handlePlay}
+      onMouseEnter={() => {
+        console.log("mouse enter");
+        handlePlay();
+      }}
+      onMouseLeave={() => {
+        console.log("mouse leave");
+        handlePause();
+      }}
+      // onClick={
+      //   isPlaying
+      //     ? () => {
+      //         console.log("pause");
+      //         ref.current?.pause();
+      //       }
+      //     : () => {
+      //         console.log("play");
+      //         handlePlay();
+      //       }
+      // }
     >
       {/* Постер как отдельный элемент */}
       <div
@@ -75,11 +92,13 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
         className={cls("team__card-video", !isLoading && "video-loaded")}
         ref={ref}
         loop
-        muted
         controls={isPlaying}
         playsInline
         preload="metadata"
         crossOrigin="anonymous"
+        onMouseDown={() => {
+          console.log("click");
+        }}
         onLoadStart={() => {
           setIsLoading(true);
           setHasError(false);
@@ -121,7 +140,7 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
         isLoading={isLoading}
       /> */}
 
-      {
+      {!isPlaying && (
         <div className="team__card-content">
           <PlayButtonUI
             className="team__card-button"
@@ -145,7 +164,13 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
           <h3 className="team__card-title">{member.name}</h3>
           <span className="team__card-position">{member.position}</span>
         </div>
-      }
+      )}
+
+      {/* {isNotVolume && (
+        <span className="team__card-volume">
+          Для включения звука нажмите на видео
+        </span>
+      )} */}
     </div>
   );
 };

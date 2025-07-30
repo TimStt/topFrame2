@@ -1,4 +1,8 @@
-import { useAuthStore, useAuthStoreBase } from "@/features/auth/auth.store";
+import {
+  TRole,
+  useAuthStore,
+  useAuthStoreBase,
+} from "@/features/auth/auth.store";
 import { changeStepAuth } from "@/features/auth/change-step-auth";
 import { useAnimateOnScroll } from "@/shared/hooks/use-animate-on-scroll";
 import { cls } from "@/shared/lib/cls";
@@ -14,14 +18,14 @@ import React from "react";
 export const LoginStep = () => {
   const { className, ref } = useAnimateOnScroll();
 
-  const handleTestAuth = () => {
+  const handleTestAuth = (type: TRole) => {
     useAuthStoreBase.getState().setIsAuthTest(true);
-
+    useAuthStoreBase.getState().setRole(type);
     onToggleModal("auth", false);
   };
 
   return (
-    <div
+    <form
       ref={ref}
       className={cls(className, "modal-auth__login-step fade-in ")}
     >
@@ -54,14 +58,24 @@ export const LoginStep = () => {
       <ButtonSubmitUI
         className="modal-auth__button-action"
         hasArrow
-        onClick={handleTestAuth}
+        onClick={() => handleTestAuth("freelancer")}
         fullWidth
+        type="button"
       >
-        ТЕСТ ЛК
+        ТЕСТ ЛК ФРИЛАНСЕРА
+      </ButtonSubmitUI>
+      <ButtonSubmitUI
+        className="modal-auth__button-action"
+        hasArrow
+        onClick={() => handleTestAuth("recruiter")}
+        fullWidth
+        type="button"
+      >
+        ТЕСТ ЛК РЕКРУТЕРА
       </ButtonSubmitUI>
       <p className="modal-auth__police-text">
         Продолжая, вы принимаете политику конфиденциальности
       </p>
-    </div>
+    </form>
   );
 };
