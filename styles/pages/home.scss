@@ -892,11 +892,11 @@
       height: 33px;
     }
     &::-webkit-scrollbar-track {
-      background: var(--color-white-1);
+      background: var(--color-light-blue-2);
       /* Закругленные углы дорожки */
     }
     &::-webkit-scrollbar-thumb {
-      background: var(--color-accent-blue);
+      background: var(--color-white-1);
 
       border-radius: 2px;
     }
