@@ -83,7 +83,6 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
       <video
         className={cls('team__card-video', !isLoading && 'video-loaded')}
         ref={ref}
-        loop
         onEnded={() => {
           handlePause()
         }}
@@ -118,9 +117,8 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
         onPause={() => {
           setIsPaused(true)
         }}
-      >
-        <source src={member.video} type="video/mp4" />
-      </video>
+        src={member.video}
+      />
 
       {/* <PlayButtonUI
         className="team__card-button"
