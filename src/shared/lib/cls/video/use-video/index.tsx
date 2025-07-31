@@ -42,6 +42,8 @@ export const useVideo = ({ videoId }: { videoId: number }) => {
 
     container?.addEventListener('mouseenter', handlePlay)
 
+    container?.addEventListener('touchstart', handlePlay)
+
     /// отследить любой клик по документу
     document.addEventListener('click', handleClick)
     video?.addEventListener('click', handleClick)
