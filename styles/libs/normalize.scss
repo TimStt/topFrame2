@@ -14,11 +14,18 @@ details > summary::marker {
 }
 
 details > summary::-webkit-details-marker {
-  display: none; /* Эй, Chrome, смотри, стрелка исчезла! */
+  display: none !important; /* Эй, Chrome, смотри, стрелка исчезла! */
 }
 
 details:not(summary) {
-  list-style: none; /* Если нет summary, то и стрелки нет! */
+  list-style: none !important; /* Если нет summary, то и стрелки нет! */
+}
+
+summary {
+  list-style: none !important;
+}
+summary::-webkit-details-marker {
+  display: none !important;
 }
 
 h2,

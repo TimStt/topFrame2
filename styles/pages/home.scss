@@ -548,6 +548,19 @@
     &:has(.zero-hero__feature-details[open]) {
       height: 100%;
       overflow-y: auto;
+      &::-webkit-scrollbar {
+        width: 2px;
+        height: 33px;
+      }
+      &::-webkit-scrollbar-track {
+        background: var(--color-light-blue-2);
+        /* Закругленные углы дорожки */
+      }
+      &::-webkit-scrollbar-thumb {
+        background: var(--color-white-1);
+
+        border-radius: 2px;
+      }
       border-color: var(--color-light-blue);
       // border: 1px solid var(--color-light-blue); // Убираем эту строку
 
@@ -1584,6 +1597,10 @@
   .zero-hero__feature-card {
     margin-inline: 1px;
     max-width: calc(100% - 2px);
+  }
+
+  .zero-hero_inner {
+    --paddingBottom: 16px;
   }
 
   .footer__contacts {
