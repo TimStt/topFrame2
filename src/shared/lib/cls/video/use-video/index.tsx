@@ -10,6 +10,7 @@ export const useVideo = ({ videoId }: { videoId: number }) => {
   const ref = useRef<HTMLVideoElement>(null)
 
   const [hasError, setHasError] = useState(false)
+  const [isCurrentTime, setIsCurrentTime] = useState(0)
 
   const [isPaused, setIsPaused] = useState(false)
 
@@ -101,6 +102,7 @@ export const useVideo = ({ videoId }: { videoId: number }) => {
         })
       }
       setActiveVideo(videoId)
+      video.currentTime = isCurrentTime
       // Запускаем воспроизведение
       await video.play()
     } catch (error) {
@@ -148,5 +150,7 @@ export const useVideo = ({ videoId }: { videoId: number }) => {
     setIsLoading,
     setHasError,
     Loader,
+    isCurrentTime,
+    setIsCurrentTime,
   }
 }

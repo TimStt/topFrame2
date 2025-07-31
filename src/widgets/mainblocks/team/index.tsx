@@ -50,6 +50,8 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
     setHasError,
     setIsPaused,
     isPaused,
+    isCurrentTime,
+    setIsCurrentTime,
     containerRef,
     isNotVolume,
     Loader,
@@ -88,6 +90,9 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
         }}
         controls={isPlaying}
         playsInline
+        onTimeUpdate={(e) => {
+          setIsCurrentTime(e.currentTarget.currentTime)
+        }}
         muted
         preload="metadata"
         crossOrigin="anonymous"
