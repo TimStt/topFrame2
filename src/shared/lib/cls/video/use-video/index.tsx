@@ -36,6 +36,12 @@ export const useVideo = ({ videoId }: { videoId: number }) => {
       video.muted = true
     }
 
+    container?.addEventListener('mouseout', handlePause)
+
+    container?.addEventListener('mouseleave', handlePause)
+
+    container?.addEventListener('mouseenter', handlePlay)
+
     /// отследить любой клик по документу
     document.addEventListener('click', handleClick)
     video?.addEventListener('click', handleClick)
@@ -44,6 +50,11 @@ export const useVideo = ({ videoId }: { videoId: number }) => {
       if (video) {
         managerActiveVideo.unregisterVideo(video)
       }
+      container?.removeEventListener('mouseout', handlePause)
+
+      container?.removeEventListener('mouseenter', handlePlay)
+
+      container?.removeEventListener('mouseleave', handlePause)
 
       document.removeEventListener('click', handleClick)
       video?.removeEventListener('click', handleClick)

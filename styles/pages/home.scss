@@ -1004,7 +1004,7 @@
       color: var(--color-main);
       margin-bottom: 16px;
       display: -webkit-box;
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
       min-height: min-content;
       overflow: hidden;
@@ -1012,9 +1012,15 @@
     }
 
     &-description {
-      // --maxHeight: 88px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
 
-      overflow: auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
       font-family: var(--second-family);
       @include font-setup(16, 22, 400);
 

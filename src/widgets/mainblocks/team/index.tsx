@@ -64,14 +64,7 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
         isPaused && 'video-paused',
       )}
       ref={containerRef}
-      onMouseEnter={() => {
-        console.log('mouse enter')
-        handlePlay()
-      }}
-      onMouseLeave={() => {
-        console.log('mouse leave')
-        handlePause()
-      }}
+
       // onClick={
       //   isPlaying
       //     ? () => {
