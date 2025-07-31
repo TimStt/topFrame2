@@ -4,7 +4,7 @@
  * @dependencies: @/styles/components/description-block.scss
  * @created: 2024-06-07
  */
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 
 import cls from 'classnames'
 
@@ -34,9 +34,28 @@ export const DescriptionCollapseUI: React.FC<IDescriptionCollapseUIProps> = ({
   const [isMaxHeight, setIsMaxHeight] = useState(0)
   const [calculatedLineHeight, setCalculatedLineHeight] = useState('1.5em')
 
+  // ✅ НОВОЕ: Кэш для предотвращения ненужных пересчетов
+  const calculationCache = useRef<{
+    text: string
+    maxRows: number
+    width: number
+    result: {
+      truncatedText: string
+      showButton: boolean
+      maxHeight: number
+    }
+  } | null>(null)
+
   // ✅ НОВОЕ: Состояние для отслеживания готовности шрифтов в Safari
   const [fontsLoaded, setFontsLoaded] = useState(false)
   const [recalculateTrigger, setRecalculateTrigger] = useState(0)
+  const [isSafari, setIsSafari] = useState(false)
+
+  // ✅ НОВОЕ: Определяем Safari
+  useEffect(() => {
+    const userAgent = navigator.userAgent.toLowerCase()
+    setIsSafari(userAgent.includes('safari') && !userAgent.includes('chrome'))
+  }, [])
 
   // ✅ НОВОЕ: Функция для принудительной загрузки шрифтов в Safari
   const ensureFontsLoaded = async () => {
@@ -87,15 +106,40 @@ export const DescriptionCollapseUI: React.FC<IDescriptionCollapseUIProps> = ({
     })
   }
 
+  // ✅ НОВОЕ: Проверяем кэш перед расчетом
+  const shouldRecalculate = (element: HTMLElement): boolean => {
+    if (!calculationCache.current) return true
+
+    const cache = calculationCache.current
+    const currentWidth = element.offsetWidth
+
+    return cache.text !== text || cache.maxRows !== maxRows || cache.width !== currentWidth
+  }
+
   useEffect(() => {
-    // ✅ НОВОЕ: Сначала загружаем шрифты
-    ensureFontsLoaded()
-  }, [])
+    // ✅ НОВОЕ: Сначала загружаем шрифты только в Safari
+    if (isSafari) {
+      ensureFontsLoaded()
+    } else {
+      setFontsLoaded(true)
+    }
+  }, [isSafari])
 
   useEffect(() => {
     if (!textRef.current || !blockRef.current || isInitial || !fontsLoaded) return
 
     const element = textRef.current
+    const currentWidth = element.offsetWidth
+
+    // ✅ НОВОЕ: Проверяем кэш
+    if (!shouldRecalculate(element)) {
+      const cache = calculationCache.current!
+      setTruncatedText(cache.result.truncatedText)
+      setShowButton(cache.result.showButton)
+      setIsMaxHeight(cache.result.maxHeight)
+      return
+    }
+
     const computedStyle = getComputedStyle(element)
 
     // Безопасный расчет lineHeight для Safari
@@ -116,9 +160,11 @@ export const DescriptionCollapseUI: React.FC<IDescriptionCollapseUIProps> = ({
 
     setCalculatedLineHeight(lineHeight + 'px')
 
-    // ✅ НОВОЕ: Принудительный reflow для Safari
-    forceReflow(element)
-    forceReflow(blockRef.current!)
+    // ✅ НОВОЕ: Принудительный reflow только в Safari
+    if (isSafari) {
+      forceReflow(element)
+      forceReflow(blockRef.current!)
+    }
 
     const textHeight = blockRef.current?.getBoundingClientRect().height || 0
 
@@ -156,15 +202,30 @@ export const DescriptionCollapseUI: React.FC<IDescriptionCollapseUIProps> = ({
 
     document.body.appendChild(testElement)
 
-    // ✅ НОВОЕ: Ждем стабилизации размеров в Safari
-    waitForStableDimensions(testElement).then(() => {
+    // ✅ НОВОЕ: Ждем стабилизации размеров только в Safari
+    const performCalculation = () => {
       console.log('scrollHeight text', testElement.getBoundingClientRect().height, testElement)
       console.log('clientHeight div', blockRef.current?.getBoundingClientRect().height)
 
       if (testElement.clientHeight <= maxCurrentHeight) {
         // Текст помещается в заданное количество строк
-        setTruncatedText(text)
-        setShowButton(false)
+        const result = {
+          truncatedText: text,
+          showButton: false,
+          maxHeight: maxCurrentHeight,
+        }
+
+        setTruncatedText(result.truncatedText)
+        setShowButton(result.showButton)
+        setIsMaxHeight(result.maxHeight)
+
+        // ✅ НОВОЕ: Сохраняем в кэш
+        calculationCache.current = {
+          text,
+          maxRows,
+          width: currentWidth,
+          result,
+        }
       } else {
         // Нужно обрезать текст
         setShowButton(true)
@@ -219,8 +280,10 @@ export const DescriptionCollapseUI: React.FC<IDescriptionCollapseUIProps> = ({
           fullTestElement.appendChild(button)
           document.body.appendChild(fullTestElement)
 
-          // ✅ НОВОЕ: Принудительный reflow для Safari
-          forceReflow(fullTestElement)
+          // ✅ НОВОЕ: Принудительный reflow только в Safari
+          if (isSafari) {
+            forceReflow(fullTestElement)
+          }
 
           console.log('fullTestElement', fullTestElement.scrollHeight)
 
@@ -252,19 +315,40 @@ export const DescriptionCollapseUI: React.FC<IDescriptionCollapseUIProps> = ({
           finalText = finalText.slice(0, bestBreakPoint)
         }
 
-        setTruncatedText(finalText)
+        const result = {
+          truncatedText: finalText,
+          showButton: true,
+          maxHeight: maxCurrentHeight,
+        }
+
+        setTruncatedText(result.truncatedText)
 
         testElement.innerText = finalText
         console.log('testElement', testElement.getBoundingClientRect().height, maxCurrentHeight)
 
         // Очищаем тестовые элементы
         document.body.removeChild(buttonElement)
+
+        // ✅ НОВОЕ: Сохраняем в кэш
+        calculationCache.current = {
+          text,
+          maxRows,
+          width: currentWidth,
+          result,
+        }
       }
 
       setIsInitial(true)
       document.body.removeChild(testElement)
-    })
-  }, [text, textMore, isInitial, fontsLoaded, recalculateTrigger])
+    }
+
+    // ✅ НОВОЕ: Выполняем расчет сразу или после стабилизации в Safari
+    if (isSafari) {
+      waitForStableDimensions(testElement).then(performCalculation)
+    } else {
+      performCalculation()
+    }
+  }, [text, textMore, isInitial, fontsLoaded, recalculateTrigger, isSafari])
 
   // ✅ НОВОЕ: Обработчик для принудительного пересчета при изменении размеров
   useEffect(() => {
@@ -273,6 +357,7 @@ export const DescriptionCollapseUI: React.FC<IDescriptionCollapseUIProps> = ({
     const resizeObserver = new ResizeObserver(() => {
       // Принудительно пересчитываем при изменении размеров
       setIsInitial(false)
+      calculationCache.current = null // Очищаем кэш при изменении размеров
       setRecalculateTrigger((prev) => prev + 1)
     })
 
@@ -284,16 +369,18 @@ export const DescriptionCollapseUI: React.FC<IDescriptionCollapseUIProps> = ({
     setExpanded((prev) => !prev)
     console.log('textRef offsetHeight', blockRef.current?.offsetHeight)
 
-    // ✅ НОВОЕ: Принудительный пересчет после toggle в Safari
-    setTimeout(() => {
-      setIsInitial(false)
-      setRecalculateTrigger((prev) => prev + 1)
-    }, 100)
+    // ✅ НОВОЕ: Принудительный пересчет после toggle только в Safari
+    if (isSafari) {
+      setTimeout(() => {
+        setIsInitial(false)
+        calculationCache.current = null // Очищаем кэш
+        setRecalculateTrigger((prev) => prev + 1)
+      }, 100)
+    }
   }
 
   const cssTextProperties = {
     '--maxLines': isCurrentMaxRows,
-
     '--maxHeight': isMaxHeight + 'px',
     overflowY: expanded ? ('auto' as const) : ('hidden' as const),
   } as React.CSSProperties
