@@ -96,9 +96,6 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
         muted
         preload="metadata"
         crossOrigin="anonymous"
-        onMouseDown={() => {
-          console.log('click')
-        }}
         onLoadStart={() => {
           setIsLoading(true)
           setHasError(false)
