@@ -32,9 +32,9 @@ export const useVideo = ({ videoId }: { videoId: number }) => {
         setIsNotVolume(false)
       }
     }
-    if (video && isNotVolume) {
-      video.muted = true
-    }
+    // if (video && isNotVolume) {
+    //   video.muted = true
+    // }
 
     container?.addEventListener('mouseout', handlePause)
 

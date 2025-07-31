@@ -89,6 +89,7 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
         }}
         controls={isPlaying}
         playsInline
+        muted
         preload="metadata"
         crossOrigin="anonymous"
         onMouseDown={() => {
