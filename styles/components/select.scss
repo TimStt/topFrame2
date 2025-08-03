@@ -78,6 +78,13 @@
   left: 16px;
   line-height: 1;
 }
+
+.select-wrapper:has(.select__label.not-empty) {
+  .select__trigger {
+    padding-top: 12px;
+  }
+}
+
 .select__label.not-empty {
   top: -2px;
   background-color: white;

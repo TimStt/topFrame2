@@ -91,7 +91,7 @@ export const SelectUI = <T extends string | number>({
   const id = useId()
 
   return (
-    <div className="select-wrapper">
+    <div className={cls('select-wrapper', value.type)}>
       <div ref={selectRef} className={selectClasses}>
         <div
           className="select__trigger"
