@@ -76,13 +76,14 @@
   top: 50%;
   transform: translateY(-50%);
   left: 16px;
+  line-height: 1;
 }
 .select__label.not-empty {
-  top: 0;
+  top: -2px;
   background-color: white;
   border-radius: 5px;
   font-size: 12px;
-  padding-inline: 2px;
+  padding: 4px;
   font-weight: 600;
 }
 .select__label-placeholder {
@@ -115,7 +116,7 @@
     background-color: rgb(230, 230, 230);
     border-radius: 2px;
 
-    padding: 2px 4px;
+    padding: 0px 4px;
     z-index: 7;
     font-size: 85%;
     cursor: pointer;

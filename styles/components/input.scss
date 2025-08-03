@@ -11,6 +11,7 @@
   --paddingRightWithPassword: 10px;
 
   --paddingSmall: 16px var(--paddingRightSmall);
+  --paddingMedium: 16px var(--paddingRightMedium);
   --paddingLarge: 16px var(--paddingRightMedium);
 
   &--full-width {
@@ -78,7 +79,6 @@ input::placeholder {
 
   &:focus-visible {
     border-color: var(--color-light-blue);
-    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
   }
 
   &:disabled {
@@ -115,6 +115,10 @@ input::placeholder {
     }
   }
 
+  &--medium {
+    padding: var(--paddingMedium);
+  }
+
   &--large {
     padding: var(--paddingLarge);
     font-size: 18px;
@@ -143,6 +147,8 @@ input::placeholder {
 
   // Variants
   &--primary {
+    border-radius: 48px;
+
     border-color: #727272;
 
     &::placeholder {

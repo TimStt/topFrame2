@@ -1,40 +1,40 @@
-import { useAnimateOnScroll } from "@/shared/hooks/use-animate-on-scroll";
-import { cls } from "@/shared/lib/cls";
-import { PAGES_PATHS } from "@/shared/constants/pages-paths";
-import { onToggleModal } from "@/shared/lib/zustands/use-store-modals";
-import { ButtonSubmitUI } from "@/shared/ui/button-submit-ui";
-import { ButtonUI } from "@/shared/ui/button-ui";
-import { InputPhoneUI } from "@/shared/ui/input-phone-ui";
-import { InputUI } from "@/shared/ui/input-ui";
-import { ModalToastUI } from "@/shared/ui/modal-toast-ui";
-import { useModalToastStore } from "@/shared/ui/modal-toast-ui/modal-toast.store";
-import { TextareaUI } from "@/shared/ui/textarea-ui";
-import Link from "next/link";
-import React from "react";
+import React from 'react'
+
+import { PAGES_PATHS } from '@/shared/constants/pages-paths'
+import { useAnimateOnScroll } from '@/shared/hooks/use-animate-on-scroll'
+import { cls } from '@/shared/lib/cls'
+import { onToggleModal } from '@/shared/lib/zustands/use-store-modals'
+import { ButtonSubmitUI } from '@/shared/ui/button-submit-ui'
+import { ButtonUI } from '@/shared/ui/button-ui'
+import { InputPhoneUI } from '@/shared/ui/input-phone-ui'
+import { InputUI } from '@/shared/ui/input-ui'
+import { ModalToastUI } from '@/shared/ui/modal-toast-ui'
+import { useModalToastStore } from '@/shared/ui/modal-toast-ui/modal-toast.store'
+import { TextareaUI } from '@/shared/ui/textarea-ui'
+import Link from 'next/link'
 
 export const RegisterStep = () => {
-  const { className, ref } = useAnimateOnScroll();
+  const { className, ref } = useAnimateOnScroll()
 
-  const { showModalToast } = useModalToastStore();
+  const { showModalToast } = useModalToastStore()
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
 
     showModalToast({
       isOpen: true,
-      title:
-        "Спасибо! Скоро с вами свяжется наш менеджер для подтверждения регистрации",
+      title: 'Спасибо! Скоро с вами свяжется наш менеджер для подтверждения регистрации',
 
       delay: 5000,
-    });
-    onToggleModal("auth", false);
-  };
+    })
+    onToggleModal('auth', false)
+  }
 
   return (
     <>
       <form
         ref={ref}
-        className={cls(className, "modal-auth__register-step fade-in ")}
+        className={cls(className, 'modal-auth__register-step fade-in ')}
         onSubmit={handleSubmit}
       >
         <p className="modal-auth__description subtitle">
@@ -71,5 +71,5 @@ export const RegisterStep = () => {
         </p>
       </form>
     </>
-  );
-};
+  )
+}

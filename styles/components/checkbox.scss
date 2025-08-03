@@ -1,4 +1,4 @@
-@use "../libs/mixins" as *;
+@use '../libs/mixins' as *;
 
 .control {
   display: flex;
@@ -28,7 +28,7 @@
   /* left: 0; */
   /* top: 50%; */
   /* transform: translate(0%, -50%); */
-  width: var(--sizeIndicator);
+  min-width: var(--sizeIndicator);
   border: 1px solid var(--color-accent-blue);
   position: relative;
   border-radius: 4px;
@@ -56,7 +56,7 @@
 
 .control-checkbox .control__indicator:after {
   box-sizing: unset;
-  content: "";
+  content: '';
   position: absolute;
   opacity: 0;
   transition-duration: var(--transition-normal);
@@ -69,7 +69,7 @@
   background-color: var(--color-accent-blue);
 
   &:after {
-    content: "";
+    content: '';
     display: block;
     position: absolute;
     left: 50%;
@@ -107,7 +107,7 @@
 }
 
 .control-checkbox .control__indicator::before {
-  content: "";
+  content: '';
   display: block;
   position: absolute;
   left: 0;
