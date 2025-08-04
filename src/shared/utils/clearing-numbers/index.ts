@@ -1,9 +1,9 @@
 export const clearingNumbers = (numbers?: string) => {
-  if (!numbers) return '';
+  if (!numbers) return "";
 
-  const clearNumbers = numbers.replace(/\D/g, '');
+  const clearNumbers = +numbers.replace(/\D/g, "");
 
-  const clearNumbersStartWithSeven = '7' + clearNumbers?.slice(1);
+  const clearNumbersStartWithSeven = "7" + clearNumbers?.toString().slice(1);
 
   return clearNumbersStartWithSeven;
 };

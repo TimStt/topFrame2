@@ -26,7 +26,7 @@ export const ButtonSubmitUI = ({
       style={{ minWidth }}
       {...props}
     >
-      {isLoading ? <LoaderUI /> : children}
+      {isLoading ? <LoaderUI width={"20px"} height={"20px"} /> : children}
     </ButtonUI>
   );
 };

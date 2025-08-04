@@ -1,5 +1,5 @@
 "use client";
-import { useAuthStore } from "@/features/auth/auth.store";
+import { useAuthStore } from "@/features/user/auth/model/auth.store";
 import { AvatarWithChange } from "@/features/change-pofile/avatar-with-change";
 import { ButtonUI } from "@/shared/ui/button-ui";
 import React from "react";
@@ -10,7 +10,7 @@ import IconEllipse from "@/source/icons/ellipse.svg";
 import IconGearWheele from "@/source/icons/gear-wheele.svg";
 import IconBook from "@/source/icons/book2.svg";
 import IconLink from "@/source/icons/link.svg";
-import { ButtonLogout } from "@/features/auth/button-logout";
+import { ButtonLogout } from "@/features/user/auth/ui/button-logout";
 
 export const InfoUser = () => {
   const role = useAuthStore().role;

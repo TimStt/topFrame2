@@ -1,4 +1,4 @@
-@use '../libs/mixins.scss' as *;
+@use "../libs/mixins.scss" as *;
 
 // Input wrapper
 .input-wrapper {
@@ -16,6 +16,12 @@
 
   &--full-width {
     width: 100%;
+  }
+
+  &:has(.input--error) {
+    .input-label {
+      color: var(--color-error);
+    }
   }
 }
 
@@ -69,11 +75,15 @@ input::placeholder {
 
   &--with-password {
     &--small {
-      --paddingRightSmall: calc(var(--paddingRightWithPassword) + var(--paddingRightSmall));
+      --paddingRightSmall: calc(
+        var(--paddingRightWithPassword) + var(--paddingRightSmall)
+      );
     }
 
     &--large {
-      --paddingRightMedium: calc(var(--paddingRightWithPassword) + var(--paddingRightMedium));
+      --paddingRightMedium: calc(
+        var(--paddingRightWithPassword) + var(--paddingRightMedium)
+      );
     }
   }
 
@@ -172,7 +182,6 @@ input::placeholder {
 
   &--error {
     border-color: var(--color-error);
-    background: var(--color-background);
   }
 
   &--success {
@@ -217,7 +226,7 @@ input::placeholder {
 .input-error {
   font-size: 12px;
   color: var(--color-error);
-  margin-top: 4px;
+  line-height: 1;
   font-weight: 400;
 }
 

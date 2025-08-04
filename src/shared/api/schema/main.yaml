@@ -1,0 +1,715 @@
+openapi: 3.0.0
+paths:
+  /api/auth/login:
+    post:
+      operationId: AuthController_login
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthDto"
+      responses:
+        "200":
+          description: Успешный вход, возвращает токены и данные пользователя
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponseDto"
+        "401":
+          description: Неверный логин или пароль
+      summary: Логин пользователя
+      tags:
+        - Авторизация
+  /api/auth/login/access-token:
+    post:
+      operationId: AuthController_getNewTokens
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RefreshTokenDto"
+      responses:
+        "200":
+          description: Новые токены и данные пользователя
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponseDto"
+        "401":
+          description: Неверный или просроченный refresh токен
+      summary: Получение нового access/refresh токена по refresh токену
+      tags:
+        - Авторизация
+  /api/auth/register:
+    post:
+      operationId: AuthController_register
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthRegisterDto"
+      responses:
+        "200":
+          description: Успешная регистрация
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessMessageDto"
+        "400":
+          description: Пользователь с таким телефоном уже существует
+      summary: Регистрация нового пользователя
+      tags:
+        - Авторизация
+  /api/account:
+    get:
+      operationId: AccountController_findOne
+      parameters: []
+      responses:
+        "200":
+          description: Успешно получен пользователь
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountResponseDto"
+        "404":
+          description: Пользователь не найден
+      security:
+        - bearer: []
+      summary: Получить текущего пользователя
+      tags:
+        - Профиль
+    patch:
+      operationId: AccountController_update
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                photo:
+                  type: string
+                  format: binary
+      responses:
+        "200":
+          description: Успешно получен пользователь
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountResponseDto"
+        "400":
+          description: Ошибка при загрузке файла
+        "404":
+          description: Пользователь не найден
+      security:
+        - bearer: []
+      summary: Обновить фото пользователя
+      tags:
+        - Профиль
+  /api/vacancy/response:
+    post:
+      operationId: VacancyController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateResponseDto"
+      responses:
+        "201":
+          description: Отклик успешно создан
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessMessageDto"
+        "400":
+          description: Ошибка валидации
+      summary: Создать отклик
+      tags:
+        - Вакансии
+  /api/vacancy/catalog:
+    get:
+      operationId: VacancyController_findAll
+      parameters:
+        - name: page
+          required: false
+          in: query
+          description: Номер страницы
+          schema:
+            type: string
+        - name: search
+          required: false
+          in: query
+          description: Поисковая строка
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Список вакансий и фильтров "
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VacancyListResponseDto"
+      summary: Получить список вакансий и фильтры для каталога
+      tags:
+        - Вакансии
+  /api/vacancy/lk/catalog:
+    get:
+      operationId: VacancyController_findCatalogLk
+      parameters:
+        - name: page
+          required: false
+          in: query
+          description: Номер страницы
+          schema:
+            type: string
+        - name: search
+          required: false
+          in: query
+          description: Поисковая строка
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Список вакансий, фильтров и данных для личного кабинета
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VacancyListLkResponseDto"
+      security:
+        - bearer: []
+      summary: Получить список вакансий, фильтры и данные для личного кабинета
+      tags:
+        - Вакансии
+  /api/vacancy/catalog/filter:
+    get:
+      operationId: VacancyController_filterVacancy
+      parameters:
+        - name: page
+          required: false
+          in: query
+          description: Номер страницы
+          schema:
+            type: string
+        - name: search
+          required: false
+          in: query
+          description: Поисковая строка
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Список вакансий
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VacancyListFilerResponseDto"
+      summary: "Получить список вакансий "
+      tags:
+        - Вакансии
+  /api/vacancy/{slug}:
+    get:
+      operationId: VacancyController_findOne
+      parameters:
+        - name: slug
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      tags:
+        - Вакансии
+  /api/space:
+    get:
+      operationId: SpaceController_findAll
+      parameters: []
+      responses:
+        "200":
+          description: Список разделов
+          content:
+            application/json:
+              schema:
+                example:
+                  space:
+                    - slug: space-1
+                      name: Название раздела
+                      image: image.png
+                      text: Описание
+                      link:
+                        url: https://example.com
+      summary: Получить все разделы
+      tags:
+        - HR пространство TopFrame
+  /api/space/{slug}:
+    get:
+      operationId: SpaceController_findOne
+      parameters:
+        - name: slug
+          required: true
+          in: path
+          description: Slug раздела
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Информация о разделе и его блоках
+          content:
+            application/json:
+              schema:
+                example:
+                  space:
+                    slug: space-1
+                    name: Название раздела
+                    link:
+                      label: Присоединиться
+                      value: https://burgerkingrus.ru/
+                  blocks:
+                    - title: Заголовок
+                      titleIsBlur: false
+                      description: "[] || {}"
+                      descriptionType: text
+                      position: 1
+      summary: Получить блоки раздела по slug
+      tags:
+        - HR пространство TopFrame
+  /api/direction/{slug}:
+    get:
+      operationId: DirectionController_findOne
+      parameters:
+        - name: slug
+          required: true
+          in: path
+          description: Slug направления
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Найденное направление
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    example: Example Title
+                  text:
+                    type: string
+                    example: Optional description text
+                    nullable: true
+                  slug:
+                    type: string
+                    example: example-slug
+                  image:
+                    type: string
+                    example: uploads/direction/image.png
+                    nullable: true
+                  filterSlug:
+                    type: string
+                    example: filter-slug
+                  filterValue:
+                    type: integer
+                    example: 123
+                required:
+                  - title
+                  - slug
+                  - filterSlug
+                  - filterValue
+        "404":
+          description: Направление не найдено
+      tags:
+        - Наши направления
+info:
+  title: API Документация TopFrame
+  description: Описание API
+  version: "1.0"
+  contact: {}
+tags: []
+servers: []
+components:
+  schemas:
+    AuthDto:
+      type: object
+      properties:
+        login:
+          type: string
+          example: user123
+          description: Логин пользователя
+        password:
+          type: string
+          example: strongpassword
+          description: Пароль (не менее 6 символов)
+          minLength: 6
+      required:
+        - login
+        - password
+    AccountResponseDto:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+        name:
+          type: string
+          example: Иван
+        surname:
+          type: string
+          example: Иванов
+        phone:
+          type: string
+          example: "+79999999999"
+        photo:
+          type: object
+          example: account/photo123.jpg
+          nullable: true
+        city:
+          type: object
+          example: Москва
+          nullable: true
+        jobTitle:
+          type: object
+          example: Разработчик
+          nullable: true
+      required:
+        - id
+        - name
+        - surname
+        - phone
+        - photo
+        - city
+        - jobTitle
+    AuthResponseDto:
+      type: object
+      properties:
+        user:
+          description: Данные пользователя
+          allOf:
+            - $ref: "#/components/schemas/AccountResponseDto"
+        accessToken:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+          description: JWT access token
+        refreshToken:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+          description: JWT refresh token
+      required:
+        - user
+        - accessToken
+        - refreshToken
+    RefreshTokenDto:
+      type: object
+      properties:
+        refreshToken:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+          description: JWT refresh token
+      required:
+        - refreshToken
+    AuthRegisterDto:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Иван
+          description: Имя пользователя
+        surname:
+          type: string
+          example: Иванов
+          description: Фамилия пользователя
+        phone:
+          type: string
+          example: "+79991234567"
+          description: Номер телефона в формате +7...
+        comment:
+          type: string
+          example: Комментарий от пользователя
+          description: Необязательное поле с комментарием
+      required:
+        - name
+        - surname
+        - phone
+    SuccessMessageDto:
+      type: object
+      properties:
+        message:
+          type: string
+          example: successfully
+          description: Сообщение об успешной операции
+      required:
+        - message
+    CreateResponseDto:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Иван
+          description: Имя пользователя
+        surname:
+          type: string
+          example: Иванов
+          description: Фамилия пользователя
+        phone:
+          type: string
+          example: "+79991234567"
+          description: Номер телефона в формате +7...
+        comment:
+          type: string
+          example: Комментарий от пользователя
+          description: Необязательное поле с комментарием
+        vacancyId:
+          type: number
+          example: 123
+          description: ID вакансии
+      required:
+        - name
+        - surname
+        - phone
+        - vacancyId
+    FilterValueDto:
+      type: object
+      properties:
+        value:
+          type: number
+          example: 2
+        label:
+          type: string
+          example: Сюрвейерские инспекции
+      required:
+        - value
+        - label
+    FilterDto:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Подразделение работы
+        slug:
+          type: string
+          example: work
+        type:
+          type: string
+          example: text
+        arr:
+          type: array
+          items:
+            $ref: "#/components/schemas/FilterValueDto"
+      required:
+        - name
+        - slug
+        - type
+        - arr
+    VacancyDto:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Сюрвейерские инспекции
+        slug:
+          type: string
+          example: surveyor-inspections
+        price:
+          type: object
+          example: 'Текст: От "8500" до "8500" за сутки '
+          nullable: true
+        city:
+          type: object
+          example: Санкт-Петербург
+          nullable: true
+        chip:
+          example:
+            - Полная занятость
+          type: array
+          items:
+            type: string
+      required:
+        - name
+        - slug
+        - price
+        - city
+        - chip
+    UserDto:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Уникальный идентификатор пользователя
+        name:
+          type: string
+          example: Иван
+          description: Имя пользователя
+        surname:
+          type: string
+          example: Иванов
+          description: Фамилия пользователя
+        role:
+          type: string
+          enum:
+            - recruiter
+            - freelancer
+            - admin
+            - bot
+            - applicant
+          description: Роль пользователя
+        phone:
+          type: string
+          example: "+79991234567"
+          description: Телефон пользователя
+        photo:
+          type: object
+          example: uploads/user/photo.jpg
+          description: Фото пользователя
+          nullable: true
+        city:
+          type: object
+          example: Москва
+          description: Город пользователя
+          nullable: true
+        jobTitle:
+          type: object
+          example: Менеджер
+          description: Должность пользователя
+          nullable: true
+      required:
+        - id
+        - name
+        - surname
+        - role
+        - phone
+    VacancyListResponseDto:
+      type: object
+      properties:
+        filters:
+          type: array
+          items:
+            $ref: "#/components/schemas/FilterDto"
+        vacancies:
+          type: array
+          items:
+            $ref: "#/components/schemas/VacancyDto"
+        countPage:
+          type: number
+          example: 1
+        count:
+          type: number
+          example: 1
+          description: Количество найденных вакансий
+        user:
+          $ref: "#/components/schemas/UserDto"
+      required:
+        - filters
+        - vacancies
+        - countPage
+        - count
+        - user
+    LinkItemDto:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Главная
+          description: Название ссылки
+        id:
+          type: number
+          example: 1
+          description: Уникальный идентификатор
+        allowedRoles:
+          type: array
+          description: Разрешённые роли для доступа
+          items:
+            type: string
+            enum:
+              - recruiter
+              - freelancer
+              - admin
+              - bot
+              - applicant
+        link:
+          type: string
+          example: /home
+          description: URL ссылка
+        icon:
+          type: string
+          example: home-icon
+          description: Иконка
+        isQuickLink:
+          type: boolean
+          example: true
+          description: Является ли быстрой ссылкой
+      required:
+        - name
+        - id
+        - allowedRoles
+        - link
+        - icon
+        - isQuickLink
+    VacancyListLkResponseDto:
+      type: object
+      properties:
+        filters:
+          type: array
+          items:
+            $ref: "#/components/schemas/FilterDto"
+        quickFilter:
+          type: array
+          items:
+            $ref: "#/components/schemas/FilterDto"
+        quickLinks:
+          type: array
+          items:
+            $ref: "#/components/schemas/LinkItemDto"
+        instructions:
+          type: array
+          items:
+            $ref: "#/components/schemas/LinkItemDto"
+        vacancies:
+          type: array
+          items:
+            $ref: "#/components/schemas/VacancyDto"
+        countPage:
+          type: number
+          example: 1
+        count:
+          type: number
+          example: 1
+          description: Количество найденных вакансий
+        user:
+          $ref: "#/components/schemas/UserDto"
+      required:
+        - filters
+        - quickFilter
+        - quickLinks
+        - instructions
+        - vacancies
+        - countPage
+        - count
+        - user
+    VacancyListFilerResponseDto:
+      type: object
+      properties:
+        vacancies:
+          type: array
+          items:
+            $ref: "#/components/schemas/VacancyDto"
+        countPage:
+          type: number
+          example: 1
+        count:
+          type: number
+          example: 1
+          description: Количество найденных вакансий
+      required:
+        - vacancies
+        - countPage
+        - count

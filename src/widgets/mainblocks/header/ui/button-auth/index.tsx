@@ -1,7 +1,8 @@
 "use client";
 
 import { Avatar } from "@/entity/user/ui/avatar";
-import { useAuthStore } from "@/features/auth/auth.store";
+import { useAuthStore } from "@/features/user/auth/model/auth.store";
+import { useGetUser } from "@/features/user/auth/model/use-get-user";
 import { PAGES_PATHS } from "@/shared/constants/pages-paths";
 import { useGetScrollWidth } from "@/shared/hooks/use-get-scroll-width";
 import { onToggleModal } from "@/shared/lib/zustands/use-store-modals";
@@ -9,8 +10,7 @@ import Link from "next/link";
 import React from "react";
 
 export const ButtonAuth = () => {
-  const isAuth = useAuthStore().isAuthTest;
-  useGetScrollWidth();
+  const isAuth = !!useGetUser().user;
   return isAuth ? (
     <Link className="header__profile" href={PAGES_PATHS.PROFILE}>
       <Avatar userAvatar={""} size="small" />

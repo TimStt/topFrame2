@@ -1,6 +1,4 @@
-import { ErrorMessage, FastField, Field } from "formik";
-
-import React, { HTMLAttributes, InputHTMLAttributes } from "react";
+import React, { InputHTMLAttributes } from "react";
 
 import { format, useMask } from "@react-input/mask";
 
@@ -9,7 +7,7 @@ import { cls } from "@/shared/lib/cls";
 import { useMaskInput } from "@/shared/lib/mask/use-mask-input";
 import { clearingNumbers } from "@/shared/utils/clearing-numbers";
 
-interface IInputPhoneProps extends InputHTMLAttributes<HTMLInputElement> {
+interface IInputPhoneProps extends IInput {
   className?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -17,33 +15,44 @@ interface IInputPhoneProps extends InputHTMLAttributes<HTMLInputElement> {
 export const InputPhoneUI = ({
   value,
   className,
-
   onChange,
   ...props
-}: IInput) => {
-  const { defaultValue, inputRef, options } = useMaskInput({
+}: IInputPhoneProps) => {
+  const { defaultValue, inputRef } = useMaskInput({
     mask: "+_ (___) ___-__-__",
     value,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const formattedValue = clearingNumbers(e.target.value);
-    e.target.value = formattedValue?.toString() || "";
-    onChange?.(e);
+    // Получаем только цифры из введенного значения
+    const numbersOnly = clearingNumbers(e.target.value);
+
+    console.log("numbersOnly", numbersOnly);
+
+    // Создаем новое событие с очищенным значением
+    const newEvent = {
+      ...e,
+      target: {
+        ...e.target,
+        value: numbersOnly,
+      },
+    };
+
+    console.log("newEvent", newEvent);
+
+    onChange?.(newEvent);
   };
 
   return (
-    <>
-      <InputUI
-        type="tel"
-        rootRef={inputRef}
-        className={cls("input_phone", className)}
-        onChange={handleChange}
-        label="Телефон"
-        placeholder="Телефон"
-        value={defaultValue}
-        {...props}
-      />
-    </>
+    <InputUI
+      type="tel"
+      rootRef={inputRef}
+      className={cls("input_phone", className)}
+      onChange={handleChange}
+      label="Телефон"
+      placeholder="Телефон"
+      value={defaultValue}
+      {...props}
+    />
   );
 };

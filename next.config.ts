@@ -1,6 +1,24 @@
 import { NextConfig } from "next/types";
 
 const nextConfig: NextConfig = {
+  env: {
+    URL: process.env.URL,
+    TOKEN_NAME: process.env.TOKEN_NAME,
+    SIMPLE_REST_URL_PHOTO: process.env.SIMPLE_REST_URL_PHOTO,
+  },
+
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "fishman-boy.ru",
+      },
+      {
+        protocol: "https",
+        hostname: "s3.timeweb.cloud",
+      },
+    ],
+  },
   webpack(config) {
     // Grab the existing rule that handles SVG imports
     //@ts-ignore

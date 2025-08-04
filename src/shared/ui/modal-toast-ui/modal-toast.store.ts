@@ -7,16 +7,19 @@ interface ModalToastStore {
   title: string;
   description?: string;
   delay: number;
+  onClose?: () => void;
   showModalToast: ({
     isOpen,
     title,
     description,
     delay,
+    onClose,
   }: {
     isOpen: boolean;
     title: string;
     description?: string;
     delay: number;
+    onClose?: () => void;
   }) => void;
 }
 
@@ -25,10 +28,10 @@ export const useModalToastStoreBase = create<ModalToastStore>((set) => ({
   title: "",
   description: "",
   delay: 0,
-  showModalToast: ({ isOpen, title, description, delay }) => {
+  showModalToast: ({ isOpen, title, description, delay, onClose }) => {
     onToggleModal("toast", isOpen);
     if (isOpen) {
-      set({ isOpen, title, description, delay });
+      set({ isOpen, title, description, delay, onClose });
     } else {
       set({ isOpen: false, title: "", description: "", delay: 0 });
     }

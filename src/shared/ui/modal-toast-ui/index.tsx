@@ -20,8 +20,9 @@ export const ModalToastUI: React.FC<ModalToastUIProps> = ({ className }) => {
   const { isOpenModal, handleCloseModal } = useInitialModal("toast", () => {
     setProgress(0);
     refStartTime.current = 0;
+    onClose?.();
   });
-  const { title, description, delay } = useModalToastStore();
+  const { title, description, delay, onClose } = useModalToastStore();
   const [progress, setProgress] = useState(0);
 
   const refStartTime = useRef<number>(0);
@@ -52,6 +53,7 @@ export const ModalToastUI: React.FC<ModalToastUIProps> = ({ className }) => {
         refStartTime.current = 0;
         setProgress(0);
         handleCloseModal();
+        onClose?.();
       };
 
       const id = requestAnimationFrame(updateProgress);
