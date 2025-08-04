@@ -19,11 +19,10 @@ export const AvatarWithChange = ({ className }: { className?: string }) => {
       <Avatar
         className="avatar-with-change__avatar"
         userAvatar={isNewAvatar || ""}
-      >
-        <span className="avatar-with-change__button" id={id}>
-          <IconPen />
-        </span>
-      </Avatar>
+      ></Avatar>
+      <span className="avatar-with-change__button" id={id}>
+        <IconPen />
+      </span>
       <span className="visually-hidden"> Изменить фотографию </span>
     </FilePickerUI>
   );
