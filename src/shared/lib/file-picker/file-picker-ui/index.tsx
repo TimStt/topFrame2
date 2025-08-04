@@ -17,6 +17,7 @@ export const FilePickerUI = (props: IUIPickerFiles) => {
     setURL,
     setURLS,
     allTypes,
+    title,
     setFile,
     withIcon = false,
     classNameLabel,
@@ -39,6 +40,7 @@ export const FilePickerUI = (props: IUIPickerFiles) => {
         is_loading: isLoading,
       })}
       htmlFor={id}
+      title={title || "Добавить фотографию"}
     >
       {isLoading ? (
         <LoaderUI width="30px" height="30px" />

@@ -15,6 +15,7 @@ export const AvatarWithChange = ({ className }: { className?: string }) => {
       typePicker="image"
       multiple={false}
       setURL={setIsNewAvatar}
+      title="Изменить аватарку"
     >
       <Avatar
         className="avatar-with-change__avatar"
