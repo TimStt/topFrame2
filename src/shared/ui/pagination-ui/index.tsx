@@ -11,9 +11,15 @@ export interface IPagination {
   meta: IMetaPaginationInfoDto;
   className?: string;
   hasMore?: boolean;
+  isLoading?: boolean;
 }
 
-export const PaginationUI = ({ meta, className, hasMore }: IPagination) => {
+export const PaginationUI = ({
+  meta,
+  className,
+  hasMore,
+  isLoading,
+}: IPagination) => {
   const nextPage = meta?.current_page ? meta.current_page + 1 : 1;
   const prevPage = meta?.current_page ? meta.current_page - 1 : 1;
   const pages = getPageNumbersPagination(

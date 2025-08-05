@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   env: {
     URL: process.env.URL,
     TOKEN_NAME: process.env.TOKEN_NAME,
-    SIMPLE_REST_URL_PHOTO: process.env.SIMPLE_REST_URL_PHOTO,
+    URL_PHOTO: process.env.SIMPLE_REST_URL_PHOTO,
   },
 
   images: {
@@ -16,6 +16,10 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "s3.timeweb.cloud",
+      },
+      {
+        protocol: "https",
+        hostname: "topframe.webtm.ru",
       },
     ],
   },

@@ -8,13 +8,16 @@ import { useGetScrollWidth } from "@/shared/hooks/use-get-scroll-width";
 import { onToggleModal } from "@/shared/lib/zustands/use-store-modals";
 import Link from "next/link";
 import React from "react";
+import { ButtonAuthSkeleton } from "./skeleton";
 
 export const ButtonAuth = () => {
-  const isAuth = !!useGetUser().user;
-  return isAuth ? (
+  const { info, isLoading } = useGetUser();
+  return isLoading ? (
+    <ButtonAuthSkeleton />
+  ) : info?.user ? (
     <Link className="header__profile" href={PAGES_PATHS.PROFILE}>
-      <Avatar userAvatar={""} size="small" />
-      <span>Иван</span>
+      <Avatar userAvatar={info?.user?.photo} size="small" />
+      <span>{info?.user?.name}</span>
     </Link>
   ) : (
     <button

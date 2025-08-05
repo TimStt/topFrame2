@@ -92,10 +92,10 @@ export interface components {
 
     VacancyListResponseDto: {
       filters: components["schemas"]["FilterDto"][];
+      quickFilter: components["schemas"]["FilterDto"][];
       vacancies: components["schemas"]["VacancyDto"][];
       countPage: number;
       count: number;
-      user: components["schemas"]["UserDto"];
     };
 
     LinkItemDto: {

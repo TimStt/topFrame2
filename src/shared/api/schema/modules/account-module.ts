@@ -21,9 +21,11 @@ export interface AccountOperations {
           [name: string]: unknown;
         };
         content: {
-          "application/json": IResponse<
-            components["schemas"]["AccountResponseDto"]
-          >;
+          "application/json": IResponse<{
+            user: components["schemas"]["AccountResponseDto"];
+            quickLinks: components["schemas"]["LinkItemDto"][];
+            instructions: components["schemas"]["LinkItemDto"][];
+          }>;
         };
       };
       /** @description Пользователь не найден */

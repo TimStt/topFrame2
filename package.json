@@ -27,6 +27,7 @@
     "react-hook-form": "^7.62.0",
     "react-hover-video-player": "^10.0.2",
     "react-input-mask": "^2.0.4",
+    "react-loading-skeleton": "^3.5.0",
     "reactjs-popup": "^2.0.6",
     "swiper": "^11.2.10",
     "zod": "^4.0.14",

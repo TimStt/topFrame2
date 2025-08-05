@@ -1,11 +1,7 @@
-import { object } from 'yup';
-
-import { objectToFormData } from '../object-to-form-data';
-
 export const arrayToFormData = (
   array: File[],
   name?: string,
-  formDataCurrent?: FormData,
+  formDataCurrent?: FormData
 ): FormData => {
   const data = new FormData();
 
@@ -13,11 +9,11 @@ export const arrayToFormData = (
 
   array.forEach((item, index) => {
     if (item instanceof File) {
-      dataCurrent.append(name ? name + '[]' : 'files[]', item);
+      dataCurrent.append(name ? name + "[]" : "files[]", item);
       return;
     }
 
-    if (typeof item === 'object') {
+    if (typeof item === "object") {
       Object.entries(item).forEach(([key, value]) => {
         dataCurrent.append(`${name}[${index}][${key}]`, value as string);
       });
@@ -25,7 +21,7 @@ export const arrayToFormData = (
       return;
     }
 
-    dataCurrent.append(name + '[]' || 'files[]', item);
+    dataCurrent.append(name + "[]" || "files[]", item);
   });
 
   return dataCurrent;

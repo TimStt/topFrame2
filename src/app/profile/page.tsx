@@ -1,16 +1,29 @@
 import { HeadPage } from "@/widgets/mainblocks/head-page";
 import { InfoUser } from "@/widgets/profile/info-user";
-import { SearchVacancies } from "@/widgets/vacancy/search-vacancies";
+import { SearchVacancies } from "@/features/vacancy/search/search-vacancies";
+import { WrapperPrefetchQuery } from "@/shared/lib/react-query/wrapper-prefetch-query";
+import { getOptionsVacanciesQuery } from "@/entity/vacancy/api/get-catalog/options";
 
-const Page = () => {
+const Page = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{
+    page: number;
+    search: string;
+  }>;
+}) => {
+  const page = (await searchParams).page;
+  const search = (await searchParams).search;
   return (
     <main className="profile">
-      <HeadPage className="container" title="Личный кабинет" />
+      <WrapperPrefetchQuery {...getOptionsVacanciesQuery({ page, search })}>
+        <HeadPage className="container" title="Личный кабинет" />
 
-      <div className="profile__inner container">
-        <InfoUser />
-        <SearchVacancies />
-      </div>
+        <div className="profile__inner container">
+          <InfoUser />
+          <SearchVacancies />
+        </div>
+      </WrapperPrefetchQuery>
     </main>
   );
 };

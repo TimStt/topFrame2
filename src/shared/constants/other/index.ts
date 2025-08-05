@@ -1,8 +1,10 @@
 export const TYPE_IMAGE_UPLOAD =
-  'image/jpeg, image/png, image/jpg, image/gif, image/svg, image/webp'
+  "image/jpeg, image/png, image/jpg, image/gif, image/svg, image/webp";
 
-export const ALL_TYPES_IMAGE_UPLOAD = 'image/*'
+export const ALL_TYPES_IMAGE_UPLOAD = "image/*";
 
-export const TYPE_DOCUMENT_UPLOAD = '.bmp, .pdf, .txt, .doc, .docx, .xls'
+export const TYPE_DOCUMENT_UPLOAD = ".bmp, .pdf, .txt, .doc, .docx, .xls";
 
-export const BACKGROUND_IMAGE_BLUE = '/icons/bg-main.svg'
+export const BACKGROUND_IMAGE_BLUE = "/icons/bg-main.svg";
+
+export const URL_GET_IMAGE = process.env.URL_PHOTO;

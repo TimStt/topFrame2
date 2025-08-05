@@ -189,9 +189,11 @@
         width: 100%;
         border-radius: 40px;
 
-        svg {
-          width: 16px;
-          height: 16px;
+        img {
+          max-width: 16px;
+          height: auto;
+          aspect-ratio: 1/1;
+          object-fit: contain;
         }
       }
     }
@@ -208,5 +210,14 @@
     &__info-user {
       max-width: 100%;
     }
+  }
+}
+
+@media (max-width: 480px) {
+  .profile__vacancies-head {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+    margin-block: 35px 30px;
   }
 }

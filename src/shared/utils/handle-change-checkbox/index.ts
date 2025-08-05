@@ -16,11 +16,17 @@ export const handleOptionChange = <T extends string | number>(
       return;
     }
 
+    console.log("optionValue change", optionValue);
+    console.log("value", value);
+
     if (checked) {
-      newValue = value ? [...value, optionValue] : [optionValue];
+      newValue = value?.find((v) => v.value === optionValue.value)
+        ? value?.filter((v) => v.value !== optionValue.value)
+        : [...(value || []), optionValue];
     } else {
       newValue = value?.filter((v) => v.value !== optionValue.value) || [];
     }
+    console.log("newValue", newValue);
     onChange(newValue);
   };
 };

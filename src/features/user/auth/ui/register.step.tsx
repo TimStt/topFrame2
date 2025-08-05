@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { PAGES_PATHS } from "@/shared/constants/pages-paths";
 import { useAnimateOnScroll } from "@/shared/hooks/use-animate-on-scroll";
 import { cls } from "@/shared/lib/cls";
@@ -62,10 +62,17 @@ export const RegisterStep = () => {
             error={errorsRegister.surname?.message}
             {...validateForm.register("surname")}
           />
-          <InputPhoneUI
-            classNameWrapper="modal-auth__input input-bottom"
-            error={errorsRegister.phone?.message}
-            {...validateForm.register("phone")}
+          <Controller
+            name="phone"
+            control={validateForm.control}
+            render={({ field }) => (
+              <InputPhoneUI
+                classNameWrapper="modal-auth__input input-bottom"
+                error={errorsRegister.phone?.message}
+                value={field.value}
+                onChange={field.onChange}
+              />
+            )}
           />
           <TextareaUI
             classNameWrapper="modal-auth__input  input-bottom"

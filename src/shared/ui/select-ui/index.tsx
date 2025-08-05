@@ -1,97 +1,110 @@
-import React, { useEffect, useId, useRef, useState } from 'react'
+import React, { useEffect, useId, useRef, useState } from "react";
 
-import useOnClickOutside from '@/shared/hooks/use-on-click-outside'
-import { cls } from '@/shared/lib/cls'
-import { handleOptionChange } from '@/shared/utils/handle-change-checkbox'
-import ArrowIcon from '@/source/icons/arrow2.svg'
+import useOnClickOutside from "@/shared/hooks/use-on-click-outside";
+import { cls } from "@/shared/lib/cls";
+import { handleOptionChange } from "@/shared/utils/handle-change-checkbox";
+import ArrowIcon from "@/source/icons/arrow2.svg";
 
-import { CheckboxUI } from '../checkbox-ui'
+import { CheckboxUI } from "../checkbox-ui";
 
 export interface ISelectOptions {
-  value: string
-  label: string
+  value: string | number;
+  label: string;
 }
 
 export type ISelectOption = {
   /** Значение опции */
-  options: ISelectOptions[]
+  options: ISelectOptions[];
+
+  /** название фильтра для отправки на сервер */
+  name: string;
+
   /** Текст опции */
-  type: 'checkbox' | 'radio'
-  label: string
-  /** Отключена ли опция */
-}
+
+  label: string;
+};
 
 export interface ISelect {
   /** Массив опций */
 
   /** Выбранные значения */
-  value: ISelectOption
-  activeValue: ISelectOptions[]
+  value: ISelectOption;
+  activeValue: ISelectOptions[];
+
+  type: "checkbox" | "radio";
   /** Обработчик изменения выбора */
-  onChange?: (name: string, value: ISelectOption) => void
+  onChange?: (name: string, value: ISelectOption) => void;
   /** Placeholder */
-  placeholder?: string
+  placeholder?: string;
   /** Отключен ли селект */
-  disabled?: boolean
+  disabled?: boolean;
   /** Дополнительные классы */
-  className?: string
+  className?: string;
   /** Лейбл селекта */
-  label?: string
+  label?: string;
   /** Текст ошибки */
-  error?: string
+  error?: string;
   /** Полная ширина */
-  fullWidth?: boolean
+  fullWidth?: boolean;
 }
 
 export const SelectUI = <T extends string | number>({
   value,
   onChange,
-  placeholder = 'Выберите значение',
+  placeholder = "Выберите значение",
   disabled = false,
   className,
   activeValue,
   label,
+  type,
   error,
   fullWidth = false,
 }: ISelect) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const selectRef = useRef<HTMLDivElement>(null)
+  const [isOpen, setIsOpen] = useState(false);
+  const selectRef = useRef<HTMLDivElement>(null);
 
   const selectClasses = cls(
-    'select',
+    "select",
     {
-      'select--open': isOpen,
-      'select--disabled': disabled,
-      'select--error': error,
-      'select--full-width': fullWidth,
+      "select--open": isOpen,
+      "select--disabled": disabled,
+      "select--error": error,
+      "select--full-width": fullWidth,
     },
-    className,
-  )
+    className
+  );
 
   const handleToggle = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!disabled) {
-      setIsOpen(!isOpen)
+      setIsOpen(!isOpen);
     }
-  }
+  };
 
-  const handleChange = handleOptionChange(value.type, activeValue || [], (currentValue) => {
-    onChange?.(label || '', {
-      options: currentValue,
-      type: value?.type,
-      label: label || '',
-    })
-  })
+  const handleChange = handleOptionChange(
+    type,
+    activeValue || [],
+    (currentValue) => {
+      onChange?.(label || "", {
+        options: currentValue,
+        name: value.name,
+        label: label || "",
+      });
+    }
+  );
 
   // Закрытие при клике вне компонента
-  useOnClickOutside(selectRef, () => setIsOpen(false))
+  useOnClickOutside(selectRef, () => setIsOpen(false));
 
   // Формирование отображаемого текста
-  const displayText = value.options?.length > 0 ? activeValue.map((opt) => opt.label).join(',') : ''
+  const displayText =
+    value.options?.length > 0
+      ? activeValue.map((opt) => opt.label).join(",")
+      : "";
 
-  const id = useId()
+  const id = useId();
 
   return (
-    <div className={cls('select-wrapper', value.type)}>
+    <div className={cls("select-wrapper", type)}>
       <div ref={selectRef} className={selectClasses}>
         <div
           className="select__trigger"
@@ -101,18 +114,22 @@ export const SelectUI = <T extends string | number>({
           aria-haspopup="listbox"
         >
           {displayText &&
-            (value.type === 'checkbox' ? (
+            (type === "checkbox" ? (
               <div className="select__values">
-                {displayText.split(',').map((opt) => (
+                {displayText.split(",").map((opt) => (
                   <div
                     className="select__values-item"
                     key={opt}
                     onClick={(e) => {
-                      e.stopPropagation()
+                      e.stopPropagation();
                       handleChange(
-                        { value: value.options.find((v) => v.label === opt)?.value!, label: opt },
-                        false,
-                      )
+                        {
+                          value: value.options.find((v) => v.label === opt)
+                            ?.value!,
+                          label: opt,
+                        },
+                        false
+                      );
                     }}
                   >
                     <span>{opt}</span>
@@ -135,13 +152,15 @@ export const SelectUI = <T extends string | number>({
             ))}
           {
             <span
-              className={cls('select__label', { 'not-empty': !!displayText })}
+              className={cls("select__label", { "not-empty": !!displayText })}
               aria-hidden="true"
             >
               {label}
             </span>
           }
-          {!displayText && <span className="select__label-placeholder">{label}</span>}
+          {!displayText && (
+            <span className="select__label-placeholder">{label}</span>
+          )}
           <ArrowIcon className="select__arrow" />
         </div>
 
@@ -158,16 +177,23 @@ export const SelectUI = <T extends string | number>({
                 <li
                   key={option.value}
                   className="select__option"
-                  aria-selected={value.options.some((opt) => opt.value === option.value)}
+                  aria-selected={value.options.some(
+                    (opt) => opt.value === option.value
+                  )}
                   id={`select-option-${option.value}`}
                   role="option"
                 >
                   <CheckboxUI
                     key={option.value}
-                    type={value.type}
-                    checked={activeValue.some((opt) => opt.value === option.value)}
+                    type={type}
+                    checked={activeValue.some(
+                      (opt) => opt.value === option.value
+                    )}
                     onChangeCheckbox={(checked) =>
-                      handleChange({ value: option.value, label: option.label }, !!checked)
+                      handleChange(
+                        { value: option.value, label: option.label },
+                        !!checked
+                      )
                     }
                     label={option.label}
                   />
@@ -179,5 +205,5 @@ export const SelectUI = <T extends string | number>({
       </div>
       {error && <span className="select-error">{error}</span>}
     </div>
-  )
-}
+  );
+};

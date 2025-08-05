@@ -15,8 +15,7 @@ export const ButtonSearchUI = ({
       variant="custom"
       size="custom"
       isLoading={isLoading}
-    >
-      Поиск
-    </ButtonSubmitUI>
+      text="Поиск"
+    />
   );
 };

@@ -54,3 +54,20 @@
 - Файлы: `src/widgets/mainblocks/team/index.tsx`, `src/shared/lib/cls/video/use-video/index.tsx`
 - Стили: `styles/pages/home.scss`
 - Данные: видео файлы в `public/video/` (1.mp4, 2.mp4, 3.mp4)
+
+## [2024-12-19] - Создание скелетонов для компонентов
+
+### Добавлено
+
+- Скелетон для профиля в шапке (`ButtonAuthSkeleton`)
+- Скелетон для информации в профиле (`InfoUserSkeleton`)
+- Скелетон для карточки вакансии (`CardVacancySkeleton`)
+- Скелетон для быстрых фильтров (`QuickFiltersSkeleton`)
+- Скелетон для страницы вакансии (`VacancyPageSkeleton`)
+
+### Технические детали
+
+- Использована библиотека `react-loading-skeleton`
+- Все скелетоны созданы в отдельных файлах `skeleton.tsx` рядом с основными компонентами
+- Скелетоны адаптированы под дизайн-систему проекта
+- Добавлена документация в заголовки файлов

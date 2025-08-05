@@ -109,7 +109,7 @@ export interface VacancyOperations {
         headers: {
           [name: string]: unknown;
         };
-        content: {
+        content?: {
           "application/json": IResponse<
             components["schemas"]["VacancyListFilerResponseDto"]
           >;
@@ -134,7 +134,9 @@ export interface VacancyOperations {
         headers: {
           [name: string]: unknown;
         };
-        content?: never;
+        content?: {
+          "application/json": IResponse<components["schemas"]["VacancyDto"]>;
+        };
       };
     };
   };

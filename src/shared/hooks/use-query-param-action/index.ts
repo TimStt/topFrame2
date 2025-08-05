@@ -8,9 +8,10 @@ import { useCallback } from "react";
 import { filteredQueries } from "@/shared/utils/filtered-queries";
 
 import { usePathnameURL } from "../use-pathname-URL";
+import { ISelectOption } from "@/shared/ui/select-ui";
 
 type QueryValue = string | null;
-type QueryParams = Record<string, unknown>;
+type QueryParams = Record<string, string | number>;
 
 export const useQueryParamAction = () => {
   const { params, pathname } = usePathnameURL();
@@ -103,20 +104,33 @@ export const useQueryParamAction = () => {
   /**
    * Получает все параметры из URL в виде объекта
    */
-  const getAllParams = useCallback(
-    <T extends QueryParams>(zodSchema?: ZodSchema<T>): T | undefined => {
-      const currentAllParams = Object.fromEntries(params.entries()) as T;
-
-      if (Object.keys(currentAllParams).length === 0) {
-        return undefined;
+  const getAllParams = useCallback(<T extends QueryParams>():
+    | {
+        normalized: {
+          options: string[];
+          name: string;
+        }[];
+        original: T;
       }
+    | undefined => {
+    const currentAllParams = Object.fromEntries(params.entries()) as T;
 
-      return zodSchema
-        ? filteredQueries<T>(currentAllParams, zodSchema)
-        : currentAllParams;
-    },
-    [params]
-  );
+    if (Object.keys(currentAllParams).length === 0) {
+      return undefined;
+    }
+
+    const normalizedParams = Object.entries(currentAllParams).map(
+      ([key, value]) => ({
+        options: value?.toString().split(",") || [value],
+        name: key,
+      })
+    );
+
+    return {
+      normalized: normalizedParams,
+      original: currentAllParams,
+    };
+  }, [params]);
 
   /**
    * Устанавливает несколько параметров в URL

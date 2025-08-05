@@ -12,7 +12,7 @@ export const mockFilters: ISelectOption[] = [
       { value: "finance", label: "Финансовый отдел" },
       { value: "support", label: "Служба поддержки" },
     ],
-    type: "checkbox",
+    name: "department",
   },
   {
     label: "Город",
@@ -25,7 +25,7 @@ export const mockFilters: ISelectOption[] = [
       { value: "nizhniy", label: "Нижний Новгород" },
       { value: "remote", label: "Удаленно" },
     ],
-    type: "checkbox",
+    name: "city",
   },
   {
     label: "Опыт",
@@ -35,7 +35,7 @@ export const mockFilters: ISelectOption[] = [
       { value: "3-6", label: "3-6 лет" },
       { value: "6+", label: "Более 6 лет" },
     ],
-    type: "radio",
+    name: "experience",
   },
   {
     label: "Уровень дохода",
@@ -47,7 +47,7 @@ export const mockFilters: ISelectOption[] = [
       { value: "200+", label: "Свыше 200 000" },
       { value: "negotiable", label: "По договоренности" },
     ],
-    type: "radio",
+    name: "salary",
   },
   {
     label: "Занятость",
@@ -58,7 +58,7 @@ export const mockFilters: ISelectOption[] = [
       { value: "internship", label: "Стажировка" },
       { value: "freelance", label: "Фриланс" },
     ],
-    type: "radio",
+    name: "employment",
   },
 ];
 

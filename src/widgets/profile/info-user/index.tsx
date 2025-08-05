@@ -11,34 +11,39 @@ import IconGearWheele from "@/source/icons/gear-wheele.svg";
 import IconBook from "@/source/icons/book2.svg";
 import IconLink from "@/source/icons/link.svg";
 import { ButtonLogout } from "@/features/user/auth/ui/button-logout";
+import { useGetUser } from "@/features/user/auth/model/use-get-user";
+import { URL_GET_IMAGE } from "@/shared/constants/other";
+import Image from "next/image";
 
 export const InfoUser = () => {
-  const role = useAuthStore().role;
+  const { info, isLoading } = useGetUser();
   return (
     <section className="profile__info-user">
       <div className="profile__info-user__about">
         <AvatarWithChange className="profile__info-user__avatar" />
-        <span className="profile__info-user__name">Петр Петров Иванович</span>
+        <span className="profile__info-user__name">{info?.user?.name}</span>
         <span className="profile__info-user__role">
           {
             {
               freelancer: "Фрилансер",
               recruiter: "Рекрутер",
-            }[role || "freelancer"]
+            }[info?.user?.role || "freelancer"]
           }
         </span>
 
-        <ButtonUI
-          className="profile__info-user__button"
-          fullWidth
-          as="a"
-          href="https://yandex.ru/maps/?text=Москва"
-          target="_blank"
-        >
-          <IconLocation />
-          <span>Москва</span>
-        </ButtonUI>
-        {role === "recruiter" && (
+        {
+          <ButtonUI
+            className="profile__info-user__button"
+            fullWidth
+            as="a"
+            href="https://yandex.ru/maps/?text=Москва"
+            target="_blank"
+          >
+            <IconLocation />
+            {<span>{info?.user?.city || "Москва"}</span>}
+          </ButtonUI>
+        }
+        {info?.user?.role === "recruiter" && (
           <ButtonUI
             className="profile__info-user__button"
             fullWidth
@@ -47,51 +52,51 @@ export const InfoUser = () => {
         )}
       </div>
 
-      <div className="profile__info-user__links instructions">
+      <div className="profile__info-user__links ">
         <label className="profile__info-user__links-label">
           Быстрые ссылки
         </label>
         <div className="profile__info-user__links-list">
-          <Link className="profile__info-user__links-item" href="">
-            <IconEllipse />
-            <span className="profile__info-user__links-item-value">
-              Портал TopFrame
-            </span>
-          </Link>
-          <Link className="profile__info-user__links-item" href="">
-            <IconGearWheele />
-            <span className="profile__info-user__links-value">Битрикс24</span>
-          </Link>
-          <Link className="profile__info-user__links-item" href="">
-            <IconBook />
-            <span className="profile__info-user__links-item-value">
-              Таблица СБ
-            </span>
-          </Link>
+          {info?.quickLinks.map((link) => (
+            <a
+              className="profile__info-user__links-item"
+              href={link.link}
+              target="_blank"
+              key={link.id}
+            >
+              <Image
+                src={URL_GET_IMAGE + link.icon}
+                alt="icon"
+                width={16}
+                height={16}
+              />
+              <span className="profile__info-user__links-item-value">
+                {link.name}
+              </span>
+            </a>
+          ))}
         </div>
       </div>
-      <div className="profile__info-user__links">
-        <label className="profile__info-user__links-label">
-          Быстрые ссылки
-        </label>
-        <div className="profile__info-user__links-list">
-          <Link className="profile__info-user__links-item" href="">
-            <IconLink />
+      <div className="profile__info-user__links instructions">
+        <label className="profile__info-user__links-label">Инструкции</label>
+        {info?.instructions.map((instruction) => (
+          <a
+            className="profile__info-user__links-item"
+            href={instruction.link}
+            target="_blank"
+            key={instruction.id}
+          >
+            <Image
+              src={URL_GET_IMAGE + instruction.icon}
+              alt="icon"
+              width={16}
+              height={16}
+            />
             <span className="profile__info-user__links-item-value">
-              PDF файл
+              {instruction.name}
             </span>
-          </Link>
-          <Link className="profile__info-user__links-item" href="">
-            <IconLink />
-            <span className="profile__info-user__links-value">Инструкция</span>
-          </Link>
-          <Link className="profile__info-user__links-item" href="">
-            <IconLink />
-            <span className="profile__info-user__links-item-value">
-              Обучалка
-            </span>
-          </Link>
-        </div>
+          </a>
+        ))}
       </div>
       <ButtonLogout />
     </section>

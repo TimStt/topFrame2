@@ -48,13 +48,12 @@ export const AccordionFilterUI: React.FC<AccordionFilterUIProps> = ({
   });
 
   const handleChange = handleOptionChange(
-    filter.type,
+    "checkbox",
     activeValue || [],
     (currentValue) => {
-      onChange(filter.label, {
+      onChange(filter.name, {
+        ...filter,
         options: currentValue,
-        type: filter.type,
-        label: filter.label,
       });
     }
   );
@@ -62,7 +61,7 @@ export const AccordionFilterUI: React.FC<AccordionFilterUIProps> = ({
   return (
     <>
       <AccordionUI
-        key={filter.label}
+        key={filter.name}
         rootRef={refAccordion}
         open={isOpen}
         classNameRoot="filter__accordion"
@@ -72,7 +71,7 @@ export const AccordionFilterUI: React.FC<AccordionFilterUIProps> = ({
         rootOnClick={() => setIsOpen(!isOpen)}
         summaryContent={
           <>
-            <span className="filter__accordion__title">{filter.label}</span>
+            <span className="filter__accordion__title">{filter.name}</span>
             <ArrowIcon />
           </>
         }
@@ -90,7 +89,7 @@ export const AccordionFilterUI: React.FC<AccordionFilterUIProps> = ({
                     !!checked
                   );
                 }}
-                type={filter.type}
+                type="checkbox"
               />
             ))}
           </div>

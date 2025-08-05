@@ -8,7 +8,7 @@ export const SearchBoxUI = ({
   renderQuickFilters,
   renderActions,
   renderHints,
-
+  handleSubmit,
   className,
   classNameForm,
   ...props
@@ -16,12 +16,18 @@ export const SearchBoxUI = ({
   renderQuickFilters?: React.ReactNode;
   renderActions?: React.ReactNode;
   renderHints?: React.ReactNode;
-
+  handleSubmit?: () => void;
   classNameForm?: string;
 } & Omit<ComponentPropsWithoutRef<"input">, "size">) => {
   return (
     <search className={cls("search-box", className)}>
-      <form className="search-box__form">
+      <form
+        className="search-box__form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit?.();
+        }}
+      >
         <InputUI
           className="search-box__input"
           variant="outline"

@@ -9,11 +9,11 @@ export const invalidateUser = () => {
 export const useGetUser = () => {
   const userQuery = rqClient.useQuery("get", "/api/account");
 
-  const user = userQuery.data?.response;
+  const info = userQuery.data?.response;
   const isLoading = userQuery.isLoading;
 
   return {
     isLoading,
-    user,
+    info,
   };
 };

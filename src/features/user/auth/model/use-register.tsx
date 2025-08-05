@@ -24,6 +24,9 @@ export const useRegister = () => {
   });
 
   const handleRegister = (data: IApiSchemas["AuthRegisterDto"]) => {
+    if (!data.comment?.length) {
+      delete data.comment;
+    }
     registerMutation.mutate({
       body: data,
     });

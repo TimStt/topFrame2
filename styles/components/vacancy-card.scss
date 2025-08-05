@@ -1,4 +1,4 @@
-@use '../libs/_mixins.scss' as *;
+@use "../libs/_mixins.scss" as *;
 
 .vacancy-list {
   display: flex;
@@ -28,7 +28,12 @@
   border: 1px solid var(--color-light-blue);
   border-radius: 8px;
 
-  @include fluid-text(var(--maxPadding), var(--minPadding), padding, var(--container-max-width));
+  @include fluid-text(
+    var(--maxPadding),
+    var(--minPadding),
+    padding,
+    var(--container-max-width)
+  );
   max-width: calc(var(--container-max-width) * 1px);
   width: 100%;
   background-color: var(--color-light);
@@ -48,7 +53,7 @@
     width: 100%;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       inset: 0;
     }
@@ -99,7 +104,7 @@
 
   &__params {
     display: flex;
-    gap: 4px;
+    gap: 8px 4px;
 
     flex-wrap: wrap;
   }
@@ -123,6 +128,10 @@
 }
 
 .search-vacancies {
+  &__actions {
+    display: flex;
+    gap: 8px;
+  }
 }
 
 @media (max-width: 750px) {
@@ -145,5 +154,6 @@
   .vacancy-card__actions {
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
   }
 }
