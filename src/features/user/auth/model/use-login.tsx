@@ -15,7 +15,7 @@ export const useLogin = () => {
 
   const onSuccessLogin = (token: string) => {
     onToggleModal("auth", false);
-    setByCookie(TOKEN_NAME, token);
+    setByCookie(TOKEN_NAME, token, 365);
     invalidateUser();
     showModalToast({
       isOpen: true,

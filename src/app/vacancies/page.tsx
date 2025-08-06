@@ -1,7 +1,7 @@
 import { BACKGROUND_IMAGE_BLUE } from "@/shared/constants/other";
 import { AnimationEllipses } from "@/shared/ui/animation-ellipses-ui";
 import { HeadPage } from "@/widgets/mainblocks/head-page";
-import { SearchVacancies } from "@/features/vacancy/search/search-vacancies";
+import { SearchVacancies } from "@/features/vacancy/search/ui";
 
 export default function Page() {
   return (

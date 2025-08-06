@@ -1,6 +1,6 @@
 import { HeadPage } from "@/widgets/mainblocks/head-page";
 import { InfoUser } from "@/widgets/profile/info-user";
-import { SearchVacancies } from "@/features/vacancy/search/search-vacancies";
+import { SearchVacancies } from "@/features/vacancy/search/ui";
 import { WrapperPrefetchQuery } from "@/shared/lib/react-query/wrapper-prefetch-query";
 import { getOptionsVacanciesQuery } from "@/entity/vacancy/api/get-catalog/options";
 

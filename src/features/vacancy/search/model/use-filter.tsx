@@ -41,15 +41,23 @@ export const useFilter = ({
   >(isActiveFilterQuery || undefined);
 
   const handleChangeFilter = (label: string, values: ISelectOption) => {
-    console.log("values", values);
     const filterSelected = isActiveFilters?.findIndex(
       (f) => f.name === values.name
     );
-    if (filterSelected && filterSelected !== -1 && values.options.length > 0) {
+
+    console.log("handleChangeFilter", values);
+    console.log("filterSelected", filterSelected);
+    if (filterSelected !== -1 && filterSelected !== undefined) {
       const newFilters = [...(isActiveFilters || [])];
-      newFilters[filterSelected] = {
+      // if (!values.options.length) {
+      //   setIsActiveFilters(newFilters.filter((f) => f.name !== values.name));
+      //   return;
+      // }
+      newFilters[filterSelected!] = {
         ...values,
+        options: values.options.length > 0 ? values.options : [],
       };
+      console.log("newFilters", newFilters);
       setIsActiveFilters(newFilters);
     } else {
       setIsActiveFilters([
@@ -67,28 +75,27 @@ export const useFilter = ({
   // активные быстрые фильтры
 
   const currentActiveFilters = isActiveFilters;
-  console.log("isCurrentActiveFilters", currentActiveFilters);
 
   const isEmptyActiveFilters =
     currentActiveFilters && currentActiveFilters.length === 0;
 
   const isActiveQuickFilters = useMemo(() => {
-    return filters?.filter((f) => quickFilter?.find((q) => q.slug === f.slug));
-  }, [filters, quickFilter]);
+    return isActiveFilterQuery?.filter((f) =>
+      quickFilter?.find((q) => q.slug === f.name && f.options.length > 0)
+    );
+  }, [isActiveFilterQuery, quickFilter]);
 
   const isEmptyQuickFilters =
-    isActiveQuickFilters && isActiveQuickFilters.length === 0;
+    !isActiveQuickFilters || isActiveQuickFilters.length === 0;
 
   const resetAllFilters = () => {
-    if (!isActiveFilters && queryActionsParams) {
-      isActiveFilterQuery?.forEach((f) => {
-        queryActionsParams.remove(f.name);
-      });
-      return;
-    }
-
     if (isActiveFilters && isActiveFilters.length > 0) {
-      setIsActiveFilters([]);
+      setIsActiveFilters(
+        isActiveFilters.map((f) => ({
+          ...f,
+          options: [],
+        }))
+      );
       return;
     }
 
@@ -96,22 +103,17 @@ export const useFilter = ({
   };
 
   const resetQuickFilters = () => {
-    if (!isActiveQuickFilters && queryActionsParams) {
-      isActiveFilterQuery
-        ?.filter(
-          (f) => f.name !== quickFilter?.find((q) => q.slug === f.name)?.slug
-        )
-        .forEach((f) => {
-          queryActionsParams.remove(f.name);
-        });
-      return;
-    }
-
     if (isActiveQuickFilters && isActiveQuickFilters.length > 0) {
       setIsActiveFilters(
-        isActiveFilters?.filter(
-          (f) => f.name !== quickFilter?.find((q) => q.slug === f.name)?.slug
-        )
+        isActiveFilters?.map((f) => {
+          if (f.name === quickFilter?.find((q) => q.slug === f.name)?.slug) {
+            return {
+              ...f,
+              options: [],
+            };
+          }
+          return f;
+        })
       );
       return;
     }
@@ -120,10 +122,35 @@ export const useFilter = ({
   };
 
   const acceptAllFilters = () => {
+    console.log("isActiveFilters acceptAllFilters", isActiveFilters);
+
     isActiveFilters?.forEach((f) => {
-      f.options.forEach((o) => {
-        queryActionsParams.set(f.name, o.value.toString());
-      });
+      if (!f.options.length) {
+        queryActionsParams.remove(f.name);
+        setIsActiveFilters(isActiveFilters?.filter((f) => f.name !== f.name));
+        return;
+      }
+
+      const isThisActiveFilters = isActiveFilterQuery?.find(
+        (q) => q.name === f.name
+      );
+      console.log("isThisActiveFilters", isThisActiveFilters);
+      console.log("f", f);
+
+      const isThisFilters =
+        isThisActiveFilters?.options.every((o) =>
+          f.options.some((q) => q.value === o.value)
+        ) && f.options.length === isThisActiveFilters?.options.length;
+
+      if (isThisFilters) {
+        return;
+      }
+
+      const string = f.options.map((o) => o.value).join(",");
+
+      console.log("string", string);
+
+      queryActionsParams.set(f.name, string, false, false);
     });
   };
 
@@ -138,3 +165,5 @@ export const useFilter = ({
     isEmptyQuickFilters,
   };
 };
+
+export type TFilter = ReturnType<typeof useFilter>;

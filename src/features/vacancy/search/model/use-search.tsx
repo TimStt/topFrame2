@@ -16,12 +16,10 @@ export const useSearch = () => {
     setIsSearchValue(e.target.value);
   };
 
-  const currentPage = queryActions.get<number>("page") || 1;
-
   return {
     isSearchValue,
     handleSearch,
-    currentPage,
+
     handleChangeSearch,
   };
 };

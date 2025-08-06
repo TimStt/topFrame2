@@ -81,8 +81,20 @@ export const useQueryParamAction = () => {
       // Обработка массива значений
 
       if (isMultiple) {
-        const values = currentValue?.split(",") || [];
-        values.push(value);
+        const values = currentValue
+          ? currentValue?.includes(",")
+            ? currentValue?.split(",")
+            : [currentValue]
+          : [];
+
+        console.log("currentValue", values);
+
+        console.log("value query", value);
+        if (!values.includes(value)) {
+          values.push(value);
+        } else {
+          values.filter((v) => v !== value);
+        }
         params.set(paramName, values.join(","));
       } else {
         params.set(paramName, value);
