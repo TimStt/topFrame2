@@ -12,7 +12,6 @@ export const NewVacancies = () => {
       </p>
       <ListVacancies
         className="container"
-        vacancies={mockVacancies}
         renderButton={
           <ButtonUI
             variant="primary"

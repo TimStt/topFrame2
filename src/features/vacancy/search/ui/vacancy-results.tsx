@@ -15,6 +15,7 @@ import { TotalResultsUI } from "@/shared/ui/search-ui-kit/total-results-ui";
 import { useSearch } from "../model/use-search";
 import { mockVacancies } from "@/shared/constants/mock-data";
 import { useQueryParamAction } from "@/shared/hooks/use-query-param-action";
+import { useGetCatalog } from "@/entity/vacancy/api/get-catalog";
 
 interface VacancyResultsProps {
   count?: number;
@@ -33,6 +34,8 @@ export const VacancyResults = ({
 }: VacancyResultsProps) => {
   const currentPage = useQueryParamAction().get<number>("page") || 1;
 
+  const { result, isLoading: isLoadingCatalog } = useGetCatalog();
+
   return (
     <div className={className}>
       {withHead && (
@@ -42,7 +45,10 @@ export const VacancyResults = ({
         </div>
       )}
 
-      <ListVacancies vacancies={mockVacancies} />
+      <ListVacancies
+        vacancies={result?.vacancies || []}
+        isLoading={isLoadingCatalog}
+      />
 
       <PaginationUI
         meta={{

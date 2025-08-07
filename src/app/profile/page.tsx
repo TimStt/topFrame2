@@ -8,15 +8,14 @@ const Page = async ({
   searchParams,
 }: {
   searchParams: Promise<{
-    page: number;
+    page: string;
     search: string;
   }>;
 }) => {
-  const page = (await searchParams).page;
-  const search = (await searchParams).search;
+  const params = await searchParams;
   return (
     <main className="profile">
-      <WrapperPrefetchQuery {...getOptionsVacanciesQuery({ page, search })}>
+      <WrapperPrefetchQuery {...getOptionsVacanciesQuery(params)}>
         <HeadPage className="container" title="Личный кабинет" />
 
         <div className="profile__inner container">

@@ -8,7 +8,11 @@ export const useSearch = () => {
   const [isSearchValue, setIsSearchValue] = useState<string>(q || "");
 
   const handleSearch = () => {
-    queryActions.set("search", isSearchValue);
+    if (isSearchValue) {
+      queryActions.set("search", isSearchValue, false, false);
+    } else {
+      queryActions.remove("search");
+    }
     setIsSearchValue(isSearchValue);
   };
 

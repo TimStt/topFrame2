@@ -4,6 +4,7 @@
  * @dependencies: React, Swiper, SVG icons
  * @created: 2024-01-15
  */
+"use client";
 import React from "react";
 
 import { BACKGROUND_IMAGE_BLUE } from "@/shared/constants/other";
@@ -16,6 +17,8 @@ import { WorldIconUI } from "@/shared/ui/world-icon-ui";
 import { AnimationEllipses } from "@/shared/ui/animation-ellipses-ui";
 import { MainInfo } from "./ui/main-info";
 import { Slider } from "./ui/slider";
+import { useGetHome } from "@/entity/user/api/get-home";
+import { SkeletonZeroHero } from "./skeleton";
 
 interface ZeroHeroProps {
   className?: string;
@@ -30,6 +33,12 @@ export interface IFeatureCard {
 }
 
 export const ZeroHero = () => {
+  const { aboutUs, isLoading } = useGetHome();
+
+  if (isLoading) {
+    return <SkeletonZeroHero />;
+  }
+
   return (
     <section
       className="zero-hero transform-ellipses"
@@ -41,7 +50,7 @@ export const ZeroHero = () => {
       <div className="zero-hero_inner container">
         <div className="zero-hero__row">
           <div className="zero-hero__text-content">
-            <MainInfo />
+            <MainInfo aboutUs={aboutUs} />
           </div>
           <div className="zero-hero__world">
             <WorldIconUI />

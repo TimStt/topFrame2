@@ -6,7 +6,8 @@
  * @dependencies: React, Next.js Image
  * @created: 2024-01-15
  */
-import React, { useEffect, useRef, useState } from "react";
+"use client";
+import React from "react";
 
 import { cls } from "@/shared/lib/cls";
 import { PlayButtonUI } from "@/shared/lib/cls/video/controls-video-ui";
@@ -14,10 +15,20 @@ import { useVideo } from "@/shared/lib/cls/video/use-video";
 import LoaderUI from "@/shared/ui/loader-ui";
 import Image from "next/image";
 import HoverVideoPlayer from "react-hover-video-player";
+import { useGetHome } from "@/entity/user/api/get-home";
+import { SkeletonTeam } from "./skeleton";
 
 import { ITeamMember, teamData } from "./team.data";
+import { IApiSchemas } from "@/shared/api/schema";
+import { URL_FILE_API } from "@/shared/constants/other";
 
 export const Team: React.FC = () => {
+  const { ourTeam, isLoading } = useGetHome();
+
+  if (isLoading) {
+    return <SkeletonTeam />;
+  }
+
   return (
     <section className="team container" id="team">
       <div className="team__header">
@@ -28,7 +39,7 @@ export const Team: React.FC = () => {
       </div>
 
       <div className="team__list">
-        {teamData.map((member) => (
+        {ourTeam?.map((member) => (
           <TeamMemberCard key={member.id} member={member} />
         ))}
       </div>
@@ -37,7 +48,7 @@ export const Team: React.FC = () => {
 };
 
 interface TeamMemberCardProps {
-  member: ITeamMember;
+  member: IApiSchemas["TeamMemberDto"];
 }
 
 const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
@@ -68,23 +79,12 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
         isPaused && "video-paused"
       )}
       ref={containerRef}
-
-      // onClick={
-      //   isPlaying
-      //     ? () => {
-      //         console.log("pause");
-      //         ref.current?.pause();
-      //       }
-      //     : () => {
-      //         console.log("play");
-      //         handlePlay();
-      //       }
-      // }
     >
       {/* Постер как отдельный элемент */}
-      <div
+      <img
         className="team__card-poster"
-        style={{ backgroundImage: `url(${member.image})` }}
+        src={URL_FILE_API + member.preview}
+        alt={member.title}
       />
 
       <video
@@ -109,11 +109,6 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
           setIsLoading(false);
           setIsPaused(false);
         }}
-        // onError={(e) => {
-        //   console.error('Ошибка загрузки видео:', e)
-        //   setIsLoading(false)
-        //   setHasError(true)
-        // }}
         onLoadedMetadata={() => {
           console.log("Видео метаданные загружены");
         }}
@@ -124,22 +119,8 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
         onPause={() => {
           setIsPaused(true);
         }}
-        src={member.video}
+        src={URL_FILE_API + member.video}
       />
-
-      {/* <PlayButtonUI
-        className="team__card-button"
-        isPlaying={isPlaying}
-        onClick={() => {
-          if (isPaused) {
-            handlePlay();
-          } else {
-            console.log("pause");
-            ref.current?.pause();
-          }
-        }}
-        isLoading={isLoading}
-      /> */}
 
       {!isPlaying && (
         <div className="team__card-content">
@@ -162,16 +143,10 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
             }
           />
 
-          <h3 className="team__card-title">{member.name}</h3>
-          <span className="team__card-position">{member.position}</span>
+          <h3 className="team__card-title">{member.title}</h3>
+          <span className="team__card-position">{member.description}</span>
         </div>
       )}
-
-      {/* {isNotVolume && (
-        <span className="team__card-volume">
-          Для включения звука нажмите на видео
-        </span>
-      )} */}
     </div>
   );
 };

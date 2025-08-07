@@ -37,6 +37,11 @@ main {
   flex-grow: 1;
 }
 
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 /* ========== КАСТОМНЫЕ СТИЛИ СКРОЛЛБАРА ========== */
 
 /* Для Webkit браузеров (Chrome, Safari, Edge) */

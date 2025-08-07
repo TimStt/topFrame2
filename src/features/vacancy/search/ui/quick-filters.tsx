@@ -66,6 +66,10 @@ export const QuickFilters = ({
             hasArrow
             text="Применить фильтры"
             onClick={filterVacancies.acceptAllFilters}
+            disabled={
+              filterVacancies.isEmptyQuickFilters ||
+              filterVacancies.isAllQuickFilterApplied
+            }
           />
           <button
             className="filter__reset-filters"

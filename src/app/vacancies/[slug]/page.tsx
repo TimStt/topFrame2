@@ -25,7 +25,6 @@ export default async function VacanciesPage({
       >
         <AboutVacancy />
       </WrapperPrefetchQuery>
-      <AboutVacancy />
     </main>
   );
 }

@@ -135,7 +135,9 @@ export interface VacancyOperations {
           [name: string]: unknown;
         };
         content?: {
-          "application/json": IResponse<components["schemas"]["VacancyDto"]>;
+          "application/json": {
+            vacancy: components["schemas"]["VacancyDetailsDto"];
+          };
         };
       };
     };

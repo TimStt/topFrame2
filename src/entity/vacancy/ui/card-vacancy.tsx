@@ -5,58 +5,43 @@ import { cls } from "@/shared/lib/cls";
 import { ButtonUI } from "@/shared/ui/button-ui";
 import Link from "next/link";
 import { PAGES_PATHS } from "@/shared/constants/pages-paths";
-
-export interface ICardVacancy {
-  id: number;
-  title: string;
-  resumeParams: string[];
-  children?: React.ReactNode;
-  location: string;
-  className?: string;
-  startPrice: string;
-  endPrice: string;
-}
+import { IApiSchemas } from "@/shared/api/schema";
 
 export const CardVacancy = ({
   id,
-  title,
-  resumeParams,
-  children,
-  location,
+  name,
+  price,
+  slug,
+  city,
+  chip,
   className,
-  startPrice,
-  endPrice,
-}: ICardVacancy) => {
+}: IApiSchemas["VacancyDto"] & { className?: string }) => {
   return (
     <div className={cls("vacancy-card", className)}>
       <Link
         className="vacancy-card__link"
-        href={PAGES_PATHS.VACANCY_PAGE(title.toLowerCase().replace(/ /g, "-"))}
+        href={PAGES_PATHS.VACANCY_PAGE(slug)}
       />
       <div className="vacancy-card__info">
-        <h3 className="vacancy-card__title">{title}</h3>
+        <h3 className="vacancy-card__title">{name}</h3>
         <div className="vacancy-card__params">
-          {resumeParams.map((param) => (
+          {chip?.map((param) => (
             <ChipUI key={param} text={param} />
           ))}
         </div>
         <div className="vacancy-card__location">
           <LocationIcon />
-          <span>{location}</span>
+          <span>{city}</span>
         </div>
       </div>
       <div className="vacancy-card__actions">
-        <span className="vacancy-card__actions-text">
-          {startPrice}&shy; - {endPrice}
-        </span>
+        <span className="vacancy-card__actions-text">{price}</span>
         <ButtonUI
           size="medium"
           variant="secondary"
           hasArrow
           as="a"
-          href={PAGES_PATHS.VACANCY_PAGE(
-            title.toLowerCase().replace(/ /g, "-")
-          )}
+          href={PAGES_PATHS.VACANCY_PAGE(slug)}
           text="Подробнее"
         />
       </div>

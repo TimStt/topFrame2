@@ -1,6 +1,6 @@
 "use client";
 import { useAuthStore } from "@/features/user/auth/model/auth.store";
-import { AvatarWithChange } from "@/features/change-pofile/avatar-with-change";
+import { AvatarWithChange } from "@/features/user/auth/ui/avatar-with-change";
 import { ButtonUI } from "@/shared/ui/button-ui";
 import React from "react";
 import { useStore } from "zustand";
@@ -12,11 +12,14 @@ import IconBook from "@/source/icons/book2.svg";
 import IconLink from "@/source/icons/link.svg";
 import { ButtonLogout } from "@/features/user/auth/ui/button-logout";
 import { useGetUser } from "@/features/user/auth/model/use-get-user";
-import { URL_GET_IMAGE } from "@/shared/constants/other";
+import { URL_FILE_API } from "@/shared/constants/other";
 import Image from "next/image";
+import { InfoUserSkeleton } from "./skeleton";
 
 export const InfoUser = () => {
   const { info, isLoading } = useGetUser();
+
+  if (isLoading) return <InfoUserSkeleton />;
   return (
     <section className="profile__info-user">
       <div className="profile__info-user__about">
@@ -57,7 +60,7 @@ export const InfoUser = () => {
           Быстрые ссылки
         </label>
         <div className="profile__info-user__links-list">
-          {info?.quickLinks.map((link) => (
+          {info?.quickLinks?.map((link) => (
             <a
               className="profile__info-user__links-item"
               href={link.link}
@@ -65,7 +68,7 @@ export const InfoUser = () => {
               key={link.id}
             >
               <Image
-                src={URL_GET_IMAGE + link.icon}
+                src={URL_FILE_API + link.icon}
                 alt="icon"
                 width={16}
                 height={16}
@@ -79,7 +82,7 @@ export const InfoUser = () => {
       </div>
       <div className="profile__info-user__links instructions">
         <label className="profile__info-user__links-label">Инструкции</label>
-        {info?.instructions.map((instruction) => (
+        {info?.instructions?.map((instruction) => (
           <a
             className="profile__info-user__links-item"
             href={instruction.link}
@@ -87,7 +90,7 @@ export const InfoUser = () => {
             key={instruction.id}
           >
             <Image
-              src={URL_GET_IMAGE + instruction.icon}
+              src={URL_FILE_API + instruction.icon}
               alt="icon"
               width={16}
               height={16}

@@ -116,33 +116,38 @@ export const useQueryParamAction = () => {
   /**
    * Получает все параметры из URL в виде объекта
    */
-  const getAllParams = useCallback(<T extends QueryParams>():
-    | {
-        normalized: {
-          options: string[];
-          name: string;
-        }[];
-        original: T;
+  const getAllParams = useCallback(
+    <T extends QueryParams>(
+      zodSchema?: ZodSchema
+    ):
+      | {
+          normalized: {
+            options: string[];
+            name: string;
+          }[];
+          original: T;
+        }
+      | undefined => {
+      const currentAllParams = Object.fromEntries(params.entries()) as T;
+
+      if (Object.keys(currentAllParams).length === 0) {
+        return undefined;
       }
-    | undefined => {
-    const currentAllParams = Object.fromEntries(params.entries()) as T;
 
-    if (Object.keys(currentAllParams).length === 0) {
-      return undefined;
-    }
+      const normalizedParams = Object.entries(currentAllParams).map(
+        ([key, value]) => ({
+          options: value?.toString().split(",") || [value],
+          name: key,
+        })
+      );
 
-    const normalizedParams = Object.entries(currentAllParams).map(
-      ([key, value]) => ({
-        options: value?.toString().split(",") || [value],
-        name: key,
-      })
-    );
-
-    return {
-      normalized: normalizedParams,
-      original: currentAllParams,
-    };
-  }, [params]);
+      return {
+        normalized: normalizedParams,
+        original: currentAllParams,
+      };
+    },
+    [params]
+  );
 
   /**
    * Устанавливает несколько параметров в URL

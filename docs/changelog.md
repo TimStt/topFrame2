@@ -75,15 +75,108 @@
 ## [2024-12-19] - Рефакторинг компонента поиска вакансий
 
 ### Добавлено
+
 - Компонент `SearchBox` для логики поиска вакансий
 - Компонент `QuickFilters` для быстрых фильтров
 - Компонент `FilterSidebar` для боковой панели фильтров
 - Компонент `VacancyResults` для отображения результатов с пагинацией
 
 ### Изменено
+
 - Рефакторинг основного компонента `SearchVacancies` для использования разделенных компонентов
 - Улучшена модульность и переиспользуемость компонентов
 - Соблюдение принципов FSD архитектуры
 
 ### Исправлено
+
 - Исправлена типизация `rootRef` в компоненте `FilterSidebar`
+
+## [2025-01-15] - Создание скелетонов для страниц направления и HR
+
+### Добавлено
+
+- Скелетон для страницы направления (`SkeletonDirectionDetails`)
+- Скелетон для HR страницы (`SkeletonHrTopFrameBlock`)
+- Использование библиотеки `react-loading-skeleton` для создания скелетонов
+- Адаптивные скелетоны с учетом структуры и стилей оригинальных компонентов
+
+### Технические детали
+
+- Скелетоны созданы в файлах `skeleton.tsx` рядом с основными компонентами
+- Учтены размеры и пропорции оригинальных элементов (изображения, текста, кнопок)
+- Добавлены комментарии для лучшего понимания структуры скелетонов
+- Скелетоны поддерживают responsive дизайн
+
+### Файлы
+
+- `src/widgets/mainblocks/direction-details/skeleton.tsx`
+- `src/widgets/mainblocks/hr-top-frame-block/skeleton.tsx`
+
+## [2025-01-15] - Создание модуля главной страницы и хуков
+
+### Добавлено
+
+- Новый модуль `home-module.ts` для API главной страницы
+- Хук `useGetHome` для получения данных главной страницы
+- Хук `useGetSpace` для получения списка разделов SPACE
+- Хук `useGetSpaceDetail` для получения детальной информации о разделе SPACE
+- Новые схемы в components: `AboutUsDto`, `SpaceItemDto`, `VacancyPreviewDto`, `TeamMemberDto`
+- Файлы options для всех новых хуков
+
+### Технические детали
+
+- Модуль поддерживает полную структуру данных главной страницы
+- Хуки следуют паттерну FSD архитектуры
+- Добавлена типизация для всех новых схем
+- Хуки возвращают структурированные данные с деструктуризацией
+
+### Файлы
+
+- `src/shared/api/schema/modules/home-module.ts`
+- `src/shared/api/schema/components.ts` (обновлен)
+- `src/shared/api/schema/index.ts` (обновлен)
+- `src/entity/user/api/get-home/index.ts`
+- `src/entity/user/api/get-home/options.ts`
+- `src/entity/user/api/get-space/index.ts`
+- `src/entity/user/api/get-space/options.ts`
+- `src/entity/user/api/get-space-detail/index.ts`
+- `src/entity/user/api/get-space-detail/options.ts`
+
+## [2025-01-15] - Интеграция хуков в компоненты главной страницы
+
+### Добавлено
+
+- Скелетоны для всех компонентов главной страницы с использованием `react-loading-skeleton`
+- Интеграция хука `useGetHome` в компоненты: `ZeroHero`, `Directions`, `Team`, `NewVacancies`
+- Интеграция хука `useGetSpace` в компонент `HREcosystemSection`
+- Новый компонент `NewVacancies` для отображения вакансий с API
+- Обновление компонента `MainInfo` для принятия данных `aboutUs`
+
+### Изменено
+
+- Компоненты теперь используют данные из API вместо статических данных
+- Добавлена обработка состояний загрузки с отображением скелетонов
+- Обновлена типизация для работы с API данными
+- Компонент `Team` теперь использует `ourTeam` данные из API
+
+### Технические детали
+
+- Все скелетоны созданы в отдельных файлах `skeleton.tsx`
+- Скелетоны адаптированы под структуру и стили оригинальных компонентов
+- Добавлена проверка на существование данных перед рендерингом
+- Компоненты показывают скелетоны во время загрузки данных
+
+### Файлы
+
+- `src/widgets/mainblocks/zero-hero/index.tsx` (обновлен)
+- `src/widgets/mainblocks/zero-hero/skeleton.tsx` (создан)
+- `src/widgets/mainblocks/zero-hero/ui/main-info/index.tsx` (обновлен)
+- `src/widgets/mainblocks/hr-ecosystem/index.tsx` (обновлен)
+- `src/widgets/mainblocks/hr-ecosystem/skeleton.tsx` (создан)
+- `src/widgets/mainblocks/directions/index.tsx` (обновлен)
+- `src/widgets/mainblocks/directions/skeleton.tsx` (создан)
+- `src/widgets/mainblocks/team/index.tsx` (обновлен)
+- `src/widgets/mainblocks/team/skeleton.tsx` (создан)
+- `src/widgets/mainblocks/new-vacancies/index.tsx` (создан)
+- `src/widgets/mainblocks/new-vacancies/skeleton.tsx` (создан)
+- `src/app/page.tsx` (обновлен)

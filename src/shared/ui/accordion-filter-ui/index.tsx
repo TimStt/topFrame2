@@ -68,7 +68,7 @@ export const AccordionFilterUI: React.FC<AccordionFilterUIProps> = ({
         classNameDetails="filter__accordion__details"
         classNameSummary="filter__accordion__summary"
         classNameContent="filter__accordion__content"
-        rootOnClick={() => setIsOpen(!isOpen)}
+        onClick={() => setIsOpen(!isOpen)}
         summaryContent={
           <>
             <span className="filter__accordion__title">{filter.label}</span>

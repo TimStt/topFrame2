@@ -12,6 +12,7 @@ export const useFilter = ({
 }) => {
   const queryActionsParams = useQueryParamAction();
 
+  // так как в query мы не сохраняем label на русском, то находим его в данных от бека
   const getFilterLabel = (filterName: string, filterValue: string) => {
     return (
       filters
@@ -20,6 +21,7 @@ export const useFilter = ({
     );
   };
 
+  // активные фильтры из query приводим к нужному формату
   const isActiveFilterQuery: Omit<ISelectOption, "label">[] | undefined =
     useMemo(() => {
       const queryParams = queryActionsParams.getAllParams()?.normalized;
@@ -38,26 +40,25 @@ export const useFilter = ({
   // активные ВРЕМЕННЫЕ фильтры
   const [isActiveFilters, setIsActiveFilters] = useState<
     Omit<ISelectOption, "label">[] | undefined
-  >(isActiveFilterQuery || undefined);
+  >(
+    isActiveFilterQuery?.filter(
+      (f) => f.name !== "search" && f.name !== "page"
+    ) || undefined
+  );
 
+  // изменение фильтра
   const handleChangeFilter = (label: string, values: ISelectOption) => {
     const filterSelected = isActiveFilters?.findIndex(
       (f) => f.name === values.name
     );
 
-    console.log("handleChangeFilter", values);
-    console.log("filterSelected", filterSelected);
     if (filterSelected !== -1 && filterSelected !== undefined) {
       const newFilters = [...(isActiveFilters || [])];
-      // if (!values.options.length) {
-      //   setIsActiveFilters(newFilters.filter((f) => f.name !== values.name));
-      //   return;
-      // }
+
       newFilters[filterSelected!] = {
         ...values,
         options: values.options.length > 0 ? values.options : [],
       };
-      console.log("newFilters", newFilters);
       setIsActiveFilters(newFilters);
     } else {
       setIsActiveFilters([
@@ -67,7 +68,6 @@ export const useFilter = ({
         },
       ]);
     }
-    console.log(isActiveFilters);
   };
 
   // активные фильтры из query
@@ -76,19 +76,56 @@ export const useFilter = ({
 
   const currentActiveFilters = isActiveFilters;
 
-  const isEmptyActiveFilters =
-    currentActiveFilters && currentActiveFilters.length === 0;
+  const getCurrentActiveFilterBySlug = (slug: string) => {
+    return currentActiveFilters?.find((f) => f.name === slug);
+  };
 
-  const isActiveQuickFilters = useMemo(() => {
-    return isActiveFilterQuery?.filter((f) =>
-      quickFilter?.find((q) => q.slug === f.name && f.options.length > 0)
+  const isActiveQuickFilters = isActiveFilters?.filter((f) =>
+    quickFilter?.find((q) => q.slug === f.name)
+  );
+
+  const isEmptyQuickFilters = !isActiveQuickFilters?.length;
+  const isEmptyAllFilters = !isActiveFilters?.length;
+
+  // ПЕРЕДЕЛАЙ В ФУНКЦИЮ
+
+  const checkFilterIsApplied = (
+    filterSelected: Omit<ISelectOption, "label">
+  ) => {
+    const activeFilter = isActiveFilterQuery?.find(
+      (q) => q.name === filterSelected.name
     );
-  }, [isActiveFilterQuery, quickFilter]);
 
-  const isEmptyQuickFilters =
-    !isActiveQuickFilters || isActiveQuickFilters.length === 0;
+    return (
+      activeFilter?.options.every((o) =>
+        filterSelected.options.some((q) => q.value === o.value)
+      ) && activeFilter?.options.length === filterSelected.options.length
+    );
+  };
 
+  const resetActiveFilterBySlug = (slug: string) => {
+    setIsActiveFilters(
+      isActiveFilters?.map((f) => (f.name === slug ? { ...f, options: [] } : f))
+    );
+  };
+
+  const isAllQuickFilterApplied = isActiveQuickFilters?.every((f) =>
+    checkFilterIsApplied(f)
+  );
+
+  const isAllFilterApplied = isActiveFilters?.every((f) =>
+    checkFilterIsApplied(f)
+  );
+
+  console.log(
+    "isAllQuickFilterApplied",
+    isAllQuickFilterApplied,
+    isActiveFilters
+  );
+
+  // сбрасываем все фильтры
   const resetAllFilters = () => {
+    // если есть временные фильтры, то сбрасываем их
     if (isActiveFilters && isActiveFilters.length > 0) {
       setIsActiveFilters(
         isActiveFilters.map((f) => ({
@@ -98,11 +135,13 @@ export const useFilter = ({
       );
       return;
     }
-
+    // если нет временных фильтров, то сбрасываем все активные фильтры
     queryActionsParams.cleanAllParams();
   };
 
+  // сбрасываем быстрые фильтры
   const resetQuickFilters = () => {
+    // если есть быстрые временные фильтры, то сбрасываем их
     if (isActiveQuickFilters && isActiveQuickFilters.length > 0) {
       setIsActiveFilters(
         isActiveFilters?.map((f) => {
@@ -117,40 +156,37 @@ export const useFilter = ({
       );
       return;
     }
-
+    // если нет быстрых временных фильтров, то сбрасываем все активные фильтры
     queryActionsParams.cleanAllParams();
   };
 
+  // принимаем все фильтры
   const acceptAllFilters = () => {
     console.log("isActiveFilters acceptAllFilters", isActiveFilters);
 
-    isActiveFilters?.forEach((f) => {
-      if (!f.options.length) {
-        queryActionsParams.remove(f.name);
-        setIsActiveFilters(isActiveFilters?.filter((f) => f.name !== f.name));
+    isActiveFilters?.forEach((isActiveFilterItem) => {
+      // если фильтр не выбран, то удаляем его из query
+      if (!isActiveFilterItem.options.length) {
+        queryActionsParams.remove(isActiveFilterItem.name);
+        setIsActiveFilters(
+          isActiveFilters?.filter((f) => f.name !== isActiveFilterItem.name)
+        );
         return;
       }
 
-      const isThisActiveFilters = isActiveFilterQuery?.find(
-        (q) => q.name === f.name
-      );
-      console.log("isThisActiveFilters", isThisActiveFilters);
-      console.log("f", f);
+      // проверяем, есть ли фильтр в query
+      const isThisActiveFilters = checkFilterIsApplied(isActiveFilterItem);
 
-      const isThisFilters =
-        isThisActiveFilters?.options.every((o) =>
-          f.options.some((q) => q.value === o.value)
-        ) && f.options.length === isThisActiveFilters?.options.length;
-
-      if (isThisFilters) {
+      if (isThisActiveFilters) {
         return;
       }
 
-      const string = f.options.map((o) => o.value).join(",");
+      console.log("usQuery", isActiveFilterQuery);
 
-      console.log("string", string);
+      // если фильтры не совпадают, то добавляем их в query
+      const string = isActiveFilterItem.options.map((o) => o.value).join(",");
 
-      queryActionsParams.set(f.name, string, false, false);
+      queryActionsParams.set(isActiveFilterItem.name, string, false, false);
     });
   };
 
@@ -161,8 +197,12 @@ export const useFilter = ({
     resetQuickFilters,
     acceptAllFilters,
     currentActiveFilters,
-    isEmptyActiveFilters,
+    isEmptyAllFilters,
     isEmptyQuickFilters,
+    isAllQuickFilterApplied,
+    getCurrentActiveFilterBySlug,
+    resetActiveFilterBySlug,
+    isAllFilterApplied,
   };
 };
 

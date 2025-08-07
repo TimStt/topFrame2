@@ -1,4 +1,5 @@
 import { queryClient, rqClient } from "@/shared/api/api-client";
+import { URL_FILE_API } from "@/shared/constants/other";
 
 export const invalidateUser = () => {
   queryClient.invalidateQueries({
@@ -14,6 +15,12 @@ export const useGetUser = () => {
 
   return {
     isLoading,
-    info,
+    info: {
+      ...info,
+      user: {
+        ...info?.user,
+        photo: info?.user?.photo ? URL_FILE_API + info?.user?.photo : null,
+      },
+    },
   };
 };

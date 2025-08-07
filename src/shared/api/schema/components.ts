@@ -71,7 +71,16 @@ export interface components {
       arr: components["schemas"]["FilterValueDto"][];
     };
 
+    VacancyInfoDto: {
+      data: string | string[];
+      location: string;
+      name: string;
+      showTitle: boolean;
+      type: "text" | "file" | "image";
+    };
+
     VacancyDto: {
+      id: number;
       name: string;
       slug: string;
       price: string | null;
@@ -79,6 +88,16 @@ export interface components {
       chip: string[];
     };
 
+    VacancyDetailsDto: {
+      id: number;
+      name: string;
+
+      leftBox: components["schemas"]["VacancyInfoDto"][];
+      price: string;
+      city: string;
+      description: components["schemas"]["VacancyInfoDto"][];
+      chip: components["schemas"]["VacancyInfoDto"][];
+    };
     UserDto: {
       id: number;
       name: string;
@@ -161,11 +180,44 @@ export interface components {
 
     DirectionDto: {
       title: string;
-      text?: string | null;
+      description?: string | null;
       slug: string;
       image?: string | null;
-      filterSlug: string;
-      filterValue: number;
+      link: {
+        slug: string;
+        value: string;
+      };
+    };
+
+    // Главная страница
+    AboutUsDto: {
+      id: number;
+      title: string;
+      description: string;
+    };
+
+    SpaceItemDto: {
+      hasSeparatePage: boolean;
+      slug: string;
+      name: string;
+      icon: string;
+      inCenter: boolean;
+    };
+
+    VacancyPreviewDto: {
+      id: number;
+      name: string;
+      price: Record<string, unknown>;
+      city: Record<string, unknown>;
+      chip: string[];
+    };
+
+    TeamMemberDto: {
+      id: number;
+      title: string;
+      description: string;
+      preview: string;
+      video: string;
     };
   };
   responses: never;

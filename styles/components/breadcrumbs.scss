@@ -1,4 +1,4 @@
-@use '../libs/_mixins.scss' as *;
+@use "../libs/_mixins.scss" as *;
 
 // Breadcrumbs wrapper
 .breadcrumbs {
@@ -13,30 +13,40 @@
 }
 
 // Breadcrumbs item
-.breadcrumbs__item {
-  text-decoration: none;
-  color: var(--color-main);
+.breadcrumbs__list {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
 
-  transition-duration: var(--transition-normal);
-  user-select: none;
+  a,
+  span {
+    @include font-setup(12, 12, 400);
+    color: #727272;
+    text-decoration: none;
 
-  @include font-setup(12, 16, 400);
-
-  &--clickable {
-    cursor: pointer;
-
-    &:hover {
-      text-decoration: underline;
-    }
-
-    // &:focus {
-    //   outline: 2px solid var(--color-primary);
-    //   outline-offset: 2px;
-    //   border-radius: 2px;
-    // }
+    transition-duration: var(--transition-normal);
+    user-select: none;
   }
 
-  &--active {
+  a:first-child {
+    color: var(--color-main);
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  // &:focus {
+  //   outline: 2px solid var(--color-primary);
+  //   outline-offset: 2px;
+  //   border-radius: 2px;
+  // }
+
+  a:after {
+    content: "/";
+    display: inline-block;
+    margin-left: 4px;
     color: #727272;
   }
 }

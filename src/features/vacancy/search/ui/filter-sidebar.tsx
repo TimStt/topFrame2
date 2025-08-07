@@ -46,6 +46,7 @@ export const FilterSidebar = ({
           className="filter__reset-filters"
           onClick={filterVacancies.resetAllFilters}
           title="Сбросить все фильтры"
+          disabled={filterVacancies.isEmptyAllFilters}
         >
           Сбросить
         </button>
@@ -59,15 +60,26 @@ export const FilterSidebar = ({
             label: filter.name,
           }}
           activeValue={
-            filterVacancies.currentActiveFilters?.find(
-              (f) => f?.name === filter?.slug
-            )?.options || []
+            filterVacancies.getCurrentActiveFilterBySlug(filter.slug)
+              ?.options || []
           }
           onChange={(label, values) =>
             filterVacancies.handleChangeFilter(label, values)
           }
           renderReset={
-            <button className="filter__reset-filters">Сбросить</button>
+            <button
+              className="filter__reset-filters"
+              disabled={
+                filterVacancies.isEmptyAllFilters ||
+                !filterVacancies.getCurrentActiveFilterBySlug(filter.slug)
+                  ?.options.length
+              }
+              onClick={() =>
+                filterVacancies.resetActiveFilterBySlug(filter.slug)
+              }
+            >
+              Сбросить
+            </button>
           }
         />
       ))}
@@ -76,6 +88,10 @@ export const FilterSidebar = ({
           <ButtonUI
             className="filter__side-bar__apply"
             text="Применить фильтры"
+            disabled={
+              filterVacancies.isAllFilterApplied ||
+              filterVacancies.isEmptyAllFilters
+            }
             onClick={handleAcceptFilterSideBar}
           />
         )

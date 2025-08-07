@@ -9,86 +9,94 @@ import { HeadPage } from "@/widgets/mainblocks/head-page";
 import React from "react";
 import { ModalAddResponse } from "../modal-add-response";
 import LocationIcon from "@/source/icons/location.svg";
+import { useGetVacancy } from "@/entity/vacancy/api/get-vacancy";
+import { notFound, redirect, useParams } from "next/navigation";
+import { VacancyPageSkeleton } from "./skeleton";
+import { PAGES_PATHS } from "@/shared/constants/pages-paths";
+import { VacancyPageSkeletonBenefits } from "./skeleton-benifits";
+import { WrapperNotFoundUI } from "@/shared/ui/wrapper-not-found-ui";
 export const AboutVacancy: React.FC = () => {
+  const slug = useParams<{ slug: string }>().slug;
+  const queryVacancy = useGetVacancy(slug);
+
   return (
-    <div className="vacancy-page__content container">
-      <div className="vacancy-page__main">
-        <HeadPage title="Software Engineer " />
-        <span className="vacancy-page__salary">120 000 - 150 000 Р</span>
-        <div className="vacancy-page__tags">
-          <ChipUI className="vacancy-page__tag" text="Полная занятость" />
-          <ChipUI className="vacancy-page__tag" text="Опыт 3-6 лет" />
-          <ChipUI className="vacancy-page__tag" text="Гибкий график" />
+    <WrapperNotFoundUI
+      data={queryVacancy.vacancy}
+      isLoading={queryVacancy.isLoading}
+    >
+      <div className="vacancy-page__content container">
+        <div className="vacancy-page__main">
+          <HeadPage
+            title={queryVacancy.vacancy?.name}
+            isLoading={queryVacancy.isLoading}
+          />
+          {queryVacancy.isLoading ? (
+            <VacancyPageSkeleton />
+          ) : (
+            <>
+              <span className="vacancy-page__salary">
+                {queryVacancy.vacancy?.price}
+              </span>
+              <div className="vacancy-page__tags">
+                {queryVacancy.vacancy?.chip.map((chip) =>
+                  Array.isArray(chip.data) ? null : (
+                    <ChipUI
+                      className="vacancy-page__tag"
+                      text={Array.isArray(chip.data) ? chip.data[0] : chip.data}
+                      key={chip.data}
+                    />
+                  )
+                )}
+              </div>
+              <div className="vacancy-page__location">
+                <LocationIcon />
+                <span>{queryVacancy.vacancy?.city}</span>
+              </div>
+              <ModalAddResponse />
+              <div className="vacancy-page__info">
+                {queryVacancy.vacancy?.description.map((item) => (
+                  <div className="vacancy-page__info-item" key={item.name}>
+                    <h3>{item.name}</h3>
+                    {Array.isArray(item.data) ? (
+                      <ul>
+                        {item.data.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p dangerouslySetInnerHTML={{ __html: item.data }} />
+                    )}
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
 
-        <div className="vacancy-page__location">
-          <LocationIcon />
-          <span>Москва</span>
-        </div>
-
-        <ModalAddResponse />
-
-        <div className="vacancy-page__info">
-          <div className="vacancy-page__info-item">
-            <h3>Описание позиции</h3>
-            <p>
-              Компания ищет талантливого Software Engineer для присоединения к
-              нашей динамичной команде разработчиков. Вы будете создавать
-              инновационные решения, которые помогут TopFrame строить будущее
-              российского бизнеса.
-            </p>
-            <p>
-              Инженер будет отвечать за разработку высококачественного
-              программного обеспечения, участие в архитектурных решениях и
-              тесное сотрудничество с кросс-функциональными командами для
-              создания продуктов мирового класса.
-            </p>
+        {/* {queryVacancy.vacancy?.leftBox.map((benefit) =>
+        Array.isArray(benefit.data) ? null : (
+          <div className="vacancy-page__benefits">
+            <h3>{benefit.name}</h3>
+            <p>{benefit.data}</p>
           </div>
-          <div className="vacancy-page__info-item">
-            <h3>Основные обязанности</h3>
+        )
+      )} */}
+        {queryVacancy.isLoading ? (
+          <VacancyPageSkeletonBenefits />
+        ) : (
+          <div className="vacancy-page__benefits">
+            <h3>Что мы предлагаем</h3>
             <ul>
-              <li>
-                Разработка и поддержка веб-приложений с использованием
-                современных технологий
-              </li>
-              <li>
-                Участие в проектировании системной архитектуры и принятии
-                технических решений
-              </li>
-              <li>
-                Написание чистого, тестируемого и хорошо документированного кода
-              </li>
-              <li>Проведение код-ревью и менторинг младших разработчиков</li>
-              <li>
-                Оптимизация производительности приложений и решение технических
-                проблем
-              </li>
+              <li>Конкурентная зарплата</li>
+              <li>Медицинская страховка</li>
+              <li>Гибкий график работы</li>
+              <li>Возможность удаленной работы</li>
+              <li>Обучение и развитие</li>
+              <li>Корпоративные мероприятия</li>
             </ul>
           </div>
-          <div className="vacancy-page__info- ">
-            <h3>Требования</h3>
-            <ul>
-              <li>Опыт разработки на JavaScript/TypeScript от 3+ лет</li>
-              <li>Знание React, Next.js и современных frontend технологий</li>
-              <li>Опыт работы с Node.js и базами данных</li>
-              <li>Понимание принципов REST API и GraphQL</li>
-              <li>Знание Git и опыт работы в команде</li>
-            </ul>
-          </div>
-        </div>
+        )}
       </div>
-
-      <div className="vacancy-page__benefits">
-        <h3>Что мы предлагаем</h3>
-        <ul>
-          <li>Конкурентная зарплата</li>
-          <li>Медицинская страховка</li>
-          <li>Гибкий график работы</li>
-          <li>Возможность удаленной работы</li>
-          <li>Обучение и развитие</li>
-          <li>Корпоративные мероприятия</li>
-        </ul>
-      </div>
-    </div>
+    </WrapperNotFoundUI>
   );
 };

@@ -9,6 +9,7 @@ import {
   DirectionOperations,
   DirectionPaths,
 } from "./modules/direction-module";
+import { HomeOperations, HomePaths } from "./modules/home-module";
 
 // Экспорт базовых типов
 export type { webhooks, $defs, IImage } from "./types";
@@ -22,6 +23,7 @@ export type {
   DirectionOperations,
   DirectionPaths,
 } from "./modules/direction-module";
+export type { HomeOperations, HomePaths } from "./modules/home-module";
 
 /**
  * Объединение всех путей API
@@ -30,7 +32,8 @@ export type paths = AuthPaths &
   AccountPaths &
   VacancyPaths &
   SpacePaths &
-  DirectionPaths;
+  DirectionPaths &
+  HomePaths;
 
 /**
  * Объединение всех операций API
@@ -39,6 +42,7 @@ export type operations = AuthOperations &
   AccountOperations &
   VacancyOperations &
   SpaceOperations &
-  DirectionOperations;
+  DirectionOperations &
+  HomeOperations;
 
 export type IApiSchemas = components["schemas"];
