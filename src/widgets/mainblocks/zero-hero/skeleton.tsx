@@ -3,63 +3,58 @@
  * @description: Скелетон для компонента ZeroHero
  * @created: 2025-01-15
  */
-import React from "react";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
+import React from 'react'
+
+import { BACKGROUND_IMAGE_BLUE } from '@/shared/constants/other'
+import { AnimationEllipses } from '@/shared/ui/animation-ellipses-ui'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 export const SkeletonZeroHero: React.FC = () => {
   return (
-    <section className="zero-hero transform-ellipses">
+    <section
+      className="zero-hero transform-ellipses"
+      style={{ backgroundImage: `url(${BACKGROUND_IMAGE_BLUE})` }}
+      aria-busy
+    >
+      <AnimationEllipses className="zero-hero__animation-ellipses" length={3} />
       <div className="zero-hero_inner container">
-        <div className="zero-hero__row">
-          {/* Скелетон для текстового контента */}
+        <div className="zero-hero__row" style={{ gap: 20 }}>
+          {/* Левая колонка: заголовок, подзаголовок, кнопка */}
           <div className="zero-hero__text-content">
-            <Skeleton
-              height={60}
-              width={400}
-              style={{ marginBottom: "20px" }}
-            />
-            <Skeleton count={3} height={20} style={{ marginBottom: "16px" }} />
-            <Skeleton count={2} height={20} style={{ marginBottom: "24px" }} />
-            <Skeleton height={48} width={200} />
+            <Skeleton height={56} width={520} style={{ marginBottom: 24, opacity: 0.5 }} />
+            <Skeleton height={18} width={560} style={{ marginBottom: 12, opacity: 0.5 }} />
+            <Skeleton height={18} width={540} style={{ marginBottom: 28, opacity: 0.5 }} />
+            <Skeleton height={48} width={260} style={{ opacity: 0.5 }} />
           </div>
 
-          {/* Скелетон для иконки мира */}
+          {/* Правая колонка: карта мира (сохраняем пропорции контейнера) */}
           <div className="zero-hero__world">
-            <Skeleton
-              width={200}
-              height={200}
-              style={{ borderRadius: "50%" }}
-            />
+            <div style={{ width: '100%', height: '100%' }}>
+              <Skeleton style={{ width: '100%', height: '100%', borderRadius: 12, opacity: 0.5 }} />
+            </div>
           </div>
         </div>
 
-        {/* Скелетон для слайдера */}
+        {/* Нижний блок: стрелки навигации и карточки фичей */}
         <div className="zero-hero__features">
           <div className="zero-hero__features-wrapper">
-            <Skeleton height={40} width={40} style={{ borderRadius: "50%" }} />
-            <Skeleton height={40} width={40} style={{ borderRadius: "50%" }} />
+            {/* <Skeleton circle width={32} height={32} style={{ opacity: 0.5 }} />
+            <Skeleton circle width={32} height={32} style={{ opacity: 0.5 }} /> */}
           </div>
 
-          {/* Скелетон для карточек функций */}
-          <div style={{ display: "flex", gap: "20px", marginTop: "20px" }}>
-            {Array.from({ length: 3 }).map((_, index) => (
-              <div key={index} style={{ flex: 1 }}>
-                <Skeleton
-                  height={120}
-                  style={{ borderRadius: "8px", marginBottom: "12px" }}
-                />
-                <Skeleton
-                  height={20}
-                  width="80%"
-                  style={{ marginBottom: "8px" }}
-                />
-                <Skeleton count={2} height={16} />
+          <div className="zero-hero__swiper" style={{ display: 'flex', gap: 20 }}>
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="zero-hero__feature-card" style={{ flex: 1 }}>
+                <div className="zero-hero__card-head">
+                  <Skeleton circle width={24} height={24} style={{ opacity: 0.5 }} />
+                  <Skeleton width={140} height={18} style={{ opacity: 0.5 }} />
+                </div>
               </div>
             ))}
           </div>
         </div>
       </div>
     </section>
-  );
-};
+  )
+}

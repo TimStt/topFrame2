@@ -4,39 +4,47 @@
  * @dependencies: React, Swiper, SVG icons
  * @created: 2024-01-15
  */
-"use client";
-import React from "react";
+'use client'
 
-import { BACKGROUND_IMAGE_BLUE } from "@/shared/constants/other";
-import { AccordionUI } from "@/shared/ui/accordion-ui";
-import { ArrowIconUI } from "@/shared/ui/arrow-icon-ui";
-import { ButtonUI } from "@/shared/ui/button-ui";
-import BgMain from "@/source/icons/bg-main.svg";
+import React from 'react'
 
-import { WorldIconUI } from "@/shared/ui/world-icon-ui";
-import { AnimationEllipses } from "@/shared/ui/animation-ellipses-ui";
-import { MainInfo } from "./ui/main-info";
-import { Slider } from "./ui/slider";
-import { useGetHome } from "@/entity/user/api/get-home";
-import { SkeletonZeroHero } from "./skeleton";
+import { useGetHome } from '@/entity/user/api/get-home'
+import { BACKGROUND_IMAGE_BLUE } from '@/shared/constants/other'
+import { AccordionUI } from '@/shared/ui/accordion-ui'
+import { AnimationEllipses } from '@/shared/ui/animation-ellipses-ui'
+import { ArrowIconUI } from '@/shared/ui/arrow-icon-ui'
+import { ButtonUI } from '@/shared/ui/button-ui'
+import { WorldIconUI } from '@/shared/ui/world-icon-ui'
+import BgMain from '@/source/icons/bg-main.svg'
+
+import { SkeletonZeroHero } from './skeleton'
+import { MainInfo } from './ui/main-info'
+import { Slider } from './ui/slider'
+
+/**
+ * @file: ZeroHero section
+ * @description: Main hero section with title, background and feature cards
+ * @dependencies: React, Swiper, SVG icons
+ * @created: 2024-01-15
+ */
 
 interface ZeroHeroProps {
-  className?: string;
-  children?: React.ReactNode;
+  className?: string
+  children?: React.ReactNode
 }
 
 export interface IFeatureCard {
-  id: number;
-  title: string;
-  description: string;
-  icon: React.ReactNode;
+  id: number
+  title: string
+  description: string
+  icon: React.ReactNode
 }
 
 export const ZeroHero = () => {
-  const { aboutUs, isLoading } = useGetHome();
+  const { aboutUs, isLoading } = useGetHome()
 
   if (isLoading) {
-    return <SkeletonZeroHero />;
+    return <SkeletonZeroHero />
   }
 
   return (
@@ -69,7 +77,7 @@ export const ZeroHero = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default ZeroHero;
+export default ZeroHero

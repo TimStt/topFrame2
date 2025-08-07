@@ -3,46 +3,48 @@
  * @description: Компонент MainIn
  * @created: 2025-07-29
  */
-"use client";
+'use client'
 
-import React from "react";
+import React from 'react'
 
-import { useAnimateOnScroll } from "@/shared/hooks/use-animate-on-scroll";
-import { cls } from "@/shared/lib/cls";
-import { ButtonUI } from "@/shared/ui/button-ui";
+import { useAnimateOnScroll } from '@/shared/hooks/use-animate-on-scroll'
+import { cls } from '@/shared/lib/cls'
+import { ButtonUI } from '@/shared/ui/button-ui'
+
+/**
+ * @file: MainIn.tsx
+ * @description: Компонент MainIn
+ * @created: 2025-07-29
+ */
 
 interface MainInfoProps {
   aboutUs?: Array<{
-    id: number;
-    title: string;
-    description: string;
-  }>;
+    id: number
+    title: string
+    description: string
+  }>
 }
 
 export const MainInfo: React.FC<MainInfoProps> = ({ aboutUs }) => {
-  const { ref: refTitle, isVisible, className } = useAnimateOnScroll();
+  const { ref: refTitle, isVisible, className } = useAnimateOnScroll()
 
-  const firstAboutUs = aboutUs?.[0];
+  const firstAboutUs = aboutUs?.[0]
 
   return (
     <>
-      <h1
-        className={cls("zero-hero__title slide-down", className)}
-        ref={refTitle}
-      >
-        {firstAboutUs?.title || "Строим будущее России вместе"}
+      <h1 className={cls('zero-hero__title slide-down', className)} ref={refTitle}>
+        Строим будущее России вместе
       </h1>
-      <p className={cls("zero-hero__subtitle subtitle slide-down", className)}>
-        {firstAboutUs?.description ||
-          "Мы как Российская компания помогаем России строить полюса в новом многополярном мире"}
+      <p className={cls('zero-hero__subtitle subtitle slide-down', className)}>
+        Мы как Российская компания помогаем России строить полюса в новом многополярном мире
       </p>
       <ButtonUI
-        className={cls("zero-hero__cta-btn slide-down", className)}
+        className={cls('zero-hero__cta-btn slide-down', className)}
         variant="secondary"
         size="medium"
         text="Присоединиться к команде"
         hasArrow
       />
     </>
-  );
-};
+  )
+}
