@@ -1,6 +1,4 @@
-import { ICardVacancy } from "@/entity/vacancy/ui/card-vacancy";
-
-export const mockVacancies: Omit<ICardVacancy, "children">[] = [
+export const mockVacancies = [
   {
     id: 1,
     title: "Frontend разработчик",

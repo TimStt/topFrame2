@@ -61,8 +61,8 @@ export const HrTopFrameBlock: React.FC = () => {
           <SkeletonHrTopFrameBlock />
         ) : (
           <div className="hr-topframe-content">
-            {spaceDetail?.blocks.map((block) => (
-              <div className="hr-topframe-info">
+            {spaceDetail?.blocks.map((block, idx) => (
+              <div className="hr-topframe-info" key={(block as any).id ?? (block as any).slug ?? (block as any).title ?? idx}>
                 <h2 className="hr-h2">{block.title}</h2>
                 <div className="hr-main-text">
                   <p>{block.description}</p>

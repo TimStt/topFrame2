@@ -16,7 +16,7 @@ export const ButtonAuth = () => {
     <ButtonAuthSkeleton />
   ) : info?.user ? (
     <Link className="header__profile" href={PAGES_PATHS.PROFILE}>
-      <Avatar userAvatar={info?.user?.photo} size="small" />
+      <Avatar userAvatar={info?.user?.photo ?? undefined} size="small" />
       <span>{info?.user?.name}</span>
     </Link>
   ) : (

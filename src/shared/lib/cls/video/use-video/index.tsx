@@ -29,151 +29,137 @@ export const useVideo = ({ videoId }: { videoId: number }) => {
 
   const [isCanPause, setIsCanPause] = useState(false);
 
-  useEffect(() => {
+  // Track play attempts to be able to cancel outdated ones on quick leave
+  const playAttemptIdRef = useRef(0);
+  const pendingPlayRef = useRef<Promise<void> | null>(null);
+
+  // Stable unmute-on-click handler
+  const handleClickToUnmute = useCallback(() => {
+    if (ref.current && ref.current.muted) {
+      ref.current.muted = false;
+      ref.current.volume = 1;
+      setIsNotVolume(false);
+    }
+  }, []);
+
+  const handlePlay = useCallback(async () => {
     const video = ref.current;
-    const container = containerRef.current;
-    const handleClick = () => {
-      if (ref.current && ref.current.muted) {
-        ref.current.muted = false;
-        ref.current.volume = 1;
-        setIsNotVolume(false);
-      }
-    };
-    const handleMouseMove = (event: MouseEvent) => {
-      const rect = container?.getBoundingClientRect();
-      if (!rect) return;
-      const { clientX, clientY } = event;
+    if (!video) return;
 
-      const isInside =
-        clientX >= rect.left &&
-        clientX <= rect.right &&
-        clientY >= rect.top &&
-        clientY <= rect.bottom;
+    // Start a new attempt and cancel any pending play
+    playAttemptIdRef.current += 1;
+    const attemptId = playAttemptIdRef.current;
 
-      if (!isInside && isPlaying) {
-        handlePause();
-      }
-    };
+    // If already playing for this video, no-op
+    if (!video.paused) return;
 
-    container?.addEventListener("mouseleave", handlePause);
-
-    window.addEventListener("mousemove", handleMouseMove);
-
-    container?.addEventListener("mouseenter", handlePlay);
-
-    container?.addEventListener("touchstart", handlePlay);
-
-    /// отследить любой клик по документу
-    document.addEventListener("click", handleClick);
-    video?.addEventListener("click", handleClick);
-
-    return () => {
-      if (video) {
-        managerActiveVideo.unregisterVideo(video);
-      }
-
-      container?.removeEventListener("mouseenter", handlePlay);
-      container?.removeEventListener("mouseleave", handlePause);
-
-      container?.removeEventListener("touchstart", handlePlay);
-
-      document.removeEventListener("click", handleClick);
-      video?.removeEventListener("click", handleClick);
-    };
-  }, [isNotVolume]);
-
-  useManagerActiveVideo(ref.current);
-
-  console.log("activeVideoId", activeVideoId, videoId);
-
-  const handlePlay = async () => {
-    if (!ref.current) return;
-    const video = ref.current;
-    if (isLoading || !video.paused || isCanPause) return;
-    managerActiveVideo.stopAllExcept(ref.current);
+    managerActiveVideo.stopAllExcept(video);
     setHasError(false);
     setIsLoading(true);
     setActiveVideo(videoId);
-    try {
-      // Проверяем готовность видео
 
-      video.load();
-      // managerActiveVideo.stopAllExcept(video);
-      // Если видео не готово, загружаем его
-      if (video.readyState < 4) {
-        // Ждем готовности видео
+    try {
+      // Wait until we can play (if not ready yet)
+      if (video.readyState < 2) {
         await new Promise<void>((resolve, reject) => {
           const onCanPlay = () => {
             video.removeEventListener("canplay", onCanPlay);
             video.removeEventListener("error", onError);
-
-            setActiveVideo(videoId);
-            console.log("onCanPlay");
             resolve();
           };
-
           const onError = () => {
             video.removeEventListener("canplay", onCanPlay);
             video.removeEventListener("error", onError);
             reject(new Error("Ошибка загрузки видео"));
           };
-
           video.addEventListener("canplay", onCanPlay);
           video.addEventListener("error", onError);
         });
       }
-      setActiveVideo(videoId);
+
+      // If another attempt started while waiting, abort
+      if (playAttemptIdRef.current !== attemptId) return;
+
       video.currentTime = isCurrentTime;
-      // Запускаем воспроизведение
-      await video.play();
+
+      const playPromise = video.play();
+      pendingPlayRef.current = playPromise
+        .then(() => {})
+        .catch(() => {}); // Swallow interruption errors
+      await pendingPlayRef.current;
+
+      // If aborted during play, stop immediately
+      if (playAttemptIdRef.current !== attemptId) {
+        try {
+          video.pause();
+        } catch {}
+        return;
+      }
+
       setIsCanPause(true);
+      setIsPaused(false);
     } catch (error) {
-      console.error("Ошибка воспроизведения видео:", error);
+      // Mark error and reset active
       setHasError(true);
       setActiveVideo(null);
-
-      // Если ошибка связана с autoplay policy, показываем сообщение
-      if (error instanceof Error && error.name === "NotAllowedError") {
-        console.warn("Автоматическое воспроизведение заблокировано браузером");
-      }
     } finally {
-      setIsLoading(false);
+      // Only clear loading if this is the latest attempt
+      if (playAttemptIdRef.current === attemptId) {
+        setIsLoading(false);
+      }
     }
-  };
+  }, [videoId, isCurrentTime, setActiveVideo, setIsLoading]);
 
-  const handlePause = () => {
-    if (!ref.current) return;
-    console.log("handlePause", {
-      paused: ref.current.paused,
-      isPlaying,
-      isLoading,
-    });
-    if (!isLoading && isPlaying && isCanPause) {
-      setTimeout(() => {
-        if (ref.current) {
-          ref.current.pause();
-          ref.current.currentTime = 0;
-          setIsLoading(false);
-          setIsCanPause(false);
-          setActiveVideo(null);
-        }
-      }, 100);
+  const handlePause = useCallback(() => {
+    const video = ref.current;
+    if (!video) return;
+
+    // Cancel current attempt and pause immediately
+    playAttemptIdRef.current += 1;
+
+    try {
+      video.pause();
+    } catch {}
+
+    try {
+      video.currentTime = 0;
+    } catch {}
+
+    setIsLoading(false);
+    setIsCanPause(false);
+    setIsPaused(true);
+
+    if (activeVideoId === videoId) {
+      setActiveVideo(null);
     }
-  };
+  }, [activeVideoId, videoId, setActiveVideo, setIsLoading]);
 
-  const Loader = ({
-    className,
-    ...props
-  }: { className?: string } & ILoaderUI) => {
-    // Показываем лоадер когда видео НЕ загружено и воспроизводится
-    if (!isLoading) return undefined;
-    return (
-      <LoaderUI
-        className={cls("position-center-loader", className)}
-        {...props}
-      />
-    );
-  };
+  useEffect(() => {
+    const video = ref.current;
+    const container = containerRef.current;
+
+    if (!container) return;
+
+    container.addEventListener("pointerenter", handlePlay, { passive: true } as any);
+    container.addEventListener("pointerleave", handlePause, { passive: true } as any);
+
+    // Enable unmute on any click
+    document.addEventListener("click", handleClickToUnmute);
+    video?.addEventListener("click", handleClickToUnmute);
+
+    return () => {
+      if (video) {
+        managerActiveVideo.unregisterVideo(video);
+      }
+      container.removeEventListener("pointerenter", handlePlay as any);
+      container.removeEventListener("pointerleave", handlePause as any);
+
+      document.removeEventListener("click", handleClickToUnmute);
+      video?.removeEventListener("click", handleClickToUnmute);
+    };
+  }, [handlePlay, handlePause, handleClickToUnmute]);
+
+  useManagerActiveVideo(ref.current);
 
   return {
     ref,
@@ -188,7 +174,18 @@ export const useVideo = ({ videoId }: { videoId: number }) => {
     handlePause,
     setIsLoading,
     setHasError,
-    Loader,
+    Loader: ({
+      className,
+      ...props
+    }: { className?: string } & ILoaderUI) => {
+      if (!isLoading) return undefined;
+      return (
+        <LoaderUI
+          className={cls("position-center-loader", className)}
+          {...props}
+        />
+      );
+    },
     isCurrentTime,
     setIsCurrentTime,
   };
