@@ -11,18 +11,14 @@ export async function middleware(request: NextRequest) {
   const cookiesStore = request.cookies;
   const currentPath = request.nextUrl.pathname;
   const token = cookiesStore.get(TOKEN_NAME);
-
+  console.log("currentPath !!!!", currentPath);
   if (PROTECTED_PAGES.includes(currentPath)) {
     if (!token?.value) {
       return NextResponse.redirect(new URL("/", request.url));
     }
   }
 
-  const pathRedirect = REDIRECT_PAGES.find(
-    (path) =>
-      currentPath.split("/")[1] === path.path.split("/")[1] &&
-      currentPath.split("/").length === path.path.split("/").length
-  );
+  const pathRedirect = REDIRECT_PAGES.find((path) => currentPath === path.path);
 
   if (pathRedirect?.redirect) {
     return NextResponse.redirect(new URL(pathRedirect.redirect, request.url));
@@ -34,3 +30,7 @@ export async function middleware(request: NextRequest) {
 
   return NextResponse.next();
 }
+
+export const config = {
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+};
