@@ -123,10 +123,15 @@
   }
 }
 
-@media (max-width: 1210px) {
+@media (max-width: 1199px) {
   .vacancy-page__benefits {
     position: static;
     margin-top: 0;
+    width: max-content;
+  }
+
+  .vacancy-page__content {
+    flex-direction: column;
   }
 }
 

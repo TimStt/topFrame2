@@ -13,13 +13,17 @@
   &__info {
     flex: 1 1 0;
     min-width: 0;
-    max-width: 600px;
+    // max-width: 600px;
   }
   &__facts {
     display: inline-block;
     @include font-setup(20, 24, 700, false);
-    color: var(--color-accent-blue);
+
     margin-bottom: 24px;
+
+    &.blue {
+      color: var(--color-accent-blue);
+    }
   }
   &__main-text {
     @include font-setup(16, 22, 400, false);
@@ -34,6 +38,10 @@
     @include font-setup(20, 29, 700, false);
     color: var(--color-main);
     margin-bottom: 24px;
+
+    &.blue {
+      color: var(--color-accent-blue);
+    }
   }
 
   &__benefits {
@@ -54,8 +62,11 @@
       background: var(--color-light);
       &-title {
         @include font-setup(16, 20, 700, false);
-        color: var(--color-accent-blue);
+
         margin-bottom: 12px;
+        &.blue {
+          color: var(--color-accent-blue);
+        }
       }
       &-desc {
         font-family: var(--second-family);

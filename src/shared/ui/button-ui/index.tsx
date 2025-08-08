@@ -79,6 +79,7 @@ export const ButtonUI = <
         href={rest.href as string}
         className={buttonClasses}
         {...(rest as ComponentPropsWithoutRef<"a">)}
+        ref={rootRef as Ref<HTMLAnchorElement>}
       >
         <span>{text}</span>
         {children}
@@ -92,6 +93,7 @@ export const ButtonUI = <
       className={buttonClasses}
       type={type as "button" | "submit" | "reset"}
       {...(rest as ComponentPropsWithoutRef<"button">)}
+      ref={rootRef as Ref<HTMLButtonElement>}
     >
       <span>{text}</span>
       {children}

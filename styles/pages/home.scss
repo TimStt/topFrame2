@@ -899,6 +899,7 @@
   &__list {
     overflow-x: auto;
     max-height: 583px;
+    min-width: 40%;
     // scrollbar-width: thin;
     // scrollbar-color: var(--color-light) #d5e8f852;
     /* Дорожка скроллбара (фон, по которому двигается ползунок) */
@@ -1058,7 +1059,8 @@
   }
 
   &__selected {
-    min-width: 50%;
+    max-width: 480px;
+    width: 100%;
     /* display: flex
 ; */
     margin: auto;
@@ -1071,7 +1073,9 @@
   &__selected-empty {
     @include flex-column();
     align-items: center;
+    justify-content: center;
     gap: 12px;
+    min-height: 551px;
     color: var(--color-light);
     @include font-setup(24, 32, 700);
     text-align: center;

@@ -18,9 +18,9 @@ export const ListVacancies = ({
   renderPagination,
   renderButton,
   className,
+  vacancies,
+  isLoading,
 }: IListVacancies) => {
-  const { vacancies, isLoading } = useGetHome();
-
   return (
     <div className={cls("vacancy-list", className)}>
       <div className="vacancy-list__content">
@@ -35,8 +35,8 @@ export const ListVacancies = ({
         ) : (
           <div className="vacancy-list__empty">
             <p className="vacancy-list__empty-text">
-              По вашему запросу ничего не найдено. Попробуйте изменить параметры
-              поиска.
+              По вашему запросу ничего не найдено. <br />
+              Попробуйте изменить параметры поиска.
             </p>
           </div>
         )}

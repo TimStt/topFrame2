@@ -1,9 +1,12 @@
+"use client";
+import { useGetHome } from "@/entity/user/api/get-home";
 import { ListVacancies } from "@/entity/vacancy/ui/list-vacancies";
 import { mockVacancies } from "@/shared/constants/mock-data";
 import { ButtonUI } from "@/shared/ui/button-ui";
 import React from "react";
 
 export const NewVacancies = () => {
+  const { vacancies, isLoading } = useGetHome();
   return (
     <section className="new-vacancies">
       <h2 className="new-vacancies__title title-section">Новые вакансии</h2>
@@ -22,6 +25,8 @@ export const NewVacancies = () => {
             text="Посмотреть все вакансии"
           />
         }
+        vacancies={vacancies}
+        isLoading={isLoading}
       />
     </section>
   );

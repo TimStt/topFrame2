@@ -2,25 +2,36 @@ import { BACKGROUND_IMAGE_BLUE } from "@/shared/constants/other";
 import { AnimationEllipses } from "@/shared/ui/animation-ellipses-ui";
 import { HeadPage } from "@/widgets/mainblocks/head-page";
 import { SearchVacancies } from "@/features/vacancy/search/ui";
+import { WrapperPrefetchQuery } from "@/shared/lib/react-query/wrapper-prefetch-query";
+import { getOptionsVacanciesQuery } from "@/entity/vacancy/api/get-catalog/options";
+import { object } from "zod";
 
-export default function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ page: string; search: string }>;
+}) {
+  const params = await searchParams;
+
   return (
     <main className="vacancies">
-      <div
-        className="vacancies__head transform-ellipses"
-        style={{
-          backgroundImage: `url(${BACKGROUND_IMAGE_BLUE})`,
-        }}
-      >
-        <AnimationEllipses
-          className="zero-hero__animation-ellipses"
-          length={2}
-        />
-        <HeadPage className="container" title="Вакансии" />
-      </div>
-      <div className="vacancies__inner container">
-        <SearchVacancies withHead={false} withQuickFilters={false} />
-      </div>
+      <WrapperPrefetchQuery {...getOptionsVacanciesQuery(params)}>
+        <div
+          className="vacancies__head transform-ellipses"
+          style={{
+            backgroundImage: `url(${BACKGROUND_IMAGE_BLUE})`,
+          }}
+        >
+          <AnimationEllipses
+            className="zero-hero__animation-ellipses"
+            length={2}
+          />
+          <HeadPage className="container" title="Вакансии" />
+        </div>
+        <div className="vacancies__inner container">
+          <SearchVacancies withHead={false} withQuickFilters={false} />
+        </div>
+      </WrapperPrefetchQuery>
     </main>
   );
 }

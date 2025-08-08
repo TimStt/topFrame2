@@ -23,7 +23,9 @@ export interface DirectionOperations {
           [name: string]: unknown;
         };
         content: {
-          "application/json": IResponse<components["schemas"]["DirectionDto"]>;
+          "application/json": IResponse<
+            components["schemas"]["DirectionDetailsDto"]
+          >;
         };
       };
       /** @description Направление не найдено */

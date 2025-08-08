@@ -43,9 +43,9 @@ export const AccordionFilterUI: React.FC<AccordionFilterUIProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const refAccordion = useRef<HTMLDivElement>(null);
-  useOnClickOutside(refAccordion, () => {
-    setIsOpen(false);
-  });
+  // useOnClickOutside(refAccordion, () => {
+  //   setIsOpen(false);
+  // });
 
   const handleChange = handleOptionChange(
     "checkbox",

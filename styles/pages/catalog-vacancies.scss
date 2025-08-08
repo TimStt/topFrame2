@@ -25,11 +25,18 @@
     z-index: 3;
   }
 
-  .breadcrumbs__list .breadcrumbs__item {
-    color: var(--color-light);
-
-    &--active {
+  .breadcrumbs__list {
+    a,
+    span {
       color: var(--color-white-1);
+
+      &:after {
+        color: var(--color-white-1);
+      }
+    }
+
+    a:first-child {
+      color: var(--color-light);
     }
   }
 

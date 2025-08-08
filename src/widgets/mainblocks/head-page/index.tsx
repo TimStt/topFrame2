@@ -8,7 +8,7 @@ export const HeadPage = ({
   isLoading,
 }: {
   className?: string;
-  title: string;
+  title?: string;
   isLoading?: boolean;
 }) => {
   return (

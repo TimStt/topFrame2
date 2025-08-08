@@ -9,6 +9,8 @@ import { ModalToastUI } from "@/shared/ui/modal-toast-ui";
 import { Suspense } from "react";
 import LoaderUI from "@/shared/ui/loader-ui";
 import { QueryProvider } from "@/shared/api/provider";
+import { WrapperPrefetchQuery } from "@/shared/lib/react-query/wrapper-prefetch-query";
+import { getContactsOptions } from "@/entity/user/api/get-contacts/options";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -34,7 +36,9 @@ export default function RootLayout({
             <Header />
             <MobileMenu />
             {children}
-            <Footer />
+            <WrapperPrefetchQuery {...getContactsOptions()}>
+              <Footer />
+            </WrapperPrefetchQuery>
             <ModalAuth />
             <ModalToastUI />
           </Suspense>

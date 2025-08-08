@@ -1,5 +1,56 @@
 # Changelog
 
+## [2025-08-08] - Фикс поведения видео на мобильных и стоп по клику вне
+
+### Добавлено
+
+- Остановка видео при клике вне контейнера видео
+
+### Изменено
+
+- Разведено поведение для устройств с hover (desktop) и touch (mobile):
+  - Desktop: запуск по `pointerenter`, пауза по `pointerleave`
+  - Mobile: запуск по тапу по контейнеру; `pointerleave` больше не используется
+- Стабилизированы обработчики событий для корректного снятия `eventListener`
+
+### Исправлено
+
+- На мобильных устройствах `pointerleave` больше не срабатывает сразу после тапа по видео
+- Убран глобальный `document.click` для размьюта, чтобы избежать неожиданных побочных эффектов
+- Корректно снимаются слушатели при размонтировании компонента
+
+## [2025-08-08] - Скелетон страницы подробного описания направления
+
+### Добавлено
+
+- Скелетон `HrEcosystemArticleSkeleton` для страницы с подробным описанием статьи о направлении
+- Использован `react-loading-skeleton`; покрыты заголовок, абзацы, блок преимуществ, блок шагов, кнопка и боковое изображение
+
+### Файлы
+
+- `src/widgets/mainblocks/hr-ecosystem-article/skeleton.tsx`
+
+## [2025-08-08] - Контакты: новые маршруты и хуки
+
+### Добавлено
+
+- В `home-module.ts` добавлены маршруты:
+  - `GET /api/contact` — список email, телефонов и документов
+  - `GET /api/contact/{slug}` — получение документа по slug
+- Новые схемы: `ContactItemDto`, `ContactDocumentDto`
+- Хуки:
+  - `useGetContacts` (+ `getContactsOptions`)
+  - `useGetContactDetail` (+ `getContactDetailOptions`)
+
+### Файлы
+
+- `src/shared/api/schema/components.ts`
+- `src/shared/api/schema/modules/home-module.ts`
+- `src/entity/user/api/get-contacts/index.ts`
+- `src/entity/user/api/get-contacts/options.ts`
+- `src/entity/user/api/get-contact-detail/index.ts`
+- `src/entity/user/api/get-contact-detail/options.ts`
+
 ## [2024-01-15] - Добавление плавных переходов для видео в секции команды
 
 ### Добавлено

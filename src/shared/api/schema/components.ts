@@ -91,7 +91,11 @@ export interface components {
     VacancyDetailsDto: {
       id: number;
       name: string;
-
+      button?: {
+        role: "recruiter" | "freelancer";
+        label: string;
+        value: string;
+      };
       leftBox: components["schemas"]["VacancyInfoDto"][];
       price: string;
       city: string;
@@ -156,27 +160,58 @@ export interface components {
       image?: string;
       text?: string;
       link?: {
-        url: string;
+        label: string;
+        value: string;
+      };
+    };
+    SpaceDetailsBlockDto: {
+      titleIsBlue: boolean;
+      title: string;
+      position: number;
+    };
+
+    SpaceDetailsSpaceDto: {
+      image: string;
+      slug: string;
+      name: string;
+      link?: {
+        label: string;
+        value: string;
       };
     };
 
-    SpaceDetailDto: {
-      space: {
-        slug: string;
-        name: string;
-        link?: {
-          label: string;
-          value: string;
+    SpaceDetailDto:
+      | {
+          space: components["schemas"]["SpaceDetailsSpaceDto"];
+
+          blocks: Array<
+            components["schemas"]["SpaceDetailsBlockDto"] & {
+              description: string;
+
+              descriptionType: "text";
+            }
+          >;
+        }
+      | {
+          space: components["schemas"]["SpaceDetailsSpaceDto"];
+          blocks: Array<
+            {
+              description: {
+                name: string;
+              }[];
+              descriptionType: "step";
+            } & components["schemas"]["SpaceDetailsBlockDto"]
+          >;
+        }
+      | {
+          space: components["schemas"]["SpaceDetailsSpaceDto"];
+          blocks: Array<
+            {
+              description: { title: string; description: string }[];
+              descriptionType: "block";
+            } & components["schemas"]["SpaceDetailsBlockDto"]
+          >;
         };
-      };
-      blocks: {
-        title: string;
-        titleIsBlur: boolean;
-        description: string;
-        descriptionType: string;
-        position: number;
-      }[];
-    };
 
     DirectionDto: {
       title: string;
@@ -187,6 +222,15 @@ export interface components {
         slug: string;
         value: string;
       };
+    };
+
+    DirectionDetailsDto: {
+      filterSlug: string;
+      filterValue: string;
+      image: string;
+      slug: string;
+      text: string;
+      title: string;
     };
 
     // Главная страница
@@ -218,6 +262,19 @@ export interface components {
       description: string;
       preview: string;
       video: string;
+    };
+
+    // Контакты
+    ContactItemDto: {
+      id: number;
+      value: string;
+      isEmail?: boolean;
+    };
+
+    ContactDocumentDto: {
+      title: string;
+      description: string;
+      slug: string;
     };
   };
   responses: never;

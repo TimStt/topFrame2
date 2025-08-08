@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 /**
  * @file: Footer section
@@ -6,19 +6,22 @@
  * @dependencies: React, Next.js Link
  * @created: 2024-01-15
  */
-import React from 'react'
+import React from "react";
 
-import { BACKGROUND_IMAGE_BLUE } from '@/shared/constants/other'
-import { PAGES_PATHS } from '@/shared/constants/pages-paths'
-import ArrowIcon from '@/source/icons/arrow.svg'
-import EmailIcon from '@/source/icons/email.svg'
-import LogoIsArt from '@/source/icons/logo-is-art.svg'
-import Image from 'next/image'
-import Link from 'next/link'
+import { BACKGROUND_IMAGE_BLUE } from "@/shared/constants/other";
+import { PAGES_PATHS } from "@/shared/constants/pages-paths";
+import ArrowIcon from "@/source/icons/arrow.svg";
+import EmailIcon from "@/source/icons/email.svg";
+import LogoIsArt from "@/source/icons/logo-is-art.svg";
+import Image from "next/image";
+import Link from "next/link";
 
-import { companyInfo, footerContacts, footerNavigation } from './footer.data'
+import { companyInfo, footerContacts, footerNavigation } from "./footer.data";
+import { useGetContacts } from "@/entity/user/api/get-contacts";
 
 export const Footer: React.FC = () => {
+  const { contacts } = useGetContacts();
+
   return (
     <footer
       className="footer"
@@ -63,17 +66,25 @@ export const Footer: React.FC = () => {
           </div>
           {/* Правая колонка - Контакты */}
           <div className="footer__contacts">
-            <a className="footer__contacts__email" href="mailto:info@topframe.ru">
-              <span className="visually-hidden">Посмотреть почту</span>
-              <EmailIcon />
-            </a>
-            <a href="tel:+79636843639" className="footer__contacts-phone">
-              +7 963 684 36 39
-            </a>
-
-            <a href="tel:+79636843641" className="footer__contacts-phone">
-              +7 963 684 36 41
-            </a>
+            {contacts?.emails.map((email) => (
+              <a
+                className="footer__contacts__email"
+                href={`mailto:${email.value}`}
+                key={email.id}
+              >
+                <span className="visually-hidden">Посмотреть почту</span>
+                <EmailIcon />
+              </a>
+            ))}
+            {contacts?.phones.map((phone) => (
+              <a
+                href={`tel:${phone.value}`}
+                className="footer__contacts-phone"
+                key={phone.id}
+              >
+                {phone.value}
+              </a>
+            ))}
           </div>
         </div>
         <div className="footer__bottom">
@@ -82,7 +93,14 @@ export const Footer: React.FC = () => {
               © 2001 - {new Date().getFullYear()} TOPFRAME. Все права защищены.
             </p>
 
-            <Link href={PAGES_PATHS.POLICY}>Политика конфиденциальности</Link>
+            {contacts?.documents.map((document) => (
+              <Link
+                href={PAGES_PATHS.DOCUMENTS(document.slug)}
+                key={document.slug}
+              >
+                {document.title}
+              </Link>
+            ))}
 
             <Link href={PAGES_PATHS.IS_ART} target="_blank">
               <LogoIsArt />
@@ -93,7 +111,7 @@ export const Footer: React.FC = () => {
 
       {/* Нижняя часть футера */}
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

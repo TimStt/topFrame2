@@ -6,15 +6,18 @@ import { useQueryParamAction } from "@/shared/hooks/use-query-param-action";
 export const useGetCatalog = () => {
   const queriesActions = useQueryParamAction();
 
+  const params =
+    queriesActions.getAllParams<{
+      page: string;
+      search: string;
+    }>()?.original || {};
+
   const { data, ...catalogQuery } = rqClient.useQuery(
     "get",
     "/api/vacancy/catalog",
     {
       params: {
-        query: queriesActions.getAllParams<{
-          page: string;
-          search: string;
-        }>()?.original,
+        query: params,
       },
     }
   );

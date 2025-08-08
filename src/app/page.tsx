@@ -10,16 +10,20 @@ import { HREcosystemSection } from "@/widgets/mainblocks/hr-ecosystem";
 import { Directions } from "@/widgets/mainblocks/directions";
 import { Team } from "@/widgets/mainblocks/team";
 import { NewVacancies } from "@/widgets/vacancy/new-vacancies";
+import { WrapperPrefetchQuery } from "@/shared/lib/react-query/wrapper-prefetch-query";
+import { getHomeOptions } from "@/entity/user/api/get-home/options";
 
 export default function Home() {
   return (
     <>
       <main>
-        <ZeroHero />
-        <HREcosystemSection />
-        <Directions />
-        <Team />
-        <NewVacancies />
+        <WrapperPrefetchQuery {...getHomeOptions()}>
+          <ZeroHero />
+          <HREcosystemSection />
+          <Directions />
+          <Team />
+          <NewVacancies />
+        </WrapperPrefetchQuery>
       </main>
     </>
   );

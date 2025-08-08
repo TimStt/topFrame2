@@ -134,7 +134,7 @@ export const DirectionCard: React.FC<
           hasArrow
           fullWidth={false}
           text="Подробнее"
-          href={PAGES_PATHS.DIRECTIONS(card?.link?.slug || "")}
+          href={PAGES_PATHS.DIRECTIONS(card?.slug || "")}
           as="a"
         />
       </div>

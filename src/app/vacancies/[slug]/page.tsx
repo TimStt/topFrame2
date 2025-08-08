@@ -9,13 +9,13 @@ import { WrapperPrefetchQuery } from "@/shared/lib/react-query/wrapper-prefetch-
 import { getOptionsVacanciesQuery } from "@/entity/vacancy/api/get-catalog/options";
 import { getOptionsVacancyQuery } from "@/entity/vacancy/api/get-vacancy/options";
 export default async function VacanciesPage({
-  searchParams,
+  params,
 }: {
-  searchParams: Promise<{
+  params: Promise<{
     slug: string;
   }>;
 }) {
-  const slug = (await searchParams).slug;
+  const slug = (await params).slug;
   return (
     <main className="vacancy-page">
       <WrapperPrefetchQuery

@@ -15,9 +15,14 @@ import { VacancyPageSkeleton } from "./skeleton";
 import { PAGES_PATHS } from "@/shared/constants/pages-paths";
 import { VacancyPageSkeletonBenefits } from "./skeleton-benifits";
 import { WrapperNotFoundUI } from "@/shared/ui/wrapper-not-found-ui";
+import { ButtonUI } from "@/shared/ui/button-ui";
+import { onToggleModal } from "@/shared/lib/zustands/use-store-modals";
 export const AboutVacancy: React.FC = () => {
   const slug = useParams<{ slug: string }>().slug;
   const queryVacancy = useGetVacancy(slug);
+
+  console.log("queryVacancy", queryVacancy.vacancy);
+  const hasButton = !!queryVacancy.vacancy?.button;
 
   return (
     <WrapperNotFoundUI
@@ -52,7 +57,21 @@ export const AboutVacancy: React.FC = () => {
                 <LocationIcon />
                 <span>{queryVacancy.vacancy?.city}</span>
               </div>
-              <ModalAddResponse />
+              <ButtonUI
+                className="vacancy-page__button"
+                variant="secondary"
+                text="Откликнуться"
+                hasArrow
+                as={hasButton ? "a" : "button"}
+                href={queryVacancy.vacancy?.button?.value}
+                target={hasButton ? "_blank" : undefined}
+                onClick={
+                  !hasButton
+                    ? () => onToggleModal("addResponse", true)
+                    : undefined
+                }
+              />
+              <ModalAddResponse idResponse={queryVacancy.vacancy?.id} />
               <div className="vacancy-page__info">
                 {queryVacancy.vacancy?.description.map((item) => (
                   <div className="vacancy-page__info-item" key={item.name}>

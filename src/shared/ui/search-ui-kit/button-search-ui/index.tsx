@@ -13,6 +13,7 @@ export const ButtonSearchUI = ({
     <ButtonSubmitUI
       className={cls("search-box__button-search", className)}
       variant="custom"
+      colorLoader="#fff"
       size="custom"
       isLoading={isLoading}
       text="Поиск"
