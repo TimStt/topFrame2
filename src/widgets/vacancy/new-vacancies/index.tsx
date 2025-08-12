@@ -2,6 +2,7 @@
 import { useGetHome } from "@/entity/user/api/get-home";
 import { ListVacancies } from "@/entity/vacancy/ui/list-vacancies";
 import { mockVacancies } from "@/shared/constants/mock-data";
+import { PAGES_PATHS } from "@/shared/constants/pages-paths";
 import { ButtonUI } from "@/shared/ui/button-ui";
 import React from "react";
 
@@ -21,7 +22,7 @@ export const NewVacancies = () => {
             size="medium"
             hasArrow
             as="a"
-            href="/"
+            href={PAGES_PATHS.VACANCIES}
             text="Посмотреть все вакансии"
           />
         }

@@ -1,14 +1,23 @@
+import { TOKEN_NAME } from "@/shared/constants/other";
 import { queryClient, rqClient } from "@/shared/api/api-client";
 import { URL_FILE_API } from "@/shared/constants/other";
+import { getCookie } from "@/shared/utils/get-cookie-client";
 
-export const invalidateUser = () => {
-  queryClient.invalidateQueries({
+export const invalidateUser = async () => {
+  await queryClient.invalidateQueries({
     queryKey: rqClient.queryOptions("get", "/api/account").queryKey,
   });
 };
 
 export const useGetUser = () => {
-  const userQuery = rqClient.useQuery("get", "/api/account");
+  const userQuery = rqClient.useQuery(
+    "get",
+    "/api/account",
+    {},
+    {
+      enabled: !!getCookie(TOKEN_NAME),
+    }
+  );
 
   const info = userQuery.data?.response;
   const isLoading = userQuery.isLoading;

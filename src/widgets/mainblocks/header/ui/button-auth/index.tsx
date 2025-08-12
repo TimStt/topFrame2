@@ -1,22 +1,24 @@
-'use client'
+"use client";
 
-import React from 'react'
+import React from "react";
 
-import { Avatar } from '@/entity/user/ui/avatar'
-import { useAuthStore } from '@/features/user/auth/model/auth.store'
-import { useGetUser } from '@/features/user/auth/model/use-get-user'
-import { PAGES_PATHS } from '@/shared/constants/pages-paths'
-import { useGetScrollWidth } from '@/shared/hooks/use-get-scroll-width'
-import { onToggleModal } from '@/shared/lib/zustands/use-store-modals'
-import Link from 'next/link'
+import { Avatar } from "@/entity/user/ui/avatar";
+import { useAuthStore } from "@/features/user/auth/model/auth.store";
+import { useGetUser } from "@/features/user/auth/model/use-get-user";
+import { PAGES_PATHS } from "@/shared/constants/pages-paths";
+import { useGetScrollWidth } from "@/shared/hooks/use-get-scroll-width";
+import { onToggleModal } from "@/shared/lib/zustands/use-store-modals";
+import Link from "next/link";
 
-import { ButtonAuthSkeleton } from './skeleton'
+import { ButtonAuthSkeleton } from "./skeleton";
 
 export const ButtonAuth = () => {
-  const { info, isLoading } = useGetUser()
+  const { info, isLoading } = useGetUser();
+
+  console.log("info", info);
   return isLoading ? (
     <ButtonAuthSkeleton />
-  ) : info?.user ? (
+  ) : !!info?.user.role ? (
     <Link className="header__profile" href={PAGES_PATHS.PROFILE}>
       <Avatar userAvatar={info?.user?.photo ?? undefined} size="small" />
       <span>{info?.user?.name}</span>
@@ -25,9 +27,9 @@ export const ButtonAuth = () => {
     <button
       className="header__login-btn"
       title="Войти в аккаунт"
-      onClick={() => onToggleModal('auth', true)}
+      onClick={() => onToggleModal("auth", true)}
     >
       Войти
     </button>
-  )
-}
+  );
+};

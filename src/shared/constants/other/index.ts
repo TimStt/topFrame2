@@ -8,3 +8,5 @@ export const TYPE_DOCUMENT_UPLOAD = ".bmp, .pdf, .txt, .doc, .docx, .xls";
 export const BACKGROUND_IMAGE_BLUE = "/icons/bg-main.svg";
 
 export const URL_FILE_API = process.env.URL_PHOTO as string;
+
+export const TOKEN_NAME = process.env.TOKEN_NAME || "token";

@@ -44,13 +44,13 @@ export const AboutVacancy: React.FC = () => {
               </span>
               <div className="vacancy-page__tags">
                 {queryVacancy.vacancy?.chip.map((chip) =>
-                  Array.isArray(chip.data) ? null : (
+                  chip.type === "text" && !Array.isArray(chip.data) ? (
                     <ChipUI
                       className="vacancy-page__tag"
                       text={Array.isArray(chip.data) ? chip.data[0] : chip.data}
                       key={chip.data}
                     />
-                  )
+                  ) : null
                 )}
               </div>
               <div className="vacancy-page__location">
@@ -76,14 +76,29 @@ export const AboutVacancy: React.FC = () => {
                 {queryVacancy.vacancy?.description.map((item) => (
                   <div className="vacancy-page__info-item" key={item.name}>
                     <h3>{item.name}</h3>
-                    {Array.isArray(item.data) ? (
+                    {item.type === "text" && Array.isArray(item.data) ? (
                       <ul>
                         {item.data.map((item) => (
                           <li key={item}>{item}</li>
                         ))}
                       </ul>
-                    ) : (
+                    ) : item.type === "text" ? (
                       <p dangerouslySetInnerHTML={{ __html: item.data }} />
+                    ) : (item.type === "file" || item.type === "image") &&
+                      Array.isArray(item.data) ? (
+                      item.data.map((item) => (
+                        <a href={item as string} target="_blank">
+                          {item}
+                        </a>
+                      ))
+                    ) : (
+                      <a
+                        href={item.data as string}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {item.data}
+                      </a>
                     )}
                   </div>
                 ))}

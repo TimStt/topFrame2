@@ -1,4 +1,4 @@
-import { TOKEN_NAME } from "@/shared/api";
+import { TOKEN_NAME } from "@/shared/constants/other";
 import { rqClient } from "@/shared/api/api-client";
 import { IApiSchemas } from "@/shared/api/schema";
 import { onToggleModal } from "@/shared/lib/zustands/use-store-modals";

@@ -218,6 +218,8 @@ export interface components {
       description?: string | null;
       slug: string;
       image?: string | null;
+
+      filterValue: string;
       link: {
         slug: string;
         value: string;

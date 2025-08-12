@@ -126,6 +126,10 @@ export const DirectionCard: React.FC<
           size="medium"
           hasArrow
           text="Присоединиться к компании"
+          as="a"
+          href={
+            PAGES_PATHS.VACANCIES + `?${card?.link?.slug}=${card?.link?.value}`
+          }
         />
         <ButtonUI
           className="directions__card-button"

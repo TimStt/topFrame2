@@ -8,5 +8,5 @@ export const navigationItems = [
   },
 
   { label: "Наши вакансии", href: PAGES_PATHS.VACANCIES },
-  { label: "Наша команда", href: "/docs/#team" },
+  { label: "Наша команда", href: "/#team" },
 ];

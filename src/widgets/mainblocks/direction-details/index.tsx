@@ -13,6 +13,7 @@ import { useGetDirection } from "@/entity/user/api/get-direction";
 import { useParams } from "next/navigation";
 import { SkeletonDirectionDetails } from "./skeleton";
 import { URL_FILE_API } from "@/shared/constants/other";
+import { PAGES_PATHS } from "@/shared/constants/pages-paths";
 
 export const DirectionDetails: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -50,6 +51,11 @@ export const DirectionDetails: React.FC = () => {
             variant="primary"
             hasArrow
             text="Присоединиться к команде"
+            as="a"
+            href={
+              PAGES_PATHS.VACANCIES +
+              `?${directionInfo?.filterSlug}=${directionInfo?.filterValue}`
+            }
           />
         </div>
       )}

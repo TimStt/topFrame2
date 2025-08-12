@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { TOKEN_NAME } from "@/shared/api";
+import { TOKEN_NAME } from "@/shared/constants/other";
 import {
   PAGES_PATHS,
   PROTECTED_PAGES,
@@ -11,7 +11,7 @@ export async function middleware(request: NextRequest) {
   const cookiesStore = request.cookies;
   const currentPath = request.nextUrl.pathname;
   const token = cookiesStore.get(TOKEN_NAME);
-  console.log("currentPath !!!!", currentPath);
+
   if (PROTECTED_PAGES.includes(currentPath)) {
     if (!token?.value) {
       return NextResponse.redirect(new URL("/", request.url));
