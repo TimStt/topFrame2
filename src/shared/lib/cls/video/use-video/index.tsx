@@ -121,7 +121,6 @@ export const useVideo = ({ videoId }: { videoId: number }) => {
     playAttemptIdRef.current += 1;
 
     try {
-      video.load();
       video.pause();
       console.log("handlePause", video.paused);
     } catch {
@@ -187,7 +186,7 @@ export const useVideo = ({ videoId }: { videoId: number }) => {
       }
       container.removeEventListener("pointerenter", onPointerEnter);
       container.removeEventListener("pointerleave", onPointerLeave);
-      container.removeEventListener("click", onContainerClick);
+      container.removeEventListener("pointerdown", onContainerClick);
     };
   }, [handlePlay, handlePause, handleClickToUnmute, isPlaying]);
 

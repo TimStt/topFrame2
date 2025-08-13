@@ -87,18 +87,36 @@
     top: 0;
     right: 0;
     transform: translateX(100%);
-    max-width: var(--width-side-bar-filter);
-    width: 100%;
+
     transition-duration: var(--transition-normal);
     height: 100dvh;
     transition-property: transform;
     background-color: var(--color-white);
 
     z-index: var(--z-fixed);
-    padding: var(--topPadding) 130px 0px 20px;
+
+    pointer-events: none;
+    width: 100dvw;
+    background: #72727254;
+    display: flex;
+    justify-content: flex-end;
+
+    --applyButtonPadding: 24px;
+
+    &__inner-container {
+      overflow: auto;
+      padding: var(--topPadding) 130px 0px 20px;
+      height: 100%;
+      max-width: var(--width-side-bar-filter);
+      pointer-events: all;
+      background-color: var(--color-white);
+    }
 
     &__inner {
       position: relative;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
 
       .modal__close {
         top: calc(var(--topPadding) / 2 * -1 - var(--size-close-button) / 2);
@@ -107,7 +125,10 @@
     }
 
     &__apply {
-      margin-top: 24px;
+      position: sticky;
+      bottom: var(--applyButtonPadding);
+      margin-top: auto;
+      z-index: 10;
     }
 
     &.is-open {
@@ -156,9 +177,12 @@
     }
 
     &__content {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+      &-inner {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: calc(var(--applyButtonPadding) * 2);
+      }
     }
     .filter__reset-filters {
       color: var(--color-gray-2);

@@ -87,8 +87,7 @@ export const DynamicDocumentTitle = ({ slug }: { slug: string }) => {
   return (
     <>
       <Link href={PAGES_PATHS.HOME}>Главная</Link>
-      <Link href={PAGES_PATHS.DOCUMENTS(":slug")}>Документы</Link>{" "}
-      <span>{title}</span>
+      <Link href={PAGES_PATHS.DOCUMENTS()}>Документы</Link> <span>{title}</span>
     </>
   );
 };

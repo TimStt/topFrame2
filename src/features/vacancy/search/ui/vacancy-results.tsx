@@ -34,7 +34,7 @@ export const VacancyResults = ({
 }: VacancyResultsProps) => {
   const currentPage = useQueryParamAction().get<number>("page") || 1;
 
-  const { result, isLoading: isLoadingCatalog } = useGetCatalog();
+  const { searchResult, isLoadingSearch } = useGetCatalog();
 
   return (
     <div className={className}>
@@ -46,8 +46,8 @@ export const VacancyResults = ({
       )}
 
       <ListVacancies
-        vacancies={result?.vacancies || []}
-        isLoading={isLoadingCatalog}
+        vacancies={searchResult?.vacancies || []}
+        isLoading={isLoadingSearch}
       />
 
       <PaginationUI

@@ -2,7 +2,10 @@ import { HeadPage } from "@/widgets/mainblocks/head-page";
 import { InfoUser } from "@/widgets/profile/info-user";
 import { SearchVacancies } from "@/features/vacancy/search/ui";
 import { WrapperPrefetchQuery } from "@/shared/lib/react-query/wrapper-prefetch-query";
-import { getOptionsVacanciesQuery } from "@/entity/vacancy/api/get-catalog/options";
+import {
+  getOptionsSearchVacanciesQuery,
+  getOptionsFilterQuery,
+} from "@/entity/vacancy/api/get-catalog/options";
 import { Metadata } from "next/types";
 
 export const metadata: Metadata = {
@@ -21,13 +24,15 @@ const Page = async ({
   const params = await searchParams;
   return (
     <main className="profile">
-      <WrapperPrefetchQuery {...getOptionsVacanciesQuery(params)}>
-        <HeadPage className="container" title="Личный кабинет" />
+      <WrapperPrefetchQuery {...getOptionsSearchVacanciesQuery(params)}>
+        <WrapperPrefetchQuery {...getOptionsFilterQuery()}>
+          <HeadPage className="container" title="Личный кабинет" />
 
-        <div className="profile__inner container">
-          <InfoUser />
-          <SearchVacancies />
-        </div>
+          <div className="profile__inner container">
+            <InfoUser />
+            <SearchVacancies />
+          </div>
+        </WrapperPrefetchQuery>
       </WrapperPrefetchQuery>
     </main>
   );

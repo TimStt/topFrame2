@@ -28,10 +28,11 @@ export const SearchVacancies = ({
   withHead?: boolean;
   className?: string;
 }) => {
-  const { result, isLoading } = useGetCatalog();
+  const { searchResult, filterResult, isLoadingSearch, isLoadingFilter } =
+    useGetCatalog();
   const filterVacancies = useFilter({
-    quickFilter: result?.quickFilter,
-    filters: result?.filters,
+    quickFilter: filterResult?.quickFilter,
+    filters: filterResult?.filters,
   });
   return (
     <div className={cls("search-vacancies", className)}>
@@ -40,7 +41,7 @@ export const SearchVacancies = ({
         renderQuickFilters={
           withQuickFilters && (
             <QuickFilters
-              quickFilter={result?.quickFilter}
+              quickFilter={filterResult?.quickFilter}
               filterVacancies={filterVacancies}
             />
           )
@@ -48,14 +49,14 @@ export const SearchVacancies = ({
       />
 
       <VacancyResults
-        count={result?.count}
-        countPage={result?.countPage}
-        isLoading={isLoading}
+        count={searchResult?.count}
+        countPage={searchResult?.countPage}
+        isLoading={isLoadingSearch}
         withHead={withHead}
       />
 
       <FilterSidebar
-        filters={result?.filters}
+        filters={filterResult?.filters}
         filterVacancies={filterVacancies}
         withApplyFilters={withApplyFilters}
       />

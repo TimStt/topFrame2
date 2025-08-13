@@ -38,65 +38,67 @@ export const FilterSidebar = ({
   };
 
   return (
-    <FilterSideBarUI
-      isOpen={modalFilter.isOpenModal}
-      rootRef={modalFilter.ref}
-      renderResetFilters={
-        <button
-          className="filter__reset-filters"
-          onClick={filterVacancies.resetAllFilters}
-          title="Сбросить все фильтры"
-          disabled={filterVacancies.isEmptyAllFilters}
-        >
-          Сбросить
-        </button>
-      }
-      renderFilters={filters?.map((filter) => (
-        <AccordionFilterUI
-          key={filter.slug}
-          filter={{
-            options: filter.arr,
-            name: filter.slug,
-            label: filter.name,
-          }}
-          activeValue={
-            filterVacancies.getCurrentActiveFilterBySlug(filter.slug)
-              ?.options || []
-          }
-          onChange={(label, values) =>
-            filterVacancies.handleChangeFilter(label, values)
-          }
-          renderReset={
-            <button
-              className="filter__reset-filters"
-              disabled={
-                filterVacancies.isEmptyAllFilters ||
-                !filterVacancies.getCurrentActiveFilterBySlug(filter.slug)
-                  ?.options.length
-              }
-              onClick={() =>
-                filterVacancies.resetActiveFilterBySlug(filter.slug)
-              }
-            >
-              Сбросить
-            </button>
-          }
-        />
-      ))}
-      renderApplyFilters={
-        withApplyFilters && (
-          <ButtonUI
-            className="filter__side-bar__apply"
-            text="Применить фильтры"
-            disabled={
-              filterVacancies.isAllFilterApplied ||
-              filterVacancies.isEmptyAllFilters
+    <>
+      <FilterSideBarUI
+        isOpen={modalFilter.isOpenModal}
+        rootRef={modalFilter.ref}
+        renderResetFilters={
+          <button
+            className="filter__reset-filters"
+            onClick={filterVacancies.resetAllFilters}
+            title="Сбросить все фильтры"
+            disabled={filterVacancies.isEmptyAllFilters}
+          >
+            Сбросить
+          </button>
+        }
+        renderFilters={filters?.map((filter) => (
+          <AccordionFilterUI
+            key={filter.slug}
+            filter={{
+              options: filter.arr,
+              name: filter.slug,
+              label: filter.name,
+            }}
+            activeValue={
+              filterVacancies.getCurrentActiveFilterBySlug(filter.slug)
+                ?.options || []
             }
-            onClick={handleAcceptFilterSideBar}
+            onChange={(label, values) =>
+              filterVacancies.handleChangeFilter(label, values)
+            }
+            renderReset={
+              <button
+                className="filter__reset-filters"
+                disabled={
+                  filterVacancies.isEmptyAllFilters ||
+                  !filterVacancies.getCurrentActiveFilterBySlug(filter.slug)
+                    ?.options.length
+                }
+                onClick={() =>
+                  filterVacancies.resetActiveFilterBySlug(filter.slug)
+                }
+              >
+                Сбросить
+              </button>
+            }
           />
-        )
-      }
-      onCloseFilter={modalFilter.handleCloseModal}
-    />
+        ))}
+        renderApplyFilters={
+          withApplyFilters && (
+            <ButtonUI
+              className="filter__side-bar__apply"
+              text="Применить фильтры"
+              disabled={
+                filterVacancies.isAllFilterApplied ||
+                filterVacancies.isEmptyAllFilters
+              }
+              onClick={handleAcceptFilterSideBar}
+            />
+          )
+        }
+        onCloseFilter={modalFilter.handleCloseModal}
+      />
+    </>
   );
 };

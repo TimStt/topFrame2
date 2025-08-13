@@ -26,7 +26,7 @@ export const SearchBox = ({
   className,
 }: SearchBoxProps) => {
   const searchVacancies = useSearch();
-  const { isLoading } = useGetCatalog();
+  const { isLoadingSearch } = useGetCatalog();
 
   return (
     <SearchBoxUI
@@ -38,7 +38,7 @@ export const SearchBox = ({
       renderQuickFilters={renderQuickFilters}
       renderActions={
         <>
-          <ButtonSearchUI isLoading={isLoading} />
+          <ButtonSearchUI isLoading={isLoadingSearch} />
           <ButtonFiltersUI
             handleOpenFilters={() => onToggleModal("filter", true)}
           />
