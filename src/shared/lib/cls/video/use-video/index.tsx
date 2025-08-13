@@ -140,8 +140,6 @@ export const useVideo = ({ videoId }: { videoId: number }) => {
     }
   }, [activeVideoId, videoId, setActiveVideo, setIsLoading]);
 
-  useOnClickOutside(containerRef, handlePause, ["team__card-content"]);
-
   useEffect(() => {
     const video = ref.current;
     const container = containerRef.current;
@@ -169,6 +167,18 @@ export const useVideo = ({ videoId }: { videoId: number }) => {
         handlePlay();
       }
     };
+    const onPointerDown = (e: PointerEvent) => {
+      const target = e.target as Node | null;
+      const path = (e as any).composedPath?.() ?? [];
+      const isInside =
+        (target && container.contains(target)) ||
+        path.includes(container) ||
+        (ref.current && path.includes(ref.current));
+
+      if (!isInside) {
+        handlePause();
+      }
+    };
 
     container.addEventListener("pointerenter", onPointerEnter as any, {
       passive: true,
@@ -180,6 +190,10 @@ export const useVideo = ({ videoId }: { videoId: number }) => {
       passive: true,
     });
 
+    document.addEventListener("pointerdown", onPointerDown, {
+      passive: true,
+    });
+
     return () => {
       if (video) {
         managerActiveVideo.unregisterVideo(video);
@@ -187,6 +201,7 @@ export const useVideo = ({ videoId }: { videoId: number }) => {
       container.removeEventListener("pointerenter", onPointerEnter);
       container.removeEventListener("pointerleave", onPointerLeave);
       container.removeEventListener("pointerdown", onContainerClick);
+      document.removeEventListener("pointerdown", onPointerDown);
     };
   }, [handlePlay, handlePause, handleClickToUnmute, isPlaying]);
 
