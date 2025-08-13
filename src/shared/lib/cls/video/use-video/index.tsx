@@ -8,6 +8,7 @@ import LoaderUI, { ILoaderUI } from "@/shared/ui/loader-ui";
 import { useVideoStore } from "@/widgets/mainblocks/team/video-store";
 
 import { cls } from "../..";
+import useOnClickOutside from "@/shared/hooks/use-on-click-outside";
 
 export const useVideo = ({ videoId }: { videoId: number }) => {
   const ref = useRef<HTMLVideoElement>(null);
@@ -30,6 +31,8 @@ export const useVideo = ({ videoId }: { videoId: number }) => {
   const [isCanPause, setIsCanPause] = useState(false);
 
   // Track play attempts to be able to cancel outdated ones on quick leave
+
+  console.log("isPlaying", isPlaying, " isCurrentLoading", isCurrentLoading);
   const playAttemptIdRef = useRef(0);
   const pendingPlayRef = useRef<Promise<void> | null>(null);
 
@@ -52,6 +55,8 @@ export const useVideo = ({ videoId }: { videoId: number }) => {
 
     // If already playing for this video, no-op
     if (!video.paused) return;
+
+    console.log("handlePlay");
 
     managerActiveVideo.stopAllExcept(video);
     setHasError(false);
@@ -110,20 +115,25 @@ export const useVideo = ({ videoId }: { videoId: number }) => {
 
   const handlePause = useCallback(() => {
     const video = ref.current;
+
     if (!video) return;
     // Cancel current attempt and pause immediately
     playAttemptIdRef.current += 1;
 
     try {
+      video.load();
       video.pause();
-    } catch {}
+      console.log("handlePause", video.paused);
+    } catch {
+      console.log("handlePause error");
+    }
 
     try {
       video.currentTime = 0;
     } catch {}
 
     setIsLoading(false);
-    setIsCanPause(false);
+
     setIsPaused(true);
 
     if (activeVideoId === videoId) {
@@ -131,15 +141,14 @@ export const useVideo = ({ videoId }: { videoId: number }) => {
     }
   }, [activeVideoId, videoId, setActiveVideo, setIsLoading]);
 
+  useOnClickOutside(containerRef, handlePause, ["team__card-content"]);
+
   useEffect(() => {
     const video = ref.current;
     const container = containerRef.current;
     if (!container) return;
 
-    const isHoverCapable =
-      typeof window !== "undefined" &&
-      typeof window.matchMedia === "function" &&
-      window.matchMedia("(hover: hover)").matches;
+    const isHoverCapable = window.matchMedia("(hover: hover)").matches;
 
     const onPointerEnter = (e: PointerEvent) => {
       if (!isHoverCapable || e.pointerType !== "mouse") return;
@@ -162,23 +171,15 @@ export const useVideo = ({ videoId }: { videoId: number }) => {
       }
     };
 
-    const onDocumentPointerDown = (e: PointerEvent) => {
-      if (!container.contains(e.target as Node)) {
-        console.log("onDocumentPointerDown pause");
-        handlePause();
-      }
-    };
-
     container.addEventListener("pointerenter", onPointerEnter as any, {
       passive: true,
     });
     container.addEventListener("pointerleave", onPointerLeave as any, {
       passive: true,
     });
-    container.addEventListener("click", onContainerClick, {
+    container.addEventListener("pointerdown", onContainerClick, {
       passive: true,
     });
-    document.addEventListener("pointerdown", onDocumentPointerDown, true);
 
     return () => {
       if (video) {
@@ -187,7 +188,6 @@ export const useVideo = ({ videoId }: { videoId: number }) => {
       container.removeEventListener("pointerenter", onPointerEnter);
       container.removeEventListener("pointerleave", onPointerLeave);
       container.removeEventListener("click", onContainerClick);
-      document.removeEventListener("pointerdown", onDocumentPointerDown, true);
     };
   }, [handlePlay, handlePause, handleClickToUnmute, isPlaying]);
 
