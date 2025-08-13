@@ -6,7 +6,7 @@ import LocationIcon from "@/source/icons/location.svg";
 import { ModalAddResponse } from "@/widgets/vacancy/modal-add-response";
 import { AboutVacancy } from "@/widgets/vacancy/about-vacancy";
 import { WrapperPrefetchQuery } from "@/shared/lib/react-query/wrapper-prefetch-query";
-import { getOptionsVacanciesQuery } from "@/entity/vacancy/api/get-catalog/options";
+import { getOptionsSearchVacanciesQuery } from "@/entity/vacancy/api/get-catalog/options";
 import {
   getOptionsVacancyQuery,
   getVacancy,
