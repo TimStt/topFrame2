@@ -54,6 +54,11 @@ export interface HomeOperations {
             emails: components["schemas"]["ContactItemDto"][];
             phones: components["schemas"]["ContactItemDto"][];
             documents: components["schemas"]["ContactDocumentDto"][];
+            privacyPolicy: {
+              isPrivacyPolicy: boolean;
+              slug: string;
+              title: string;
+            };
           }>;
         };
       };

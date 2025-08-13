@@ -17,6 +17,7 @@ import { z } from "zod";
 import { useLogin } from "../model/use-login";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useGetContacts } from "@/entity/user/api/get-contacts";
 
 const LoginSchema = z.object({
   login: z.string().min(1, "Логин обязателен для заполнения"),
@@ -41,6 +42,8 @@ export const LoginStep = () => {
     resolver: zodResolver(LoginSchema),
     mode: "onChange",
   });
+
+  const { contacts } = useGetContacts();
 
   return (
     <form
@@ -103,7 +106,13 @@ export const LoginStep = () => {
       </ButtonSubmitUI> */}
       <p className="police-text">
         Продолжая, вы принимаете
-        <Link href={PAGES_PATHS.POLICY}> политику конфиденциальности</Link>
+        <Link
+          href={PAGES_PATHS.DOCUMENTS(contacts?.privacyPolicy.slug)}
+          onClick={() => onToggleModal("auth", false)}
+        >
+          {" "}
+          {contacts?.privacyPolicy.title.toLowerCase()}
+        </Link>
       </p>
     </form>
   );

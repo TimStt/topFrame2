@@ -29,7 +29,7 @@ export const footerNavigation: IFooterSection[] = [
         href: PAGES_PATHS.HR_TOPFRAME(),
       },
       { id: 2, title: "Наши направления", href: "#directions" },
-      { id: 3, title: "Фриланс", href: PAGES_PATHS.FREELANCE },
+
       { id: 4, title: "Вакансии", href: PAGES_PATHS.VACANCIES },
       { id: 5, title: "Наша команда", href: "/#team" },
     ],

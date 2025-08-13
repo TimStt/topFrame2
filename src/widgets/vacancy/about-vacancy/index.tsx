@@ -87,7 +87,7 @@ export const AboutVacancy: React.FC = () => {
                     ) : (item.type === "file" || item.type === "image") &&
                       Array.isArray(item.data) ? (
                       item.data.map((item) => (
-                        <a href={item as string} target="_blank">
+                        <a href={item as string} target="_blank" key={item}>
                           {item}
                         </a>
                       ))
@@ -107,28 +107,17 @@ export const AboutVacancy: React.FC = () => {
           )}
         </div>
 
-        {/* {queryVacancy.vacancy?.leftBox.map((benefit) =>
-        Array.isArray(benefit.data) ? null : (
-          <div className="vacancy-page__benefits">
-            <h3>{benefit.name}</h3>
-            <p>{benefit.data}</p>
-          </div>
-        )
-      )} */}
         {queryVacancy.isLoading ? (
           <VacancyPageSkeletonBenefits />
         ) : (
-          <div className="vacancy-page__benefits">
-            <h3>Что мы предлагаем</h3>
-            <ul>
-              <li>Конкурентная зарплата</li>
-              <li>Медицинская страховка</li>
-              <li>Гибкий график работы</li>
-              <li>Возможность удаленной работы</li>
-              <li>Обучение и развитие</li>
-              <li>Корпоративные мероприятия</li>
-            </ul>
-          </div>
+          queryVacancy.vacancy?.leftBox.map((benefit) =>
+            Array.isArray(benefit.data) ? null : (
+              <div className="vacancy-page__benefits" key={benefit.name}>
+                <h3>{benefit.name}</h3>
+                <p>{benefit.data}</p>
+              </div>
+            )
+          )
         )}
       </div>
     </WrapperNotFoundUI>

@@ -6,7 +6,7 @@
 "use client";
 import IconSuccess from "@/source/icons/success.svg";
 import { useInitialModal } from "@/shared/lib/zustands/use-initial-modal";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { ModalUI } from "../modal-ui";
 import { cls } from "@/shared/lib/cls";
 import { ButtonCloseUI } from "../modal-ui/button-close-ui";
@@ -22,7 +22,17 @@ export const ModalToastUI: React.FC<ModalToastUIProps> = ({ className }) => {
     refStartTime.current = 0;
     onClose?.();
   });
+
+  const onCloseCallback = useCallback(() => {
+    onClose?.();
+  }, []);
+
+  const handleCloseModalCallback = useCallback(() => {
+    handleCloseModal();
+  }, []);
+
   const { title, description, delay, onClose } = useModalToastStore();
+
   const [progress, setProgress] = useState(0);
 
   const refStartTime = useRef<number>(0);
@@ -52,8 +62,8 @@ export const ModalToastUI: React.FC<ModalToastUIProps> = ({ className }) => {
         }
         refStartTime.current = 0;
         setProgress(0);
-        handleCloseModal();
-        onClose?.();
+        handleCloseModalCallback();
+        onCloseCallback();
       };
 
       const id = requestAnimationFrame(updateProgress);
@@ -62,7 +72,7 @@ export const ModalToastUI: React.FC<ModalToastUIProps> = ({ className }) => {
         cancelAnimationFrame(id);
       };
     }
-  }, [isOpenModal, delay]);
+  }, [isOpenModal, delay, handleCloseModalCallback, onCloseCallback]);
 
   return (
     <ModalUI

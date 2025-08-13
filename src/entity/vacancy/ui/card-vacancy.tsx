@@ -24,11 +24,13 @@ export const CardVacancy = ({
       />
       <div className="vacancy-card__info">
         <h3 className="vacancy-card__title">{name}</h3>
-        <div className="vacancy-card__params">
-          {chip?.map((param) => (
-            <ChipUI key={param} text={param} />
-          ))}
-        </div>
+        {!!chip.length && (
+          <div className="vacancy-card__params">
+            {chip?.map((param) => (
+              <ChipUI key={param} text={param} />
+            ))}
+          </div>
+        )}
         <div className="vacancy-card__location">
           <LocationIcon />
           <span>{city}</span>

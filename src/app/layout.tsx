@@ -39,7 +39,9 @@ export default function RootLayout({
             <WrapperPrefetchQuery {...getContactsOptions()}>
               <Footer />
             </WrapperPrefetchQuery>
-            <ModalAuth />
+            <WrapperPrefetchQuery {...getContactsOptions()}>
+              <ModalAuth />
+            </WrapperPrefetchQuery>
             <ModalToastUI />
           </Suspense>
         </QueryProvider>

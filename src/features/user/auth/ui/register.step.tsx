@@ -16,6 +16,7 @@ import { useRegister } from "../model/use-register";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IApiSchemas } from "@/shared/api/schema";
+import { useGetContacts } from "@/entity/user/api/get-contacts";
 
 const RegisterSchema = z.object({
   name: z.string().min(1, "Имя обязательно для заполнения"),
@@ -36,6 +37,8 @@ export const RegisterStep = () => {
     resolver: zodResolver(RegisterSchema),
     mode: "onChange",
   });
+
+  const { contacts } = useGetContacts();
 
   return (
     <>
@@ -92,7 +95,13 @@ export const RegisterStep = () => {
         />
         <p className="police-text">
           Продолжая, вы принимаете
-          <Link href={PAGES_PATHS.POLICY}> политику конфиденциальности</Link>
+          <Link
+            href={PAGES_PATHS.DOCUMENTS(contacts?.privacyPolicy.slug)}
+            onClick={() => onToggleModal("auth", false)}
+          >
+            {" "}
+            {contacts?.privacyPolicy.title.toLowerCase()}
+          </Link>
         </p>
       </form>
     </>
