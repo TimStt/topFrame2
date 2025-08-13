@@ -29,7 +29,7 @@ export const QuickFilters = ({
   className,
   filterVacancies,
 }: QuickFiltersProps) => {
-  const isLoading = useGetCatalog().isLoading;
+  const isLoading = useGetCatalog().isLoadingFilter;
 
   return (
     <QuickFiltersUI
