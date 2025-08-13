@@ -37,6 +37,8 @@ export const FilterSidebar = ({
     modalFilter.handleCloseModal();
   };
 
+  console.log(filters);
+
   return (
     <>
       <FilterSideBarUI

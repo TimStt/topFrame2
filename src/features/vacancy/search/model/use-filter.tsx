@@ -88,8 +88,15 @@ export const useFilter = ({
     quickFilter?.find((q) => q.slug === f.name)
   );
 
-  const isEmptyQuickFilters = !isActiveQuickFilters?.length;
-  const isEmptyAllFilters = !isActiveFilters?.length;
+  const isEmptyQuickFilters =
+    !isActiveQuickFilters?.length ||
+    (isActiveQuickFilters?.every((f) => !f.options.length) &&
+      !isActiveFilterQuery?.length);
+
+  const isEmptyAllFilters =
+    !isActiveFilters?.length ||
+    (isActiveFilters?.every((f) => !f.options.length) &&
+      !isActiveFilterQuery?.length);
 
   // ПЕРЕДЕЛАЙ В ФУНКЦИЮ
 
