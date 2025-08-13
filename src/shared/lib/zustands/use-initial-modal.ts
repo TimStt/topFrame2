@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import useOnClickOutside from "@/shared/hooks/use-on-click-outside";
 import { useScrollHidden } from "@/shared/hooks/use-scroll-hidden";
@@ -20,6 +20,18 @@ export const useInitialModal = (
   const isOpenModal = !!useStoreModalsBase((state) => state[name]);
   const ref = useRef<HTMLDivElement | null>(null);
   // const innerRef = useRef<HTMLDivElement>(null);
+
+  // useEffect(() => {
+  //   const handlePopState = () => {
+  //     window.document.body.style.overflow = "auto";
+  //   };
+
+  //   window.addEventListener("popstate", handlePopState);
+
+  //   return () => {
+  //     window.removeEventListener("popstate", handlePopState);
+  //   };
+  // }, [isOpenModal]);
 
   const handleCloseModal = () => {
     toggle(false);

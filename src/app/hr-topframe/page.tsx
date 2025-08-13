@@ -3,19 +3,12 @@ import { ChipUI } from "@/shared/ui/chip-ui";
 import { HeadPage } from "@/widgets/mainblocks/head-page";
 import { HrTopFrameBlock } from "@/widgets/mainblocks/hr-top-frame-block";
 import Image from "next/image";
+import { Metadata } from "next/types";
 
-const tabs = [
-  "TF COIN",
-  "Корпоративная культура",
-  "Блог Linkedin",
-  "Клиенты",
-  "Бот обратной связи",
-  "Горячая линия",
-  "Блог Дзен",
-  "Welcome book",
-  "Институт",
-  "Битрикс",
-];
+export const metadata: Metadata = {
+  title: "HR TopFrame",
+  description: "HR TopFrame",
+};
 
 export default function Page() {
   return (

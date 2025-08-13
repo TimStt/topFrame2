@@ -42,7 +42,7 @@
 
   text-align: center;
   text-decoration: none;
-  max-width: max-content;
+  min-width: max-content;
   border: none;
   border-radius: var(--btnBorderRadius);
   cursor: pointer;
@@ -273,7 +273,8 @@
   --colorText: var(--color-accent-blue);
   border-radius: 50px;
   display: flex;
-  max-width: 250px;
+  max-width: 180px;
+  height: max-content;
   align-items: center;
   justify-content: center;
   padding: 8px 24px;

@@ -12,6 +12,7 @@ import { Team } from "@/widgets/mainblocks/team";
 import { NewVacancies } from "@/widgets/vacancy/new-vacancies";
 import { WrapperPrefetchQuery } from "@/shared/lib/react-query/wrapper-prefetch-query";
 import { getHomeOptions } from "@/entity/user/api/get-home/options";
+import { Metadata } from "next/types";
 
 export default function Home() {
   return (

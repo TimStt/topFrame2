@@ -1559,6 +1559,13 @@
   .hr-ecosystem__wrapper::before {
     top: -45%;
   }
+
+  .zero-hero {
+    --paddingBottom: 24px;
+  }
+  .zero-hero__features {
+    --maxHeight: 116px;
+  }
 }
 
 @media (max-width: 900px) {
@@ -1566,8 +1573,8 @@
     display: none;
   }
 
-  .zero-hero {
-    --paddingBottom: 64px;
+  .zero-hero__feature-card {
+    padding: 16px;
   }
 }
 
@@ -1586,7 +1593,7 @@
     max-width: 100%;
   }
   .zero-hero {
-    --paddingBottom: 24px;
+    --paddingBottom: 16px;
   }
 
   .directions__card {
@@ -1610,10 +1617,6 @@
     margin-right: 0;
   }
 
-  .zero-hero_inner {
-    --paddingBottom: 42px;
-  }
-
   .header {
     &__logo-image {
       width: 100px;
@@ -1632,10 +1635,6 @@
         height: 18px;
       }
     }
-
-    &__feature-card {
-      padding: 16px;
-    }
   }
 }
 
@@ -1652,7 +1651,7 @@
   }
 
   .zero-hero_inner {
-    --paddingBottom: 16px;
+    --paddingBottom: 12px;
   }
 
   .footer__contacts {

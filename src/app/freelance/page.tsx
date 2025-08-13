@@ -1,6 +1,12 @@
 import { ButtonUI } from "@/shared/ui/button-ui";
 import { HeadPage } from "@/widgets/mainblocks/head-page";
 import Image from "next/image";
+import { Metadata } from "next/types";
+
+export const metadata: Metadata = {
+  title: "Фриланс | TopFrame",
+  description: "Фриланс | TopFrame",
+};
 
 export default function Page() {
   return (

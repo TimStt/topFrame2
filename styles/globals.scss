@@ -42,6 +42,11 @@ button:disabled {
   opacity: 0.5;
 }
 
+a,
+button {
+  cursor: pointer;
+}
+
 /* ========== КАСТОМНЫЕ СТИЛИ СКРОЛЛБАРА ========== */
 
 /* Для Webkit браузеров (Chrome, Safari, Edge) */

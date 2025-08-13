@@ -1,6 +1,12 @@
 import React from "react";
 import { ButtonUI } from "@/shared/ui/button-ui";
 import { PAGES_PATHS } from "@/shared/constants/pages-paths";
+import { Metadata } from "next/types";
+
+export const metadata: Metadata = {
+  title: "404 | TopFrame",
+  description: "404 | TopFrame",
+};
 
 export default function NotFoundPage() {
   return (

@@ -1,4 +1,4 @@
-import { RefObject, useEffect } from 'react';
+import { RefObject, useEffect } from "react";
 
 export default function useOnClickOutside<T extends HTMLElement>(
   ref: RefObject<T | null>,
@@ -25,16 +25,16 @@ export default function useOnClickOutside<T extends HTMLElement>(
       }
 
       // Вызываем обработчик
-      console.log('  // Вызываем обработчик');
+      console.log("  // Вызываем обработчик");
       handler(event);
     };
 
-    document.addEventListener('mousedown', listener);
-    document.addEventListener('touchstart', listener);
+    document.addEventListener("mousedown", listener);
+    document.addEventListener("touchstart", listener);
 
     return () => {
-      document.removeEventListener('mousedown', listener);
-      document.removeEventListener('touchstart', listener);
+      document.removeEventListener("mousedown", listener);
+      document.removeEventListener("touchstart", listener);
     };
   }, [ref, handler, ignoreSelectors]);
 }

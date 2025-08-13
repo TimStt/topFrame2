@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 export const useScrollHidden = (state: boolean, notBlocked?: boolean) => {
   useEffect(() => {
-    if (typeof window === 'undefined' || notBlocked) return;
+    if (typeof window === "undefined" || notBlocked) return;
     if (state) {
-      document.querySelector('html')!.style.overflow = 'hidden';
+      document.querySelector("html")!.style.overflow = "hidden";
 
       return;
     }
-    document.querySelector('html')!.style.overflow = 'auto';
+    document.querySelector("html")!.style.overflow = "auto";
     // setTimeout(() => {
     //   const listModals = Array.from(
     //     document.getElementsByTagName("dialog")
@@ -25,5 +25,18 @@ export const useScrollHidden = (state: boolean, notBlocked?: boolean) => {
     //     document.body.style.marginRight = "0px";
     //   }
     // }, 500);
+
+    const handlePopState = () => {
+      if (state) {
+        document.querySelector("html")!.style.overflow = "auto";
+      }
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      document.querySelector("html")!.style.overflow = "auto";
+      window.removeEventListener("popstate", handlePopState);
+    };
   }, [notBlocked, state]);
 };

@@ -15,6 +15,8 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { useAddResponse } from "@/features/vacancy/search/model/use-add-response";
+import { useGetContacts } from "@/entity/user/api/get-contacts";
+import { onToggleModal } from "@/shared/lib/zustands/use-store-modals";
 
 export const SchemaAddResponse = z.object({
   name: z.string().min(1, "Имя обязательно"),
@@ -34,6 +36,8 @@ export const ModalAddResponse = ({ idResponse }: { idResponse: number }) => {
   } = useForm<z.infer<typeof SchemaAddResponse>>({
     resolver: zodResolver(SchemaAddResponse),
   });
+
+  const { contacts } = useGetContacts();
 
   return (
     <>
@@ -94,7 +98,12 @@ export const ModalAddResponse = ({ idResponse }: { idResponse: number }) => {
           />
           <p className="police-text">
             Продолжая, вы принимаете
-            <Link href={PAGES_PATHS.POLICY}> политику конфиденциальности</Link>
+            <Link
+              href={PAGES_PATHS.DOCUMENTS(contacts?.privacyPolicy.slug)}
+              onClick={() => onToggleModal("addResponse", false)}
+            >
+              политику конфиденциальности
+            </Link>
           </p>
         </form>
       </ModalUI>

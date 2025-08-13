@@ -3,6 +3,12 @@ import { InfoUser } from "@/widgets/profile/info-user";
 import { SearchVacancies } from "@/features/vacancy/search/ui";
 import { WrapperPrefetchQuery } from "@/shared/lib/react-query/wrapper-prefetch-query";
 import { getOptionsVacanciesQuery } from "@/entity/vacancy/api/get-catalog/options";
+import { Metadata } from "next/types";
+
+export const metadata: Metadata = {
+  title: "Личный кабинет | TopFrame",
+  description: "Личный кабинет | TopFrame",
+};
 
 const Page = async ({
   searchParams,

@@ -5,6 +5,12 @@ import { SearchVacancies } from "@/features/vacancy/search/ui";
 import { WrapperPrefetchQuery } from "@/shared/lib/react-query/wrapper-prefetch-query";
 import { getOptionsVacanciesQuery } from "@/entity/vacancy/api/get-catalog/options";
 import { object } from "zod";
+import { Metadata } from "next/types";
+
+export const metadata: Metadata = {
+  title: "Вакансии",
+  description: "Вакансии - это возможность найти работу или сотрудника",
+};
 
 export default async function Page({
   searchParams,
