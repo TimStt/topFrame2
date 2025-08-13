@@ -900,8 +900,8 @@
     overflow-x: auto;
     max-height: 583px;
     min-width: 40%;
-    // scrollbar-width: thin;
-    // scrollbar-color: var(--color-light) #d5e8f852;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-white-1) var(--color-light-blue-2);
     /* Дорожка скроллбара (фон, по которому двигается ползунок) */
     &::-webkit-scrollbar {
       width: 2px;
@@ -998,7 +998,7 @@
       border-radius: 8px;
       max-width: 480px;
       display: flex;
-      min-height: 309px;
+      // min-height: 309px;
       max-height: 309px;
       flex-direction: column;
     }
@@ -1017,9 +1017,8 @@
       );
       color: var(--color-main);
       margin-bottom: 16px;
-      display: -webkit-box;
-      -webkit-line-clamp: 1;
-      -webkit-box-orient: vertical;
+
+      text-wrap: nowrap;
       min-height: min-content;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -1040,7 +1039,6 @@
 
       margin-bottom: 24px;
       color: #727272;
-      flex: 1;
     }
 
     .directions__card-button + .directions__card-button {

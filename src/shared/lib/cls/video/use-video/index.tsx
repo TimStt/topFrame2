@@ -143,24 +143,28 @@ export const useVideo = ({ videoId }: { videoId: number }) => {
 
     const onPointerEnter = (e: PointerEvent) => {
       if (!isHoverCapable || e.pointerType !== "mouse") return;
+      console.log("onPointerEnter play");
       handlePlay();
     };
 
     const onPointerLeave = (e: PointerEvent) => {
       if (!isHoverCapable || e.pointerType !== "mouse") return;
       handlePause();
+      console.log("onPointerLeave pause");
     };
 
     const onContainerClick = () => {
       if (isHoverCapable) return;
       handleClickToUnmute();
       if (!isPlaying) {
+        console.log("onContainerClick play");
         handlePlay();
       }
     };
 
     const onDocumentPointerDown = (e: PointerEvent) => {
       if (!container.contains(e.target as Node)) {
+        console.log("onDocumentPointerDown pause");
         handlePause();
       }
     };
