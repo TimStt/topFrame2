@@ -50,7 +50,7 @@ export const InfoUser = () => {
           <ButtonUI
             className="profile__info-user__button"
             fullWidth
-            text="HR департамент"
+            text={info?.user?.jobTitle}
           />
         )}
       </div>
