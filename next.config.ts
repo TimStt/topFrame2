@@ -20,6 +20,7 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "topframe.webtm.ru",
+        pathname: "/api/uploads/**",
       },
     ],
   },

@@ -4,7 +4,7 @@ export const navigationItems = [
   { label: "HR пространство", href: PAGES_PATHS.HR_TOPFRAME() },
   {
     label: "Наши направления",
-    href: "/#directions",
+    href: PAGES_PATHS.DIRECTIONS(),
   },
 
   { label: "Наши вакансии", href: PAGES_PATHS.VACANCIES },

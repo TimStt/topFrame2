@@ -28,7 +28,7 @@ export const footerNavigation: IFooterSection[] = [
         title: "HR пространство TopFrame",
         href: PAGES_PATHS.HR_TOPFRAME(),
       },
-      { id: 2, title: "Наши направления", href: "#directions" },
+      { id: 2, title: "Наши направления", href: PAGES_PATHS.DIRECTIONS() },
 
       { id: 4, title: "Вакансии", href: PAGES_PATHS.VACANCIES },
       { id: 5, title: "Наша команда", href: "/#team" },

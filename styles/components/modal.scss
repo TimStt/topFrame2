@@ -161,6 +161,8 @@
 .modal-auth,
 .modal-add-response {
   width: 100%;
+  position: relative;
+  overflow: hidden;
 
   &__description {
     font-family: var(--second-family);

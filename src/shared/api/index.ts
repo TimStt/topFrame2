@@ -75,16 +75,20 @@ export const apiInstanceFetch = async <ResponseFetch = undefined>(
   } catch (error) {
     const errorMessage = (
       (error as AxiosError).response?.data as {
-        message: string;
+        message: string | string[];
       }
     )?.message;
 
-    const isErrorMessageRus = detectRussianText(errorMessage);
+    const currentErrorMessage = Array.isArray(errorMessage)
+      ? errorMessage[0]
+      : errorMessage;
+
+    const isErrorMessageRus = detectRussianText(currentErrorMessage);
 
     const errorResponse = {
       status: (error as AxiosError).response?.status,
       response: undefined as ResponseFetch,
-      errorMessage: isErrorMessageRus ? errorMessage : undefined,
+      errorMessage: isErrorMessageRus ? currentErrorMessage : undefined,
       isError: true,
     };
 

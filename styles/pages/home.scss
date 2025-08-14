@@ -87,20 +87,20 @@
       transition: color var(--transition-normal) ease;
       position: relative;
 
-      &::after {
-        content: "";
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: var(--colorMainHeader);
-        transition: width var(--transition-normal) ease;
-      }
+      // &::after {
+      //   content: "";
+      //   position: absolute;
+      //   bottom: -4px;
+      //   left: 0;
+      //   width: 0;
+      //   height: 1px;
+      //   background: var(--colorMainHeader);
+      //   transition: width var(--transition-normal) ease;
+      // }
 
-      &:hover::after {
-        width: 100%;
-      }
+      // &:hover::after {
+      //   width: 100%;
+      // }
     }
   }
 

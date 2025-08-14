@@ -8,7 +8,10 @@ import { useModalToastStore } from "@/shared/ui/modal-toast-ui/modal-toast.store
 import { useRouter } from "next/navigation";
 import { PAGES_PATHS } from "@/shared/constants/pages-paths";
 
-export const useLogin = () => {
+export const useLogin = (params?: {
+  onError?: (error: string) => void;
+  onSuccess?: (token: string) => void;
+}) => {
   const { showModalToast } = useModalToastStore();
 
   const router = useRouter();
@@ -30,6 +33,15 @@ export const useLogin = () => {
   const loginMutation = rqClient.useMutation("post", "/api/auth/login", {
     onSuccess: (r) => {
       onSuccessLogin(r.response.token);
+      params?.onSuccess?.(r.response.token);
+    },
+    onError: (error) => {
+      console.log(error);
+
+      params?.onError?.(
+        error.errorMessage ||
+          "Что-то пошло не так при входе в систему. Попробуйте позже"
+      );
     },
   });
 

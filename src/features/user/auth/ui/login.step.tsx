@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useId } from "react";
 
 import { changeStepAuth } from "@/features/user/auth/model/change-step-auth";
 import { PAGES_PATHS } from "@/shared/constants/pages-paths";
@@ -18,75 +18,82 @@ import { useLogin } from "../model/use-login";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useGetContacts } from "@/entity/user/api/get-contacts";
+import { ErrorFieldUI } from "@/shared/ui/error-field-ui";
+import { ErrorBoxUI } from "@/shared/ui/error-box-ui";
 
 const LoginSchema = z.object({
   login: z.string().min(1, "Логин обязателен для заполнения"),
   password: z.string().min(1, "Пароль обязателен для заполнения"),
+  errorMessage: z.string().optional(),
 });
 
 export const LoginStep = () => {
   const { className, ref } = useAnimateOnScroll();
 
-  const handleTestAuth = (type: TRole) => {
-    useAuthStoreBase.getState().setIsAuthTest(true);
-    useAuthStoreBase.getState().setRole(type);
-    onToggleModal("auth", false);
-  };
-
-  const { loginMutation, handleLogin } = useLogin();
-
   const {
-    formState: { errors: errorsLogin },
+    formState: { errors: errorsLogin, isDirty },
+    setError,
     ...validateForm
   } = useForm({
     resolver: zodResolver(LoginSchema),
     mode: "onChange",
   });
 
+  const { loginMutation, handleLogin } = useLogin({
+    onError: (error) => {
+      setError("errorMessage", { message: error });
+    },
+  });
+
   const { contacts } = useGetContacts();
 
+  const id = useId();
+
   return (
-    <form
-      ref={ref}
-      className={cls(className, "modal-auth__login-step fade-in ")}
-      onSubmit={validateForm.handleSubmit(handleLogin)}
-    >
-      <div className="modal-auth__inputs">
-        <InputUI
-          classNameWrapper="modal-auth__input input-bottom"
-          label="Ваш логин"
-          placeholder="Логин"
-          {...validateForm.register("login")}
-          error={errorsLogin.login?.message}
-        />
-        <InputPasswordUI
-          classNameWrapper="modal-auth__input input-bottom"
-          label="Ваш пароль"
-          placeholder="Пароль"
-          {...validateForm.register("password")}
-          error={errorsLogin.password?.message}
-        />
-      </div>
-
-      <ButtonSubmitUI
-        className="modal-auth__button-action"
-        hasArrow
-        fullWidth
-        isLoading={loginMutation.isPending}
-        text="Продолжить"
-      />
-      <ButtonUI
-        className="modal-auth__button-action"
-        type="button"
-        hasArrow
-        fullWidth
-        variant="secondary"
-        onClick={() => changeStepAuth("registration")}
+    <>
+      <form
+        ref={ref}
+        className={cls(className, "modal-auth__login-step fade-in ")}
+        onSubmit={validateForm.handleSubmit(handleLogin)}
+        aria-describedby={id}
       >
-        Заявка на регистрацию
-      </ButtonUI>
+        <div className="modal-auth__inputs">
+          <InputUI
+            classNameWrapper="modal-auth__input input-bottom"
+            label="Ваш логин"
+            placeholder="Логин"
+            {...validateForm.register("login")}
+            error={errorsLogin.login?.message}
+          />
+          <InputPasswordUI
+            classNameWrapper="modal-auth__input input-bottom"
+            label="Ваш пароль"
+            placeholder="Пароль"
+            {...validateForm.register("password")}
+            error={errorsLogin.password?.message}
+          />
+        </div>
 
-      {/* <ButtonSubmitUI
+        <ButtonSubmitUI
+          className="modal-auth__button-action"
+          hasArrow
+          dirty={isDirty}
+          fullWidth
+          isLoading={loginMutation.isPending}
+          text="Продолжить"
+        />
+        <ButtonUI
+          className="modal-auth__button-action"
+          type="button"
+          hasArrow
+          fullWidth
+          variant="secondary"
+          onClick={() => changeStepAuth("registration")}
+        >
+          Заявка на регистрацию
+        </ButtonUI>
+
+        {/* <ButtonSubmitUI
         className="modal-auth__button-action"
         hasArrow
         onClick={() => handleTestAuth("freelancer")}
@@ -104,16 +111,25 @@ export const LoginStep = () => {
       >
         ТЕСТ ЛК РЕКРУТЕРА
       </ButtonSubmitUI> */}
-      <p className="police-text">
-        Продолжая, вы принимаете
-        <Link
-          href={PAGES_PATHS.DOCUMENTS(contacts?.privacyPolicy.slug)}
-          onClick={() => onToggleModal("auth", false)}
-        >
-          {" "}
-          {contacts?.privacyPolicy.title.toLowerCase()}
-        </Link>
-      </p>
-    </form>
+        <p className="police-text">
+          Продолжая, вы принимаете
+          <Link
+            href={PAGES_PATHS.DOCUMENTS(contacts?.privacyPolicy.slug)}
+            onClick={() => onToggleModal("auth", false)}
+          >
+            {" "}
+            {contacts?.privacyPolicy.title.toLowerCase()}
+          </Link>
+        </p>
+      </form>
+      {
+        <ErrorBoxUI
+          message={errorsLogin?.errorMessage?.message}
+          hasCloseButton
+          onClose={() => validateForm.resetField("errorMessage")}
+          delay={3000}
+        />
+      }
+    </>
   );
 };

@@ -30,12 +30,23 @@ export interface AuthOperations {
           >;
         };
       };
+
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": IResponse;
+        };
+      };
       /** @description Неверный логин или пароль */
       401: {
         headers: {
           [name: string]: unknown;
         };
-        content?: never;
+        content: {
+          "application/json": IResponse;
+        };
       };
     };
   };
@@ -103,7 +114,9 @@ export interface AuthOperations {
         headers: {
           [name: string]: unknown;
         };
-        content?: never;
+        content: {
+          "application/json": IResponse;
+        };
       };
     };
   };

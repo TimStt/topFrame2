@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useId } from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { PAGES_PATHS } from "@/shared/constants/pages-paths";
 import { useAnimateOnScroll } from "@/shared/hooks/use-animate-on-scroll";
@@ -17,28 +17,38 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IApiSchemas } from "@/shared/api/schema";
 import { useGetContacts } from "@/entity/user/api/get-contacts";
+import { ErrorFieldUI } from "@/shared/ui/error-field-ui";
+import { ErrorBoxUI } from "@/shared/ui/error-box-ui";
 
 const RegisterSchema = z.object({
   name: z.string().min(1, "Имя обязательно для заполнения"),
   surname: z.string().min(1, "Фамилия обязательна для заполнения"),
   phone: z.string().min(10, "Номер должен содержать 10 цифр"),
   comment: z.string().optional(),
+  errorMessage: z.string().optional(),
 });
 
 export const RegisterStep = () => {
   const { className, ref } = useAnimateOnScroll();
 
-  const { registerMutation, handleRegister } = useRegister();
-
   const {
-    formState: { errors: errorsRegister },
+    formState: { errors: errorsRegister, isDirty },
+    setError,
     ...validateForm
   } = useForm({
     resolver: zodResolver(RegisterSchema),
     mode: "onChange",
   });
 
+  const { registerMutation, handleRegister } = useRegister({
+    onError: (error) => {
+      setError("errorMessage", { message: error });
+    },
+  });
+
   const { contacts } = useGetContacts();
+
+  const id = useId();
 
   return (
     <>
@@ -46,6 +56,7 @@ export const RegisterStep = () => {
         ref={ref}
         className={cls(className, "modal-auth__register-step fade-in ")}
         onSubmit={validateForm.handleSubmit(handleRegister)}
+        aria-describedby={id}
       >
         <p className="modal-auth__description subtitle">
           С вами свяжется менеджер для подтверждения регистрации
@@ -90,9 +101,11 @@ export const RegisterStep = () => {
           className="modal-auth__button-action"
           hasArrow
           fullWidth
+          dirty={isDirty}
           text="Продолжить"
           isLoading={registerMutation.isPending}
         />
+
         <p className="police-text">
           Продолжая, вы принимаете
           <Link
@@ -104,6 +117,14 @@ export const RegisterStep = () => {
           </Link>
         </p>
       </form>
+      {
+        <ErrorBoxUI
+          message={errorsRegister?.errorMessage?.message}
+          hasCloseButton
+          onClose={() => validateForm.resetField("errorMessage")}
+          delay={3000}
+        />
+      }
     </>
   );
 };

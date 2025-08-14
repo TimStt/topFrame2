@@ -5,7 +5,7 @@ export const PAGES_PATHS = {
   VACANCIES: "/vacancies",
   VACANCY: (slug: string) => `/vacancies/${slug}`,
   DIRECTIONS: (direction?: string) =>
-    `/directions${direction ? `/${direction}` : ""}`,
+    `${direction ? `/directions/${direction}` : "/#directions"}`,
   HR_TOPFRAME: (tab?: string, slug?: string) =>
     `/hr-topframe${tab ? `?${QUERY_KEYS.SPACE_TAB}=${tab}` : ""}${
       slug ? `/${slug}` : ""

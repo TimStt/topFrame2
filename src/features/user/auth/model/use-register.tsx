@@ -4,7 +4,7 @@ import { components } from "@/shared/api/schema/components";
 import { onToggleModal } from "@/shared/lib/zustands/use-store-modals";
 import { useModalToastStore } from "@/shared/ui/modal-toast-ui/modal-toast.store";
 
-export const useRegister = () => {
+export const useRegister = (params?: { onError?: (error: string) => void }) => {
   const { showModalToast } = useModalToastStore();
 
   const onSuccessRegister = () => {
@@ -21,6 +21,12 @@ export const useRegister = () => {
 
   const registerMutation = rqClient.useMutation("post", "/api/auth/register", {
     onSuccess: onSuccessRegister,
+    onError: (error) => {
+      params?.onError?.(
+        error.errorMessage ||
+          "Что-то пошло не так при регистрации. Попробуйте позже"
+      );
+    },
   });
 
   const handleRegister = (data: IApiSchemas["AuthRegisterDto"]) => {

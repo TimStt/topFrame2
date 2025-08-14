@@ -6,11 +6,14 @@ export const ButtonSubmitUI = ({
   isLoading,
   children,
   colorLoader,
+  hasArrow,
   text,
+  dirty,
   ...props
 }: Omit<IButton<"button">, "loading"> & {
   isLoading?: boolean;
   colorLoader?: string;
+  dirty?: boolean;
 }) => {
   const ref = useRef<HTMLButtonElement>(null);
 
@@ -25,10 +28,11 @@ export const ButtonSubmitUI = ({
   return (
     <ButtonUI
       type="submit"
-      loading={isLoading}
       rootRef={ref}
+      disabled={dirty === false || isLoading}
       style={{ minWidth }}
       text={minWidth && isLoading ? "" : text}
+      hasArrow={isLoading ? false : hasArrow}
       {...props}
     >
       {minWidth && isLoading ? (
@@ -39,7 +43,7 @@ export const ButtonSubmitUI = ({
           color={colorLoader}
         />
       ) : (
-        children
+        <>{!isLoading && children}</>
       )}
     </ButtonUI>
   );
