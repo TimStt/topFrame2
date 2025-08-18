@@ -83,7 +83,7 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
     containerRef,
     isNotVolume,
     Loader,
-  } = useVideo({ videoId: member.id });
+  } = useVideo({ videoId: member?.id });
 
   return (
     <div
@@ -98,8 +98,8 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
       {/* Постер как отдельный элемент */}
       <img
         className="team__card-poster"
-        src={URL_FILE_API + member.preview}
-        alt={member.title}
+        src={URL_FILE_API + member?.preview}
+        alt={member?.title}
         loading="eager"
         width={280}
         height={200}
