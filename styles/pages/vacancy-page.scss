@@ -12,6 +12,10 @@
     margin-top: 16px;
   }
 
+  &__main {
+    flex: 1;
+  }
+
   li {
     --sizeDot: 6px;
     --marginDot: 8px;
@@ -87,14 +91,14 @@
     border-radius: 8px;
     display: flex;
     flex-direction: column;
-    gap: 64px;
+    gap: 36px;
     max-width: 780px;
     width: 100%;
 
     h3 {
-      @include font-setup(24, 29, 600);
+      @include font-setup(20, 29, 600);
 
-      margin-bottom: 24px;
+      margin-bottom: 16px;
     }
 
     p {
@@ -127,7 +131,7 @@
   .vacancy-page__benefits {
     position: static;
     margin-top: 0;
-    width: max-content;
+    width: 100%;
   }
 
   .vacancy-page__content {

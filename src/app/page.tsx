@@ -20,7 +20,7 @@ export default async function Home() {
     <>
       <main>
         <WrapperPrefetchQuery {...getHomeOptions()}>
-          <ZeroHero />
+          {/* <ZeroHero /> */}
           <HREcosystemSection />
           <Directions />
 
