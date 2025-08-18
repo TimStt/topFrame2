@@ -11,7 +11,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 export const InfoUserSkeleton = () => {
   return (
-    <section className="profile__info-user-skeleton">
+    <section className="profile__info-user">
       {/* Скелетон для блока "О пользователе" */}
       <div className="profile__info-user__about-skeleton">
         <div

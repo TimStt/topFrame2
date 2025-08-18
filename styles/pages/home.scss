@@ -2,6 +2,12 @@
 
 @use "../libs/mixins.scss" as *;
 
+.logo {
+  display: inline-block;
+  max-width: 120px;
+  width: 100%;
+}
+
 .title-section {
   @include font-setup(
     40,
@@ -33,7 +39,7 @@
     gap: 8px;
 
     span {
-      @include font-setup(12, 16, 400);
+      @include font-setup(16, 18, 400);
       color: var(--colorMainHeader);
     }
   }
@@ -81,8 +87,7 @@
 
     &-link {
       font-family: var(--second-family);
-      font-weight: 400;
-      font-size: 12px;
+      @include font-setup(16, 18, 400);
       color: var(--colorMainHeader);
       transition: color var(--transition-normal) ease;
       position: relative;
@@ -115,11 +120,10 @@
     border: 2px solid var(--color-accent-blue);
     color: var(--color-accent-blue);
 
-    font-weight: 600;
-    font-size: 12px;
+    @include font-setup(16, 18, 600);
     color: var(--colorMainHeader);
-    width: 67px;
-    height: 22px;
+    width: fit-content;
+    padding: 6px 18px;
     background-color: transparent;
     border: 1px solid var(--colorMainHeader);
     border-radius: 40px;
@@ -139,10 +143,26 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-
+  overflow: hidden;
   --paddingTop: 23px;
   --paddingBottom: 20px;
   padding-block: var(--paddingTop) var(--paddingBottom);
+
+  &__ellipse-1 {
+    position: absolute;
+    left: -22%;
+    /* bottom: 10%; */
+    top: -100%;
+    z-index: -1;
+    width: 100%;
+  }
+  &__ellipse-2 {
+    position: absolute;
+    right: -6%;
+    /* bottom: -41%; */
+    top: -146%;
+    z-index: -1;
+  }
 
   &__content {
   }
@@ -156,17 +176,11 @@
   }
 
   &__logo {
-    display: inline-block;
     margin-bottom: 12px;
-
-    img {
-      max-width: 102.5px;
-    }
   }
 
   &__description {
-    font-weight: 400;
-    font-size: 12px;
+    @include font-setup(16, 18, 400);
     color: var(--color-light-blue);
     margin-bottom: 24px;
   }
@@ -181,8 +195,7 @@
     &-item {
       a {
         font-family: var(--third-family);
-        font-weight: 400;
-        font-size: 12px;
+        @include font-setup(16, 18, 400);
         color: var(--color-light);
       }
     }
@@ -193,8 +206,7 @@
     align-items: center;
     gap: 4px;
     gap: 10px;
-    font-weight: 500;
-    font-size: 12px;
+    @include font-setup(16, 18, 500);
     gap: 4px;
     color: var(--color-light);
 
@@ -206,9 +218,9 @@
   &__bottom-content {
     @include flex-center-between();
     font-family: var(--second-family);
-    font-weight: 400;
+
     flex-wrap: wrap;
-    font-size: 12px;
+    @include font-setup(16, 18, 400);
     gap: 8px;
     text-wrap: nowrap;
     color: var(--color-light-blue-2);
@@ -221,10 +233,9 @@
 
     color: var(--color-light);
 
-    font-weight: 500;
-    font-size: 12px;
+    @include font-setup(16, 18, 500);
 
-    --sizeEmail: 28px;
+    --sizeEmail: 32px;
     --sizeTriangle: 6px;
     --sizeIcon: 16px;
 
@@ -285,8 +296,7 @@
     &-phone {
       text-wrap: nowrap;
     }
-
-    .footer__contact-phone + .footer__contact-phone {
+    &-phone + &-phone {
       margin-top: 12px;
     }
   }
@@ -614,13 +624,13 @@
 .hr-ecosystem {
   --sizeCircle: 335px;
 
-  --sizeMiddleLine: 700px;
-  --sizeBigLine: 1040px;
+  --sizeMiddleLine: 800px;
+  --sizeBigLine: 1224px;
   overflow: hidden;
   --bottomMargin: calc((var(--sizeCircle) / 3) * -1);
   position: relative;
   padding-top: 463px;
-  --topBigLine: 30%;
+  --topBigLine: 22%;
   --topMiddleLine: 50%;
 
   &:after,
@@ -1318,6 +1328,12 @@
     transition: opacity 0.3s ease-in-out;
   }
 
+  &__button-more {
+    display: flex;
+    margin-top: 24px;
+    margin-inline: auto;
+  }
+
   &-position {
     font-family: var(--second-family);
     font-weight: 400;
@@ -1435,8 +1451,8 @@
 @media (max-width: 1180px) {
   .hr-ecosystem {
     --sizeCircle: 300px;
-    --sizeMiddleLine: 549px;
-    --sizeBigLine: 889px;
+    --sizeMiddleLine: 660px;
+    --sizeBigLine: 1025px;
   }
 
   // .hr-ecosystem__element:nth-child(2) {

@@ -13,8 +13,9 @@ import { NewVacancies } from "@/widgets/vacancy/new-vacancies";
 import { WrapperPrefetchQuery } from "@/shared/lib/react-query/wrapper-prefetch-query";
 import { getHomeOptions } from "@/entity/user/api/get-home/options";
 import { Metadata } from "next/types";
+import { fetchClient } from "@/shared/api/api-client";
 
-export default function Home() {
+export default async function Home() {
   return (
     <>
       <main>
@@ -22,7 +23,9 @@ export default function Home() {
           <ZeroHero />
           <HREcosystemSection />
           <Directions />
+
           <Team />
+
           <NewVacancies />
         </WrapperPrefetchQuery>
       </main>

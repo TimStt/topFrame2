@@ -13,11 +13,14 @@ import { PAGES_PATHS } from "@/shared/constants/pages-paths";
 import ArrowIcon from "@/source/icons/arrow.svg";
 import EmailIcon from "@/source/icons/email.svg";
 import LogoIsArt from "@/source/icons/logo-is-art.svg";
+
+import EllipseBg2 from "@/source/icons/ellipse-bg2.svg";
 import Image from "next/image";
 import Link from "next/link";
 
 import { companyInfo, footerContacts, footerNavigation } from "./footer.data";
 import { useGetContacts } from "@/entity/user/api/get-contacts";
+import { AnimationEllipses } from "@/shared/ui/animation-ellipses-ui";
 
 export const Footer: React.FC = () => {
   const { contacts } = useGetContacts();
@@ -30,11 +33,13 @@ export const Footer: React.FC = () => {
       }}
     >
       {/* Основная часть футера */}
-      <div className="footer__content container">
+      <div className="footer__content container transform-ellipses">
         {/* Левая колонка - Логотип и описание */}
+        <EllipseBg2 className="footer__ellipse-1" />
+        <EllipseBg2 className="footer__ellipse-2" />
         <div className="footer__top">
           <div className="footer__brand">
-            <Link className="footer__logo" href="/">
+            <Link className="footer__logo logo" href="/">
               <Image
                 src="/icons/logo.svg"
                 width={102}

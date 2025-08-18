@@ -10,6 +10,7 @@ import { CheckboxUI } from "../checkbox-ui";
 export interface ISelectOptions {
   value: string | number;
   label: string;
+  isAll?: boolean;
 }
 
 export type ISelectOption = {
@@ -82,8 +83,9 @@ export const SelectUI = <T extends string | number>({
 
   const handleChange = handleOptionChange(
     type,
-    activeValue || [],
+
     (currentValue) => {
+      console.log("currentValue", currentValue);
       onChange?.(label || "", {
         options: currentValue,
         name: value.name,
@@ -101,7 +103,32 @@ export const SelectUI = <T extends string | number>({
       ? activeValue.map((opt) => opt.label).join(",")
       : "";
 
+  // создат ьвременный массив для визуального выделения всех опций
+
+  const isCheckedAll = activeValue.some((opt) => opt.isAll);
+
+  const handleCheckAll = (checked: boolean) => {
+    console.log("handleCheckAll");
+    if (!checked) {
+      onChange?.(label || "", {
+        options: [],
+        name: value.name,
+        label: label || "",
+      });
+
+      return;
+    }
+
+    onChange?.(label || "", {
+      options: value.options,
+      name: value.name,
+      label: label || "",
+    });
+  };
+
   const id = useId();
+
+  console.log(value.options);
 
   return (
     <div className={cls("select-wrapper", type)}>
@@ -128,7 +155,8 @@ export const SelectUI = <T extends string | number>({
                             ?.value!,
                           label: opt,
                         },
-                        false
+                        false,
+                        activeValue
                       );
                     }}
                   >
@@ -186,14 +214,18 @@ export const SelectUI = <T extends string | number>({
                   <CheckboxUI
                     key={option.value}
                     type={type}
-                    checked={activeValue.some(
-                      (opt) => opt.value === option.value
-                    )}
+                    checked={
+                      (option.isAll ? isCheckedAll : true) &&
+                      activeValue.some((opt) => opt.value === option.value)
+                    }
                     onChangeCheckbox={(checked) =>
-                      handleChange(
-                        { value: option.value, label: option.label },
-                        !!checked
-                      )
+                      option.isAll
+                        ? handleCheckAll(!!checked)
+                        : handleChange(
+                            { value: option.value, label: option.label },
+                            !!checked,
+                            activeValue
+                          )
                     }
                     label={option.label}
                   />

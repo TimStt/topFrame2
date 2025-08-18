@@ -10,12 +10,18 @@ import EllipseBg1 from "@/source/icons/ellipse-bg-1.svg";
 export const AnimationEllipses = ({
   className,
   length = 3,
+  noAnimation = false,
 }: {
   className?: string;
   length?: number;
+  noAnimation?: boolean;
 }) => {
   return (
-    <div className={cls("animation-ellipses", className)}>
+    <div
+      className={cls("animation-ellipses", className, {
+        disable: noAnimation,
+      })}
+    >
       {Array.from({ length }).map((_, index) => (
         <EllipseBg1
           key={index}

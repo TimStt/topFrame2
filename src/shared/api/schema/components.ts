@@ -62,6 +62,7 @@ export interface components {
     FilterValueDto: {
       value: number;
       label: string;
+      isAll: boolean;
     };
 
     FilterDto: {
@@ -264,6 +265,12 @@ export interface components {
       description: string;
       preview: string;
       video: string;
+    };
+
+    TeamResponseDto: {
+      ourTeamCountPage: number;
+      ourTeam: components["schemas"]["TeamMemberDto"][];
+      currentPage: number;
     };
 
     // Контакты

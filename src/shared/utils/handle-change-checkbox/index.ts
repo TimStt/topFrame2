@@ -2,10 +2,14 @@ import { ISelectOption, ISelectOptions } from "@/shared/ui/select-ui";
 
 export const handleOptionChange = <T extends string | number>(
   type: "checkbox" | "radio",
-  value?: ISelectOptions[],
+
   onChange?: (value: ISelectOptions[]) => void
 ) => {
-  return (optionValue: ISelectOptions, checked: boolean) => {
+  return (
+    optionValue: ISelectOptions,
+    checked: boolean,
+    activeValue: ISelectOptions[] = []
+  ) => {
     if (!onChange) return;
 
     let newValue: ISelectOptions[];
@@ -17,14 +21,18 @@ export const handleOptionChange = <T extends string | number>(
     }
 
     console.log("optionValue change", optionValue);
-    console.log("value", value);
+    console.log("value", activeValue);
 
     if (checked) {
-      newValue = value?.find((v) => v.value === optionValue.value)
-        ? value?.filter((v) => v.value !== optionValue.value)
-        : [...(value || []), optionValue];
+      newValue = activeValue?.find((v) => v.value === optionValue.value)
+        ? activeValue?.filter((v) => v.value !== optionValue.value)
+        : [...(activeValue || []), optionValue];
     } else {
-      newValue = value?.filter((v) => v.value !== optionValue.value) || [];
+      newValue = (
+        activeValue?.filter(
+          (v) => v.value !== optionValue.value //&& !v.isAll
+        ) || []
+      ).filter((v) => !v.isAll);
     }
     console.log("newValue", newValue);
     onChange(newValue);

@@ -49,7 +49,7 @@ export const AccordionFilterUI: React.FC<AccordionFilterUIProps> = ({
 
   const handleChange = handleOptionChange(
     "checkbox",
-    activeValue || [],
+
     (currentValue) => {
       onChange(filter.name, {
         ...filter,
@@ -57,6 +57,25 @@ export const AccordionFilterUI: React.FC<AccordionFilterUIProps> = ({
       });
     }
   );
+
+  const handleCheckAll = (checked: boolean) => {
+    console.log("handleCheckAll");
+    if (!checked) {
+      onChange?.(filter.name, {
+        options: [],
+        name: filter.name,
+        label: filter.label,
+      });
+
+      return;
+    }
+
+    onChange?.(filter.name, {
+      options: filter.options,
+      name: filter.name,
+      label: filter.label,
+    });
+  };
 
   return (
     <>
@@ -84,9 +103,14 @@ export const AccordionFilterUI: React.FC<AccordionFilterUIProps> = ({
                 label={option.label}
                 checked={activeValue?.some((v) => v.value === option.value)}
                 onChangeCheckbox={(checked) => {
+                  if (option.isAll) {
+                    handleCheckAll(!!checked);
+                    return;
+                  }
                   handleChange(
                     { value: option.value, label: option.label },
-                    !!checked
+                    !!checked,
+                    activeValue || []
                   );
                 }}
                 type="checkbox"

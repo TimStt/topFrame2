@@ -56,13 +56,17 @@ export const useFilter = ({
       (f) => f.name === values.name
     );
 
+    console.log("values", values);
+
     if (filterSelected !== -1 && filterSelected !== undefined) {
       const newFilters = [...(isActiveFilters || [])];
 
       newFilters[filterSelected!] = {
         ...values,
-        options: values.options.length > 0 ? values.options : [],
+        options: values.options.length > 0 ? [...values.options] : [],
       };
+
+      console.log("newFilters", newFilters);
       setIsActiveFilters(newFilters);
     } else {
       setIsActiveFilters([

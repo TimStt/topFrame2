@@ -4,26 +4,20 @@
 //   QueryObserverOptions,
 //   UnusedSkipTokenInfiniteOptions,
 //   UseInfiniteQueryOptions,
-// } from '@tanstack/react-query';
+// } from "@tanstack/react-query";
 
-// import {
-//   ILinksPaginationDto,
-//   IMetaPaginationInfoDto,
-//   IMultipleElementsDto,
-//   IResponse,
-// } from '../types';
-
-// export const baseInitialOptionsPagination = <Data,
-//   T extends { meta: IMetaPaginationInfoDto, data: Data } & {
-//     [key: string]: unknown;
-//   },
-// >(
-//   initialPageParam?: number,
+// export const baseInitialOptionsPagination = <T>(
+//   initialPageParam?: number
 // ): Omit<
-//   UseInfiniteQueryOptions<IResponse<T>>,
-//   'queryKey' | 'queryFn' | 'select'
+//   UseInfiniteQueryOptions<IResponse<IMultipleElementsDto<T>>>,
+//   "queryKey" | "queryFn" | "select"
 // > & {
-//   select: (data: InfiniteData<IResponse<T>>) => IResponse<T>
+//   select: (data: InfiniteData<IResponse<IMultipleElementsDto<T>>>) => {
+//     data: T[];
+//     total: number;
+//     meta: IMetaPaginationInfoDto;
+//     links: ILinksPaginationDto;
+//   };
 // } => ({
 //   initialPageParam: initialPageParam || 1,
 //   getNextPageParam: ({ response }) => {
@@ -35,16 +29,17 @@
 //     return nextPage;
 //   },
 //   select: (data) => {
-
 //     const dataResult = data?.pages
 //       ?.map((results) => results?.response?.data)
 //       .flat();
 
+//     const total = data?.pages?.[0]?.response?.meta?.total || 0;
+
 //     return {
 //       data: dataResult,
-
+//       total,
 //       meta: data?.pages?.[0]?.response?.meta,
-
+//       links: data?.pages?.[0]?.response?.links,
 //     };
 //   },
 // });

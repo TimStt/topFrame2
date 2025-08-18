@@ -21,9 +21,14 @@ import { SkeletonTeam } from "./skeleton";
 import { ITeamMember, teamData } from "./team.data";
 import { IApiSchemas } from "@/shared/api/schema";
 import { URL_FILE_API } from "@/shared/constants/other";
+import { useGetOurTeam } from "@/entity/user/api/get-our-team";
+import { ButtonUI } from "@/shared/ui/button-ui";
+import { ButtonSubmitUI } from "@/shared/ui/button-submit-ui";
+import { IResponse } from "@/shared/api/types";
 
-export const Team: React.FC = () => {
-  const { ourTeam, isLoading } = useGetHome();
+export const Team = () => {
+  const { team, isLoading, hasNextPage, isFetchingNextPage, fetchNextPage } =
+    useGetOurTeam();
 
   if (isLoading) {
     return <SkeletonTeam />;
@@ -39,10 +44,20 @@ export const Team: React.FC = () => {
       </div>
 
       <div className="team__list">
-        {ourTeam?.map((member) => (
+        {team?.map((member) => (
           <TeamMemberCard key={member.id} member={member} />
         ))}
       </div>
+      {hasNextPage && (
+        <ButtonSubmitUI
+          className="team__button-more"
+          onClick={() => fetchNextPage()}
+          isLoading={isFetchingNextPage}
+          type="button"
+        >
+          Показать еще
+        </ButtonSubmitUI>
+      )}
     </section>
   );
 };

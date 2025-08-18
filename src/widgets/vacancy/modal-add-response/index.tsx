@@ -97,7 +97,7 @@ export const ModalAddResponse = ({ idResponse }: { idResponse: number }) => {
             isLoading={mutationAddResponse.isPending}
           />
           <p className="police-text">
-            Продолжая, вы принимаете
+            Продолжая, вы принимаете{" "}
             <Link
               href={PAGES_PATHS.DOCUMENTS(contacts?.privacyPolicy.slug)}
               onClick={() => onToggleModal("addResponse", false)}

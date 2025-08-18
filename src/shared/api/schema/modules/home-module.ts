@@ -1,6 +1,7 @@
 /**
  * API для главной страницы
  */
+import { IApiSchemas } from "..";
 import { IResponse } from "../../types";
 import { components } from "../components";
 
@@ -30,6 +31,29 @@ export interface HomeOperations {
             count: number;
             ourTeam: components["schemas"]["TeamMemberDto"][];
           }>;
+        };
+      };
+    };
+  };
+
+  "/api/home/ourTeam": {
+    parameters: {
+      query: {
+        page: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Получить видео для главной страницы */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": IResponse<IApiSchemas["TeamResponseDto"]>;
         };
       };
     };
@@ -109,6 +133,24 @@ export interface HomePaths {
     };
     /** Получить данные для главной страницы */
     get: HomeOperations["/api/home"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+
+  "/api/home/ourTeam": {
+    parameters: {
+      query: { page: string };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** Получить видео для главной страницы */
+    get: HomeOperations["/api/home/ourTeam"];
     put?: never;
     post?: never;
     delete?: never;

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 /**
  * @file: Header component
@@ -6,24 +6,29 @@
  * @dependencies: Next.js Image, Button component
  * @created: 2024-01-15
  */
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
-import { PAGES_PATHS, PAGES_WITH_BLUE_HEAD } from '@/shared/constants/pages-paths'
-import Image from 'next/image'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import {
+  PAGES_PATHS,
+  PAGES_WITH_BLUE_HEAD,
+} from "@/shared/constants/pages-paths";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-import { navigationItems } from './nav.data'
-import { ButtonAuth } from './ui/button-auth'
-import { MobileMenu } from './ui/mobile-menu'
+import { navigationItems } from "./nav.data";
+import { ButtonAuth } from "./ui/button-auth";
+import { MobileMenu } from "./ui/mobile-menu";
 
 export const Header = () => {
-  const pathname = usePathname()
-  const isBlueHead = PAGES_WITH_BLUE_HEAD.includes(pathname)
+  const pathname = usePathname();
+  const isBlueHead = PAGES_WITH_BLUE_HEAD.includes(pathname);
 
   const colorTextHeader = {
-    '--colorMainHeader': isBlueHead ? 'var(--color-light)' : 'var(--color-main)',
-  } as React.CSSProperties
+    "--colorMainHeader": isBlueHead
+      ? "var(--color-light)"
+      : "var(--color-main)",
+  } as React.CSSProperties;
 
   // useEffect(() => {
   //   if (!ref.current) {
@@ -49,9 +54,13 @@ export const Header = () => {
       key={pathname + isBlueHead}
     >
       <div className="header__inner container">
-        <Link className="header__logo" href="/">
+        <Link className="header__logo logo" href="/">
           <Image
-            src={PAGES_WITH_BLUE_HEAD.includes(pathname) ? '/icons/logo.svg' : '/icons/logo2.svg'}
+            src={
+              PAGES_WITH_BLUE_HEAD.includes(pathname)
+                ? "/icons/logo.svg"
+                : "/icons/logo2.svg"
+            }
             width={120}
             height={24}
             alt="TopFrame"
@@ -74,5 +83,5 @@ export const Header = () => {
         {/* Мобильное меню только для мобильных устройств */}
       </div>
     </header>
-  )
-}
+  );
+};

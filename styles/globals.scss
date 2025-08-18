@@ -108,6 +108,12 @@ button {
   svg:nth-child(3) {
     animation: ellipse-transform-3 18s ease-in-out infinite;
   }
+
+  &.disable {
+    svg {
+      animation: none;
+    }
+  }
 }
 
 // Первая анимация - движение по всей области
