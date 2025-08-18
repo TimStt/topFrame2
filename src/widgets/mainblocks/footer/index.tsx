@@ -50,7 +50,7 @@ export const Footer: React.FC = () => {
             </Link>
             <p
               className="footer__description"
-              dangerouslySetInnerHTML={{ __html: companyInfo.description }}
+              dangerouslySetInnerHTML={{ __html: companyInfo?.description }}
             />
             <Link className="footer__button" href="/" target="_blank">
               <span className="footer__button-text">Посетить главный сайт</span>
@@ -60,10 +60,10 @@ export const Footer: React.FC = () => {
           {/* Центральная колонка - Навигация */}
           <div className="footer__nav">
             <ul className="footer__nav-list">
-              {footerNavigation[0].links.map((link) => (
-                <li key={link.id} className="footer__nav-item">
-                  <Link href={link.href} className="footer__nav-link">
-                    {link.title}
+              {footerNavigation[0]?.links?.map((link) => (
+                <li key={link?.id} className="footer__nav-item">
+                  <Link href={link?.href} className="footer__nav-link">
+                    {link?.title}
                   </Link>
                 </li>
               ))}
@@ -71,23 +71,23 @@ export const Footer: React.FC = () => {
           </div>
           {/* Правая колонка - Контакты */}
           <div className="footer__contacts">
-            {contacts?.emails.map((email) => (
+            {contacts?.emails?.map((email) => (
               <a
                 className="footer__contacts__email"
-                href={`mailto:${email.value}`}
-                key={email.id}
+                href={`mailto:${email?.value}`}
+                key={email?.id}
               >
                 <span className="visually-hidden">Посмотреть почту</span>
                 <EmailIcon />
               </a>
             ))}
-            {contacts?.phones.map((phone) => (
+            {contacts?.phones?.map((phone) => (
               <a
                 href={`tel:${phone.value}`}
                 className="footer__contacts-phone"
-                key={phone.id}
+                key={phone?.id}
               >
-                {phone.value}
+                {phone?.value}
               </a>
             ))}
           </div>
@@ -98,12 +98,12 @@ export const Footer: React.FC = () => {
               © 2001 - {new Date().getFullYear()} TOPFRAME. Все права защищены.
             </p>
 
-            {contacts?.documents.map((document) => (
+            {contacts?.documents?.map((document) => (
               <Link
-                href={PAGES_PATHS.DOCUMENTS(document.slug)}
-                key={document.slug}
+                href={PAGES_PATHS.DOCUMENTS(document?.slug)}
+                key={document?.slug}
               >
-                {document.title}
+                {document?.title}
               </Link>
             ))}
 
