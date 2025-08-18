@@ -45,7 +45,7 @@ export const Team = () => {
 
       <div className="team__list">
         {team?.map((member) => (
-          <TeamMemberCard key={member.id} member={member} />
+          <TeamMemberCard key={member?.id} member={member} />
         ))}
       </div>
       {hasNextPage && (
