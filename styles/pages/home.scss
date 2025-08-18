@@ -1635,6 +1635,7 @@
 
   .directions__content {
     flex-direction: column-reverse;
+    padding-bottom: 16px;
   }
   .zero-hero__world {
     width: 100%;
@@ -1663,9 +1664,9 @@
 
   .footer__ellipse-1 {
     position: absolute;
-    left: 27%;
+    left: -31%;
     /* bottom: 10%; */
-    top: -73%;
+    top: -100%;
     z-index: -1;
   }
   .footer__ellipse-2 {

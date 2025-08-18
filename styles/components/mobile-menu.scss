@@ -119,28 +119,26 @@
   }
   .mobile-menu__nav {
     position: fixed;
-    top: var(--topButtonMenuPosition);
-    right: var(--rightButtonMenuPosition);
+    inset: 0;
     display: flex;
-    width: var(--sizeButtonMenu);
-    height: var(--sizeButtonMenu);
     padding: 0;
     margin: 0;
-    border-radius: 50%;
     z-index: 1050;
-    overflow: hidden;
-    box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.3);
-    background-color: var(--color-accent-blue);
-    animation: border-transform 7s linear infinite;
-    transition:
-      top 350ms 1100ms cubic-bezier(0.23, 1, 0.32, 1),
-      right 350ms 1100ms cubic-bezier(0.23, 1, 0.32, 1),
-      transform 250ms 1100ms ease,
-      width 650ms 400ms cubic-bezier(0.23, 1, 0.32, 1),
-      height 650ms 400ms cubic-bezier(0.23, 1, 0.32, 1);
     align-items: center;
     justify-content: center;
     padding-inline: var(--container-padding);
+    pointer-events: none;
+    background-color: var(--color-accent-blue);
+    /* круг-маска из центра кнопки */
+    clip-path: circle(
+      var(--radiusButtonMenu) at
+        calc(100% - (var(--rightButtonMenuPosition) + var(--radiusButtonMenu)))
+        calc(var(--topButtonMenuPosition) + var(--radiusButtonMenu))
+    );
+    transition: clip-path 800ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: clip-path;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
   @keyframes border-transform {
     0%,
@@ -167,18 +165,13 @@
     }
   }
   .mobile-menu__icon:checked ~ .mobile-menu__nav {
-    animation-play-state: paused;
-    top: 50%;
-    right: 50%;
-    transform: translate(50%, -50%);
-    width: 200vw;
-    height: 200vh;
-    transition:
-      top 350ms 700ms cubic-bezier(0.23, 1, 0.32, 1),
-      right 350ms 700ms cubic-bezier(0.23, 1, 0.32, 1),
-      transform 250ms 700ms ease,
-      width 750ms 1000ms cubic-bezier(0.23, 1, 0.32, 1),
-      height 750ms 1000ms cubic-bezier(0.23, 1, 0.32, 1);
+    pointer-events: auto;
+    /* раскрываем до всей области вьюпорта */
+    clip-path: circle(
+      150% at
+        calc(100% - (var(--rightButtonMenuPosition) + var(--radiusButtonMenu)))
+        calc(var(--topButtonMenuPosition) + var(--radiusButtonMenu))
+    );
   }
   .mobile-menu__list {
     position: absolute;
@@ -267,22 +260,22 @@
   .mobile-menu__icon:checked
     ~ .mobile-menu__nav
     .mobile-menu__item:nth-child(1) {
-    transition-delay: 1400ms;
+    transition-delay: 280ms;
   }
   .mobile-menu__icon:checked
     ~ .mobile-menu__nav
     .mobile-menu__item:nth-child(2) {
-    transition-delay: 1480ms;
+    transition-delay: 320ms;
   }
   .mobile-menu__icon:checked
     ~ .mobile-menu__nav
     .mobile-menu__item:nth-child(3) {
-    transition-delay: 1560ms;
+    transition-delay: 360ms;
   }
   .mobile-menu__icon:checked
     ~ .mobile-menu__nav
     .mobile-menu__item:nth-child(4) {
-    transition-delay: 1640ms;
+    transition-delay: 400ms;
   }
 }
 

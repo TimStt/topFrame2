@@ -284,10 +284,14 @@
   color: var(--colorText);
 
   span {
-    @include font-setup(12, 12, 500);
-    text-wrap: nowrap;
+    // display: -webkit-box;
+
     overflow: hidden;
     text-overflow: ellipsis;
+    -webkit-text-wrap: nowrap;
+    -webkit-text-overflow: ellipsis;
+    white-space: nowrap;
+    @include font-setup(12, 12, 500);
   }
 }
 
