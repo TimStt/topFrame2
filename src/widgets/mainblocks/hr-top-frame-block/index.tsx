@@ -59,8 +59,8 @@ export const HrTopFrameBlock: React.FC = () => {
           ) : (
             spaceList?.map((tab, idx) => (
               <ChipUI
-                key={tab.slug}
-                text={tab.name}
+                key={tab?.slug}
+                text={tab?.name}
                 className={cls({
                   "chip-active": currentTab === tab.slug,
                 })}

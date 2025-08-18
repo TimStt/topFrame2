@@ -66,12 +66,12 @@ export const Directions: React.FC = () => {
                 className={cls("directions__button", {
                   active: isSelected === direction.slug,
                 })}
-                key={direction.slug}
-                onClick={() => setIsSelected(direction.slug)}
-                onMouseEnter={() => setIsSelected(direction.slug)}
+                key={direction?.slug}
+                onClick={() => setIsSelected(direction?.slug)}
+                onMouseEnter={() => setIsSelected(direction?.slug)}
               >
                 <span className="directions__button-title">
-                  {direction.title}
+                  {direction?.title}
                 </span>
                 <ArrowIconUI />
               </button>

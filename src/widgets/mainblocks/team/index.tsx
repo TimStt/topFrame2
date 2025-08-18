@@ -137,7 +137,7 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
         onPause={() => {
           setIsPaused(true);
         }}
-        src={URL_FILE_API + member.video}
+        src={URL_FILE_API + member?.video}
       />
 
       {!isPlaying && (
@@ -161,8 +161,8 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
             }
           />
 
-          <h3 className="team__card-title">{member.title}</h3>
-          <span className="team__card-position">{member.description}</span>
+          <h3 className="team__card-title">{member?.title}</h3>
+          <span className="team__card-position">{member?.description}</span>
         </div>
       )}
     </div>
