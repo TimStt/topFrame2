@@ -6,7 +6,7 @@
 "use client";
 import { ChipUI } from "@/shared/ui/chip-ui";
 import { HeadPage } from "@/widgets/mainblocks/head-page";
-import React from "react";
+import React, { Fragment } from "react";
 import { ModalAddResponse } from "../modal-add-response";
 import LocationIcon from "@/source/icons/location.svg";
 import { useGetVacancy } from "@/entity/vacancy/api/get-vacancy";
@@ -42,7 +42,7 @@ export const AboutVacancy: React.FC = () => {
               <span className="vacancy-page__salary">
                 {queryVacancy.vacancy?.price}
               </span>
-              <div className="vacancy-page__tags">
+              <div className="vacancy-page__tags scroll">
                 {queryVacancy.vacancy?.chip.map((chip) =>
                   chip.type === "text" && !Array.isArray(chip.data) ? (
                     <ChipUI
@@ -110,13 +110,21 @@ export const AboutVacancy: React.FC = () => {
         {queryVacancy.isLoading ? (
           <VacancyPageSkeletonBenefits />
         ) : (
-          queryVacancy.vacancy?.leftBox.map((benefit) =>
-            Array.isArray(benefit.data) ? null : (
-              <div className="vacancy-page__benefits" key={benefit.name}>
-                <h3>{benefit.name}</h3>
-                <p>{benefit.data}</p>
-              </div>
-            )
+          !!queryVacancy.vacancy?.leftBox.length && (
+            <div className="vacancy-page__benefits">
+              <h3>Что мы предлагаем</h3>
+              {queryVacancy.vacancy?.leftBox.map((benefit) =>
+                Array.isArray(benefit.data) ? null : (
+                  <ul key={benefit.name}>
+                    <li>
+                      <p>
+                        {benefit.name}: {benefit.data}
+                      </p>
+                    </li>
+                  </ul>
+                )
+              )}
+            </div>
           )
         )}
       </div>

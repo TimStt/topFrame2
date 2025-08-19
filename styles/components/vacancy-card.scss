@@ -119,8 +119,31 @@
   &__params {
     display: flex;
     gap: 8px 4px;
-
     flex-wrap: wrap;
+    overflow: auto;
+
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-light-blue-2) var(--color-white-1);
+    /* Дорожка скроллбара (фон, по которому двигается ползунок) */
+    &::-webkit-scrollbar {
+      width: 2px;
+      height: 33px;
+    }
+    &::-webkit-scrollbar-track {
+      background: var(--color-white-1);
+      /* Закругленные углы дорожки */
+    }
+    &::-webkit-scrollbar-thumb {
+      background: var(--color-light-blue-2);
+
+      border-radius: 2px;
+    }
+
+    /* Ползунок скроллбара (та часть, которую можно перетаскивать) */
+    &::-webkit-scrollbar-thumb {
+      background: var(--color-light-blue-2);
+      border-radius: 2px;
+    }
   }
 
   &__location {

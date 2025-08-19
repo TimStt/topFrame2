@@ -14,6 +14,7 @@
 
   &__main {
     flex: 1;
+    width: 100%;
   }
 
   li {
@@ -61,9 +62,13 @@
 
   &__tags {
     display: flex;
-    flex-wrap: wrap;
+    overflow: auto;
     gap: 4px;
     margin-bottom: 24px;
+
+    .vacancy-page__tag {
+      max-width: max-content;
+    }
 
     span {
       color: var(--color-main);
@@ -122,7 +127,7 @@
     h3 {
       @include font-setup(20, 24, 700);
 
-      margin-bottom: 24px;
+      margin-bottom: 16px;
     }
   }
 }
