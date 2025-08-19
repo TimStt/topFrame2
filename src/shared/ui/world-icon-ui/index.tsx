@@ -6,9 +6,79 @@
 "use client";
 import React, { CSSProperties, SVGProps } from "react";
 
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { MotionPathPlugin } from "gsap/MotionPathPlugin";
+
+gsap.registerPlugin(MotionPathPlugin);
+
 export const WorldIconUI = (props?: SVGProps<SVGSVGElement>) => {
+  const svgRef = useRef<SVGSVGElement | null>(null);
+
+  useEffect(() => {
+    const svgEl = svgRef.current;
+    if (!svgEl) return;
+
+    const q = (selector: string) =>
+      svgEl.querySelector(selector) as SVGElement | null;
+
+    const animations: Array<{
+      circle: string;
+      path: string;
+      duration: number;
+      delay: number;
+    }> = [
+      { circle: "#circle1", path: "#line1", duration: 8, delay: 0 },
+      { circle: "#circle2", path: "#line2", duration: 12, delay: 1 },
+      { circle: "#circle3", path: "#line3", duration: 9, delay: 2 },
+      { circle: "#circle10", path: "#line10", duration: 11, delay: 3 },
+      { circle: "#circle4", path: "#line4", duration: 13, delay: 4 },
+      { circle: "#circle5", path: "#line5", duration: 7, delay: 5 },
+      { circle: "#circle6", path: "#line6", duration: 14, delay: 6 },
+      { circle: "#circle7", path: "#line7", duration: 6, delay: 7 },
+      { circle: "#circle8", path: "#line8", duration: 15, delay: 8 },
+      { circle: "#circle9", path: "#line9", duration: 2, delay: 3 },
+    ];
+
+    const tweens: gsap.core.Tween[] = [];
+    animations.forEach(({ circle, path, duration, delay }) => {
+      const circleEl = q(circle);
+      const pathEl = q(path);
+      if (!circleEl || !pathEl) return;
+
+      // ensure transform-origin and hide initially
+      circleEl.style.transformOrigin = "50% 50%";
+      circleEl.style.transformBox = "fill-box";
+      circleEl.style.opacity = "0";
+
+      tweens.push(
+        gsap.to(circleEl, {
+          duration,
+          delay,
+          repeat: -1,
+          yoyo: true,
+          ease: "none",
+          motionPath: {
+            path: pathEl as unknown as SVGPathElement,
+            align: pathEl as unknown as SVGPathElement,
+            alignOrigin: [0.5, 0.5],
+            autoRotate: false,
+          },
+          // fade-in to mimic initial <animate opacity>
+          onStart: () => {
+            gsap.to(circleEl, { opacity: 1, duration: 0.2, ease: "linear" });
+          },
+        })
+      );
+    });
+
+    return () => {
+      tweens.forEach((t) => t.kill());
+    };
+  }, []);
   return (
     <svg
+      ref={svgRef}
       xmlns="http://www.w3.org/2000/svg"
       width="682"
       height="450"
@@ -172,91 +242,43 @@ export const WorldIconUI = (props?: SVGProps<SVGSVGElement>) => {
         d="M374 178c-50.395 10.275-154.749 52.26-169 138"
         id="line1"
       />
-      <animateMotion
-        dur="8s"
-        repeatCount="indefinite"
-        href="#circle1"
-        xlinkHref="#circle1"
-        keyPoints="0;1;0"
-        keyTimes="0;0.5;1"
-        begin="0s"
-      >
-        {" "}
-        <mpath xlinkHref="#line1" />{" "}
-      </animateMotion>
-      <circle className="circle" r="6" id={"circle1"} fill="url(#z)">
-        <animate
-          attributeName="opacity"
-          values="0;1"
-          dur="0.1s"
-          begin="0s"
-          fill="freeze"
+      {/* GSAP drives motion; SMIL removed */}
+      <g filter="url(#filter0_f_492_5844)">
+        <circle
+          className="circle"
+          r="11"
+          id={"circle1"}
+          fill="url(#paint0_radial_492_5844)"
         />
-      </circle>
-      <animateMotion
-        dur="12s"
-        repeatCount="indefinite"
-        href="#circle2"
-        xlinkHref="#circle2"
-        keyPoints="0;1;0"
-        keyTimes="0;0.5;1"
-        begin="1s"
-      >
-        {" "}
-        <mpath xlinkHref="#line2" />{" "}
-      </animateMotion>
-      <circle className="circle" r="6" id={"circle2"} fill="url(#x)">
-        <animate
-          attributeName="opacity"
-          values="0;1"
-          dur="0.1s"
-          begin="1s"
-          fill="freeze"
+      </g>
+      {/* GSAP drives motion; SMIL removed */}
+      <g filter="url(#filter0_f_492_5844)">
+        <circle
+          className="circle"
+          r="11"
+          id={"circle2"}
+          fill="url(#paint0_radial_492_5844)"
         />
-      </circle>
-      <animateMotion
-        dur="9s"
-        repeatCount="indefinite"
-        href="#circle3"
-        xlinkHref="#circle3"
-        keyPoints="0;1;0"
-        keyTimes="0;0.5;1"
-        begin="2s"
-      >
-        {" "}
-        <mpath xlinkHref="#line3" />{" "}
-      </animateMotion>
-      <circle className="circle" r="6" id={"circle3"} fill="url(#D)">
-        <animate
-          attributeName="opacity"
-          values="0;1"
-          dur="0.1s"
-          begin="2s"
-          fill="freeze"
+      </g>
+      {/* GSAP drives motion; SMIL removed */}
+      <g filter="url(#filter0_f_492_5844)">
+        <circle
+          className="circle"
+          r="11"
+          id={"circle3"}
+          fill="url(#paint0_radial_492_5844)"
         />
-      </circle>
+      </g>
       <path id="line2" stroke="#FDFDFD" d="M385 215c-26 0-55 37.5-51 73.5" />
-      <animateMotion
-        dur="11s"
-        repeatCount="indefinite"
-        href="#circle10"
-        xlinkHref="#circle10"
-        keyPoints="0;1;0"
-        keyTimes="0;0.5;1"
-        begin="3s"
-      >
-        {" "}
-        <mpath xlinkHref="#line10" />{" "}
-      </animateMotion>
-      <circle className="circle" r="6" id={"circle10"} fill="url(#B)">
-        <animate
-          attributeName="opacity"
-          values="0;1"
-          dur="0.1s"
-          begin="3s"
-          fill="freeze"
+      {/* GSAP drives motion; SMIL removed */}
+      <g filter="url(#filter0_f_492_5844)">
+        <circle
+          className="circle"
+          r="11"
+          id={"circle10"}
+          fill="url(#paint0_radial_492_5844)"
         />
-      </circle>
+      </g>
       <path
         id="line10"
         stroke="#FDFDFD"
@@ -267,162 +289,123 @@ export const WorldIconUI = (props?: SVGProps<SVGSVGElement>) => {
         stroke="#FDFDFD"
         d="M596 365c6.62-42.397 6.287-134.952-48-166"
       />
-      <animateMotion
-        dur="13s"
-        repeatCount="indefinite"
-        href="#circle4"
-        xlinkHref="#circle4"
-        keyPoints="0;1;0"
-        keyTimes="0;0.5;1"
-        begin="4s"
-      >
-        {" "}
-        <mpath xlinkHref="#line4" />{" "}
-      </animateMotion>
-      <circle className="circle" r="6" id={"circle4"} fill="url(#L)">
-        <animate
-          attributeName="opacity"
-          values="0;1"
-          dur="0.1s"
-          begin="4s"
-          fill="freeze"
+      {/* GSAP drives motion; SMIL removed */}
+      <g filter="url(#filter0_f_492_5844)">
+        <circle
+          className="circle"
+          r="11"
+          id={"circle4"}
+          fill="url(#paint0_radial_492_5844)"
         />
-      </circle>
+      </g>
       <path
         id="line4"
         stroke="#FDFDFD"
         d="M432 200.5c-43.5 39.5-69 108-65 161.5"
       />
-      <animateMotion
-        dur="7s"
-        repeatCount="indefinite"
-        href="#circle5"
-        xlinkHref="#circle5"
-        keyPoints="0;1;0"
-        keyTimes="0;0.5;1"
-        begin="5s"
-      >
-        {" "}
-        <mpath xlinkHref="#line5" />{" "}
-      </animateMotion>
-      <circle className="circle" r="6" id={"circle5"} fill="url(#z)">
-        <animate
-          attributeName="opacity"
-          values="0;1"
-          dur="0.1s"
-          begin="5s"
-          fill="freeze"
+      {/* GSAP drives motion; SMIL removed */}
+      <g filter="url(#filter0_f_492_5844)">
+        <circle
+          className="circle"
+          r="11"
+          id={"circle5"}
+          fill="url(#paint0_radial_492_5844)"
         />
-      </circle>
+      </g>
       <path
         id="line5"
         stroke="#FDFDFD"
         d="M378 138c-18.99-9.209-63.975-21.101-92 5"
       />
-      <animateMotion
-        dur="14s"
-        repeatCount="indefinite"
-        href="#circle6"
-        xlinkHref="#circle6"
-        keyPoints="0;1;0"
-        keyTimes="0;0.5;1"
-        begin="6s"
-      >
-        {" "}
-        <mpath xlinkHref="#line6" />{" "}
-      </animateMotion>
-      <circle className="circle" r="6" id={"circle6"} fill="url(#B)">
-        <animate
-          attributeName="opacity"
-          values="0;1"
-          dur="0.1s"
-          begin="6s"
-          fill="freeze"
+      {/* GSAP drives motion; SMIL removed */}
+      <g filter="url(#filter0_f_492_5844)">
+        <circle
+          className="circle"
+          r="11"
+          id={"circle6"}
+          fill="url(#paint0_radial_492_5844)"
         />
-      </circle>
+      </g>
       <path
         id="line6"
         stroke="#FDFDFD"
         d="M377.5 164.5c-42-15-117.281-14.291-211.5 74.726"
       />
-      <animateMotion
-        dur="6s"
-        repeatCount="indefinite"
-        href="#circle7"
-        xlinkHref="#circle7"
-        keyPoints="0;1;0"
-        keyTimes="0;0.5;1"
-        begin="7s"
-      >
-        {" "}
-        <mpath xlinkHref="#line7" />{" "}
-      </animateMotion>
-      <circle className="circle" r="6" id={"circle7"} fill="url(#D)">
-        <animate
-          attributeName="opacity"
-          values="0;1"
-          dur="0.1s"
-          begin="7s"
-          fill="freeze"
+      {/* GSAP drives motion; SMIL removed */}
+      <g filter="url(#filter0_f_492_5844)">
+        <circle
+          className="circle"
+          r="11"
+          id={"circle7"}
+          fill="url(#paint0_radial_492_5844)"
         />
-      </circle>
+      </g>
       <path
         id="line7"
         stroke="#FDFDFD"
         d="M512.742 282.515c12.604-15.987 34.3-53.871 20.258-77.515"
       />
-      <animateMotion
-        dur="15s"
-        repeatCount="indefinite"
-        href="#circle8"
-        xlinkHref="#circle8"
-        keyPoints="0;1;0"
-        keyTimes="0;0.5;1"
-        begin="8s"
-      >
-        {" "}
-        <mpath xlinkHref="#line8" />{" "}
-      </animateMotion>
-      <circle className="circle" r="6" id={"circle8"} fill="url(#F)">
-        <animate
-          attributeName="opacity"
-          values="0;1"
-          dur="0.1s"
-          begin="8s"
-          fill="freeze"
+      {/* GSAP drives motion; SMIL removed */}
+      <g filter="url(#filter0_f_492_5844)">
+        <circle
+          className="circle"
+          r="11"
+          id={"circle8"}
+          fill="url(#paint0_radial_492_5844)"
         />
-      </circle>
+      </g>
       <path
         id="line8"
         stroke="#FDFDFD"
         d="M475.406 251.515c5.959-9.132 14.634-32.021 1.669-50.515"
       />
-      <circle className="circle" r="6" id="circle9" fill="url(#H)">
-        <animate
-          attributeName="opacity"
-          values="0;1"
-          dur="0.1s"
-          begin="9s"
-          fill="freeze"
+      <g filter="url(#filter0_f_492_5844)">
+        <circle
+          className="circle"
+          r="11"
+          id="circle9"
+          fill="url(#paint0_radial_492_5844)"
         />
-      </circle>
-      <animateMotion
-        dur="2s"
-        repeatCount="indefinite"
-        href="#circle9"
-        xlinkHref="#circle9"
-        keyPoints="0;1;0"
-        keyTimes="0;0.5;1"
-        begin="3s"
-      >
-        <mpath xlinkHref="#line9" />
-      </animateMotion>
+      </g>
+      {/* GSAP drives motion; SMIL removed */}
       <path
         id="line9"
         stroke="#FDFDFD"
         d="M334.406 212.515C340.365 203.383 363.5 193 383 193"
       />
       <defs>
+        <filter
+          id="filter0_f_492_5844"
+          x="-50%"
+          y="-50%"
+          width="200%"
+          height="200%"
+          filterUnits="objectBoundingBox"
+          color-interpolation-filters="sRGB"
+        >
+          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="BackgroundImageFix"
+            result="shape"
+          />
+          <feGaussianBlur
+            stdDeviation="4"
+            result="effect1_foregroundBlur_492_5844"
+          />
+        </filter>
+        <radialGradient
+          id="paint0_radial_492_5844"
+          cx="0"
+          cy="0"
+          r="1"
+          gradientUnits="userSpaceOnUse"
+          gradientTransform="translate(0 0) rotate(90) scale(9)"
+        >
+          <stop stop-color="#FDFDFD" />
+          <stop offset="1" stop-color="#F7FFCD" />
+        </radialGradient>
         <radialGradient
           id="b"
           cx="0"

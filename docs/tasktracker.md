@@ -1,5 +1,15 @@
 # Task Tracker
 
+## Задача: Мобильное меню — заменить псевдоэлементы бургера на span-полоски
+
+- **Статус**: Завершена
+- **Описание**: Для большей гибкости и явной разметки иконки бургера, заменены `:before`/`:after` у `label.mobile-menu__label` на три `span`-элемента с классом `mobile-menu__bar`.
+- **Шаги выполнения**:
+  - [x] Добавить три `span` внутри `label.mobile-menu__label`
+  - [x] Переписать стили и анимации с `:before`/`:after` на `.mobile-menu__bar`
+  - [x] Обновить документацию (`changelog.md`, `tasktracker.md`)
+- **Зависимости**: `src/widgets/mainblocks/header/ui/mobile-menu/index.tsx`, `styles/components/mobile-menu.scss`
+
 ## Задача: Мобильное меню — убрать лаги и пикселизацию при раскрытии на Android
 
 - **Статус**: Завершена

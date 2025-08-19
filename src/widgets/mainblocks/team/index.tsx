@@ -100,7 +100,7 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
         className="team__card-poster"
         src={URL_FILE_API + member?.preview}
         alt={member?.title}
-        loading="eager"
+        loading="lazy"
         width={280}
         height={200}
       />

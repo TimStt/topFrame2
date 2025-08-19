@@ -4,7 +4,7 @@
 
 .logo {
   display: inline-block;
-  max-width: 120px;
+  max-width: 144px;
   width: 100%;
 }
 
@@ -394,9 +394,7 @@
 
     // Применение анимаций к линиям на карте мира
     .circle {
-      filter: drop-shadow(0 0 5px #fdfdfd) drop-shadow(0 0 5px #f7ffcd);
-      position: relative;
-      opacity: 0;
+      // filter: drop-shadow(0 0 5px #fdfdfd) drop-shadow(0 0 5px #f7ffcd);
 
       // // Асинхронная анимация для каждой линии
       // &:nth-child(1) {

@@ -53,69 +53,43 @@
     cursor: pointer;
     z-index: 1060;
   }
-  .mobile-menu__icon:checked + .mobile-menu__label:before,
-  .mobile-menu__icon:not(:checked) + .mobile-menu__label:before {
+  /* burger bars based on spans instead of pseudo-elements */
+  .mobile-menu__label {
+    position: relative;
+  }
+  .mobile-menu__bar {
     position: absolute;
-    content: "";
-    display: block;
-    width: 25px;
-    height: 16px;
-    z-index: 20;
-    top: 0;
     left: 0;
-    border-top: 2px solid var(--color-light-gray);
-    border-bottom: 2px solid var(--color-light-gray);
-    transition:
-      border-width 100ms 1500ms ease,
-      top 100ms 1600ms cubic-bezier(0.23, 1, 0.32, 1),
-      height 100ms 1600ms cubic-bezier(0.23, 1, 0.32, 1),
-      background-color 200ms ease,
-      transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
-  }
-  .mobile-menu__icon:checked + .mobile-menu__label:after,
-  .mobile-menu__icon:not(:checked) + .mobile-menu__label:after {
-    position: absolute;
-    content: "";
-    display: block;
     width: 25px;
     height: 2px;
+    background-color: var(--color-light-gray);
     z-index: 20;
-    top: 10px;
-    /* right: 4px; */
-    background-color: var(--color-light-gray);
-    margin-top: -1px;
     transition:
-      width 100ms 1750ms ease,
-      right 100ms 1750ms ease,
-      margin-top 100ms ease,
-      transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
+      transform 200ms cubic-bezier(0.23, 1, 0.32, 1),
+      opacity 150ms ease,
+      top 100ms cubic-bezier(0.23, 1, 0.32, 1),
+      background-color 200ms ease;
   }
-  .mobile-menu__icon:checked + .mobile-menu__label:before {
-    top: 10px;
+  .mobile-menu__bar--top {
+    top: 0;
+  }
+  .mobile-menu__bar--middle {
+    top: 9px;
+  }
+  .mobile-menu__bar--bottom {
+    top: 18px;
+  }
+  /* checked state transforms to cross */
+  .mobile-menu__icon:checked + .mobile-menu__label .mobile-menu__bar--top {
+    top: 9px;
     transform: rotate(45deg);
-    height: 2px;
-    background-color: var(--color-light-gray);
-    border-width: 0;
-    transition:
-      border-width 100ms 340ms ease,
-      top 100ms 300ms cubic-bezier(0.23, 1, 0.32, 1),
-      height 100ms 300ms cubic-bezier(0.23, 1, 0.32, 1),
-      background-color 200ms 500ms ease,
-      transform 200ms 1700ms cubic-bezier(0.23, 1, 0.32, 1);
   }
-  .mobile-menu__icon:checked + .mobile-menu__label:after {
-    width: 25px;
-    margin-top: 0;
-    right: 0;
+  .mobile-menu__icon:checked + .mobile-menu__label .mobile-menu__bar--middle {
+    opacity: 0;
+  }
+  .mobile-menu__icon:checked + .mobile-menu__label .mobile-menu__bar--bottom {
+    top: 9px;
     transform: rotate(-45deg);
-    transition:
-      width 100ms ease,
-      right 100ms ease,
-      margin-top 100ms 500ms ease,
-      transform 200ms 1700ms cubic-bezier(0.23, 1, 0.32, 1);
-  }
-  .mobile-menu__icon:checked + .mobile-menu__label {
-    height: 25px;
   }
   .mobile-menu__nav {
     position: fixed;
