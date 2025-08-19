@@ -860,6 +860,11 @@
       justify-content: center;
 
       color: var(--color-light);
+      img {
+        max-width: 24px;
+        height: auto;
+        object-fit: cover;
+      }
     }
 
     &-title {

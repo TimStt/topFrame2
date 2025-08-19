@@ -381,9 +381,9 @@ export const WorldIconUI = (props?: SVGProps<SVGSVGElement>) => {
           width="200%"
           height="200%"
           filterUnits="objectBoundingBox"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"

@@ -130,9 +130,8 @@ const HRElement: React.FC<HRElementProps> = ({ element, index, total }) => {
       }
     >
       <div className="hr-ecosystem__element-content">
-        <div>
+        <div className="hr-ecosystem__element-icon">
           <Image
-            className="hr-ecosystem__element-icon"
             src={URL_FILE_API + element.icon}
             alt={element.name}
             width={32}
