@@ -34,6 +34,8 @@ export const SearchVacancies = ({
     quickFilter: filterResult?.quickFilter,
     filters: filterResult?.filters,
   });
+
+  console.log(searchResult);
   return (
     <div className={cls("search-vacancies", className)}>
       <SearchBox

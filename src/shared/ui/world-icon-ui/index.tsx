@@ -84,6 +84,7 @@ export const WorldIconUI = (props?: SVGProps<SVGSVGElement>) => {
       height="450"
       viewBox="0 0 682 450"
       fill="none"
+      pointerEvents="none"
     >
       <path
         fill="#D5E8F8"
@@ -323,6 +324,7 @@ export const WorldIconUI = (props?: SVGProps<SVGSVGElement>) => {
           className="circle"
           r="11"
           id={"circle6"}
+          opacity={0}
           fill="url(#paint0_radial_492_5844)"
         />
       </g>
@@ -351,6 +353,7 @@ export const WorldIconUI = (props?: SVGProps<SVGSVGElement>) => {
           className="circle"
           r="11"
           id={"circle8"}
+          opacity={0}
           fill="url(#paint0_radial_492_5844)"
         />
       </g>
@@ -364,6 +367,7 @@ export const WorldIconUI = (props?: SVGProps<SVGSVGElement>) => {
           className="circle"
           r="11"
           id="circle9"
+          opacity={0}
           fill="url(#paint0_radial_492_5844)"
         />
       </g>
@@ -403,8 +407,8 @@ export const WorldIconUI = (props?: SVGProps<SVGSVGElement>) => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(0 0) rotate(90) scale(9)"
         >
-          <stop stop-color="#FDFDFD" />
-          <stop offset="1" stop-color="#F7FFCD" />
+          <stop stopColor="#FDFDFD" />
+          <stop offset="1" stopColor="#F7FFCD" />
         </radialGradient>
         <radialGradient
           id="b"
