@@ -60,7 +60,7 @@ export const AboutVacancy: React.FC = () => {
               <ButtonUI
                 className="vacancy-page__button"
                 variant="secondary"
-                text="Откликнуться"
+                text={queryVacancy.vacancy?.button?.label || "Откликнуться"}
                 hasArrow
                 as={hasButton ? "a" : "button"}
                 href={queryVacancy.vacancy?.button?.value}

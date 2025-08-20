@@ -4,6 +4,7 @@ import { IFeatureCard } from "../..";
 import cls from "classnames";
 import useOnClickOutside from "@/shared/hooks/use-on-click-outside";
 import { useIsNotHover } from "@/shared/hooks/use-is-not-hover";
+import Warning from "@/source/icons/warning.svg";
 
 export const AccordionInfo = ({ card }: { card: IFeatureCard }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,7 +33,7 @@ export const AccordionInfo = ({ card }: { card: IFeatureCard }) => {
       summaryContent={
         <div className="zero-hero__card-head">
           <h3 className="zero-hero__card-title">{card.title}</h3>
-          {card.icon}
+          <Warning />
         </div>
       }
     >

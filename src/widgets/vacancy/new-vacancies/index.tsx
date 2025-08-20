@@ -17,17 +17,20 @@ export const NewVacancies = () => {
       <ListVacancies
         className="container"
         renderButton={
-          <ButtonUI
-            variant="primary"
-            size="medium"
-            hasArrow
-            as="a"
-            href={PAGES_PATHS.VACANCIES}
-            text="Посмотреть все вакансии"
-          />
+          !!vacancies?.length && (
+            <ButtonUI
+              variant="primary"
+              size="medium"
+              hasArrow
+              as="a"
+              href={PAGES_PATHS.VACANCIES}
+              text="Посмотреть все вакансии"
+            />
+          )
         }
         vacancies={vacancies}
         isLoading={isLoading}
+        textEmpty="Вакансий пока нет :("
       />
     </section>
   );

@@ -12,6 +12,7 @@ export interface IListVacancies {
   renderButton?: React.ReactNode;
   className?: string;
   isLoading?: boolean;
+  textEmpty?: string;
 }
 
 export const ListVacancies = ({
@@ -19,6 +20,7 @@ export const ListVacancies = ({
   renderButton,
   className,
   vacancies,
+  textEmpty,
   isLoading,
 }: IListVacancies) => {
   return (
@@ -34,10 +36,15 @@ export const ListVacancies = ({
           ))
         ) : (
           <div className="vacancy-list__empty">
-            <p className="vacancy-list__empty-text">
-              По вашему запросу ничего не найдено. <br />
-              Попробуйте изменить параметры поиска.
-            </p>
+            <p
+              className="vacancy-list__empty-text"
+              dangerouslySetInnerHTML={{
+                __html:
+                  textEmpty ||
+                  `По вашему запросу ничего не найдено. <br />
+              Попробуйте изменить параметры поиска.`,
+              }}
+            />
           </div>
         )}
       </div>

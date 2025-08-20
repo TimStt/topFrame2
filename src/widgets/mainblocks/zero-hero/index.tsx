@@ -4,22 +4,22 @@
  * @dependencies: React, Swiper, SVG icons
  * @created: 2024-01-15
  */
-'use client'
+"use client";
 
-import React from 'react'
+import React from "react";
 
-import { useGetHome } from '@/entity/user/api/get-home'
-import { BACKGROUND_IMAGE_BLUE } from '@/shared/constants/other'
-import { AccordionUI } from '@/shared/ui/accordion-ui'
-import { AnimationEllipses } from '@/shared/ui/animation-ellipses-ui'
-import { ArrowIconUI } from '@/shared/ui/arrow-icon-ui'
-import { ButtonUI } from '@/shared/ui/button-ui'
-import { WorldIconUI } from '@/shared/ui/world-icon-ui'
-import BgMain from '@/source/icons/bg-main.svg'
+import { useGetHome } from "@/entity/user/api/get-home";
+import { BACKGROUND_IMAGE_BLUE } from "@/shared/constants/other";
+import { AccordionUI } from "@/shared/ui/accordion-ui";
+import { AnimationEllipses } from "@/shared/ui/animation-ellipses-ui";
+import { ArrowIconUI } from "@/shared/ui/arrow-icon-ui";
+import { ButtonUI } from "@/shared/ui/button-ui";
+import { WorldIconUI } from "@/shared/ui/world-icon-ui";
+import BgMain from "@/source/icons/bg-main.svg";
 
-import { SkeletonZeroHero } from './skeleton'
-import { MainInfo } from './ui/main-info'
-import { Slider } from './ui/slider'
+import { SkeletonZeroHero } from "./skeleton";
+import { MainInfo } from "./ui/main-info";
+import { Slider } from "./ui/slider";
 
 /**
  * @file: ZeroHero section
@@ -29,22 +29,21 @@ import { Slider } from './ui/slider'
  */
 
 interface ZeroHeroProps {
-  className?: string
-  children?: React.ReactNode
+  className?: string;
+  children?: React.ReactNode;
 }
 
 export interface IFeatureCard {
-  id: number
-  title: string
-  description: string
-  icon: React.ReactNode
+  id: number;
+  title: string;
+  description: string;
 }
 
 export const ZeroHero = () => {
-  const { aboutUs, isLoading } = useGetHome()
+  const { isLoading } = useGetHome();
 
   if (isLoading) {
-    return <SkeletonZeroHero />
+    return <SkeletonZeroHero />;
   }
 
   return (
@@ -58,7 +57,7 @@ export const ZeroHero = () => {
       <div className="zero-hero_inner container">
         <div className="zero-hero__row">
           <div className="zero-hero__text-content">
-            <MainInfo aboutUs={aboutUs} />
+            <MainInfo />
           </div>
           <div className="zero-hero__world">
             <WorldIconUI />
@@ -77,7 +76,7 @@ export const ZeroHero = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default ZeroHero
+export default ZeroHero;

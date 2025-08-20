@@ -26,10 +26,8 @@ interface MainInfoProps {
   }>;
 }
 
-export const MainInfo: React.FC<MainInfoProps> = ({ aboutUs }) => {
+export const MainInfo = () => {
   const { ref: refTitle, isVisible, className } = useAnimateOnScroll();
-
-  const firstAboutUs = aboutUs?.[0];
 
   return (
     <>
