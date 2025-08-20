@@ -22,7 +22,7 @@ export const useGetOurTeam = () => {
     initialPageParam: 1,
     getNextPageParam: (lastPage: IResponse<IApiSchemas["TeamResponseDto"]>) =>
       lastPage?.response?.ourTeamCountPage > lastPage?.response?.currentPage
-        ? lastPage?.response?.currentPage + 1
+        ? +lastPage?.response?.currentPage + 1
         : undefined,
     select: (
       data: InfiniteData<
