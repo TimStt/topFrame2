@@ -29,78 +29,10 @@ const nextConfig: NextConfig = {
         pathname: "/api/uploads/**",
       },
     ],
-    formats: ["image/webp", "image/avif"],
-    minimumCacheTTL: 60 * 60 * 24 * 30, // 30 дней
-  },
-
-  // Оптимизация экспериментальных функций
-  experimental: {
-    optimizeCss: true,
-    optimizePackageImports: ["swiper", "react-loading-skeleton"],
-  },
-
-  // Оптимизация заголовков
-  async headers() {
-    return [
-      {
-        source: "/(.*)",
-        headers: [
-          {
-            key: "X-Content-Type-Options",
-            value: "nosniff",
-          },
-          {
-            key: "X-Frame-Options",
-            value: "DENY",
-          },
-          {
-            key: "X-XSS-Protection",
-            value: "1; mode=block",
-          },
-        ],
-      },
-      {
-        source: "/fonts/(.*)",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      {
-        source: "/icons/(.*)",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-    ];
   },
 
   webpack(config, { dev, isServer }) {
     // Оптимизация только для production
-    if (!dev && !isServer) {
-      // Разделение вендорных библиотек
-      config.optimization.splitChunks = {
-        chunks: "all",
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: "vendors",
-            chunks: "all",
-          },
-          swiper: {
-            test: /[\\/]node_modules[\\/]swiper[\\/]/,
-            name: "swiper",
-            chunks: "all",
-            priority: 10,
-          },
-        },
-      };
-    }
 
     // Grab the existing rule that handles SVG imports
     //@ts-ignore

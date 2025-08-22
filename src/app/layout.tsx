@@ -19,9 +19,7 @@ export const metadata: Metadata = {
     icon: "/images/favicon.ico",
     apple: "/images/favicon.png",
   },
-  // Оптимизация для производительности
-  viewport: "width=device-width, initial-scale=1",
-  themeColor: "#0066CC",
+
   // Предзагрузка критических ресурсов
 };
 
