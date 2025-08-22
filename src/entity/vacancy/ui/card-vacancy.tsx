@@ -40,7 +40,6 @@ export const CardVacancy = ({
         <span className="vacancy-card__actions-text">{price}</span>
         <ButtonUI
           size="medium"
-          variant="secondary"
           hasArrow
           as="a"
           href={PAGES_PATHS.VACANCY_PAGE(slug)}

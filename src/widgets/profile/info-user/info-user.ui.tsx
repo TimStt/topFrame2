@@ -56,10 +56,13 @@ const InfoUser = () => {
       </div>
 
       <div className="profile__info-user__links ">
-        <label className="profile__info-user__links-label">
+        <label
+          className="profile__info-user__links-label"
+          htmlFor="quick-links"
+        >
           Быстрые ссылки
         </label>
-        <div className="profile__info-user__links-list">
+        <div className="profile__info-user__links-list" id="quick-links">
           {info?.quickLinks?.map((link) => (
             <a
               className="profile__info-user__links-item"
@@ -81,25 +84,32 @@ const InfoUser = () => {
         </div>
       </div>
       <div className="profile__info-user__links instructions">
-        <label className="profile__info-user__links-label">Инструкции</label>
-        {info?.instructions?.map((instruction) => (
-          <a
-            className="profile__info-user__links-item"
-            href={instruction.link}
-            target="_blank"
-            key={instruction.id}
-          >
-            <Image
-              src={URL_FILE_API + instruction.icon}
-              alt="icon"
-              width={16}
-              height={16}
-            />
-            <span className="profile__info-user__links-item-value">
-              {instruction.name}
-            </span>
-          </a>
-        ))}
+        <label
+          className="profile__info-user__links-label"
+          htmlFor="instructions"
+        >
+          Инструкции
+        </label>
+        <div className="profile__info-user__links-list" id="instructions">
+          {info?.instructions?.map((instruction) => (
+            <a
+              className="profile__info-user__links-item"
+              href={instruction.link}
+              target="_blank"
+              key={instruction.id}
+            >
+              <Image
+                src={URL_FILE_API + instruction.icon}
+                alt="icon"
+                width={16}
+                height={16}
+              />
+              <span className="profile__info-user__links-item-value">
+                {instruction.name}
+              </span>
+            </a>
+          ))}
+        </div>
       </div>
       <ButtonLogout />
     </section>

@@ -622,8 +622,9 @@
   --sizeCircle: 335px;
 
   --sizeMiddleLine: 800px;
-  --sizeBigLine: 1224px;
+  --sizeBigLine: 1204px;
   overflow: hidden;
+
   --bottomMargin: calc((var(--sizeCircle) / 3) * -1);
   position: relative;
   padding-top: 463px;
@@ -780,6 +781,7 @@
     width: 100%;
     max-height: 114px;
     height: 100%;
+    z-index: 1;
 
     --angle: 0deg;
     --endAngle: calc(var(--angle) + 360deg);
@@ -834,8 +836,8 @@
     left: 50%;
     transform-origin: center;
     // Элементы внешнего круга (слева направо по часовой стрелке, начиная с 195°)
-    animation: rotate 30s linear infinite;
-    // напиши анимация вращения элемента от исходной позиции --angle 0deg до 360deg
+    animation: rotate 60s linear infinite;
+
     @keyframes rotate {
       from {
         transform: translate(-50%, -50%) rotate(var(--angle))
@@ -963,7 +965,7 @@
         29,
         700,
         true,
-        18,
+        16,
         24,
         var(--container-max-width)
       );
@@ -1450,7 +1452,15 @@
 //   }
 // }
 
-@media (max-width: 1180px) {
+@media (max-width: 1350px) {
+  .hr-ecosystem {
+    --sizeCircle: 320px;
+    --sizeMiddleLine: 745px;
+    --sizeBigLine: 1126px;
+  }
+}
+
+@media (max-width: 1250px) {
   .hr-ecosystem {
     --sizeCircle: 300px;
     --sizeMiddleLine: 660px;
@@ -1470,7 +1480,27 @@
   // }
 }
 
-@media (max-width: 1040px) {
+@media (max-width: 1200px) {
+  .hr-ecosystem {
+    --sizeCircle: 280px;
+    --sizeMiddleLine: 600px;
+
+    --widthElement: 120px;
+  }
+  .hr-ecosystem__title {
+    font-size: 24px;
+  }
+
+  .hr-ecosystem__element {
+    max-height: 110px;
+
+    &-content {
+      padding: 12px;
+    }
+  }
+}
+
+@media (max-width: 1150px) {
   .hr-ecosystem__wrapper::after {
     top: -25%;
   }

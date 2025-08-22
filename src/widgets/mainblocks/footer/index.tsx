@@ -48,11 +48,15 @@ export const Footer: React.FC = () => {
                 className="header__logo-image"
               />
             </Link>
-            <p
+            {/* <p
               className="footer__description"
               dangerouslySetInnerHTML={{ __html: companyInfo?.description }}
-            />
-            <Link className="footer__button" href="/" target="_blank">
+            /> */}
+            <Link
+              className="footer__button"
+              href="https://topframe-group.com/"
+              target="_blank"
+            >
               <span className="footer__button-text">Посетить главный сайт</span>
               <ArrowIcon />
             </Link>

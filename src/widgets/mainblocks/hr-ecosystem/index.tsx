@@ -50,6 +50,8 @@ export const HREcosystemSection: React.FC = () => {
           <h2 className="hr-ecosystem__title">HR пространство TopFrame</h2>
         </div>
       </div>
+
+      {/* Внешний круг - дублируем элементы для непрерывного потока */}
       <div
         className="hr-ecosystem__elements"
         style={
@@ -59,15 +61,28 @@ export const HREcosystemSection: React.FC = () => {
           } as React.CSSProperties
         }
       >
-        {spaceOuter?.map((element, index) => (
+        {/* Первый набор элементов */}
+        {spaceOuter?.concat(spaceOuter)?.map((element, index) => (
           <HRElement
-            key={element.slug}
+            key={`outer-${element.slug}-${index}`}
+            element={element}
+            index={index}
+            total={spaceOuter?.length * 2}
+          />
+        ))}
+        {/* Второй набор элементов (дубликаты) */}
+        {/* {spaceOuter?.map((element, index) => (
+          <HRElement
+            key={`outer-2-${element.slug}`}
             element={element}
             index={index}
             total={spaceOuter?.length}
+            isDuplicate={true}
           />
-        ))}
+        ))} */}
       </div>
+
+      {/* Средний круг - дублируем элементы для непрерывного потока */}
       <div
         className="hr-ecosystem__elements"
         style={
@@ -77,23 +92,28 @@ export const HREcosystemSection: React.FC = () => {
           } as React.CSSProperties
         }
       >
-        {spaceCenter?.map((element, index) => (
+        {/* Сначала рендерим все оригинальные центральные элементы */}
+        {spaceCenter?.concat(spaceCenter)?.map((element, index) => (
           <HRElement
-            key={element.slug}
+            key={`center-original-${element.slug}-${index}`}
             element={element}
             index={index}
-            total={spaceCenter?.length}
+            total={spaceCenter?.length * 2}
+            isDuplicate={false}
           />
         ))}
+        {/* Затем рендерим все дубликаты центральных элементов */}
       </div>
 
       <div className="hr-ecosystem__elements all">
+        {/* Сначала рендерим все оригинальные элементы */}
         {allSpace?.map((element, index) => (
           <HRElement
-            key={element.slug}
+            key={`original-${element.slug}-${index}`}
             element={element}
             index={index}
             total={hrEcosystemData.length}
+            isDuplicate={false}
           />
         ))}
       </div>
@@ -105,10 +125,35 @@ interface HRElementProps {
   element: IApiSchemas["SpaceItemDto"];
   index: number;
   total: number;
+  isDuplicate?: boolean;
 }
 
-const HRElement: React.FC<HRElementProps> = ({ element, index, total }) => {
-  const angle = index * (360 / total);
+const HRElement: React.FC<HRElementProps> = ({
+  element,
+  index,
+  total,
+  isDuplicate = false,
+}) => {
+  // Для дубликатов добавляем смещение на 180 градусов
+  const baseAngle = index * (360 / total);
+  const angle = isDuplicate
+    ? baseAngle + (element.inCenter ? 180 : 180)
+    : baseAngle;
+
+  // Определяем тип круга на основе данных API
+  const circleType = element.inCenter ? "inner" : "outer";
+
+  if (!element.inCenter) {
+    console.log("angle", {
+      baseAngle,
+      angle,
+      isDuplicate,
+      index,
+      circleType,
+      inCenter: element.inCenter,
+    });
+  }
+
   return (
     <Link
       className={cls(`hr-ecosystem__element`)}
@@ -117,6 +162,7 @@ const HRElement: React.FC<HRElementProps> = ({ element, index, total }) => {
         element.hasSeparatePage ? element.slug : undefined
       )}
       title={`Читать о ${element.name} в HR пространстве TopFrame`}
+      data-duplicate={isDuplicate}
       style={
         {
           "--angle": `${angle}deg`,
@@ -124,7 +170,7 @@ const HRElement: React.FC<HRElementProps> = ({ element, index, total }) => {
             {
               inner: "var(--radiusMiddleLine)",
               outer: "var(--radiusBigLine)",
-            }[element.inCenter ? "inner" : "outer"]
+            }[circleType]
           }`,
         } as React.CSSProperties
       }

@@ -74,33 +74,56 @@ export const AboutVacancy: React.FC = () => {
               <ModalAddResponse idResponse={queryVacancy.vacancy?.id} />
               <div className="vacancy-page__info">
                 {queryVacancy.vacancy?.description.map((item) => (
-                  <div className="vacancy-page__info-item" key={item.name}>
-                    <h3>{item.name}</h3>
+                  <Fragment key={item.name}>
                     {item.type === "text" && Array.isArray(item.data) ? (
-                      <ul>
-                        {item.data.map((item) => (
-                          <li key={item}>{item}</li>
-                        ))}
-                      </ul>
+                      <div className="vacancy-page__info__list">
+                        <span className="vacancy-page__info__name">
+                          {item.name} :
+                        </span>
+                        <ul>
+                          {item.data.map((item) => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
                     ) : item.type === "text" ? (
-                      <p dangerouslySetInnerHTML={{ __html: item.data }} />
-                    ) : (item.type === "file" || item.type === "image") &&
-                      Array.isArray(item.data) ? (
-                      item.data.map((item) => (
-                        <a href={item as string} target="_blank" key={item}>
-                          {item}
-                        </a>
-                      ))
-                    ) : (
-                      <a
-                        href={item.data as string}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
+                      <p className="vacancy-page__info__text">
+                        <span className="vacancy-page__info__name">
+                          {item.name}:
+                        </span>{" "}
                         {item.data}
-                      </a>
+                      </p>
+                    ) : (
+                      (item.type === "file" || item.type === "image") && (
+                        <div className="vacancy-page__info__list">
+                          <span className="vacancy-page__info__name">
+                            {item.name} :
+                          </span>
+                          {Array.isArray(item.data) ? (
+                            <ul>
+                              {item.data.map((item) => (
+                                <a
+                                  href={item as string}
+                                  target="_blank"
+                                  key={item}
+                                >
+                                  {item}
+                                </a>
+                              ))}
+                            </ul>
+                          ) : (
+                            <a
+                              href={item.data as string}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              {item.data}
+                            </a>
+                          )}
+                        </div>
+                      )
                     )}
-                  </div>
+                  </Fragment>
                 ))}
               </div>
             </>
@@ -113,17 +136,18 @@ export const AboutVacancy: React.FC = () => {
           !!queryVacancy.vacancy?.leftBox.length && (
             <div className="vacancy-page__benefits">
               <h3>Что мы предлагаем</h3>
-              {queryVacancy.vacancy?.leftBox.map((benefit) =>
-                Array.isArray(benefit.data) ? null : (
-                  <ul key={benefit.name}>
+
+              <ul>
+                {queryVacancy.vacancy?.leftBox.map((benefit) =>
+                  Array.isArray(benefit.data) ? null : (
                     <li>
                       <p>
                         {benefit.name}: {benefit.data}
                       </p>
                     </li>
-                  </ul>
-                )
-              )}
+                  )
+                )}
+              </ul>
             </div>
           )
         )}

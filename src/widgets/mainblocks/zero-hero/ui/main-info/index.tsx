@@ -38,8 +38,8 @@ export const MainInfo = () => {
         Строим будущее России вместе
       </h1>
       <p className={cls("zero-hero__subtitle subtitle slide-down", className)}>
-        Мы как Российская компания помогаем России строить полюса в новом
-        многополярном мире
+        Мы как Российская компания помогаем России строить полюс в новом
+        многополярном мире.
       </p>
       <ButtonUI
         className={cls("zero-hero__cta-btn slide-down", className)}
