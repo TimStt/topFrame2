@@ -27,22 +27,15 @@ interface MainInfoProps {
 }
 
 export const MainInfo = () => {
-  const { ref: refTitle, isVisible, className } = useAnimateOnScroll();
-
   return (
     <>
-      <h1
-        className={cls("zero-hero__title slide-down", className)}
-        ref={refTitle}
-      >
-        Строим будущее России вместе
-      </h1>
-      <p className={cls("zero-hero__subtitle subtitle slide-down", className)}>
+      <h1 className={"zero-hero__title"}>Строим будущее России вместе</h1>
+      <p className={"zero-hero__subtitle subtitle"}>
         Мы как Российская компания помогаем России строить полюс в новом
         многополярном мире.
       </p>
       <ButtonUI
-        className={cls("zero-hero__cta-btn slide-down", className)}
+        className={"zero-hero__cta-btn"}
         variant="secondary"
         size="medium"
         text="Присоединиться к команде"

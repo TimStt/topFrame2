@@ -16,11 +16,17 @@ import { cls } from "@/shared/lib/cls";
 import HrEcosystemArticleSkeleton from "./skeleton";
 import { WrapperNotFoundUI } from "@/shared/ui/wrapper-not-found-ui";
 import { URL_FILE_API } from "@/shared/constants/other";
+import { useGetUser } from "@/features/user/auth/model/use-get-user";
+import { onToggleModal } from "@/shared/lib/zustands/use-store-modals";
+import { changeStepAuth } from "@/features/user/auth/model/change-step-auth";
 
 export const HrEcosystemArticle: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const { spaceDetail, isLoading: isLoadingSpaceDetail } =
     useGetSpaceDetail(slug);
+
+  const { isAuth } = useGetUser();
+  console.log("spaceDetail", spaceDetail);
 
   return (
     <WrapperNotFoundUI isLoading={isLoadingSpaceDetail} data={spaceDetail}>
@@ -115,17 +121,31 @@ export const HrEcosystemArticle: React.FC = () => {
                     );
                   }
                 })}
-
-                <ButtonUI
-                  variant="primary"
-                  hasArrow
-                  text={spaceDetail?.space?.link?.label}
-                  className="freelance-page__button"
-                  as="a"
-                  href={spaceDetail?.space?.link?.value}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                />
+                {spaceDetail?.space.link ? (
+                  <ButtonUI
+                    variant="primary"
+                    hasArrow
+                    text={spaceDetail?.space?.link?.label}
+                    className="freelance-page__button"
+                    as="a"
+                    href={spaceDetail?.space?.link?.value}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  />
+                ) : (
+                  !isAuth && (
+                    <ButtonUI
+                      variant="primary"
+                      hasArrow
+                      text={"Зарегистрироваться"}
+                      className="freelance-page__button"
+                      onClick={() => {
+                        onToggleModal("auth", true);
+                        changeStepAuth("registration");
+                      }}
+                    />
+                  )
+                )}
               </div>
 
               <Image

@@ -31,5 +31,6 @@ export const useGetUser = () => {
         photo: info?.user?.photo ? URL_FILE_API + info?.user?.photo : null,
       },
     },
+    isAuth: !!info?.user?.id,
   };
 };
