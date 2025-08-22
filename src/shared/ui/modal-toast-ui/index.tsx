@@ -17,6 +17,7 @@ interface ModalToastUIProps {
 }
 
 export const ModalToastUI: React.FC<ModalToastUIProps> = ({ className }) => {
+  const { title, description, delay, onClose } = useModalToastStore();
   const { isOpenModal, handleCloseModal } = useInitialModal("toast", () => {
     setProgress(0);
     refStartTime.current = 0;
@@ -25,13 +26,11 @@ export const ModalToastUI: React.FC<ModalToastUIProps> = ({ className }) => {
 
   const onCloseCallback = useCallback(() => {
     onClose?.();
-  }, []);
+  }, [onClose]);
 
   const handleCloseModalCallback = useCallback(() => {
     handleCloseModal();
-  }, []);
-
-  const { title, description, delay, onClose } = useModalToastStore();
+  }, [handleCloseModal]);
 
   const [progress, setProgress] = useState(0);
 

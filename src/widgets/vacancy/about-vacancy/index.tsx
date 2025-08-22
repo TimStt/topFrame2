@@ -21,7 +21,6 @@ export const AboutVacancy: React.FC = () => {
   const slug = useParams<{ slug: string }>().slug;
   const queryVacancy = useGetVacancy(slug);
 
-  console.log("queryVacancy", queryVacancy.vacancy);
   const hasButton = !!queryVacancy.vacancy?.button;
 
   return (
@@ -140,7 +139,7 @@ export const AboutVacancy: React.FC = () => {
               <ul>
                 {queryVacancy.vacancy?.leftBox.map((benefit) =>
                   Array.isArray(benefit.data) ? null : (
-                    <li>
+                    <li key={benefit.name}>
                       <p>
                         {benefit.name}: {benefit.data}
                       </p>

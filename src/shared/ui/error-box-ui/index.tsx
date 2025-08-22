@@ -41,7 +41,7 @@ export const ErrorBoxUI = ({
     setTimeout(() => {
       onCloseCallback();
     }, delay);
-  }, [onCloseCallback, message]);
+  }, [onCloseCallback, message, delay]);
 
   return (
     <div
