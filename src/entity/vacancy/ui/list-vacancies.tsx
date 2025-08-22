@@ -5,6 +5,7 @@ import { cls } from "@/shared/lib/cls";
 import { IApiSchemas } from "@/shared/api/schema";
 import { CardVacancySkeleton } from "./skeleton";
 import { useGetHome } from "@/entity/user/api/get-home";
+import { NewVacanciesSkeleton } from "@/widgets/vacancy/new-vacancies/skeleton";
 
 export interface IListVacancies {
   vacancies?: IApiSchemas["VacancyDto"][];
@@ -23,14 +24,14 @@ export const ListVacancies = ({
   textEmpty,
   isLoading,
 }: IListVacancies) => {
+  if (isLoading) {
+    return <NewVacanciesSkeleton />;
+  }
+
   return (
     <div className={cls("vacancy-list", className)}>
       <div className="vacancy-list__content">
-        {isLoading ? (
-          Array.from({ length: 10 }).map((_, index) => (
-            <CardVacancySkeleton key={index} />
-          ))
-        ) : vacancies?.length ? (
+        {vacancies?.length ? (
           vacancies.map((vacancy) => (
             <CardVacancy key={vacancy.id} {...vacancy} />
           ))

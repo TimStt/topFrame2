@@ -1,0 +1,105 @@
+// Критический CSS для быстрого рендеринга
+// Стили для критического контента (заголовок, основные элементы)
+
+// Базовые стили для критического контента
+.zero-hero {
+  position: relative;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-top: calc(var(--height-header) * -1);
+  --paddingTop: 17px;
+  --paddingBottom: 42px;
+
+  &_inner {
+    padding-block: calc(var(--height-header) + var(--paddingTop))
+      var(--paddingBottom);
+    position: relative;
+    z-index: 2;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  // Критический заголовок - оптимизирован для LCP
+  &__title {
+    font-size: 44px;
+    line-height: 53px;
+    font-weight: 700;
+    color: var(--color-light);
+    margin-bottom: 24px;
+    // Оптимизация для быстрого рендеринга
+    contain: layout style paint;
+    will-change: auto;
+
+    @media (max-width: 768px) {
+      font-size: 32px;
+      line-height: 38px;
+    }
+  }
+
+  &__subtitle {
+    font-size: 18px;
+    line-height: 27px;
+    color: var(--color-light);
+    margin-bottom: 28px;
+    opacity: 0.8;
+    contain: layout style;
+  }
+
+  &__cta-btn {
+    contain: layout style;
+  }
+
+  &__text-content {
+    flex: 1;
+    max-width: 600px;
+    margin-right: 40px;
+  }
+
+  &__world {
+    flex: 1;
+    max-width: 400px;
+    height: 300px;
+  }
+}
+
+// Базовые переменные
+:root {
+  --color-light: #ffffff;
+  --color-main: #333333;
+  --color-accent-blue: #0066cc;
+  --height-header: 80px;
+  --transition-normal: 0.3s ease;
+}
+
+// Системные шрифты для fallback
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+// Контейнер
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+// Утилиты для быстрого рендеринга
+.hidden {
+  display: none;
+}
+
+.subtitle {
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: 400;
+}

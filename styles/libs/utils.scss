@@ -9,6 +9,14 @@
   width: 100%;
 }
 
+.bg-blue {
+  background-color: var(--color-accent-blue);
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .scroll {
   scrollbar-width: thin;
   scrollbar-color: var(--color-light-blue-2) var(--color-white-1);

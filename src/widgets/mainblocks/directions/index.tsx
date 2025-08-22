@@ -41,7 +41,7 @@ export const Directions: React.FC = () => {
 
   return (
     <section
-      className="directions transform-ellipses"
+      className="directions transform-ellipses bg-blue"
       id="directions"
       style={{
         backgroundImage: `url(${BACKGROUND_IMAGE_BLUE})`,

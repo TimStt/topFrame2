@@ -5,9 +5,15 @@ import { mockVacancies } from "@/shared/constants/mock-data";
 import { PAGES_PATHS } from "@/shared/constants/pages-paths";
 import { ButtonUI } from "@/shared/ui/button-ui";
 import React from "react";
+import { NewVacanciesSkeleton } from "./skeleton";
 
 export const NewVacancies = () => {
   const { vacancies, isLoading } = useGetHome();
+
+  if (isLoading) {
+    return <NewVacanciesSkeleton />;
+  }
+
   return (
     <section className="new-vacancies">
       <h2 className="new-vacancies__title title-section">Новые вакансии</h2>

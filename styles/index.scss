@@ -1,6 +1,12 @@
+// Критический CSS для быстрого рендеринга
+@import "./critical";
+
 @import "./libs/fonts", "./libs/utils";
 @import "./libs/normalize";
 @import "./globals";
+
+// Оптимизированные анимации
+@import "./components/animations";
 
 // components ui
 @import "./components/button", "./components/burger-button",

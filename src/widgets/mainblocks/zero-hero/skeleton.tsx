@@ -3,17 +3,18 @@
  * @description: Скелетон для компонента ZeroHero
  * @created: 2025-01-15
  */
-import React from 'react'
+import React from "react";
 
-import { BACKGROUND_IMAGE_BLUE } from '@/shared/constants/other'
-import { AnimationEllipses } from '@/shared/ui/animation-ellipses-ui'
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import { BACKGROUND_IMAGE_BLUE } from "@/shared/constants/other";
+import { AnimationEllipses } from "@/shared/ui/animation-ellipses-ui";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { SkeletonSlider } from "./ui/slider/skeleton";
 
 export const SkeletonZeroHero: React.FC = () => {
   return (
     <section
-      className="zero-hero transform-ellipses"
+      className="zero-hero transform-ellipses bg-blue"
       style={{ backgroundImage: `url(${BACKGROUND_IMAGE_BLUE})` }}
       aria-busy
     >
@@ -22,16 +23,35 @@ export const SkeletonZeroHero: React.FC = () => {
         <div className="zero-hero__row" style={{ gap: 20 }}>
           {/* Левая колонка: заголовок, подзаголовок, кнопка */}
           <div className="zero-hero__text-content">
-            <Skeleton height={56} width={520} style={{ marginBottom: 24, opacity: 0.5 }} />
-            <Skeleton height={18} width={560} style={{ marginBottom: 12, opacity: 0.5 }} />
-            <Skeleton height={18} width={540} style={{ marginBottom: 28, opacity: 0.5 }} />
+            <Skeleton
+              height={56}
+              width={520}
+              style={{ marginBottom: 24, opacity: 0.5 }}
+            />
+            <Skeleton
+              height={18}
+              width={560}
+              style={{ marginBottom: 12, opacity: 0.5 }}
+            />
+            <Skeleton
+              height={18}
+              width={540}
+              style={{ marginBottom: 28, opacity: 0.5 }}
+            />
             <Skeleton height={48} width={260} style={{ opacity: 0.5 }} />
           </div>
 
           {/* Правая колонка: карта мира (сохраняем пропорции контейнера) */}
           <div className="zero-hero__world">
-            <div style={{ width: '100%', height: '100%' }}>
-              <Skeleton style={{ width: '100%', height: '100%', borderRadius: 12, opacity: 0.5 }} />
+            <div style={{ width: "100%", height: "100%" }}>
+              <Skeleton
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: 12,
+                  opacity: 0.5,
+                }}
+              />
             </div>
           </div>
         </div>
@@ -43,18 +63,9 @@ export const SkeletonZeroHero: React.FC = () => {
             <Skeleton circle width={32} height={32} style={{ opacity: 0.5 }} /> */}
           </div>
 
-          <div className="zero-hero__swiper" style={{ display: 'flex', gap: 20 }}>
-            {Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="zero-hero__feature-card" style={{ flex: 1 }}>
-                <div className="zero-hero__card-head">
-                  <Skeleton circle width={24} height={24} style={{ opacity: 0.5 }} />
-                  <Skeleton width={140} height={18} style={{ opacity: 0.5 }} />
-                </div>
-              </div>
-            ))}
-          </div>
+          <SkeletonSlider />
         </div>
       </div>
     </section>
-  )
-}
+  );
+};

@@ -140,9 +140,6 @@
 }
 
 .footer {
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
   overflow: hidden;
   --paddingTop: 23px;
   --paddingBottom: 20px;
@@ -306,9 +303,7 @@
   position: relative;
 
   overflow: hidden;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+
   margin-top: calc(var(--height-header) * -1);
   --paddingTop: 17px;
   --paddingBottom: 42px;

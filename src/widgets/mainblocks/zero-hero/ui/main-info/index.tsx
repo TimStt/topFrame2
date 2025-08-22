@@ -29,11 +29,30 @@ interface MainInfoProps {
 export const MainInfo = () => {
   return (
     <>
-      <h1 className={"zero-hero__title"}>Строим будущее России вместе</h1>
-      <p className={"zero-hero__subtitle subtitle"}>
+      {/* Критический заголовок - приоритет для LCP */}
+      <h1
+        className={"zero-hero__title"}
+        style={{
+          // Оптимизация для быстрого рендеринга
+          contain: "layout style paint",
+          willChange: "auto",
+        }}
+      >
+        Строим будущее России вместе
+      </h1>
+
+      {/* Подзаголовок */}
+      <p
+        className={"zero-hero__subtitle subtitle"}
+        style={{
+          contain: "layout style",
+        }}
+      >
         Мы как Российская компания помогаем России строить полюс в новом
         многополярном мире.
       </p>
+
+      {/* Кнопка CTA */}
       <ButtonUI
         className={"zero-hero__cta-btn"}
         variant="secondary"
@@ -42,6 +61,9 @@ export const MainInfo = () => {
         hasArrow
         as="a"
         href={PAGES_PATHS.VACANCIES}
+        style={{
+          contain: "layout style",
+        }}
       />
     </>
   );

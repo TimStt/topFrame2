@@ -48,7 +48,7 @@ export const ZeroHero = () => {
 
   return (
     <section
-      className="zero-hero transform-ellipses"
+      className="zero-hero transform-ellipses bg-blue"
       style={{
         backgroundImage: `url(${BACKGROUND_IMAGE_BLUE})`,
       }}

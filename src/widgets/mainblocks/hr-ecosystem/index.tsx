@@ -18,15 +18,9 @@ import { cls } from "@/shared/lib/cls";
 import Image from "next/image";
 import Link from "next/link";
 
-import {
-  IHRElement,
-  centralElement,
-  hrEcosystemData,
-} from "./hr-ecosystem.data";
 import { SkeletonHREcosystemSection } from "./skeleton";
 
 export const HREcosystemSection: React.FC = () => {
-  const { ref, className } = useAnimateOnScroll();
   const { isLoading, spaceCenter, spaceOuter } = useGetHome();
 
   if (isLoading) {
@@ -35,7 +29,7 @@ export const HREcosystemSection: React.FC = () => {
   const allSpace = [...(spaceCenter || []), ...(spaceOuter || [])];
 
   return (
-    <section className={cls(`hr-ecosystem container`)} ref={ref}>
+    <section className={cls(`hr-ecosystem container`)}>
       <h2 className="hr-ecosystem__title hidden title-section">
         HR пространство TopFrame
       </h2>
@@ -112,7 +106,7 @@ export const HREcosystemSection: React.FC = () => {
             key={`original-${element.slug}-${index}`}
             element={element}
             index={index}
-            total={hrEcosystemData.length}
+            total={allSpace?.length}
             isDuplicate={false}
           />
         ))}
@@ -184,7 +178,7 @@ const HRElement: React.FC<HRElementProps> = ({
             height={32}
           />
         </div>
-        <h4 className="hr-ecosystem__element-title">{element.name}</h4>
+        <h3 className="hr-ecosystem__element-title">{element.name}</h3>
       </div>
     </Link>
   );

@@ -27,7 +27,7 @@ export const Footer: React.FC = () => {
 
   return (
     <footer
-      className="footer"
+      className="footer bg-blue"
       style={{
         backgroundImage: `url(${BACKGROUND_IMAGE_BLUE})`,
       }}
