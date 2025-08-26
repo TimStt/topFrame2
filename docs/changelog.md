@@ -1,5 +1,21 @@
 # Changelog
 
+## [2024-12-19] - Добавление React Select компонента
+
+### Добавлено
+
+- Новый компонент `SelectUI_RS` на базе библиотеки react-select
+- Совместимый API с существующим `SelectUI` компонентом
+- Кастомные стили для react-select в виде объекта `reactSelectStyles`
+- Отдельный файл стилей `react-select-styles.ts` для лучшей организации кода
+- Индексный файл для удобного импорта нового компонента
+
+### Файлы
+
+- `src/shared/ui/select-ui/react-select.tsx`
+- `src/shared/ui/select-ui/react-select-styles.ts`
+- `src/shared/ui/select-ui/react-select-index.tsx`
+
 ## [2024-12-19] - Исправление перекрытия дубликатов в HR экосистеме
 
 ### Исправлено

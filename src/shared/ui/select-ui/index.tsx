@@ -47,6 +47,7 @@ export interface ISelect {
   error?: string;
   /** Полная ширина */
   fullWidth?: boolean;
+  hasSearch?: boolean;
 }
 
 export const SelectUI = <T extends string | number>({
@@ -60,10 +61,11 @@ export const SelectUI = <T extends string | number>({
   type,
   error,
   fullWidth = false,
+  hasSearch = false,
 }: ISelect) => {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
-
+  const refSearch = useRef<HTMLInputElement>(null);
   const selectClasses = cls(
     "select",
     {
@@ -72,12 +74,14 @@ export const SelectUI = <T extends string | number>({
       "select--error": error,
       "select--full-width": fullWidth,
     },
+    type,
     className
   );
 
-  const handleToggle = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleToggle = (status: boolean) => {
     if (!disabled) {
-      setIsOpen(!isOpen);
+      setIsOpen(status);
+      refSearch.current?.focus();
     }
   };
 
@@ -91,6 +95,8 @@ export const SelectUI = <T extends string | number>({
         name: value.name,
         label: label || "",
       });
+
+      setSearchValue("");
     }
   );
 
@@ -116,6 +122,8 @@ export const SelectUI = <T extends string | number>({
         label: label || "",
       });
 
+      setSearchValue("");
+
       return;
     }
 
@@ -126,23 +134,49 @@ export const SelectUI = <T extends string | number>({
     });
   };
 
+  const [searchValue, setSearchValue] = useState("");
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+
+    if (!isOpen) {
+      handleToggle(true);
+    }
+  };
+
   const id = useId();
 
-  console.log(value.options);
+  const currentOptions = value.options.filter((opt) =>
+    opt.label.toLowerCase().includes(searchValue.toLowerCase())
+  );
 
   return (
-    <div className={cls("select-wrapper", type)}>
+    <div
+      className={cls("select-wrapper", type, {
+        "has-value": !!displayText,
+      })}
+    >
       <div ref={selectRef} className={selectClasses}>
         <div
           className="select__trigger"
-          onClick={handleToggle}
+          onClick={() => handleToggle(!isOpen)}
           aria-expanded={isOpen}
           aria-labelledby={`select-${id}`}
           aria-haspopup="listbox"
         >
+          {hasSearch && (
+            <input
+              type="text"
+              className="select__search"
+              placeholder="Поиск"
+              name="search"
+              value={searchValue}
+              onChange={handleSearch}
+            />
+          )}
           {displayText &&
             (type === "checkbox" ? (
-              <div className="select__values">
+              <div className="select__values" key={searchValue}>
                 {displayText.split(",").map((opt) => (
                   <div
                     className="select__values-item"
@@ -180,7 +214,9 @@ export const SelectUI = <T extends string | number>({
             ))}
           {
             <span
-              className={cls("select__label", { "not-empty": !!displayText })}
+              className={cls("select__label", {
+                "not-empty": !!displayText || !!searchValue.length,
+              })}
               aria-hidden="true"
             >
               {label}
@@ -201,36 +237,42 @@ export const SelectUI = <T extends string | number>({
               aria-labelledby={`select-${id}`}
               aria-multiselectable={true}
             >
-              {value.options.map((option) => (
-                <li
-                  key={option.value}
-                  className="select__option"
-                  aria-selected={value.options.some(
-                    (opt) => opt.value === option.value
-                  )}
-                  id={`select-option-${option.value}`}
-                  role="option"
-                >
-                  <CheckboxUI
+              {currentOptions.length > 0 ? (
+                currentOptions.map((option) => (
+                  <li
                     key={option.value}
-                    type={type}
-                    checked={
-                      (option.isAll ? isCheckedAll : true) &&
-                      activeValue.some((opt) => opt.value === option.value)
-                    }
-                    onChangeCheckbox={(checked) =>
-                      option.isAll
-                        ? handleCheckAll(!!checked)
-                        : handleChange(
-                            { value: option.value, label: option.label },
-                            !!checked,
-                            activeValue
-                          )
-                    }
-                    label={option.label}
-                  />
+                    className="select__option"
+                    aria-selected={value.options.some(
+                      (opt) => opt.value === option.value
+                    )}
+                    id={`select-option-${option.value}`}
+                    role="option"
+                  >
+                    <CheckboxUI
+                      key={option.value}
+                      type={type}
+                      checked={
+                        (option.isAll ? isCheckedAll : true) &&
+                        activeValue.some((opt) => opt.value === option.value)
+                      }
+                      onChangeCheckbox={(checked) =>
+                        option.isAll
+                          ? handleCheckAll(!!checked)
+                          : handleChange(
+                              { value: option.value, label: option.label },
+                              !!checked,
+                              activeValue
+                            )
+                      }
+                      label={option.label}
+                    />
+                  </li>
+                ))
+              ) : (
+                <li className="select__option">
+                  <span className="select__option-empty">Нет результатов</span>
                 </li>
-              ))}
+              )}
             </ul>
           </div>
         )}

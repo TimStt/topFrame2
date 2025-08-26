@@ -67,6 +67,7 @@ export interface components {
 
     FilterDto: {
       name: string;
+      hasFilterInput: boolean;
       slug: string;
       type: string;
       arr: components["schemas"]["FilterValueDto"][];

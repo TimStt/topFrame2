@@ -29,6 +29,7 @@
     "react-hover-video-player": "^10.0.2",
     "react-input-mask": "^2.0.4",
     "react-loading-skeleton": "^3.5.0",
+    "react-select": "^5.10.2",
     "reactjs-popup": "^2.0.6",
     "swiper": "^11.2.10",
     "zod": "^4.0.14",

@@ -1,4 +1,4 @@
-@use '../libs/_mixins.scss' as *;
+@use "../libs/_mixins.scss" as *;
 
 // Select wrapper
 .select-wrapper {
@@ -9,6 +9,19 @@
   max-width: 100%;
 
   --selectHeight: 43px;
+}
+
+.select__search {
+  border: none;
+  width: 100%;
+
+  &::placeholder {
+    opacity: 0;
+  }
+  &:focus {
+    border: none;
+    outline: none;
+  }
 }
 
 // Select label
@@ -40,6 +53,11 @@
 
   .control__label {
     font-size: 14px;
+  }
+  &.checkbox {
+    .select__trigger {
+      padding: 8px 16px 8px 24px;
+    }
   }
 }
 
@@ -85,6 +103,15 @@
   }
 }
 
+.select-wrapper.has-value .select__search {
+  display: none;
+}
+
+.select:has(.select__search:focus) .select__search::placeholder {
+  opacity: 1;
+}
+
+.select:has(.select__search:focus) .select__label,
 .select__label.not-empty {
   top: -2px;
   background-color: white;
@@ -113,7 +140,9 @@
 .select__values {
   display: flex;
   flex-wrap: wrap;
+  max-height: 65px;
   gap: 4px;
+  overflow: auto;
 
   &-item {
     display: flex;
@@ -200,6 +229,13 @@
 .select__option {
   label {
     padding: 12px 16px;
+  }
+  &:has(.select__option-empty) {
+    padding-inline: 8px;
+
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
   }
 
   // &:not(:last-child) {
