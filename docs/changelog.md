@@ -1,9 +1,14 @@
 # Changelog
 
-## [2024-12-19] - Исправление бесконечных ререндеров и проблем с загрузкой
+## [2024-12-19] - Реорганизация структуры компонентов и исправление hydration mismatch
 
 ### Исправлено
 
+- Устранены ошибки hydration mismatch на мобильных устройствах
+- Отключен SSR для проблемных компонентов (`HREcosystemSection`, `Directions`, `Team`) для избежания расхождений сервер/клиент
+- Сохранен SSR для SEO-критичного компонента `NewVacancies` для лучшей индексации
+- Добавлены скелетоны для плавной загрузки компонентов без SSR
+- Реорганизована структура компонентов: динамические импорты перенесены в `index.tsx`, оригинальные компоненты в `.ui.tsx`
 - Устранены бесконечные ререндеры в компонентах с вакансиями
 - Убраны все `console.log` из компонентов и хуков, которые вызывали проблемы с ререндером
 - Оптимизированы зависимости в хуке `useFilter` для предотвращения лишних пересчетов
@@ -16,8 +21,21 @@
 - Убраны `console.log` из компонентов главной страницы: `HREcosystemSection`, `Team`
 - Убран `console.log` из хука `useGetHome`
 
+### Компромисс SEO/Производительность
+
+- **Отключен SSR для**: `HREcosystemSection`, `Directions`, `Team` (интерактивные компоненты с анимациями)
+- **Сохранен SSR для**: `NewVacancies` (SEO-критичный контент с вакансиями)
+- **Результат**: Устранены hydration ошибки, сохранена индексация важного контента
+
 ### Файлы
 
+- `src/app/page.tsx`
+- `src/widgets/mainblocks/hr-ecosystem/index.tsx`
+- `src/widgets/mainblocks/hr-ecosystem/hr-ecosystem.ui.tsx`
+- `src/widgets/mainblocks/directions/index.tsx`
+- `src/widgets/mainblocks/directions/directions.ui.tsx`
+- `src/widgets/mainblocks/team/index.tsx`
+- `src/widgets/mainblocks/team/team.ui.tsx`
 - `src/features/vacancy/search/model/use-filter.tsx`
 - `src/entity/vacancy/api/get-catalog/index.ts`
 - `src/shared/hooks/use-query-param-action/index.ts`
@@ -26,8 +44,6 @@
 - `src/features/vacancy/search/ui/quick-filters.tsx`
 - `src/shared/ui/select-ui/index.tsx`
 - `src/entity/vacancy/ui/card-vacancy.tsx`
-- `src/widgets/mainblocks/hr-ecosystem/index.tsx`
-- `src/widgets/mainblocks/team/index.tsx`
 - `src/entity/user/api/get-home/index.ts`
 
 ## [2024-12-19] - Исправление дублирующихся ключей в компонентах с вакансиями

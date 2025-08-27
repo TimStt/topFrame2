@@ -30,24 +30,10 @@ export const MainInfo = () => {
   return (
     <>
       {/* Критический заголовок - приоритет для LCP */}
-      <h1
-        className={"zero-hero__title"}
-        style={{
-          // Оптимизация для быстрого рендеринга
-          contain: "layout style paint",
-          willChange: "auto",
-        }}
-      >
-        Строим будущее России вместе
-      </h1>
+      <h1 className={"zero-hero__title"}>Строим будущее России вместе</h1>
 
       {/* Подзаголовок */}
-      <p
-        className={"zero-hero__subtitle subtitle"}
-        style={{
-          contain: "layout style",
-        }}
-      >
+      <p className={"zero-hero__subtitle subtitle"}>
         Мы как Российская компания помогаем России строить полюс в новом
         многополярном мире.
       </p>
@@ -61,9 +47,6 @@ export const MainInfo = () => {
         hasArrow
         as="a"
         href={PAGES_PATHS.VACANCIES}
-        style={{
-          contain: "layout style",
-        }}
       />
     </>
   );
