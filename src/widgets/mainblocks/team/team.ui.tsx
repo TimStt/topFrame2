@@ -116,7 +116,7 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
           setIsCurrentTime(e.currentTarget.currentTime);
         }}
         muted
-        preload="metadata"
+        preload="none"
         crossOrigin="anonymous"
         onLoadStart={() => {
           setIsLoading(true);

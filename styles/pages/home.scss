@@ -1600,6 +1600,9 @@
     flex-direction: column;
     gap: 16px;
   }
+  .zero-hero__features {
+    margin-top: 33px;
+  }
 
   .hr-ecosystem__wrapper::after {
     top: -25%;
@@ -1639,6 +1642,11 @@
     flex-direction: column;
     gap: 16px;
   }
+
+  .zero-hero__features {
+    margin-top: 0;
+  }
+
   .directions__card__text-container,
   .directions__card img,
   .directions__card {
