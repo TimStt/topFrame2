@@ -17,11 +17,6 @@ export const useGetHome = () => {
     suspense: false,
   });
 
-  // Убираем console.log для production
-  if (process.env.NODE_ENV === "development") {
-    console.log(data?.response);
-  }
-
   return {
     ...data?.response,
     ...queryHome,

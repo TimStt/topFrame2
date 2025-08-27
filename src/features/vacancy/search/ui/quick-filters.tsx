@@ -30,7 +30,6 @@ export const QuickFilters = ({
   filterVacancies,
 }: QuickFiltersProps) => {
   const isLoading = useGetCatalog().isLoadingFilter;
-  console.log("quickFilter", quickFilter);
   return (
     <QuickFiltersUI
       className={className}
@@ -40,7 +39,7 @@ export const QuickFilters = ({
         ) : (
           quickFilter?.map((filter, index) => (
             <SelectUI
-              key={filter.name + index}
+              key={filter.slug || `filter-${index}`}
               value={{
                 options: filter.arr,
                 name: filter.slug,

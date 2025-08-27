@@ -9,7 +9,6 @@ export interface IBreadcrumbItem {
 
 export const useBreadcrumb = (paths: IBreadcrumbItem[]) => {
   const pathname = usePathname().split("/");
-  console.log(pathname);
 
   const currentPath = paths.find(
     (item) =>
@@ -17,14 +16,9 @@ export const useBreadcrumb = (paths: IBreadcrumbItem[]) => {
       pathname.length === item.path.split("/").length
   );
 
-  const breadcrumbsItems = (
-    currentPath?.title instanceof Function
-      ? {
-          path: currentPath.path,
-          title: currentPath?.title({ slug: pathname.pop() || "" }),
-        }
-      : (currentPath as { path: string; title: JSX.Element })
-  )?.title;
+  const breadcrumbsItems = currentPath?.title instanceof Function
+    ? currentPath.title({ slug: pathname[pathname.length - 1] || "" })
+    : currentPath?.title;
 
   return {
     breadcrumbsItems,

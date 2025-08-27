@@ -7,15 +7,19 @@ import { rqClient } from "@/shared/api/api-client";
 import { useQueryParamAction } from "@/shared/hooks/use-query-param-action";
 import { IApiSchemas } from "@/shared/api/schema";
 import { IResponse } from "@/shared/api/types";
+import { useMemo } from "react";
 
 export const useGetCatalog = () => {
   const queriesActions = useQueryParamAction();
 
-  const params =
-    queriesActions.getAllParams<{
-      page: string;
-      search: string;
-    }>()?.original || {};
+  const params = useMemo(
+    () =>
+      queriesActions.getAllParams<{
+        page: string;
+        search: string;
+      }>()?.original || {},
+    []
+  );
 
   const { data, ...catalogQuery } = rqClient.useQuery(
     "get",

@@ -39,7 +39,7 @@ export const useFilter = ({
       }));
 
       return normalizedQueryParams;
-    }, [queryActionsParams, filters, getFilterLabel]);
+    }, [filters, getFilterLabel]);
 
   // активные ВРЕМЕННЫЕ фильтры
   const [isActiveFilters, setIsActiveFilters] = useState<
@@ -56,8 +56,6 @@ export const useFilter = ({
       (f) => f.name === values.name
     );
 
-    console.log("values", values);
-
     if (filterSelected !== -1 && filterSelected !== undefined) {
       const newFilters = [...(isActiveFilters || [])];
 
@@ -66,7 +64,6 @@ export const useFilter = ({
         options: values.options.length > 0 ? [...values.options] : [],
       };
 
-      console.log("newFilters", newFilters);
       setIsActiveFilters(newFilters);
     } else {
       setIsActiveFilters([
@@ -132,12 +129,6 @@ export const useFilter = ({
     checkFilterIsApplied(f)
   );
 
-  console.log(
-    "isAllQuickFilterApplied",
-    isAllQuickFilterApplied,
-    isActiveFilters
-  );
-
   // сбрасываем все фильтры
   const resetAllFilters = () => {
     // если есть временные фильтры, то сбрасываем их
@@ -177,8 +168,6 @@ export const useFilter = ({
 
   // принимаем все фильтры
   const acceptAllFilters = () => {
-    console.log("isActiveFilters acceptAllFilters", isActiveFilters);
-
     isActiveFilters?.forEach((isActiveFilterItem) => {
       // если фильтр не выбран, то удаляем его из query
       if (!isActiveFilterItem.options.length) {
@@ -195,8 +184,6 @@ export const useFilter = ({
       if (isThisActiveFilters) {
         return;
       }
-
-      console.log("usQuery", isActiveFilterQuery);
 
       // если фильтры не совпадают, то добавляем их в query
       const string = isActiveFilterItem.options.map((o) => o.value).join(",");

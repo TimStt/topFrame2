@@ -26,8 +26,8 @@ export const CardVacancy = ({
         <h3 className="vacancy-card__title">{name}</h3>
         {!!chip.length && (
           <div className="vacancy-card__params">
-            {chip?.map((param) => (
-              <ChipUI key={param} text={param} />
+            {chip?.map((param, index) => (
+              <ChipUI key={`${param}-${index}`} text={param} />
             ))}
           </div>
         )}

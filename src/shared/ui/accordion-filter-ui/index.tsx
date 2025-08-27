@@ -28,7 +28,7 @@ export interface AccordionFilterUIProps {
   filter: ISelectOption;
   activeValue?: ISelectOptions[];
   onChange: (name: string, options: ISelectOption) => void;
-
+  hasSearch?: boolean;
   className?: string;
   renderReset?: React.ReactNode;
 }
@@ -37,7 +37,7 @@ export const AccordionFilterUI: React.FC<AccordionFilterUIProps> = ({
   filter,
   activeValue,
   onChange,
-
+  hasSearch,
   className,
   renderReset,
 }) => {
@@ -46,6 +46,14 @@ export const AccordionFilterUI: React.FC<AccordionFilterUIProps> = ({
   // useOnClickOutside(refAccordion, () => {
   //   setIsOpen(false);
   // });
+
+  const [searchValue, setSearchValue] = useState("");
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+  };
+
+  const refSearch = useRef<HTMLInputElement>(null);
 
   const handleChange = handleOptionChange(
     "checkbox",
@@ -59,7 +67,6 @@ export const AccordionFilterUI: React.FC<AccordionFilterUIProps> = ({
   );
 
   const handleCheckAll = (checked: boolean) => {
-    console.log("handleCheckAll");
     if (!checked) {
       onChange?.(filter.name, {
         options: [],
@@ -77,6 +84,26 @@ export const AccordionFilterUI: React.FC<AccordionFilterUIProps> = ({
     });
   };
 
+  const handleOpen = (state: boolean) => {
+    setIsOpen(state);
+    if (hasSearch && state) {
+      console.log("handleOpen", refSearch);
+      requestAnimationFrame(() => {
+        refSearch.current?.focus();
+      });
+
+      return;
+    }
+
+    setSearchValue("");
+  };
+
+  const currentFilterOptions = filter.options.filter(
+    (option) =>
+      option.label.toLowerCase().includes(searchValue.toLowerCase()) ||
+      !searchValue
+  );
+
   return (
     <>
       <AccordionUI
@@ -87,35 +114,53 @@ export const AccordionFilterUI: React.FC<AccordionFilterUIProps> = ({
         classNameDetails="filter__accordion__details"
         classNameSummary="filter__accordion__summary"
         classNameContent="filter__accordion__content"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => handleOpen(!isOpen)}
         summaryContent={
           <>
+            {hasSearch && (
+              <input
+                type="text"
+                className="filter__accordion__search"
+                placeholder="Поиск"
+                value={searchValue}
+                ref={refSearch}
+                name={filter.name}
+                onClick={(e) => e.stopPropagation()}
+                onChange={handleSearch}
+              />
+            )}
             <span className="filter__accordion__title">{filter.label}</span>
-            <ArrowIcon />
+            <button className="filter__accordion__button">
+              <ArrowIcon />
+            </button>
           </>
         }
       >
         <div className="filter__accordion__content">
           <div className="filter__accordion__list">
-            {filter.options.map((option) => (
-              <CheckboxUI
-                key={option.value}
-                label={option.label}
-                checked={activeValue?.some((v) => v.value === option.value)}
-                onChangeCheckbox={(checked) => {
-                  if (option.isAll) {
-                    handleCheckAll(!!checked);
-                    return;
-                  }
-                  handleChange(
-                    { value: option.value, label: option.label },
-                    !!checked,
-                    activeValue || []
-                  );
-                }}
-                type="checkbox"
-              />
-            ))}
+            {currentFilterOptions.length > 0 ? (
+              currentFilterOptions.map((option) => (
+                <CheckboxUI
+                  key={option.value}
+                  label={option.label}
+                  checked={activeValue?.some((v) => v.value === option.value)}
+                  onChangeCheckbox={(checked) => {
+                    if (option.isAll) {
+                      handleCheckAll(!!checked);
+                      return;
+                    }
+                    handleChange(
+                      { value: option.value, label: option.label },
+                      !!checked,
+                      activeValue || []
+                    );
+                  }}
+                  type="checkbox"
+                />
+              ))
+            ) : (
+              <span style={{ textAlign: "center" }}>Ничего не найдено</span>
+            )}
           </div>
           {renderReset}
         </div>

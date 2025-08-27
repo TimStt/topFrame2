@@ -62,6 +62,7 @@ export const FilterSidebar = ({
               name: filter.slug,
               label: filter.name,
             }}
+            hasSearch={true}
             activeValue={
               filterVacancies.getCurrentActiveFilterBySlug(filter.slug)
                 ?.options || []

@@ -1,5 +1,52 @@
 # Changelog
 
+## [2024-12-19] - Исправление бесконечных ререндеров и проблем с загрузкой
+
+### Исправлено
+
+- Устранены бесконечные ререндеры в компонентах с вакансиями
+- Убраны все `console.log` из компонентов и хуков, которые вызывали проблемы с ререндером
+- Оптимизированы зависимости в хуке `useFilter` для предотвращения лишних пересчетов
+- Оптимизирован хук `useGetCatalog` с добавлением `useMemo` для параметров
+- Исправлены проблемы с загрузкой профиля и быстрых фильтров
+- Исправлены циклические зависимости в хуках `useFilter` и `useGetCatalog`
+- Исправлена проблема с дублирующимися ключами в `CardVacancy` для `ChipUI`
+- Исправлена логика в хуке `useBreadcrumb` для предотвращения зацикливания
+- Исправлены проблемы с зацикливанием на мобильных устройствах и бесконечным показом скелетона
+- Убраны `console.log` из компонентов главной страницы: `HREcosystemSection`, `Team`
+- Убран `console.log` из хука `useGetHome`
+
+### Файлы
+
+- `src/features/vacancy/search/model/use-filter.tsx`
+- `src/entity/vacancy/api/get-catalog/index.ts`
+- `src/shared/hooks/use-query-param-action/index.ts`
+- `src/shared/hooks/use-breadcrumb/index.tsx`
+- `src/features/vacancy/search/ui/index.tsx`
+- `src/features/vacancy/search/ui/quick-filters.tsx`
+- `src/shared/ui/select-ui/index.tsx`
+- `src/entity/vacancy/ui/card-vacancy.tsx`
+- `src/widgets/mainblocks/hr-ecosystem/index.tsx`
+- `src/widgets/mainblocks/team/index.tsx`
+- `src/entity/user/api/get-home/index.ts`
+
+## [2024-12-19] - Исправление дублирующихся ключей в компонентах с вакансиями
+
+### Исправлено
+
+- Устранена ошибка "Encountered two children with the same key" в компонентах, работающих с вакансиями
+- Исправлены дублирующиеся ключи в `ListVacancies` - заменен ключ на составной из индекса, ID, названия и города вакансии
+- Исправлены дублирующиеся ключи в `QuickFilters` - заменен ключ на `filter.slug` вместо `filter.name + index`
+- Исправлены дублирующиеся ключи в `AboutVacancy` для всех map-функций
+- Исправлены дублирующиеся ключи в `SelectUI` для элементов выбранных значений
+
+### Файлы
+
+- `src/entity/vacancy/ui/list-vacancies.tsx`
+- `src/features/vacancy/search/ui/quick-filters.tsx`
+- `src/widgets/vacancy/about-vacancy/index.tsx`
+- `src/shared/ui/select-ui/index.tsx`
+
 ## [2024-12-19] - Добавление React Select компонента
 
 ### Добавлено

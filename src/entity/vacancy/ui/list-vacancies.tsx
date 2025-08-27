@@ -32,8 +32,8 @@ export const ListVacancies = ({
     <div className={cls("vacancy-list", className)}>
       <div className="vacancy-list__content">
         {vacancies?.length ? (
-          vacancies.map((vacancy) => (
-            <CardVacancy key={vacancy.id} {...vacancy} />
+          vacancies.map((vacancy, index) => (
+            <CardVacancy key={vacancy.id || `vacancy-${index}`} {...vacancy} />
           ))
         ) : (
           <div className="vacancy-list__empty">

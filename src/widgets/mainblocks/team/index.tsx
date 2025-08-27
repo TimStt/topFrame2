@@ -128,10 +128,9 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
           setIsPaused(false);
         }}
         onLoadedMetadata={() => {
-          console.log("Видео метаданные загружены");
+          // Видео метаданные загружены
         }}
         onPlaying={() => {
-          console.log("Видео начало воспроизведение");
           setIsPaused(false);
         }}
         onPause={() => {

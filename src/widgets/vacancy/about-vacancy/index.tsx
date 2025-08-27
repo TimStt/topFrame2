@@ -42,12 +42,12 @@ export const AboutVacancy: React.FC = () => {
                 {queryVacancy.vacancy?.price}
               </span>
               <div className="vacancy-page__tags scroll">
-                {queryVacancy.vacancy?.chip.map((chip) =>
+                {queryVacancy.vacancy?.chip.map((chip, index) =>
                   chip.type === "text" && !Array.isArray(chip.data) ? (
                     <ChipUI
                       className="vacancy-page__tag"
                       text={Array.isArray(chip.data) ? chip.data[0] : chip.data}
-                      key={chip.data}
+                      key={`chip-${chip.data}-${index}`}
                     />
                   ) : null
                 )}
@@ -79,8 +79,10 @@ export const AboutVacancy: React.FC = () => {
                           {item.name} :
                         </span>
                         <ul>
-                          {item.data.map((item) => (
-                            <li key={item}>{item}</li>
+                          {item.data.map((listItem, index) => (
+                            <li key={`${item.name}-${listItem}-${index}`}>
+                              {listItem}
+                            </li>
                           ))}
                         </ul>
                       </div>
@@ -99,13 +101,13 @@ export const AboutVacancy: React.FC = () => {
                           </span>
                           {Array.isArray(item.data) ? (
                             <ul>
-                              {item.data.map((item) => (
+                              {item.data.map((fileItem, index) => (
                                 <a
-                                  href={item as string}
+                                  href={fileItem as string}
                                   target="_blank"
-                                  key={item}
+                                  key={`${item.name}-${fileItem}-${index}`}
                                 >
-                                  {item}
+                                  {fileItem}
                                 </a>
                               ))}
                             </ul>
@@ -136,9 +138,9 @@ export const AboutVacancy: React.FC = () => {
               <h3>Что мы предлагаем</h3>
 
               <ul>
-                {queryVacancy.vacancy?.leftBox.map((benefit) =>
+                {queryVacancy.vacancy?.leftBox.map((benefit, index) =>
                   Array.isArray(benefit.data) ? null : (
-                    <li key={benefit.name}>
+                    <li key={`benefit-${benefit.name}-${index}`}>
                       <p>
                         {benefit.name}: {benefit.data}
                       </p>

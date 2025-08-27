@@ -86,17 +86,13 @@ export const SelectUI = <T extends string | number>({
   };
 
   const handleChange = handleOptionChange(
-    type,
+    "checkbox",
 
     (currentValue) => {
-      console.log("currentValue", currentValue);
-      onChange?.(label || "", {
+      onChange?.(value.name, {
+        ...value,
         options: currentValue,
-        name: value.name,
-        label: label || "",
       });
-
-      setSearchValue("");
     }
   );
 
@@ -114,7 +110,6 @@ export const SelectUI = <T extends string | number>({
   const isCheckedAll = activeValue.some((opt) => opt.isAll);
 
   const handleCheckAll = (checked: boolean) => {
-    console.log("handleCheckAll");
     if (!checked) {
       onChange?.(label || "", {
         options: [],
@@ -171,16 +166,17 @@ export const SelectUI = <T extends string | number>({
               placeholder="Поиск"
               name="search"
               value={searchValue}
+              ref={refSearch}
               onChange={handleSearch}
             />
           )}
           {displayText &&
             (type === "checkbox" ? (
               <div className="select__values" key={searchValue}>
-                {displayText.split(",").map((opt) => (
+                {displayText.split(",").map((opt, index) => (
                   <div
                     className="select__values-item"
-                    key={opt}
+                    key={`${opt}-${index}`}
                     onClick={(e) => {
                       e.stopPropagation();
                       handleChange(

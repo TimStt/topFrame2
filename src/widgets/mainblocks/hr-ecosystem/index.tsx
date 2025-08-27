@@ -137,17 +137,6 @@ const HRElement: React.FC<HRElementProps> = ({
   // Определяем тип круга на основе данных API
   const circleType = element.inCenter ? "inner" : "outer";
 
-  if (!element.inCenter) {
-    console.log("angle", {
-      baseAngle,
-      angle,
-      isDuplicate,
-      index,
-      circleType,
-      inCenter: element.inCenter,
-    });
-  }
-
   return (
     <Link
       className={cls(`hr-ecosystem__element`)}

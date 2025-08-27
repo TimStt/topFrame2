@@ -87,9 +87,6 @@ export const useQueryParamAction = () => {
             : [currentValue]
           : [];
 
-        console.log("currentValue", values);
-
-        console.log("value query", value);
         if (!values.includes(value)) {
           values.push(value);
         } else {
