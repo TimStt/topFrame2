@@ -93,6 +93,7 @@ export const SelectUI = <T extends string | number>({
         ...value,
         options: currentValue,
       });
+      setSearchValue("");
     }
   );
 

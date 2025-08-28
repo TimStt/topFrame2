@@ -15,6 +15,8 @@ import { ButtonUI } from "@/shared/ui/button-ui";
 import { TFilter, useFilter } from "../model/use-filter";
 import { useGetCatalog } from "@/entity/vacancy/api/get-catalog";
 import { QuickFiltersSkeleton } from "@/shared/ui/search-ui-kit/quick-filters-ui/skeleton";
+import { scrollToTop } from "@/shared/utils/scroll-to-top";
+import { ID_VACANCY_LIST } from "@/entity/vacancy/ui/list-skeleton";
 
 interface QuickFiltersProps {
   quickFilter?: IApiSchemas["FilterDto"][];
@@ -65,7 +67,9 @@ export const QuickFilters = ({
           <ButtonUI
             hasArrow
             text="Применить фильтры"
-            onClick={filterVacancies.acceptAllFilters}
+            onClick={() => {
+              filterVacancies.acceptAllFilters();
+            }}
             disabled={
               filterVacancies.isEmptyQuickFilters ||
               filterVacancies.isAllQuickFilterApplied

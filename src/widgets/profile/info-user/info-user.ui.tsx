@@ -46,7 +46,7 @@ const InfoUser = () => {
             {<span>{info?.user?.city || "Москва"}</span>}
           </ButtonUI>
         }
-        {info?.user?.role === "recruiter" && (
+        {info?.user?.role === "recruiter" && !!info?.user?.jobTitle && (
           <ButtonUI
             className="profile__info-user__button"
             fullWidth

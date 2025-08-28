@@ -6,9 +6,11 @@
 import React from "react";
 import { CardVacancySkeleton } from "./skeleton";
 
+export const ID_VACANCY_LIST = "vacancy-list";
+
 export const ListVacanciesSkeleton: React.FC = () => {
   return (
-    <div className={"vacancy-list"}>
+    <div className={"vacancy-list"} id={ID_VACANCY_LIST}>
       <div className="vacancy-list__content">
         {Array.from({ length: 10 }).map((_, index) => (
           <CardVacancySkeleton key={index} />
