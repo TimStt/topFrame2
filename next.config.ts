@@ -15,19 +15,19 @@ const nextConfig: NextConfig = {
   // Оптимизация изображений
   images: {
     remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "fishman-boy.ru",
-      },
-      {
-        protocol: "https",
-        hostname: "s3.timeweb.cloud",
-      },
-      {
-        protocol: "https",
-        hostname: "topframe.webtm.ru",
-        pathname: "/api/uploads/**",
-      },
+      // {
+      //   protocol: "https",
+      //   hostname: "fishman-boy.ru",
+      // },
+      // {
+      //   protocol: "https",
+      //   hostname: "s3.timeweb.cloud",
+      // },
+      // {
+      //   protocol: "https",
+      //   hostname: "topframe.webtm.ru",
+      //   pathname: "/api/uploads/**",
+      // },
     ],
   },
 
