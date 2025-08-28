@@ -951,8 +951,13 @@
     border: 1px solid transparent;
     color: var(--color-light);
     padding: 28px;
-    &.active,
-    &:hover {
+
+    @include hover-btn() {
+      border: 1px solid var(--color-light);
+      background-color: #f7ffcd;
+      color: var(--color-main);
+    }
+    &.active {
       border: 1px solid var(--color-light);
       background-color: #f7ffcd;
       color: var(--color-main);

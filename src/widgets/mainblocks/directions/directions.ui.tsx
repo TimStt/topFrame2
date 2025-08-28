@@ -28,6 +28,7 @@ import {
 import { IApiSchemas } from "@/shared/api/schema";
 import { PAGES_PATHS } from "@/shared/constants/pages-paths";
 import Link from "next/link";
+import { scrollToTop } from "@/shared/utils/scroll-to-top";
 
 export const Directions: React.FC = () => {
   const [isSelected, setIsSelected] = useState<string | null>(null);
@@ -61,20 +62,26 @@ export const Directions: React.FC = () => {
         <div className="directions__content">
           <div className="directions__list">
             {directions?.map((direction) => (
-              <Link
+              <button
                 className={cls("directions__button", {
                   active: isSelected === direction.slug,
                 })}
                 key={direction?.slug}
-                onClick={() => setIsSelected(direction?.slug)}
-                onMouseEnter={() => setIsSelected(direction?.slug)}
-                href={`#${direction?.slug}`}
+                onClick={() => {
+                  setIsSelected(direction?.slug);
+                  requestAnimationFrame(() => {
+                    scrollToTop(direction?.slug);
+                  });
+                }}
+                onMouseEnter={() => {
+                  setIsSelected(direction?.slug);
+                }}
               >
                 <span className="directions__button-title">
                   {direction?.title}
                 </span>
                 <ArrowIconUI />
-              </Link>
+              </button>
             ))}
           </div>
           <div className="directions__selected">
