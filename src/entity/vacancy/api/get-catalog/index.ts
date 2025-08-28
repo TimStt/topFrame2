@@ -18,7 +18,7 @@ export const useGetCatalog = () => {
         page: string;
         search: string;
       }>()?.original || {},
-    []
+    [queriesActions]
   );
 
   const { data, ...catalogQuery } = rqClient.useQuery(

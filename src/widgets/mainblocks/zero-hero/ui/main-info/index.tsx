@@ -30,7 +30,9 @@ export const MainInfo = () => {
   return (
     <>
       {/* Критический заголовок - приоритет для LCP */}
-      <h1 className={"zero-hero__title"}>Строим будущее России вместе</h1>
+      <h1 className={"zero-hero__title"}>
+        Строим будущее <br /> России вместе
+      </h1>
 
       {/* Подзаголовок */}
       <p className={"zero-hero__subtitle subtitle"}>

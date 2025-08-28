@@ -27,6 +27,7 @@ import {
 } from "./directions.data";
 import { IApiSchemas } from "@/shared/api/schema";
 import { PAGES_PATHS } from "@/shared/constants/pages-paths";
+import Link from "next/link";
 
 export const Directions: React.FC = () => {
   const [isSelected, setIsSelected] = useState<string | null>(null);
@@ -60,19 +61,20 @@ export const Directions: React.FC = () => {
         <div className="directions__content">
           <div className="directions__list">
             {directions?.map((direction) => (
-              <button
+              <Link
                 className={cls("directions__button", {
                   active: isSelected === direction.slug,
                 })}
                 key={direction?.slug}
                 onClick={() => setIsSelected(direction?.slug)}
                 onMouseEnter={() => setIsSelected(direction?.slug)}
+                href={`#${direction?.slug}`}
               >
                 <span className="directions__button-title">
                   {direction?.title}
                 </span>
                 <ArrowIconUI />
-              </button>
+              </Link>
             ))}
           </div>
           <div className="directions__selected">
@@ -105,6 +107,7 @@ export const DirectionCard: React.FC<
       className={cls("directions__card fade-in", className)}
       key={card?.slug}
       ref={ref}
+      id={card?.slug}
     >
       <Image
         src={URL_FILE_API + card?.image || ""}

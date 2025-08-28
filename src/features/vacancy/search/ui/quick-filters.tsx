@@ -45,7 +45,7 @@ export const QuickFilters = ({
                 name: filter.slug,
                 label: filter.name,
               }}
-              hasSearch={true}
+              hasSearch={filter.hasFilterInput}
               activeValue={
                 filterVacancies.currentActiveFilters?.find(
                   (f) => f?.name === filter?.slug

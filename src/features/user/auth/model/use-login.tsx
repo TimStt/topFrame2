@@ -16,17 +16,16 @@ export const useLogin = (params?: {
 
   const router = useRouter();
 
-  const onSuccessLogin = (token: string) => {
+  const onSuccessLogin = async (token: string) => {
     onToggleModal("auth", false);
     setByCookie(TOKEN_NAME, token, 365);
-    invalidateUser();
+
+    await invalidateUser();
+    router.push(PAGES_PATHS.PROFILE);
     showModalToast({
       isOpen: true,
       title: "Вы успешно вошли в систему",
       delay: 3000,
-      onClose: () => {
-        router.push(PAGES_PATHS.PROFILE);
-      },
     });
   };
 

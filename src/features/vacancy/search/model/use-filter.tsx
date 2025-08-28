@@ -13,17 +13,13 @@ export const useFilter = ({
   const queryActionsParams = useQueryParamAction();
 
   // так как в query мы не сохраняем label на русском, то находим его в данных от бека
-  const getFilterLabel = useMemo(
-    () => (filterName: string, filterValue: string) => {
-      return (
-        filters
-          ?.find((f) => f.slug === filterName)
-          ?.arr.find((a) => a.value === Number(filterValue))?.label ||
-        filterValue
-      );
-    },
-    [filters]
-  );
+  const getFilterLabel = (filterName: string, filterValue: string) => {
+    return (
+      filters
+        ?.find((f) => f.slug === filterName)
+        ?.arr.find((a) => a.value === Number(filterValue))?.label || filterValue
+    );
+  };
 
   // активные фильтры из query приводим к нужному формату
   const isActiveFilterQuery: Omit<ISelectOption, "label">[] | undefined =
