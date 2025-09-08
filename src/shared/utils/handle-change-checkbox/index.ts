@@ -23,6 +23,13 @@ export const handleOptionChange = <T extends string | number>(
     console.log("optionValue change", optionValue);
     console.log("value", activeValue);
 
+    // если выбрали все, то удаляем все
+    if (optionValue.isAll) {
+      newValue = [];
+      onChange(newValue);
+      return;
+    }
+
     if (checked) {
       newValue = activeValue?.find((v) => v.value === optionValue.value)
         ? activeValue?.filter((v) => v.value !== optionValue.value)

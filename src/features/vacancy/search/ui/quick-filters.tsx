@@ -32,6 +32,13 @@ export const QuickFilters = ({
   filterVacancies,
 }: QuickFiltersProps) => {
   const isLoading = useGetCatalog().isLoadingFilter;
+
+  console.log(
+    "filterVacancies.currentActiveFilters",
+    filterVacancies.currentActiveFilters,
+    "quickFilter",
+    quickFilter
+  );
   return (
     <QuickFiltersUI
       className={className}

@@ -85,6 +85,8 @@ export const SelectUI = <T extends string | number>({
     }
   };
 
+  console.log("activeValue", activeValue);
+
   const handleChange = handleOptionChange(
     "checkbox",
 
@@ -100,15 +102,17 @@ export const SelectUI = <T extends string | number>({
   // Закрытие при клике вне компонента
   useOnClickOutside(selectRef, () => setIsOpen(false));
 
+  const isCheckedAll = activeValue.some((opt) => opt.isAll);
   // Формирование отображаемого текста
   const displayText =
     value.options?.length > 0
-      ? activeValue.map((opt) => opt.label).join(",")
+      ? activeValue
+          .filter((opt) => (isCheckedAll ? opt.isAll : true))
+          .map((opt) => opt.label)
+          .join(",")
       : "";
 
   // создат ьвременный массив для визуального выделения всех опций
-
-  const isCheckedAll = activeValue.some((opt) => opt.isAll);
 
   const handleCheckAll = (checked: boolean) => {
     if (!checked) {
@@ -179,12 +183,15 @@ export const SelectUI = <T extends string | number>({
                     className="select__values-item"
                     key={`${opt}-${index}`}
                     onClick={(e) => {
+                      const findedOption = value.options.find(
+                        (v) => v.label === opt
+                      );
                       e.stopPropagation();
                       handleChange(
                         {
-                          value: value.options.find((v) => v.label === opt)
-                            ?.value!,
+                          value: findedOption?.value!,
                           label: opt,
+                          isAll: findedOption?.isAll,
                         },
                         false,
                         activeValue
@@ -249,7 +256,7 @@ export const SelectUI = <T extends string | number>({
                       key={option.value}
                       type={type}
                       checked={
-                        (option.isAll ? isCheckedAll : true) &&
+                        isCheckedAll ||
                         activeValue.some((opt) => opt.value === option.value)
                       }
                       onChangeCheckbox={(checked) =>

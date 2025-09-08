@@ -52,7 +52,7 @@ export const VacancyResults = ({
 
       <PaginationUI
         meta={{
-          current_page: currentPage,
+          current_page: +currentPage,
           last_page: countPage || 1,
           per_page: 0,
           total: count || 1,

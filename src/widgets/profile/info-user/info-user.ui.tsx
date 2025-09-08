@@ -94,7 +94,7 @@ const InfoUser = () => {
           {info?.instructions?.map((instruction) => (
             <a
               className="profile__info-user__links-item"
-              href={instruction.link}
+              href={URL_FILE_API + instruction.link}
               target="_blank"
               key={instruction.id}
             >

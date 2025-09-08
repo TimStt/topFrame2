@@ -235,6 +235,7 @@ export interface components {
       slug: string;
       text: string;
       title: string;
+      video: string;
     };
 
     // Главная страница

@@ -13,13 +13,15 @@ export const useFilter = ({
   const queryActionsParams = useQueryParamAction();
 
   // так как в query мы не сохраняем label на русском, то находим его в данных от бека
-  const getFilterLabel = (filterName: string, filterValue: string) => {
-    return (
-      filters
-        ?.find((f) => f.slug === filterName)
-        ?.arr.find((a) => a.value === Number(filterValue))?.label || filterValue
+  const getFilterByValue = (filterName: string, filterValue: string) => {
+    const findedFilterBySlug = filters?.find((f) => f.slug === filterName);
+    const findedFilterByValue = findedFilterBySlug?.arr.find(
+      (a) => a.value.toString() === filterValue.toString()
     );
+    return findedFilterByValue;
   };
+
+  console.log(filters);
 
   // активные фильтры из query приводим к нужному формату
   const isActiveFilterQuery: Omit<ISelectOption, "label">[] | undefined =
@@ -28,23 +30,25 @@ export const useFilter = ({
 
       const normalizedQueryParams = queryParams?.map((filterItem) => ({
         ...filterItem,
-        options: filterItem.options.map((optionItem) => ({
-          value: optionItem,
-          label: getFilterLabel(filterItem.name, optionItem),
-        })),
+        options: filterItem.options.map((optionItem) => {
+          const findedFilter = getFilterByValue(filterItem.name, optionItem);
+          return {
+            value: findedFilter?.value || optionItem,
+            label: findedFilter?.label || optionItem,
+            isAll: findedFilter?.isAll,
+          };
+        }),
       }));
 
       return normalizedQueryParams;
-    }, [filters, getFilterLabel]);
+    }, [filters, getFilterByValue]);
+
+  console.log("isActiveFilterQuery", isActiveFilterQuery);
 
   // активные ВРЕМЕННЫЕ фильтры
   const [isActiveFilters, setIsActiveFilters] = useState<
     Omit<ISelectOption, "label">[] | undefined
-  >(
-    isActiveFilterQuery?.filter(
-      (f) => f.name !== "search" && f.name !== "page"
-    ) || undefined
-  );
+  >();
 
   // изменение фильтра
   const handleChangeFilter = (label: string, values: ISelectOption) => {
@@ -75,7 +79,14 @@ export const useFilter = ({
 
   // активные быстрые фильтры
 
-  const currentActiveFilters = isActiveFilters;
+  const currentActiveFilters =
+    isActiveFilters ||
+    isActiveFilterQuery?.filter(
+      (f) => f.name !== "search" && f.name !== "page"
+    ) ||
+    undefined;
+
+  console.log("currentActiveFilters", currentActiveFilters);
 
   const getCurrentActiveFilterBySlug = (slug: string) => {
     return currentActiveFilters?.find((f) => f.name === slug);
@@ -97,6 +108,7 @@ export const useFilter = ({
 
   // ПЕРЕДЕЛАЙ В ФУНКЦИЮ
 
+  // проверяем, есть ли фильтр в query
   const checkFilterIsApplied = (
     filterSelected: Omit<ISelectOption, "label">
   ) => {
@@ -104,10 +116,15 @@ export const useFilter = ({
       (q) => q.name === filterSelected.name
     );
 
+    console.log("activeFilter !!!", activeFilter);
+    console.log("filterSelected !!!", filterSelected);
+
     return (
       activeFilter?.options.every((o) =>
         filterSelected.options.some((q) => q.value === o.value)
-      ) && activeFilter?.options.length === filterSelected.options.length
+      ) &&
+      (activeFilter.options.some((o) => o.isAll) ||
+        activeFilter?.options.length === filterSelected.options.length)
     );
   };
 
@@ -166,6 +183,8 @@ export const useFilter = ({
   const acceptAllFilters = () => {
     isActiveFilters?.forEach((isActiveFilterItem) => {
       // если фильтр не выбран, то удаляем его из query
+
+      queryActionsParams.set("page", "1", false, false);
       if (!isActiveFilterItem.options.length) {
         queryActionsParams.remove(isActiveFilterItem.name);
         setIsActiveFilters(
@@ -182,6 +201,18 @@ export const useFilter = ({
       }
 
       // если фильтры не совпадают, то добавляем их в query
+
+      const checkIsAll = isActiveFilterItem.options.find((o) => o.isAll);
+      if (checkIsAll) {
+        queryActionsParams.set(
+          isActiveFilterItem.name,
+          checkIsAll.value.toString(),
+          false,
+          false
+        );
+        return;
+      }
+
       const string = isActiveFilterItem.options.map((o) => o.value).join(",");
 
       queryActionsParams.set(isActiveFilterItem.name, string, false, false);

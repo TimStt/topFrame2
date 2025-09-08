@@ -10,7 +10,7 @@ button {
 
 details > summary::marker {
   display: none;
-  content: ''; /* Прощай, стрелочка, теперь ты здесь не нужна! */
+  content: ""; /* Прощай, стрелочка, теперь ты здесь не нужна! */
 }
 
 details > summary::-webkit-details-marker {
@@ -33,13 +33,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 125%;
-  margin: 0px;
   margin-bottom: 0px;
-  color: var(--color-black);
 }
 
 input:-webkit-autofill {
@@ -48,6 +42,73 @@ input:-webkit-autofill {
 
 a {
   color: inherit;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+  box-shadow: 0 0 0px 1000px transparent inset !important;
+  -webkit-text-fill-color: var(--color-main) !important;
+  border-color: var(--color-main) !important;
+}
+
+input:-webkit-autofill {
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input:-webkit-autofill {
+  animation-name: autofillWhite;
+  animation-fill-mode: both;
+  animation-duration: 500ms;
+}
+
+@keyframes autofillWhite {
+  0% {
+    box-shadow: 0 0 0px 1000px transparent inset;
+    -webkit-text-fill-color: var(--color-main);
+  }
+
+  100% {
+    box-shadow: 0 0 0px 1000px transparent inset;
+    -webkit-text-fill-color: var(--color-main);
+  }
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0px;
+  margin-bottom: 0px;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+  box-shadow: 0 0 0px 1000px transparent inset !important;
+  -webkit-text-fill-color: var(--color-light-beige) !important;
+  border-color: var(--color-light-beige) !important;
+}
+
+input:-webkit-autofill {
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input:-webkit-autofill {
+  animation-name: autofillWhite;
+  animation-fill-mode: both;
+  animation-duration: 500ms;
+}
+
+@keyframes autofillWhite {
+  0% {
+    box-shadow: 0 0 0px 1000px transparent inset;
+    -webkit-text-fill-color: var(--color-light-beige);
+  }
+
+  100% {
+    box-shadow: 0 0 0px 1000px transparent inset;
+    -webkit-text-fill-color: var(--color-light-beige);
+  }
 }
 
 ol,
@@ -102,10 +163,10 @@ h1 {
   margin-block-start: 0;
 }
 
-input[type='date']::-webkit-datetime-edit-day-field,
-input[type='date']::-webkit-datetime-edit-month-field,
-input[type='date']::-webkit-datetime-edit-year-field,
-input[type='date']::-webkit-datetime-edit-text {
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-year-field,
+input[type="date"]::-webkit-datetime-edit-text {
   color: var(--color-black);
   background-color: transparent;
 }

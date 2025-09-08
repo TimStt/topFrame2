@@ -22,11 +22,14 @@ export const LinkWithQueryUI = ({
   queries?: Record<string, string | undefined>;
   href?: string;
 } & HTMLAttributes<HTMLAnchorElement>) => {
-  const currentQueries = useQueryParamAction().getAllParams();
+  const currentQueries = useQueryParamAction().getAllParams()?.original;
 
   const pathname = usePathname();
 
   const currentHref = href || pathname;
+
+  console.log("currentQueries", currentQueries);
+  console.log("queries", queries);
 
   return (
     <Link

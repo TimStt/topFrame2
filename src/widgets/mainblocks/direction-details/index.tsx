@@ -5,7 +5,7 @@
  */
 "use client";
 
-import React from "react";
+import React, { useRef, useState } from "react";
 import { HeadPage } from "../head-page";
 import Image from "next/image";
 import { ButtonUI } from "@/shared/ui/button-ui";
@@ -14,12 +14,25 @@ import { useParams } from "next/navigation";
 import { SkeletonDirectionDetails } from "./skeleton";
 import { URL_FILE_API } from "@/shared/constants/other";
 import { PAGES_PATHS } from "@/shared/constants/pages-paths";
+import { PlayButtonUI } from "@/shared/lib/cls/video/controls-video-ui";
 
 export const DirectionDetails: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const { directionInfo, isLoading } = useGetDirection(slug);
 
   console.log("directionInfo", directionInfo);
+
+  const refVideo = useRef<HTMLVideoElement>(null);
+
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const handlePlayVideo = async () => {
+    if (refVideo.current) {
+      try {
+        await refVideo.current.play();
+      } catch (error) {}
+    }
+  };
 
   return (
     <>
@@ -39,13 +52,34 @@ export const DirectionDetails: React.FC = () => {
               dangerouslySetInnerHTML={{ __html: directionInfo?.text || "" }}
             />
 
-            <Image
-              src={URL_FILE_API + directionInfo?.image}
-              alt="Административное направление"
-              width={480}
-              height={320}
-              className="admin-direction-img"
-            />
+            <div className="admin-direction-img-container">
+              <Image
+                src={URL_FILE_API + directionInfo?.image}
+                alt=""
+                width={480}
+                height={320}
+                className="admin-direction-img"
+              />
+              {!!directionInfo?.video && (
+                <div className="admin-direction-video-container">
+                  <video
+                    src={URL_FILE_API + directionInfo?.video}
+                    poster={URL_FILE_API + directionInfo?.image}
+                    ref={refVideo}
+                    controls
+                    onPlay={() => setIsPlaying(true)}
+                    onPause={() => setIsPlaying(false)}
+                  />
+                  {!isPlaying && (
+                    <PlayButtonUI
+                      className="admin-direction-video-play-button"
+                      onClick={handlePlayVideo}
+                      isPlaying={isPlaying}
+                    />
+                  )}
+                </div>
+              )}
+            </div>
           </div>
           <ButtonUI
             variant="primary"
