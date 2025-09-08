@@ -734,6 +734,8 @@
 
   --twoElementBottom: calc(var(--bottomMargin) * -1 + 286px);
 
+  --iconCardSize: 36px;
+
   &__elements {
     --top: 50%;
     --size: 100%;
@@ -852,8 +854,12 @@
     &-icon {
       border-radius: 50%;
       background-color: #9fb872;
-      width: 36px;
-      height: 36px;
+      min-width: var(--iconCardSize);
+      min-height: var(--iconCardSize);
+      max-width: var(--iconCardSize);
+      max-height: var(--iconCardSize);
+      width: 100%;
+      height: 100%;
       transition-duration: var(--transition-normal);
       display: inline-flex;
       align-items: center;
