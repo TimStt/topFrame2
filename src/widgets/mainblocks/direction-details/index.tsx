@@ -64,7 +64,10 @@ export const DirectionDetails: React.FC = () => {
                 <div className="admin-direction-video-container">
                   <video
                     src={URL_FILE_API + directionInfo?.video}
-                    poster={URL_FILE_API + directionInfo?.image}
+                    poster={
+                      URL_FILE_API +
+                      (directionInfo?.preview || directionInfo?.image)
+                    }
                     ref={refVideo}
                     controls
                     onPlay={() => setIsPlaying(true)}

@@ -234,6 +234,7 @@ export interface components {
       image: string;
       slug: string;
       text: string;
+      preview: string;
       title: string;
       video: string;
     };
