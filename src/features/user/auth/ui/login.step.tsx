@@ -89,9 +89,8 @@ export const LoginStep = () => {
           fullWidth
           variant="secondary"
           onClick={() => changeStepAuth("registration")}
-        >
-          Заявка на регистрацию
-        </ButtonUI>
+          text="Заявка на регистрацию"
+        />
 
         {/* <ButtonSubmitUI
         className="modal-auth__button-action"

@@ -28,6 +28,17 @@ const nextConfig: NextConfig = {
         hostname: "topframe.webtm.ru",
         pathname: "/api/uploads/**",
       },
+
+      {
+        protocol: "https",
+        hostname: "hr-portal.topframe-group.com",
+        pathname: "/api/uploads/**",
+      },
+      {
+        protocol: "http",
+        hostname: "hr-portal.topframe-group.com",
+        pathname: "/api/uploads/**",
+      },
     ],
   },
 
